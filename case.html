@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Case study, Portland Content</title>
+<meta name="description" content="Portland Content is a content agency in Portland, Oregon. We make the content for your channels, post it, and report on what it did, month to month.">
+<link rel="icon" href="img/pc_logo_pink.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="index.html"><img src="img/pc_logo_white.png" alt="">Portland Content</a>
+    <nav class="main" id="nav">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#process">How it works</a>
+            <a href="index.html#contact">Contact</a>
+    </nav>
+    <span class="spacer"></span>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <a class="btn" href="index.html#contact">Book a free call</a>
+  </div>
+</header>
+<main>
+  <div class="wrap case">
+    <aside>
+      <span class="chip gold">Content creation</span>
+      <h2>Education</h2>
+      <p class="svc">Content retainer</p>
+      <p class="line">Portland specific content for three schools, with posting managed on top.</p>
+      <p>Two shoot days a year across the Northeast, Southeast and Northwest schools, cut into location films, a homepage film, testimonials and a bank of vertical clips, with social posting run month to month.</p>
+      <span class="chip">Draft copy, numbers to confirm</span>
+    </aside>
+    <article>
+      <h1>Three site content program for Wow &amp; Flutterville Play Gardens</h1>
+      <div class="hero-still panel"><div><span class="eyebrow">Three schools, one crew</span><h2>Northeast on N Vancouver. Southeast on SE 17th. Northwest in Cedar Mill.</h2><p>Stills from the October shoot day go here.</p></div></div>
+      <p>Wow &amp; Flutterville runs three Reggio Emilia and Waldorf inspired schools in Portland, each with its own director, yard and parent community. Their content came from a national childcare marketing agency and the owner's complaint was simple: it was generic, and none of it felt like Portland.</p>
+      <h2>Problem</h2>
+      <p>One annual refresh shot by subcontracted crews fed a year of templated social scripts, and the site read as the agency's template with the school's name dropped in. The school with the weakest reviews was the one featured, and the showpiece school had no film of its own.</p>
+      <h2>Solution</h2>
+      <p>We built the year around two shoot days our own crew runs, late spring and fall, timed to the yards in use and the seasons parents recognize. Each school gets a location film, the showpiece school carries the homepage film, and parents and directors sit for testimonials on their own grounds. Posting moves to a managed social line so the calendar runs without the owner in the loop.</p>
+      <h3>What the program includes</h3>
+      <ul>
+        <li>Three location films, sixty to ninety seconds, with a vertical recut of each.</li>
+        <li>One homepage film, two to three minutes, built from both shoot days.</li>
+        <li>A first tour film with a fifteen second tag per school.</li>
+        <li>Four long testimonials with shorts, two parents and two directors.</li>
+        <li>Thirty six captioned vertical clips a year, delivered in quarterly batches.</li>
+        <li>A stills gallery per school and two enrollment PDFs for tours.</li>
+      </ul>
+      <h2>Result</h2>
+      <div class="nums">
+        <div class="num"><b>3</b><span>schools, each with its own film</span></div>
+        <div class="num"><b>36</b><span>vertical clips a year</span></div>
+        <div class="num"><b>2</b><span>shoot days our crew runs</span></div>
+      </div>
+      <ul>
+        <li>Every piece of content is shot in the schools' own yards and rooms, by one crew, with the owner's media releases on file.</li>
+        <li>Posting, community replies and a one page monthly report run as a managed line on top of the retainer.</li>
+        <li>Google listings for all three schools cleaned up so categories, hours and photos match.</li>
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px"><a class="btn" href="index.html#contact">Start a conversation</a><a class="btn ghost" href="work.html">Back to the work</a></div>
+    </article>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><h4>Portland Content</h4><ul><li>PO Box 14655, Portland, OR 97293</li><li>hello@portlandcontentcreation.com</li><li>(503) 568-1199</li></ul></div>
+      <div><h4>Our work</h4><ul><li><a href="work.html">Content creation</a></li><li><a href="work.html">Incentive travel</a></li><li><a href="work.html">Social and channels</a></li><li><a href="work.html">Our studio</a></li></ul></div>
+      <div><h4>Services</h4><ul><li>Content retainers</li><li>Social management</li><li>Paid media</li><li>Email</li><li>Web and brand</li><li>Listings and local search</li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="index.html#contact">Book a free call</a></li><li><a href="https://calendly.com/macfilms/meeting" target="_blank" rel="noopener">Calendar</a></li></ul></div>
+    </div>
+    <div class="foot-small"><span>© 2026 Portland Content Creation. All rights reserved.</span><span>Portland, Oregon</span></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn){menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o?'true':'false')});}
+  document.querySelectorAll('.showcase').forEach(function(sc){
+    var items=sc.querySelectorAll('.item'), imgs=sc.querySelectorAll('.frame img'), cap=sc.querySelector('[data-cap]');
+    function pick(i){ items.forEach(function(it,k){it.setAttribute('aria-current',k===i?'true':'false')}); imgs.forEach(function(im,k){im.classList.toggle('on',k===i)}); if(cap) cap.textContent=items[i].querySelector('h3').textContent; }
+    items.forEach(function(it,i){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && sc.dataset.showcase==='1'){ location.href='case.html'; } else pick(i); }); });
+    pick(0);
+  });
+  var here=location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('nav.main a').forEach(function(a){ if(a.getAttribute('href')===here) a.setAttribute('aria-current','page'); });
+})();
+</script>
+</body>
+</html>
