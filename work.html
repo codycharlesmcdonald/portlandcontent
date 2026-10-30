@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
 </head>
 <body>
 <header class="top">
@@ -35,7 +36,7 @@
     </nav>
     <span class="spacer"></span>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
-    <a class="btn" href="index.html#contact">Book a free call</a>
+    <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a free call</a>
   </div>
 </header>
 <main>
@@ -98,10 +99,10 @@
 <footer>
   <div class="wrap">
     <div class="foot">
-      <div><h4>Portland Content</h4><ul><li>PO Box 14655, Portland, OR 97293</li><li>hello@portlandcontentcreation.com</li><li>(503) 568-1199</li></ul></div>
+      <div><h4>Portland Content</h4><ul><li>PO Box 14655, Portland, OR 97293</li><li>hello@portlandcontent.com</li><li>(503) 568-1199</li></ul></div>
       <div><h4>Our work</h4><ul><li><a href="work.html">Content creation</a></li><li><a href="services.html#s-incentive">Incentive travel</a></li><li><a href="work.html">Social and channels</a></li><li><a href="work.html">Our studio</a></li></ul></div>
       <div><h4>Services</h4><ul><li>Content retainers</li><li>Social management</li><li>Paid media</li><li>Web and brand</li><li>Listings and local search</li><li><a href="real-estate.html">Real estate agents</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li><a href="index.html#contact">Book a free call</a></li><li><a href="https://calendly.com/macfilms/meeting" target="_blank" rel="noopener">Calendar</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a free call</a></li><li><a href="tel:+15035681199">(503) 568-1199</a></li></ul></div>
     </div>
     <div class="foot-small"><span>© 2026 Portland Content Creation. All rights reserved.</span><span>Portland, Oregon</span></div>
   </div>
@@ -121,5 +122,7 @@
   document.querySelectorAll('nav.main a').forEach(function(a){ if(a.getAttribute('href')===here) a.setAttribute('aria-current','page'); });
 })();
 </script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="https://calendly.com/portlandcontent/call"]');if(!a||!window.Calendly||a.closest('.calendly-inline-widget'))return;e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/portlandcontent/call?hide_gdpr_banner=1'});});</script>
 </body>
 </html>

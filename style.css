@@ -262,3 +262,5 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 @media (max-width:760px){.reel-strip{grid-template-columns:1fr 1fr}}
 .re-pointer{margin-top:4px;font-weight:600}
 .re-pointer a{color:var(--pink);border-bottom:1px solid currentColor}
+.cal-inline{min-width:300px;height:700px;background:#fff}
+@media (max-width:760px){.cal-inline{height:820px}}
