@@ -264,3 +264,7 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 .re-pointer a{color:var(--pink);border-bottom:1px solid currentColor}
 .cal-inline{min-width:300px;height:700px;background:#fff}
 @media (max-width:760px){.cal-inline{height:820px}}
+.reel-strip .v{position:relative}
+.reel-strip .v iframe{position:absolute;top:0;left:50%;width:100%;height:100%;transform:translateX(-50%);border:0;pointer-events:none}
+.reel-strip .v iframe.r45{width:142.3%}
+@media (prefers-reduced-motion:reduce){.reel-strip .v iframe{display:none}}
