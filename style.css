@@ -284,3 +284,10 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 .studios .here .go{color:var(--ink-muted);border-bottom-color:transparent}
 @media (max-width:820px){.studios{grid-template-columns:1fr;gap:0}.studios .st img{height:52px}.studios .st{grid-row:auto;grid-template-rows:none;padding-block:22px 28px}}
 @media (prefers-reduced-motion:reduce){.studios .st{transition:none}}
+.madefor li a{display:flex;align-items:center;gap:8px;border-bottom:1px solid currentColor;padding-bottom:1px}
+.madefor li a:hover{color:var(--pink)}
+
+/* inline links found in the link audit: headings and prose that lead somewhere */
+html{scroll-padding-top:88px}
+.svc h3 a,.steps h3 a,.contact .row h3 a,.contact .row p a,.studio .copy p a,.foot ul a{background:linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;transition:color .2s,background-size .3s}
+.svc h3 a:hover,.steps h3 a:hover,.contact .row h3 a:hover,.contact .row p a:hover,.studio .copy p a:hover,.foot ul a:hover{color:var(--pink)}
