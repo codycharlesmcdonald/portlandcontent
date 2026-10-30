@@ -291,3 +291,17 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 html{scroll-padding-top:88px}
 .svc h3 a,.steps h3 a,.contact .row h3 a,.contact .row p a,.studio .copy p a,.foot ul a{background:linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;transition:color .2s,background-size .3s}
 .svc h3 a:hover,.steps h3 a:hover,.contact .row h3 a:hover,.contact .row p a:hover,.studio .copy p a:hover,.foot ul a:hover{color:var(--pink)}
+
+/* motion: scroll reveals (motion.js adds .motion, so content shows if the script never runs), hover draws and slow zooms; opacity and transform only */
+.motion .rv{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.2,.7,.2,1) var(--rv-d,0ms),transform .6s cubic-bezier(.2,.7,.2,1) var(--rv-d,0ms)}
+.motion .rv.rv-in{opacity:1;transform:none}
+.svc h3 a,.steps h3 a,.contact .row h3 a,.contact .row p a,.studio .copy p a,.foot ul a,.madefor li a,.re-pointer a{background:linear-gradient(var(--pink),var(--pink)) left bottom/0 1px no-repeat,linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;border-bottom:0;transition:color .3s ease-out,background-size .45s cubic-bezier(.2,.7,.2,1)}
+.svc h3 a:hover,.steps h3 a:hover,.contact .row h3 a:hover,.contact .row p a:hover,.studio .copy p a:hover,.foot ul a:hover,.madefor li a:hover,.re-pointer a:hover{background-size:100% 1px,100% 1px}
+.feature .thumb img,.mini .thumb img,.studio .still img,.who .still img,.showcase .frame img{transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .45s ease}
+a.feature:hover .thumb img,a.mini:hover .thumb img,.studio .still:hover img,.who .still:hover img,.showcase .frame:hover img.on{transform:scale(1.025)}
+.reel-strip .v img,.reel-strip .v iframe{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.reel-strip a:hover .v img{transform:scale(1.025)}
+.reel-strip a:hover .v iframe{transform:translateX(-50%) scale(1.025)}
+.studios .go{background:linear-gradient(var(--pink),var(--pink)) left bottom/0 1px no-repeat;transition:color .3s ease-out,background-size .45s cubic-bezier(.2,.7,.2,1)}
+.studios a.st:hover .go{background-size:100% 1px}
+@media (prefers-reduced-motion:reduce){.motion .rv{opacity:1;transform:none;transition:none}a.feature:hover .thumb img,a.mini:hover .thumb img,.studio .still:hover img,.who .still:hover img,.showcase .frame:hover img.on,.reel-strip a:hover .v img{transform:none}.reel-strip a:hover .v iframe{transform:translateX(-50%)}}
