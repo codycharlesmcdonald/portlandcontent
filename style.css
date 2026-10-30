@@ -205,6 +205,9 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 .mini{padding:22px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start;min-width:0}
 .mini h3{font-size:1.3rem}
 .mini p{font-size:.92rem;color:var(--muted)}
+.feature .thumb,.mini .thumb{display:block;aspect-ratio:16/9;overflow:hidden;background:#000}
+.feature .thumb img,.mini .thumb img{width:100%;height:100%;object-fit:cover}
+
 .rowlink{padding:18px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:1.15rem;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .rowlink span{color:var(--muted);font-weight:400;font-size:.85rem}
 @media (max-width:860px){.cat{grid-template-columns:1fr}.cat .label{position:static}.pair{grid-template-columns:1fr}}
