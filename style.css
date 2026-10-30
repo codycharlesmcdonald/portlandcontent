@@ -243,3 +243,10 @@ footer{padding-block:48px 32px;border-top:1px solid var(--line)}
 
 .showcase .item .watch{grid-column:2;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);opacity:0;transition:opacity .2s}
 .showcase .item[aria-current="true"] .watch{opacity:1}
+
+.madefor{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:26px}
+.madefor .mf-label{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--pink)}
+.madefor ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:14px 26px}
+.madefor li{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:500;opacity:.85}
+.madefor svg{width:20px;height:20px;fill:currentColor;flex:none}
+.madefor svg[fill="none"]{fill:none}
