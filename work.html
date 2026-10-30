@@ -52,13 +52,13 @@
           <p class="line">Location films, a homepage film, parent and director testimonials, thirty six clips a year.</p>
         </a>
         <div class="pair">
-          <a class="mini" href="case.html"><span class="thumb"><img loading="lazy" decoding="async" width="1280" height="720" src="img/intel_still.jpg" alt="Frame from the Intel partnership film"></span><h3>Sustainability and AI partnership film for Intel</h3><p>A full crew documentary piece on a partnership, shot and delivered on brand and on schedule.</p></a>
-          <a class="mini" href="case.html"><h3>Employee resource group film for Keurig Dr Pepper</h3><p>An internal piece built on interviews, cut for the company's own channels.</p></a>
+          <a class="mini" href="https://www.youtube.com/watch?v=Mw5Oh1UVbHk" target="_blank" rel="noopener"><span class="thumb"><img loading="lazy" decoding="async" width="1280" height="720" src="img/intel_still.jpg" alt="Frame from the Intel partnership film"></span><h3>Sustainability and AI partnership film for Intel</h3><p>A full crew documentary piece on a partnership, shot and delivered on brand and on schedule.</p></a>
+          <div class="mini"><span class="thumb"><img loading="lazy" decoding="async" width="1280" height="720" src="img/kdp_still.jpg" alt="Interview frame from the Keurig Dr Pepper film"></span><h3>Employee resource group film for Keurig Dr Pepper</h3><p>An internal piece built on interviews, cut for the company's own channels.</p></div>
         </div>
         <div class="showcase" data-showcase="2">
         <div class="list">
-          <button class="item" type="button" aria-current="true"><span class="n">01</span><h3>USA Pears on FoodQuest</h3><p>A kitchen episode of the TV series FoodQuest, hosted by Mario and Courtney Lopez, shot for the growers' own channels.</p></button>
-          <button class="item" type="button" aria-current="false"><span class="n">02</span><h3>4D Recovery, 2022 mission highlight</h3><p>Interviews and verité across a year of the nonprofit's work.</p></button>
+          <button class="item" type="button" aria-current="true" data-href="https://vimeo.com/809171879"><span class="n">01</span><h3>USA Pears on FoodQuest</h3><p>A kitchen episode of the TV series FoodQuest, hosted by Mario and Courtney Lopez, shot for the growers' own channels.</p><span class="watch">Watch the film</span></button>
+          <button class="item" type="button" aria-current="false" data-href="https://www.youtube.com/watch?v=sc4ccOYLX0s"><span class="n">02</span><h3>4D Recovery, 2022 mission highlight</h3><p>Interviews and verité across a year of the nonprofit's work.</p><span class="watch">Watch the film</span></button>
         </div>
         <div class="frame"><img width="1280" height="720" src="img/pears_still.jpg" alt="Frame from the USA Pears film" class=on><img loading="lazy" decoding="async" width="1280" height="720" src="img/recovery_still.jpg" alt="Frame from the 4D Recovery mission highlight"><span class="cap" data-cap></span></div>
       </div>
@@ -68,15 +68,15 @@
     <div class="cat">
       <div class="label"><h2>Social and channels</h2><p>Posting, replies and ads, run on top of the footage with one report a month.</p><a class="btn" href="index.html#contact">Work with us</a></div>
       <div class="list">
-        <a class="feature" href="case.html">
+        <div class="feature">
           <h3>Local Roku campaign for a regional business</h3>
           <p class="sum">Their dialog, our shoot. A thirty and a fifteen cut to Roku spec, the ad account set up in the client's name, targeting set to the programs, days and hours they picked, and a monthly report.</p>
           <p class="svc">Paid media</p>
           <p class="line">Setup and launch, then month to month management with one creative swap a quarter.</p>
-        </a>
+        </div>
         <div class="pair">
-          <a class="mini" href="case.html"><h3>Social management for a three site school</h3><p>Calendar, posting Tuesday through Friday, community replies and a one page report each month.</p></a>
-          <a class="mini" href="case.html"><h3>Google listing cleanup for three locations</h3><p>Categories, hours, photos and events made consistent across every listing.</p></a>
+          <div class="mini"><h3>Social management for a three site school</h3><p>Calendar, posting Tuesday through Friday, community replies and a one page report each month.</p></div>
+          <div class="mini"><h3>Google listing cleanup for three locations</h3><p>Categories, hours, photos and events made consistent across every listing.</p></div>
         </div>
       </div>
     </div>
@@ -86,8 +86,8 @@
       <div class="list">
         <div class="showcase" data-showcase="3">
         <div class="list">
-          <button class="item" type="button" aria-current="true"><span class="n">01</span><h3>2025 cinematography reel</h3><p>A year of commercial and documentary work in two minutes.</p></button>
-          <button class="item" type="button" aria-current="false"><span class="n">02</span><h3>Our Sustainable Future, with Mario and Courtney Lopez</h3><p>An episode of the TV series Our Sustainable Future on Atomo's beanless coffee, hosted by Mario and Courtney Lopez.</p></button>
+          <button class="item" type="button" aria-current="true" data-href="https://vimeo.com/1140589145"><span class="n">01</span><h3>2025 cinematography reel</h3><p>A year of commercial and documentary work in two minutes.</p><span class="watch">Watch the film</span></button>
+          <button class="item" type="button" aria-current="false" data-href="https://vimeo.com/808322659"><span class="n">02</span><h3>Our Sustainable Future, with Mario and Courtney Lopez</h3><p>An episode of the TV series Our Sustainable Future on Atomo's beanless coffee, hosted by Mario and Courtney Lopez.</p><span class="watch">Watch the film</span></button>
         </div>
         <div class="frame"><img loading="lazy" decoding="async" width="1280" height="720" src="img/reel_still.jpg" alt="Frame from the 2025 cinematography reel" class=on><img loading="lazy" decoding="async" width="1280" height="720" src="img/atomo_still.jpg" alt="Frame from the Atomo Coffee brand film"><span class="cap" data-cap></span></div>
       </div>
@@ -113,7 +113,8 @@
   document.querySelectorAll('.showcase').forEach(function(sc){
     var items=sc.querySelectorAll('.item'), imgs=sc.querySelectorAll('.frame img'), cap=sc.querySelector('[data-cap]');
     function pick(i){ items.forEach(function(it,k){it.setAttribute('aria-current',k===i?'true':'false')}); imgs.forEach(function(im,k){im.classList.toggle('on',k===i)}); if(cap) cap.textContent=items[i].querySelector('h3').textContent; }
-    items.forEach(function(it,i){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && sc.dataset.showcase==='1'){ location.href='case.html'; } else pick(i); }); });
+    items.forEach(function(it,i){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && it.dataset.href){ window.open(it.dataset.href,'_blank','noopener'); } else pick(i); }); });
+    var fr=sc.querySelector('.frame'); if(fr){ fr.style.cursor='pointer'; fr.addEventListener('click',function(){ var c=sc.querySelector('.item[aria-current="true"]'); if(c&&c.dataset.href) window.open(c.dataset.href,'_blank','noopener'); }); }
     pick(0);
   });
   var here=location.pathname.split('/').pop()||'index.html';
