@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Real Estate Rob, a content plan from Portland Content</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="A content plan for Real Estate Rob from Portland Content: horizontal re-cuts of the films we made together, a monthly shoot built around your listings, and your channels run for you.">
+<meta name="description" content="A content plan for Real Estate Rob from Portland Content. Pick the services that fit, from horizontal re-edits of your films to a monthly content retainer built around your listings.">
 <link rel="icon" href="img/pc_logo_pink.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Portland Content">
 <meta property="og:title" content="A content plan for Real Estate Rob">
-<meta property="og:description" content="A content plan for Real Estate Rob from Portland Content: horizontal re-cuts of the films we made together, a monthly shoot built around your listings, and your channels run for you.">
+<meta property="og:description" content="Pick the services that fit, from horizontal re-edits of your films to a monthly content retainer built around your listings.">
 <meta property="og:image" content="https://portlandcontent.com/img/re_hero.jpg">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="720">
@@ -20,43 +20,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="plan.css">
 <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
 <style>
-/* Pitch page for Rob Laird: unlinked, noindex, out of the sitemap */
-.pitch-sec{display:grid;grid-template-columns:300px 1fr;gap:28px 56px;align-items:start}
-.pitch-sec .label{display:grid;gap:14px;align-content:start;position:sticky;top:88px}
-.pitch-sec .label .n{font-size:.78rem;font-weight:600;color:var(--pink);letter-spacing:.08em;font-variant-numeric:tabular-nums}
-.pitch-sec .label h2{font-size:clamp(1.9rem,3.2vw,2.5rem)}
-.pitch-sec .body{display:grid;gap:22px;min-width:0}
-.pitch-sec .body>p{max-width:40em;opacity:.85}
-.paper .pitch-sec .body>p{opacity:1;color:var(--ink-muted)}
-.reel-strip{margin-top:6px}
-.reel-strip .len{font-size:.78rem;opacity:.6;margin-top:-6px}
-.reel-strip.three{grid-template-columns:repeat(3,1fr)}
-.pitch-rows{list-style:none;margin:0;padding:0;display:grid}
-.pitch-rows li{display:grid;grid-template-columns:44px 1fr;gap:6px 14px;padding:22px 0;border-top:1px solid color-mix(in srgb,currentColor 16%,transparent)}
-.pitch-rows li:last-child{border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
-.pitch-rows .n{font-size:.78rem;font-weight:600;color:var(--pink);letter-spacing:.08em;padding-top:.45em;font-variant-numeric:tabular-nums}
-.pitch-rows h3{font-size:1.35rem}
-.pitch-rows p{grid-column:2;font-size:.95rem;opacity:.8;max-width:36em}
-.sub{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--pink);margin-top:10px}
-.studios.rob{margin-top:8px}
-.studios .wm{height:64px;margin-block:6px;display:flex;align-items:center;font-family:var(--serif);font-size:2.3rem;line-height:1;color:var(--ink-fg)}
-.studios .wm i{color:var(--pink);font-style:italic;margin-left:.12em}
-.studios .st.next{border-top-style:dashed}
-.studios a.st.next:hover .wm i{color:var(--pink)}
-.paper .handles a{color:var(--ink-fg)}
-.handles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:14px 30px}
-.handles a{display:flex;align-items:center;gap:10px;font-weight:500;background:linear-gradient(var(--pink),var(--pink)) left bottom/0 1px no-repeat,linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;padding-bottom:2px;transition:color .3s ease-out,background-size .45s cubic-bezier(.2,.7,.2,1)}
-.handles a:hover{color:var(--pink);background-size:100% 1px,100% 1px}
-.handles svg{width:20px;height:20px;fill:currentColor;flex:none}
-.fixes{list-style:none;margin:0;padding:0;display:grid;gap:22px;counter-reset:fx}
-.fixes li{padding-left:20px;border-left:2px solid var(--pink);display:grid;gap:6px;max-width:42em}
-.fixes h3{font-size:1.25rem}
-.fixes p{color:var(--ink-muted);font-size:.95rem}
-.sign{font-family:var(--serif);font-size:1.3rem;font-style:italic}
-@media (max-width:860px){.pitch-sec{grid-template-columns:1fr}.pitch-sec .label{position:static}.reel-strip.three{grid-template-columns:1fr 1fr 1fr}}
-@media (max-width:560px){.reel-strip.three{grid-template-columns:1fr 1fr}}
+.companies .studios{margin-top:8px}
+.companies .studios .wm{height:64px;margin-block:6px;display:flex;align-items:center;font-family:var(--serif);font-size:2.3rem;line-height:1;color:var(--ink-fg)}
+.companies .studios .wm i{color:var(--pink);font-style:italic;margin-left:.12em}
 </style>
 </head>
 <body>
@@ -75,101 +44,84 @@
     <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a free call</a>
   </div>
 </header>
-<main>
-  <div class="hero-full">
-    <img width="1280" height="720" src="img/re_hero.jpg" alt="A sunlit hallway in the Laurelhurst listing we filmed in April 2025">
+<main data-plan data-who="Rob Laird" data-subject="Real Estate Rob plan">
+  <div class="plan-head">
     <div class="wrap">
       <span class="cred">Prepared for <b>Rob Laird</b>, November 2026</span>
       <h1>A content plan for <b>Real Estate Rob</b></h1>
-      <p class="lede">Congratulations on the move to REAL and the new site. This page lays out how we would fill pdxrob.com and your channels with video, starting with the films we have already made together.</p>
-      <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a time to talk</a>
+      <p class="lede">Congratulations on the move to REAL and the new site. These are the services we would put behind pdxrob.com and your channels, starting with the films we have already made together. Tick what fits, and your plan comes with you to the call.</p>
     </div>
   </div>
 
-  <div class="band paper">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">01</span><h2>Start with the films we already have</h2></div>
-      <div class="body">
-        <p>In September 2025 we made four short films with you, cut vertical for Instagram. We can re-cut each one horizontally for pdxrob.com, so the home page and the About page open with you on camera, talking about how you work. The footage is already in our archive, which keeps the re-cuts quick.</p>
-        <div class="reel-strip"><a href="https://vimeo.com/1209688967" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_realtor.jpg" alt="Frame from A Portland Realtor"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688967?background=1" allow="autoplay; fullscreen; picture-in-picture" title="A Portland Realtor" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">A Portland Realtor</span><span class="len">56 seconds, vertical</span></a><a href="https://vimeo.com/1209688965" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_experience.jpg" alt="Frame from Experience over Age"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688965?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Experience over Age" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">Experience over Age</span><span class="len">71 seconds, vertical</span></a><a href="https://vimeo.com/1209688966" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_specialized.jpg" alt="Frame from A Specialized Agent"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688966?background=1" allow="autoplay; fullscreen; picture-in-picture" title="A Specialized Agent" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">A Specialized Agent</span><span class="len">45 seconds, vertical</span></a><a href="https://vimeo.com/1209688970" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_storytime.jpg" alt="Frame from Storytime"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688970?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Storytime" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">Storytime</span><span class="len">95 seconds, vertical</span></a></div>
+  <div class="wrap builder">
+    <div class="ladder">
+      <span class="grp">Start here</span>
+      <div class="rung" data-cur="films"><label class="tick"><input type="checkbox" id="s-films" data-s="films" checked aria-label="Horizontal re-edits for web"></label><b data-label="films">Horizontal re-edits for web</b><span class="d">The four September 2025 films, re-cut wide for pdxrob.com.</span></div>
+      <span class="grp">Your listings</span>
+      <div class="rung" data-cur="monthly"><label class="tick"><input type="checkbox" id="s-monthly" data-s="monthly" checked aria-label="Monthly content retainer"></label><b data-label="monthly">Monthly content retainer</b><span class="d">One shoot day a month, built around what you have on the market.</span></div>
+      <div class="rung" data-cur="listing"><label class="tick"><input type="checkbox" id="s-listing" data-s="listing" checked aria-label="Listing walkthrough films"></label><b data-label="listing">Listing walkthrough films</b><span class="d">A walkthrough for each listing, plus vertical cuts for social.</span></div>
+      <div class="rung" data-cur="camera"><label class="tick"><input type="checkbox" id="s-camera" data-s="camera" aria-label="On-camera social series"></label><b data-label="camera">On-camera social series</b><span class="d">Short pieces with you talking about the market and about owning rentals.</span></div>
+      <div class="rung" data-cur="flip"><label class="tick"><input type="checkbox" id="s-flip" data-s="flip" aria-label="Flip case studies"></label><b data-label="flip">Flip case studies</b><span class="d">Each flip filmed from the week you buy it to the finished rooms.</span></div>
+      <span class="grp">Cascadia</span>
+      <div class="rung" data-cur="map"><label class="tick"><input type="checkbox" id="s-map" data-s="map" aria-label="Property films for Cascadia"></label><b data-label="map">Property films for Cascadia</b><span class="d">A short film and a page for each house on your Past Purchases map.</span></div>
+      <div class="rung" data-cur="partners"><label class="tick"><input type="checkbox" id="s-partners" data-s="partners" aria-label="Quarterly partner updates"></label><b data-label="partners">Quarterly partner updates</b><span class="d">A few minutes each quarter, sent privately to the people in the fund.</span></div>
+      <div class="rung" data-cur="meet"><label class="tick"><input type="checkbox" id="s-meet" data-s="meet" aria-label="Meet the partners film"></label><b data-label="meet">Meet the partners film</b><span class="d">You, Doug and Joan on camera for the Cascadia site.</span></div>
+      <span class="grp">Channels and web</span>
+      <div class="rung" data-cur="social"><label class="tick"><input type="checkbox" id="s-social" data-s="social" aria-label="Social media management"></label><b data-label="social">Social media management</b><span class="d">Posting, replies and boosts on @realestaterobpdx, with one report a month.</span></div>
+      <div class="rung" data-cur="search"><label class="tick"><input type="checkbox" id="s-search" data-s="search" aria-label="Listings and local search"></label><b data-label="search">Listings and local search</b><span class="d">A Google Business Profile for Real Estate Rob and reviews after each closing.</span></div>
+      <div class="rung" data-cur="web"><label class="tick"><input type="checkbox" id="s-web" data-s="web" aria-label="Web and brand design"></label><b data-label="web">Web and brand design</b><span class="d">One look for your companies and a fuller pdxrob.com, scoped on a call.</span></div>
+    </div>
+
+    <div class="side">
+      <div class="stage" data-stage="films"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_realtor.jpg" alt="Frame from A Portland Realtor"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688967?background=1" allow="autoplay; fullscreen; picture-in-picture" title="A Portland Realtor" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Start here</span><h2>Horizontal re-edits for web</h2><p>In September 2025 we made four short films with you, cut vertical for Instagram. We can re-cut each one horizontally for pdxrob.com, so the home page and the About page open with you on camera, talking about how you work. The footage is already in our archive, which keeps the re-cuts quick.</p></div></div>
+      <div class="stage" data-stage="monthly" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_laurelhurst.jpg" alt="Frame from the Laurelhurst listing film"><iframe class="r45" loading="lazy" src="https://player.vimeo.com/video/1209689196?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Laurelhurst listing" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Your listings</span><h2>Monthly content retainer</h2><p>The retainer starts with your listings, because each one already has a date to work toward. Every month we film what you have on the market and cut it for the listing page and for your feed. As the library grows, it takes in your flips from purchase to sale.</p></div></div>
+      <div class="stage" data-stage="listing" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_hayden.jpg" alt="Frame from the Hayden Island listing film"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688850?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Hayden Island" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Your listings</span><h2>Listing walkthrough films</h2><p>One visit gives you a horizontal walkthrough for the listing and the site, plus vertical cuts for social. Laurelhurst, Hayden Island and Martha St. are the ones we have already made for you.</p></div></div>
+      <div class="stage" data-stage="camera" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_experience.jpg" alt="Frame from Experience over Age"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688965?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Experience over Age" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Your listings</span><h2>On-camera social series</h2><p>Short pieces with you talking about the market and about owning rentals, in the format of the interview series we made this summer. They keep you in front of buyers and investors between listings.</p></div></div>
+      <div class="stage" data-stage="flip" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_martha.jpg" alt="Frame from the Martha St. film"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688849?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Martha St." tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Your listings</span><h2>Flip case studies</h2><p>We film the house the week you buy it and again when the work is done, with short check-ins in between that keep the feed moving. Each flip ends up as a case study for the site, which shows your contractor side better than any list of services.</p></div></div>
+      <div class="stage" data-stage="map" hidden><span class="v"><img loading="lazy" decoding="async" width="1280" height="720" src="img/re_hero.jpg" alt="A house interior from a listing film"></span><div class="txt"><span class="grp">Cascadia</span><h2>Property films for Cascadia</h2><p>The people who invest with Cascadia put money into houses they may never walk through. Your Past Purchases map already marks the houses, and each one could open into a short film and a page, starting with Corbett, which we have already filmed. The same visit gives Real Estate Rob a case study, and if the house becomes a rental, Better Home Solutions has the listing film ready.</p></div></div>
+      <div class="stage" data-stage="partners" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_storytime.jpg" alt="Frame from Storytime"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688970?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Storytime" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Cascadia</span><h2>Quarterly partner updates</h2><p>A few minutes each quarter with you, Doug and Joan on where each house stands, sent privately to the people already in the fund.</p></div></div>
+      <div class="stage" data-stage="meet" hidden><span class="v type"><b>Cascadia</b><small>Investing Syndicate</small></span><div class="txt"><span class="grp">Cascadia</span><h2>Meet the partners film</h2><p>A short film of the three of you and how you pick and rebuild houses, for the Cascadia site. It puts faces on the team section, which today has first names only.</p></div></div>
+      <div class="stage" data-stage="social" hidden><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/rob_specialized.jpg" alt="Frame from A Specialized Agent"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688966?background=1" allow="autoplay; fullscreen; picture-in-picture" title="A Specialized Agent" tabindex="-1" aria-hidden="true"></iframe></span><div class="txt"><span class="grp">Channels and web</span><h2>Social media management</h2><p>You already have @realestaterobpdx on Instagram, Facebook and YouTube. We would post the films on a schedule you can see and answer comments in your voice. When a post is doing well, we boost it with a budget you set, and once a month you get one report on what moved. The Better Home Solutions Instagram can run from the same library.</p></div></div>
+      <div class="stage" data-stage="search" hidden><span class="v type"><b>Real Estate Rob</b><small>on Google</small></span><div class="txt"><span class="grp">Channels and web</span><h2>Listings and local search</h2><p>Most clients look you up on Google before they call. We set up a Google Business Profile for Real Estate Rob, bring your Zillow, Yelp and LinkedIn profiles over to REAL and pdxrob.com, and make it easy for clients to leave a review after each closing.</p></div></div>
+      <div class="stage" data-stage="web" hidden><span class="v type"><img width="600" height="164" src="img/rer_logo.png" alt="Real Estate Rob logo"><img width="352" height="79" src="img/bhs_logo.png" alt="Better Home Solutions logo"></span><div class="txt"><span class="grp">Channels and web</span><h2>Web and brand design</h2><p>Our brand and web partner can give your companies one look and build pdxrob.com out with live listings from RMLS and NWMLS, your films on the home page and a page for each house you rebuild. We'd rather scope that with you on a call.</p></div></div>
+
+      <div class="plan" id="plan">
+        <span class="grp">Your plan</span>
+        <h2>Talk it through</h2>
+        <p class="count" data-plan-count></p>
+        <div data-plan-list aria-live="polite"></div>
+        <div class="acts" data-plan-acts></div>
+        <p class="sign">Cody McDonald, Portland Content</p>
+        <p class="alt">cody@portlandcontent.com or (503) 568-1199</p>
       </div>
-    </div>
-  </div>
 
-  <div class="band">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">02</span><h2>A monthly shoot built around your listings</h2></div>
-      <div class="body">
-        <p>The retainer starts with your listings, because each one already has a date to work toward. Every month we film what you have on the market and cut it for the listing page and for your feed. As the library grows, it takes in your flips from purchase to sale.</p>
-        <ul class="pitch-rows">
-          <li><span class="n">01</span><h3>Film every listing once</h3><p>One visit gives you a horizontal walkthrough for the listing and the site, plus vertical cuts for social.</p></li>
-          <li><span class="n">02</span><h3>Keep you on camera</h3><p>Short pieces with you talking about the market, investing and property management, in the format of the interview series we made this summer.</p></li>
-          <li><span class="n">03</span><h3>Follow each flip</h3><p>We film the house the week you buy it and again when the work is done, with short check-ins in between that keep the feed moving. Each flip ends up as a case study for the site.</p></li>
-        </ul>
-        <p class="sub">Listings we've filmed for you</p>
-        <div class="reel-strip three"><a href="https://vimeo.com/1209689196" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_laurelhurst.jpg" alt="Frame from Laurelhurst listing"><iframe class="r45" loading="lazy" src="https://player.vimeo.com/video/1209689196?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Laurelhurst listing" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">Laurelhurst listing, April 2025</span></a><a href="https://vimeo.com/1209688850" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_hayden.jpg" alt="Frame from Hayden Island"><iframe loading="lazy" src="https://player.vimeo.com/video/1209688850?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Hayden Island" tabindex="-1" aria-hidden="true"></iframe></span><span class="t">Hayden Island, July 2025</span></a><a href="https://vimeo.com/1209688849" target="_blank" rel="noopener"><span class="v"><img loading="lazy" decoding="async" width="720" height="1280" src="img/re_martha.jpg" alt="Frame from Martha St."><iframe loading="lazy" src="https://player.vimeo.com/video/1209688849?background=1" allow="autoplay; fullscreen; picture-in-picture" title="Martha St." tabindex="-1" aria-hidden="true"></iframe></span><span class="t">Martha St., July 2025</span></a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="band paper">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">03</span><h2>Your companies, side by side</h2></div>
-      <div class="body">
-        <p>A buyer who finds Real Estate Rob should also learn that you can manage the rental afterward, and an investor should see the houses you have rebuilt. Each of our own sites ends with a row that links our three studios, which you can see at the bottom of <a href="index.html#contact" style="border-bottom:1px solid currentColor">our home page</a>. The same row on pdxrob.com and bhspdx.com would show your clients one team that can stay with a property for years, with the films running on every site.</p>
-        <div class="studios rob">
-          <span class="eyebrow">One team for the whole life of a property</span>
-          <a class="st" href="https://www.pdxrob.com" target="_blank" rel="noopener"><span class="n">01</span><img loading="lazy" decoding="async" width="600" height="164" src="img/rer_logo.png" alt="Real Estate Rob logo"><h3>Real Estate Rob</h3><p>Buying, selling and investing across Oregon and Washington, now with REAL Brokerage.</p><span class="go">pdxrob.com</span></a>
-          <a class="st" href="https://bhspdx.com" target="_blank" rel="noopener"><span class="n">02</span><img loading="lazy" decoding="async" width="352" height="79" src="img/bhs_logo.png" alt="Better Home Solutions logo"><h3>Better Home Solutions</h3><p>Property management in the Portland metro and Southwest Washington since 2015.</p><span class="go">bhspdx.com</span></a>
-          <a class="st next" href="#cascadia"><span class="n">03</span><span class="wm">Cascadia<i>.</i></span><h3>Cascadia Investing Syndicate</h3><p>The investment company you co-founded. The houses you buy and rebuild, like the Corbett house, could each get a short film and a page.</p><span class="go">How that could work</span></a>
+      <div>
+        <p class="grp" style="margin-bottom:10px">The films we already have</p>
+        <div class="strip">
+          <figure><img loading="lazy" decoding="async" src="img/rob_realtor.jpg" width="720" height="1280" alt="Frame from A Portland Realtor"><figcaption><a href="https://vimeo.com/1209688967" target="_blank" rel="noopener">A Portland Realtor</a></figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="img/rob_experience.jpg" width="720" height="1280" alt="Frame from Experience over Age"><figcaption><a href="https://vimeo.com/1209688965" target="_blank" rel="noopener">Experience over Age</a></figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="img/rob_specialized.jpg" width="720" height="1280" alt="Frame from A Specialized Agent"><figcaption><a href="https://vimeo.com/1209688966" target="_blank" rel="noopener">A Specialized Agent</a></figcaption></figure>
+          <figure><img loading="lazy" decoding="async" src="img/rob_storytime.jpg" width="720" height="1280" alt="Frame from Storytime"><figcaption><a href="https://vimeo.com/1209688970" target="_blank" rel="noopener">Storytime</a></figcaption></figure>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="band" id="cascadia">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">04</span><h2>Give Cascadia's partners a house to look at</h2></div>
+  <div class="band paper companies">
+    <div class="wrap plan-close">
+      <div class="label"><span class="grp">How it fits together</span><h2>Your companies, side by side</h2></div>
       <div class="body">
-        <p>The people who invest with Cascadia put money into houses they may never walk through. A short film of each one lets them see it, from the week you buy it to the finished rooms. The same visit gives Real Estate Rob a case study, and if the house becomes a rental, Better Home Solutions has the listing film ready.</p>
-        <ul class="pitch-rows">
-          <li><span class="n">01</span><h3>Every star on the map</h3><p>Your Past Purchases map already marks the houses. Each one could open into a short film and a page, starting with Corbett, which we have already filmed.</p></li>
-          <li><span class="n">02</span><h3>An update for your partners</h3><p>A few minutes each quarter with you, Doug and Joan on where each house stands, sent privately to the people already in the fund.</p></li>
-          <li><span class="n">03</span><h3>Meet the partners</h3><p>A short film of the three of you and how you pick and rebuild houses, for the Cascadia site.</p></li>
-        </ul>
+        <p>A buyer who finds Real Estate Rob should also learn that you can manage the rental afterward, and an investor should see the houses you have rebuilt. Each of our own sites ends with a row that links our three studios, which you can see at the bottom of <a href="index.html#contact" style="border-bottom:1px solid currentColor">our home page</a>. The same row on pdxrob.com and bhspdx.com would show your clients one team that can stay with a property for years, with the films running on every site.</p>
+        <div class="studios">
+          <span class="eyebrow">One team for the whole life of a property</span>
+          <a class="st" href="https://www.pdxrob.com" target="_blank" rel="noopener"><span class="n">01</span><img loading="lazy" decoding="async" width="600" height="164" src="img/rer_logo.png" alt="Real Estate Rob logo"><h3>Real Estate Rob</h3><p>Buying, selling and investing across Oregon and Washington, now with REAL Brokerage.</p><span class="go">pdxrob.com</span></a>
+          <a class="st" href="https://bhspdx.com" target="_blank" rel="noopener"><span class="n">02</span><img loading="lazy" decoding="async" width="352" height="79" src="img/bhs_logo.png" alt="Better Home Solutions logo"><h3>Better Home Solutions</h3><p>Property management in the Portland metro and Southwest Washington since 2015.</p><span class="go">bhspdx.com</span></a>
+          <a class="st" href="https://cascadiainvestingsyndicate.com" target="_blank" rel="noopener"><span class="n">03</span><span class="wm">Cascadia<i>.</i></span><h3>Cascadia Investing Syndicate</h3><p>The investment company you co-founded, where each house you buy and rebuild could get a short film and a page.</p><span class="go">cascadiainvestingsyndicate.com</span></a>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="band paper">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">05</span><h2>Your channels, run for you</h2></div>
-      <div class="body">
-        <p>You already have @realestaterobpdx on Instagram, Facebook and YouTube. We would post the films on a schedule you can see and answer comments in your voice. When a post is doing well, we boost it with a budget you set, and once a month you get one report on what moved.</p>
-        <ul class="handles"><li><a href="https://www.instagram.com/realestaterobpdx/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg><span>Instagram, 1,327 followers</span></a></li><li><a href="https://www.facebook.com/realestaterobpdx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg><span>Facebook</span></a></li><li><a href="https://www.youtube.com/@realestaterobpdx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube</span></a></li></ul>
-        <p>The Better Home Solutions Instagram can run from the same library, so both accounts stay active on one shoot day a month.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="band">
-    <div class="wrap pitch-sec">
-      <div class="label"><span class="n">06</span><h2>Web and brand, when you're ready</h2></div>
-      <div class="body">
-        <p>Our brand and web partner can give your businesses one look and build pdxrob.com out with live listings from RMLS and NWMLS, your films on the home page and a page for each house you rebuild. We'd rather scope that with you on a call.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="band contact-band">
-    <div class="wrap center re-cta">
-      <h2>Talk it through</h2>
-      <p class="lede">We can start with the re-cuts and your next listing, and add the rest when it makes sense for you.</p>
-      <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a time to talk</a>
-      <p class="sign">Cody McDonald, Portland Content</p>
-      <p class="note"><a href="mailto:cody@portlandcontent.com" style="color:var(--fg);text-decoration:underline">cody@portlandcontent.com</a> or <a href="tel:+15035681199" style="color:var(--fg);text-decoration:underline">(503) 568-1199</a></p>
-    </div>
-  </div>
+  <div class="plan-dock"><span data-plan-dockn></span><a href="#plan">See your plan</a></div>
 </main>
 <footer>
   <div class="wrap">
@@ -199,5 +151,6 @@
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="https://calendly.com/portlandcontent/call"]');if(!a||!window.Calendly||a.closest('.calendly-inline-widget'))return;e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/portlandcontent/call?hide_gdpr_banner=1'});});</script>
 <script src="motion.js" defer></script>
+<script src="plan.js" defer></script>
 </body>
 </html>
