@@ -80,6 +80,9 @@ a{color:inherit}
 .film h3{font-family:var(--display); font-weight:500; font-size:clamp(22px,2.3vw,27px); line-height:1.2; margin:0}
 .film p{margin:0; color:var(--mute); max-width:60ch}
 @media (max-width:760px){ .film{grid-template-columns:minmax(0,1fr)} .film .rt{font-size:38px} }
+.lede-2{display:grid; gap:14px; max-width:64ch}
+.lede-2 p{margin:0; font-size:clamp(17px,1.6vw,19px)}
+.lede-2 p + p{color:var(--mute)}
 .aside{margin:22px 0 0; color:var(--mute); font-size:15px; max-width:72ch}
 
 .steps{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 clamp(24px,4vw,48px)}
@@ -140,13 +143,13 @@ a{color:inherit}
 
 <section class="wrap hero">
   <div>
-    <h1>Your Roku ad, from the shoot to <em>on air</em></h1>
+    <h1>We'll film your Roku ad and get it <em>on air</em></h1>
     <p>You've written the dialog. We film it in one day in Wenatchee, cut it to a 30 and a 15, and set the campaign up in your own Roku account, aimed at the programs, days and hours you pick.</p>
-    <p>It's about two weeks from the shoot to a live campaign once Roku approves the spots.</p>
+    
   </div>
   <div class="tv" aria-hidden="true">
     <div class="screen">
-      <div class="slate"><span>Your spot, on the living room screen</span></div>
+      <div class="slate"><span>Your ad here</span></div>
       <div class="osd"><span class="live">Ad</span><span class="bar"><i id="bar"></i></span><span class="tc" id="tc">0:00 / 0:30</span></div>
     </div>
     <div class="stand"></div>
@@ -173,19 +176,15 @@ a{color:inherit}
         <p>We reframe the spot for phones, so you can post it on your own channels too.</p>
       </li>
     </ol>
-    <p class="aside">Both spots are delivered to Roku's spec at 1920x1080 and 6 Mbps or better, with a one year license for TV and online ads.</p>
+    <p class="aside">Both spots meet Roku's specs, and they come with a one year license for TV and online ads.</p>
   </section>
 
   <section class="sec">
-    <p class="label">How it goes live</p>
-    <ol class="steps">
-      <li><span class="num">1</span><span><strong>You open the account</strong><span>You create the Roku Ads Manager account with your email, so you own it from day one.</span></span></li>
-      <li><span class="num">2</span><span><strong>You add us as a guest</strong><span>You add us with campaign access, which keeps billing and account settings in your hands.</span></span></li>
-      <li><span class="num">3</span><span><strong>You add your card</strong><span>Media spend goes straight from your card to Roku, and Roku bills as the ads run.</span></span></li>
-      <li><span class="num">4</span><span><strong>We build the campaign</strong><span>Your budget and dates, the Wenatchee ZIP codes or the wider valley, and the days, hours and program types you pick.</span></span></li>
-      <li><span class="num">5</span><span><strong>We upload, and Roku reviews</strong><span>We upload both lengths, and Roku's review takes two to three business days.</span></span></li>
-      <li><span class="num">6</span><span><strong>The ad goes live</strong><span>The campaign goes live, and we watch the first week of delivery closely.</span></span></li>
-    </ol>
+    <p class="label">Who does what</p>
+    <div class="lede-2">
+      <p>You open the Roku Ads Manager account in your name and add your card, so the account and the billing stay yours.</p>
+      <p>We put our digital marketing manager on the account. They build the campaign around your budget, dates and the programs and hours you pick, get both spots through Roku's review, and watch the first week on air. It's about two weeks from the shoot to a live campaign.</p>
+    </div>
   </section>
 
   <section class="sec">
@@ -200,13 +199,13 @@ a{color:inherit}
       <li><label class="opt">
         <input type="checkbox" id="k-setup" checked><span class="box"></span>
         <div><h3>Setup and launch<span class="tag">Recommended</span></h3>
-        <p>Steps one through six above, done with you: the account, the campaign, the upload, Roku's review and the first week on air.</p></div>
+        <p>We walk you through the account, then build the campaign, handle Roku's review and watch the first week on air.</p></div>
         <div class="price">$750<small>One time</small></div>
       </label></li>
       <li><label class="opt">
         <input type="checkbox" id="k-mgmt"><span class="box"></span>
         <div><h3>Campaign management</h3>
-        <p>Up to three hours a month: a weekly check of delivery and pacing, adjustments to days, hours, programs and area as the numbers come in, one creative swap a quarter, a one page report and a short monthly call. Quoted as a year and billed monthly, with 30 days notice to cancel after month three.</p></div>
+        <p>Our digital marketing manager stays on the account and manages it monthly, adjusting the days, hours and programs as the numbers come in and letting you know what moved. It's quoted as a year and billed monthly, and you can cancel with 30 days notice after month three.</p></div>
         <div class="price">$400<small>A month</small></div>
       </label></li>
     </ul>

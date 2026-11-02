@@ -1,8 +1,8 @@
 /* Plan pages (unlisted, noindex): direction B from the Rob mockup, Cody's pick on 2026-11-02. A ladder of services with a checkbox each on the left; the chosen service, the live plan and the call button on the right. Hairlines and type, no cards. */
 [hidden]{display:none!important}
-.cred{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.cred{font-size:.92rem;font-weight:500;color:var(--muted)}
 .cred b{color:var(--fg);font-weight:600}
-.grp{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--pink)}
+.grp{font-size:.95rem;font-weight:600;color:var(--pink)}
 
 .plan-head{padding-block:clamp(48px,7vw,88px) 8px;background:radial-gradient(70% 90% at 90% 0%,rgba(238,29,82,.14),transparent 60%),var(--bg)}
 .plan-head .wrap{display:grid;gap:16px;justify-items:start}
@@ -110,5 +110,8 @@
 .seen li b{font-family:var(--serif);font-weight:400;font-size:1.2rem;line-height:1.25}
 .seen li span.w{grid-column:2;font-size:.9rem;color:var(--muted);max-width:40em}
 .stage .because{display:grid;gap:4px;padding-top:12px;border-top:1px solid var(--line);color:var(--fg);font-size:.95rem}
-.stage .because b{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--pink)}
+.stage .because b{font-size:.9rem;font-weight:600;color:var(--pink)}
 @media (max-width:900px){.seen .wrap{grid-template-columns:1fr}}
+
+/* labels in sentence case on the plan pages (Cody, 2026-11-02: tracked all-caps labels read as AI) */
+.eyebrow{font-size:.95rem;letter-spacing:0;text-transform:none}
