@@ -1,6 +1,6 @@
 /* Plan pages: ticks build "Your plan", the chosen service shows on the right, and Book a time to talk carries the list into Calendly (or an email). Labels come from the ladder, so the plan always matches the page. */
 (function(){
-  var main=document.querySelector('[data-plan]'); if(!main) return;
+  document.querySelectorAll('[data-plan]').forEach(function(main){
   var CAL='https://calendly.com/portlandcontent/call', MAIL='cody@portlandcontent.com';
   var who=main.getAttribute('data-who')||'', subject=main.getAttribute('data-subject')||'Content plan';
   var inputs=[].slice.call(main.querySelectorAll('input[data-s]'));
@@ -30,10 +30,11 @@
     var r=e.target.closest('.rung');
     if(r && !e.target.closest('label')){cur=r.getAttribute('data-cur'); render();}
   });
+  render();
+  });
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[data-plan-book]'); if(!a||!window.Calendly) return;
     e.preventDefault(); e.stopPropagation();
     window.Calendly.initPopupWidget({url:a.href+'&hide_gdpr_banner=1'});
   },true);
-  render();
 })();
