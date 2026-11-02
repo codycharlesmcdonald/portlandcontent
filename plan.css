@@ -96,3 +96,19 @@
   .stage h2{font-size:1.4rem}
 }
 @media (prefers-reduced-motion:reduce){.stage .v iframe{display:none}.rung b,.tick input,.tick input::after{transition:none}}
+
+/* "What we see" and "Why it matters": the reasoning behind a plan, in plain rows (Rob, 2026-11-02) */
+.seen{padding-block:8px 8px}
+.seen .wrap{display:grid;grid-template-columns:300px 1fr;gap:20px 56px;align-items:start;padding-block:28px 8px;border-top:1px solid var(--line)}
+.seen .label{display:grid;gap:10px;align-content:start}
+.seen .label h2{font-size:clamp(1.7rem,3vw,2.2rem)}
+.seen .label p{color:var(--muted);font-size:.95rem}
+.seen ul{list-style:none;margin:0;padding:0;display:grid}
+.seen li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 14px;padding:14px 0;border-top:1px solid var(--line)}
+.seen li:last-child{border-bottom:1px solid var(--line)}
+.seen li .n{font-size:.74rem;font-weight:600;color:var(--pink);padding-top:.3em;font-variant-numeric:tabular-nums}
+.seen li b{font-family:var(--serif);font-weight:400;font-size:1.2rem;line-height:1.25}
+.seen li span.w{grid-column:2;font-size:.9rem;color:var(--muted);max-width:40em}
+.stage .because{display:grid;gap:4px;padding-top:12px;border-top:1px solid var(--line);color:var(--fg);font-size:.95rem}
+.stage .because b{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--pink)}
+@media (max-width:900px){.seen .wrap{grid-template-columns:1fr}}
