@@ -124,10 +124,11 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
 .opt input{position:absolute; opacity:0; width:1px; height:1px; pointer-events:none}
 .box{width:22px; height:22px; border:1px solid var(--accent); display:grid; place-items:center; transform:translateY(4px); transition:background-color .25s ease}
 .box.round{border-radius:50%}
-.box::after{content:""; width:10px; height:10px; background:var(--bg); transform:scale(0); transition:transform .25s ease}
-.box.round::after{border-radius:50%}
+.box::after{content:""; width:6px; height:12px; border-right:2px solid var(--bg); border-bottom:2px solid var(--bg); transform:translateY(-2px) rotate(45deg) scale(0); transition:transform .25s ease}
+.box.round::after{width:10px; height:10px; border:0; border-radius:50%; background:var(--bg); transform:scale(0)}
 .opt input:checked + .box{background:var(--accent)}
-.opt input:checked + .box::after{transform:scale(1)}
+.opt input:checked + .box::after{transform:translateY(-2px) rotate(45deg) scale(1)}
+.opt input:checked + .box.round::after{transform:scale(1)}
 .opt input:focus-visible + .box{outline:2px solid var(--accent); outline-offset:4px}
 .opt .rt{font-family:var(--display); font-size:clamp(30px,3.6vw,44px); line-height:1; font-variant-numeric:lining-nums tabular-nums; color:var(--accent); transition:opacity .3s ease}
 .opt .rt small{display:block; font-family:var(--body); font-size:14px; color:var(--mute); margin-top:8px}
@@ -136,10 +137,15 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
 .opt .price{font-family:var(--display); font-size:clamp(22px,2.2vw,28px); text-align:right; font-variant-numeric:lining-nums tabular-nums; transition:opacity .3s ease}
 .opt:not(.on) .price, .opt:not(.on) h3, .opt:not(.on) .rt{opacity:.42}
 .tag{display:inline-block; font-family:var(--body); font-size:14px; font-weight:400; color:var(--accent); border:1px solid var(--accent); padding:3px 7px; margin-left:10px; vertical-align:middle; transform:translateY(-3px)}
-.seg{display:inline-flex; flex-wrap:wrap; margin-top:14px; border:1px solid var(--rule)}
-.seg button{all:unset; cursor:pointer; font-family:var(--body); font-size:14px; padding:8px 12px; color:var(--mute)}
-.seg button[aria-pressed="true"]{background:var(--accent); color:var(--bg)}
-.seg button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.seg{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; margin-top:16px}
+.seg .or{font-family:var(--display); font-style:italic; color:var(--mute)}
+.seg button{all:unset; cursor:pointer; font-family:var(--body); font-size:15px; color:var(--mute); padding-bottom:4px; position:relative; transition:color .3s ease}
+.seg button b{font-weight:500; font-variant-numeric:tabular-nums; margin-left:6px}
+.seg button::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{color:var(--ink)}
+.seg button[aria-pressed="true"]::after{transform:scaleX(1)}
+.seg button:focus-visible{outline:2px solid var(--accent); outline-offset:4px}
 @media (max-width:760px){
   .opt{grid-template-columns:30px minmax(0,1fr) auto}
   .opt .box{grid-row:1}
@@ -238,7 +244,7 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
       <h2>Have both films ready three days before <em>Studio 65</em></h2>
       <div>
         <p>The org film opens the program as guests sit down to dinner, and the appeal film plays right before the paddle raise, where the night's real giving happens.</p>
-        <p>If we film by Friday, November 6, the final cuts are with you on Wednesday the 18th, with the edit running as a rush. Tick the films the board wants, and the total updates as you go.</p>
+        <p>If we film by Friday, November 13, the final cuts are with you on Wednesday the 18th, with the edit running as a rush. Tick the films the board wants, and the total updates as you go.</p>
       </div>
     </div>
 
@@ -258,8 +264,9 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
           <div class="txt"><h3>Org film<span class="tag">Recommended</span></h3>
           <p id="org-copy">The rework is a fresh edit from your archive with new footage of Vivian from the appeal shoot day, so the room sees something new without a second shoot.</p>
           <span class="seg" role="group" aria-label="Org film version">
-            <button type="button" id="org-rework" aria-pressed="true">Rework from archive</button>
-            <button type="button" id="org-reshoot" aria-pressed="false">Full reshoot</button>
+            <button type="button" id="org-rework" aria-pressed="true">Rework from your archive<b>$1,045</b></button>
+            <span class="or" aria-hidden="true">or</span>
+            <button type="button" id="org-reshoot" aria-pressed="false">Full reshoot<b>$3,200</b></button>
           </span></div>
           <div class="price" id="org-price">$1,045</div>
         </label></li>
@@ -288,8 +295,8 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
     <section class="sec">
       <p class="label">The calendar</p>
       <ol class="line">
-        <li><span class="d">Fri, Nov 6</span><span class="t">Filming day</span><span class="n">We film with this year's recipient and pick up the new footage of Vivian.</span></li>
-        <li><span class="d">Nov 9 to 17</span><span class="t">The edit</span><span class="n">The edit runs as a rush, and your notes come back through Christy.</span></li>
+        <li><span class="d">Fri, Nov 13</span><span class="t">Filming day</span><span class="n">We film with this year's recipient and pick up the new footage of Vivian.</span></li>
+        <li><span class="d">Nov 14 to 17</span><span class="t">The edit</span><span class="n">The edit runs as a rush, and your notes come back through Christy.</span></li>
         <li class="key"><span class="d">Wed, Nov 18</span><span class="t">Final cuts</span><span class="n">You get the finished films in time to test them on the screen at the venue.</span></li>
         <li class="key"><span class="d">Sat, Nov 21</span><span class="t">Winter's Eve</span><span class="n">Studio 65 runs from 5 to 10 pm at Abbey Road Farm in Carlton.</span></li>
       </ol>
@@ -394,10 +401,10 @@ body[data-view="retreat"] .sun{opacity:1; animation:breathe 10s ease-in-out infi
         <div class="care">
       <h3 id="care-h">How we film around <em>CF</em> on both projects</h3>
       <ul class="items">
-        <li><span class="dot"></span><span>People with CF keep their distance from each other on camera, and we never stage them together. <span id="care-extra">If the recipient and Vivian both appear, they film in separate sessions.</span></span></li>
-        <li><span class="dot"></span><span>Anything that touches a person, microphones included, is sanitized before the next one.</span></li>
-        <li><span class="dot"></span><span>Anyone on our side who feels unwell stays home, without exception.</span></li>
-        <li><span class="dot"></span><span>The foundation's protocols and each family's come ahead of ours.</span></li>
+        <li><span class="dot"></span><span>We keep people with CF apart on camera and never stage them together. <span id="care-extra">If the recipient and Vivian both appear, they film in separate sessions.</span></span></li>
+        <li><span class="dot"></span><span>We sanitize microphones and anything else that touches a person between interviews.</span></li>
+        <li><span class="dot"></span><span>Anyone on our crew who feels sick stays home.</span></li>
+        <li><span class="dot"></span><span>We follow your protocols and each family's on top of our own.</span></li>
       </ul>
     </div>
   </section>
