@@ -333,3 +333,4 @@ p.svc{display:block}
 /* Labels in sentence case, 2026-11-02: Cody reads small, all-caps, letter-spaced labels as AI (memory pitch-page-format). Same weight and color, plain case, no tracking. */
 .eyebrow,.hero-full .cred,.chip,.showcase .frame .cap,.svc-item .kv b,.field label,.foot h4,.showcase .item .watch,.madefor .mf-label,.studios .go,.banner-loop .cap{text-transform:none;letter-spacing:0;font-size:.86rem}
 .foot h4{font-size:.9rem}
+.why .row .n,.svc .n,.showcase .item .n,.svc-item .head .n,.studios .n,.eyebrow,.hero-full .cred,.chip,.showcase .frame .cap,.svc-item .kv b,.field label,.foot h4,.showcase .item .watch,.madefor .mf-label,.studios .go,.banner-loop .cap,.btn{font-family:var(--sans);letter-spacing:0}
