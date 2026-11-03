@@ -329,3 +329,7 @@ p.svc{display:block}
 .case blockquote cite{display:block;margin-top:8px;font-family:var(--sans);font-style:normal;font-size:.82rem;color:var(--muted)}
 @media (max-width:760px){.case .films{grid-template-columns:1fr}.case .films figure{grid-template-columns:120px 1fr;gap:16px}.why .clip{width:min(180px,50%)}}
 @media (prefers-reduced-motion:reduce){.why .clip .v iframe,.banner-loop iframe{display:none}.why .clip:hover .v img,.case .films a.v:hover img{transform:none}}
+
+/* Labels in sentence case, 2026-11-02: Cody reads small, all-caps, letter-spaced labels as AI (memory pitch-page-format). Same weight and color, plain case, no tracking. */
+.eyebrow,.hero-full .cred,.chip,.showcase .frame .cap,.svc-item .kv b,.field label,.foot h4,.showcase .item .watch,.madefor .mf-label,.studios .go,.banner-loop .cap{text-transform:none;letter-spacing:0;font-size:.86rem}
+.foot h4{font-size:.9rem}
