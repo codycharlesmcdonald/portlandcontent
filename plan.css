@@ -58,6 +58,19 @@
 .plan ol li:last-child{border-bottom:1px solid var(--line)}
 .plan ol li .num{font-size:.74rem;font-weight:600;color:var(--pink);font-variant-numeric:tabular-nums}
 .plan ol li button{appearance:none;background:none;border:0;color:var(--muted);font:inherit;font-size:.78rem;cursor:pointer;text-decoration:underline;min-height:32px}
+.plan ol.priced li{grid-template-columns:30px 1fr auto auto}
+.plan ol li .amt{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;display:grid;justify-items:end;gap:2px}
+.plan ol li .amt.muted{color:var(--muted);font-size:.85rem}
+.plan .qty{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.plan .qty button{appearance:none;background:none;border:1px solid var(--line);color:inherit;font:inherit;width:24px;height:24px;line-height:1;cursor:pointer;text-decoration:none}
+.plan .qty b{color:inherit;font-weight:600}
+.plan-total{display:grid;gap:6px}
+.plan-total:empty{display:none}
+.plan-total div{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.plan-total div b{font-weight:600}
+.plan-total .yr{padding-top:8px;border-top:1px solid var(--line);font-family:var(--serif);font-size:1.15rem}
+.plan-total p{font-size:.82rem;color:var(--muted);margin:0}
+@media (max-width:520px){.plan ol.priced li{grid-template-columns:24px 1fr auto}.plan ol.priced li button[data-rm]{grid-column:2;justify-self:start;min-height:24px;padding:0}}
 .plan .empty{color:var(--muted);font-size:.92rem;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .plan .acts{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
 .plan .acts a.mail{font-size:.85rem;text-decoration:underline}
