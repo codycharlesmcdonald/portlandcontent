@@ -3,133 +3,607 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Wow and Flutterville, a content plan from Portland Content</title>
+<title>Wow and Flutterville, your films and the marketing plan</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="A year of content for Wow and Flutterville Playgardens from Portland Content. Pick the services that fit, from the first clips of your October footage to a film for every garden.">
-<link rel="icon" href="img/pc_logo_pink.png">
+<meta name="description" content="Mac Films plans for Wow &amp; Flutterville Playgardens: two shoot days a year and the films, clips and stills you post yourself, beside the October marketing plan.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Portland Content">
-<meta property="og:title" content="A year of content for Wow and Flutterville Playgardens">
-<meta property="og:description" content="Pick the services that fit, from the first clips of your October footage to a film for every garden.">
-<meta property="og:image" content="https://portlandcontent.com/img/wow_01.jpg">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="900">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0B0B0B">
-<link rel="apple-touch-icon" href="img/pc_logo_pink.png">
+<meta property="og:site_name" content="Mac Films">
+<meta property="og:title" content="Your films and the marketing plan, for Wow &amp; Flutterville Playgardens">
+<meta property="og:description" content="Mac Films plans for Wow &amp; Flutterville Playgardens: two shoot days a year and the films, clips and stills you post yourself, beside the October marketing plan.">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#1E2836">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="plan.css">
-<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap">
+<style>
+/* Layout: the heading is the selector (the Vivian Lee format; copy and prices from lead gen, WOW-VIDEO-PARTNER-PAGE.md).
+   Your films is the default and opens on a play garden yard in low winter light: puddles, rain boots by the door, a tripod
+   at the edge of the frame, in slate with the Mac Films yellow. The marketing plan is the October proposal kept whole and
+   opens on the same yard in summer, beds in bloom and a bunting line, in cream with the Portland Content pink.
+   Each view commits to one look on purpose. No near-black grounds and no children in the art. */
+:root{
+  --win:#1E2836; --win-2:#263243; --win-ink:#EEF1F4; --win-mute:#A9B4C2; --win-rule:#3A4859; --win-acc:#F5D33D;
+  --sum:#F6F1E6; --sum-2:#ECE4D3; --sum-ink:#1F2B1F; --sum-mute:#56634F; --sum-rule:#D5CCB7; --sum-acc:#C4164A;
+  --display:"DM Serif Display", Georgia, "Times New Roman", serif;
+  --body:"Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --bg:var(--win); --bg-2:var(--win-2); --ink:var(--win-ink); --mute:var(--win-mute); --rule:var(--win-rule); --accent:var(--win-acc);
+  color-scheme:dark;
+}
+:root:has(body[data-view="marketing"]){
+  --bg:var(--sum); --bg-2:var(--sum-2); --ink:var(--sum-ink); --mute:var(--sum-mute); --rule:var(--sum-rule); --accent:var(--sum-acc);
+  color-scheme:light;
+}
+html{background:var(--bg)}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.6;
+  transition:background-color .9s ease, color .9s ease; -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:1120px; margin:0 auto;
+  padding-left:max(24px, env(safe-area-inset-left,0px)); padding-right:max(24px, env(safe-area-inset-right,0px))}
+@media (max-width:520px){ .wrap{padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))} }
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:4px; border-radius:2px}
+
+.mast{display:flex; justify-content:space-between; gap:8px 16px; flex-wrap:wrap; padding-block:28px 0; font-size:14px; color:var(--mute)}
+.mast b{font-weight:600; color:var(--ink)}
+
+/* the selector heading */
+.picker{padding-block:clamp(40px,8vw,88px) 12px}
+.picker .for{font-family:var(--display); font-style:italic; font-size:clamp(18px,2.2vw,22px); color:var(--mute); margin:0 0 18px}
+.names{display:flex; flex-wrap:wrap; align-items:baseline; gap:0 .28em; margin:0;
+  font-family:var(--display); font-weight:400; font-size:clamp(44px,8.6vw,112px); line-height:1; letter-spacing:-.015em}
+.names .amp{font-style:italic; color:var(--accent); font-size:.62em; padding-inline:.04em}
+.tab{all:unset; cursor:pointer; position:relative; color:var(--ink); opacity:.28; transition:opacity .5s ease}
+.tab:hover{opacity:.55}
+.tab[aria-selected="true"]{opacity:1}
+.tab em{font-style:italic}
+.tab::after{content:""; position:absolute; left:0; right:0; bottom:-.06em; height:2px; background:var(--accent);
+  transform:scaleX(0); transform-origin:left; transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.tab[aria-selected="true"]::after{transform:scaleX(1)}
+.tab:focus-visible{outline-offset:8px}
+.hint{font-size:15px; color:var(--mute); margin:22px 0 0; max-width:62ch}
+
+/* art band: the yard, drawn */
+.art{position:relative; height:clamp(220px,32vw,340px); margin-top:clamp(28px,4vw,44px); overflow:hidden}
+.art canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+.art .stamp{position:absolute; left:0; right:0; bottom:0; z-index:2}
+.stamp .wrap{display:flex; justify-content:space-between; align-items:flex-end; gap:6px 28px; flex-wrap:wrap; padding-block:0 14px}
+.stamp span{font-size:14px; color:var(--ink); opacity:.9}
+.art::after{content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--rule)}
+
+.view{padding-block:clamp(48px,7vw,84px) 24px; animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:.001; transform:translateY(10px)}to{opacity:1; transform:none}}
+.lede{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:28px clamp(28px,5vw,72px); align-items:start}
+.lede h2{font-family:var(--display); font-weight:400; font-size:clamp(32px,4.4vw,52px); line-height:1.08; margin:0; text-wrap:balance}
+.lede h2 em{color:var(--accent)}
+.lede p{margin:0; font-size:clamp(17px,1.6vw,19px); max-width:58ch}
+@media (max-width:820px){ .lede{grid-template-columns:minmax(0,1fr)} }
+
+.sec{margin-top:clamp(56px,8vw,96px)}
+.label{font-size:16px; font-weight:600; color:var(--ink); margin:0 0 22px; display:flex; align-items:center; gap:14px}
+.label::after{content:""; flex:1; height:1px; background:var(--rule)}
+
+/* priced picks */
+.pick{list-style:none; margin:0; padding:0}
+.pick > li{border-top:1px solid var(--rule)}
+.pick > li:last-child{border-bottom:1px solid var(--rule)}
+.opt{display:grid; grid-template-columns:34px minmax(120px,1.2fr) minmax(0,3.4fr) minmax(104px,auto); gap:8px clamp(16px,2.6vw,36px);
+  padding-block:26px; align-items:baseline; cursor:pointer; position:relative}
+.opt input{position:absolute; opacity:0; width:1px; height:1px; pointer-events:none}
+.box{width:22px; height:22px; border:1px solid var(--accent); display:grid; place-items:center; transform:translateY(4px); transition:background-color .25s ease}
+.box::after{content:""; width:6px; height:12px; border-right:2px solid var(--bg); border-bottom:2px solid var(--bg); transform:translateY(-2px) rotate(45deg) scale(0); transition:transform .25s ease}
+.opt input:checked + .box{background:var(--accent)}
+.opt input:checked + .box::after{transform:translateY(-2px) rotate(45deg) scale(1)}
+.opt input:focus-visible + .box{outline:2px solid var(--accent); outline-offset:4px}
+.opt .ct{font-family:var(--display); font-size:clamp(18px,1.8vw,21px); line-height:1.25; color:var(--accent); transition:opacity .3s ease}
+.opt h3{font-family:var(--display); font-weight:400; font-size:clamp(21px,2.2vw,26px); line-height:1.2; margin:0 0 8px; transition:opacity .3s ease}
+.opt p{margin:0; color:var(--mute); max-width:58ch}
+.opt .price{font-family:var(--display); font-size:clamp(22px,2.2vw,28px); text-align:right; font-variant-numeric:lining-nums tabular-nums; transition:opacity .3s ease}
+.opt .price small{display:block; font-family:var(--body); font-size:14px; color:var(--mute)}
+.opt:not(.on) .price, .opt:not(.on) h3, .opt:not(.on) .ct{opacity:.42}
+.tag{display:inline-block; font-family:var(--body); font-size:14px; color:var(--accent); border:1px solid var(--accent); padding:2px 7px; margin-left:10px; vertical-align:middle; transform:translateY(-3px)}
+.seg{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; margin-top:16px}
+.seg .or{font-family:var(--display); font-style:italic; color:var(--mute)}
+.seg button{all:unset; cursor:pointer; font-size:15px; color:var(--mute); padding-bottom:4px; position:relative; transition:color .3s ease}
+.seg button b{font-weight:500; font-variant-numeric:tabular-nums; margin-left:6px}
+.seg button::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.seg button:hover, .seg button[aria-pressed="true"]{color:var(--ink)}
+.seg button[aria-pressed="true"]::after{transform:scaleX(1)}
+.seg button:focus-visible{outline:2px solid var(--accent); outline-offset:4px}
+@media (max-width:760px){
+  .opt{grid-template-columns:30px minmax(0,1fr) auto}
+  .opt .box{grid-row:1}
+  .opt .ct{grid-column:2; grid-row:1}
+  .opt .price{grid-column:3; grid-row:1}
+  .opt .txt{grid-column:2 / 4}
+}
+.total{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 28px; align-items:end; padding-block:30px 0}
+.total .k{font-size:14px; color:var(--accent)}
+.total .sum{font-family:var(--display); font-size:clamp(48px,7vw,84px); line-height:.95; font-variant-numeric:lining-nums tabular-nums}
+.total .what{margin:8px 0 0; color:var(--mute); max-width:56ch}
+.total .notes{grid-column:1 / -1; margin:6px 0 0; color:var(--mute); font-size:15px; max-width:72ch}
+@media (max-width:620px){ .total{grid-template-columns:minmax(0,1fr)} }
+
+/* prose sections */
+.care{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,7fr); gap:20px clamp(28px,5vw,72px)}
+.care h3{font-family:var(--display); font-weight:400; font-size:clamp(26px,3vw,34px); line-height:1.12; margin:0; text-wrap:balance}
+.care p{margin:0; max-width:62ch}
+@media (max-width:820px){ .care{grid-template-columns:minmax(0,1fr)} }
+
+/* timeline */
+.line{list-style:none; margin:0; padding:0; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); position:relative}
+.line::before{content:""; position:absolute; left:0; right:0; top:9px; height:1px; background:var(--rule)}
+.line li{position:relative; padding:34px 18px 0 0; min-width:0}
+.line li::before{content:""; position:absolute; left:0; top:4px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:1px solid var(--accent)}
+.line li.key::before{background:var(--accent)}
+.line .d{font-size:14px; color:var(--accent); display:block; margin-bottom:8px}
+.line .t{font-family:var(--display); font-size:clamp(19px,1.9vw,22px); line-height:1.25; display:block}
+.line .n{display:block; color:var(--mute); font-size:15px; margin-top:6px; max-width:30ch}
+@media (max-width:860px){
+  .line{grid-auto-flow:row}
+  .line::before{left:5px; right:auto; top:0; bottom:0; width:1px; height:auto}
+  .line li{padding:0 0 26px 30px}
+  .line li::before{top:5px}
+}
+.aside{margin:26px 0 0; color:var(--mute); font-size:15px; max-width:70ch}
+
+/* questions */
+.cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 clamp(28px,5vw,64px)}
+@media (max-width:760px){ .cols{grid-template-columns:minmax(0,1fr)} }
+.items{list-style:none; margin:0; padding:0}
+.items li{padding-block:16px; border-top:1px solid var(--rule); display:grid; grid-template-columns:28px minmax(0,1fr); gap:12px; align-items:baseline}
+.items .num{font-family:var(--display); font-style:italic; color:var(--accent); font-size:20px; line-height:1}
+
+/* the October services, read only */
+.svcs{list-style:none; margin:0; padding:0}
+.svc{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,3fr); gap:8px clamp(20px,3vw,44px); padding-block:24px; border-top:1px solid var(--rule)}
+.svc:last-child{border-bottom:1px solid var(--rule)}
+.svc .grp{font-size:14px; color:var(--accent); display:block; margin-bottom:6px}
+.svc h3{font-family:var(--display); font-weight:400; font-size:clamp(21px,2.2vw,25px); line-height:1.2; margin:0}
+.svc p{margin:0; color:var(--mute); max-width:62ch}
+.svc .bits{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px; font-size:15px; color:var(--mute)}
+.svc .bits b{font-weight:600; color:var(--ink)}
+@media (max-width:760px){ .svc{grid-template-columns:minmax(0,1fr)} }
+
+/* close: one call to action */
+.close{margin-top:clamp(72px,10vw,120px); padding-block:clamp(44px,6vw,64px); border-top:1px solid var(--rule); background:var(--bg-2); transition:background-color .9s ease}
+.close .wrap{display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:28px clamp(28px,5vw,72px); align-items:end}
+.close h2{font-family:var(--display); font-weight:400; font-size:clamp(30px,4vw,46px); line-height:1.08; margin:0; text-wrap:balance}
+.close p{margin:14px 0 0; color:var(--mute); max-width:52ch}
+.btn{display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-size:15px; font-weight:600;
+  padding:16px 22px; background:var(--accent); color:var(--bg); border:1px solid var(--accent); transition:background-color .25s ease, color .25s ease}
+.btn:hover{background:transparent; color:var(--ink)}
+.contact{display:grid; gap:12px; justify-items:start}
+.contact .line2{font-size:14px; color:var(--mute); user-select:all}
+@media (max-width:820px){ .close .wrap{grid-template-columns:minmax(0,1fr)} }
+.foot{padding-block:22px 34px; font-size:14px; color:var(--mute); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important} }
+</style>
 </head>
-<body>
-<header class="top">
-  <div class="wrap topbar">
-    <a class="brand" href="index.html"><img width="200" height="198" src="img/pc_logo_white.png" alt="">Portland Content</a>
-    <nav class="main" id="nav">
-      <a href="index.html">Home</a>
-      <a href="work.html">Work</a>
-      <a href="services.html">Services</a>
-      <a href="index.html#process">How it works</a>
-            <a href="index.html#contact">Contact</a>
-    </nav>
-    <span class="spacer"></span>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
-    <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a free call</a>
-  </div>
+<body data-view="films">
+<header class="wrap mast">
+  <span><b>Mac Films</b> for Wow &amp; Flutterville Playgardens</span>
+  <span>Prepared for Deanna, November 2026</span>
 </header>
-<main data-plan data-who="Wow and Flutterville" data-subject="Wow and Flutterville plan">
-  <div class="plan-head">
-    <div class="wrap">
-      <span class="cred">Prepared for <b>Deanna</b>, November 2026</span>
-      <h1>A year of content for <b>Wow and Flutterville Playgardens</b></h1>
-      <p class="lede">This page walks through the year we proposed, starting with the footage we filmed at your Northeast garden in October. It's laid out so you and your family can read it together. Tick what fits, and your plan comes with you to the call.</p>
-    </div>
-  </div>
 
-  <div class="wrap builder">
-    <div class="ladder">
-      <span class="grp">Start here</span>
-      <div class="rung" data-cur="launch"><label class="tick"><input type="checkbox" id="s-launch" data-s="launch" checked aria-label="Launch clips from October 18"></label><b data-label="launch">Launch clips from October 18</b><span class="d">We cut the first nine clips for December from the day at the Northeast garden.</span></div>
-      <span class="grp">Films and content</span>
-      <div class="rung" data-cur="gardens"><label class="tick"><input type="checkbox" id="s-gardens" data-s="gardens" checked aria-label="Garden films"></label><b data-label="gardens">Garden films</b><span class="d">Each garden gets its own film, plus a homepage film and a first-tour film.</span></div>
-      <div class="rung" data-cur="retainer"><label class="tick"><input type="checkbox" id="s-retainer" data-s="retainer" checked aria-label="Year-round content retainer"></label><b data-label="retainer">Year-round content retainer</b><span class="d">Two shoot days give you 36 short vertical clips across the year.</span></div>
-      <div class="rung" data-cur="photos"><label class="tick"><input type="checkbox" id="s-photos" data-s="photos" aria-label="Photo galleries and the parent pack"></label><b data-label="photos">Photo galleries and the parent pack</b><span class="d">Stills from both shoot days fill an enrollment pack families take home.</span></div>
-      <div class="rung" data-cur="hiring"><label class="tick"><input type="checkbox" id="s-hiring" data-s="hiring" aria-label="Teacher hiring film"></label><b data-label="hiring">Teacher hiring film</b><span class="d">A short film helps each garden hire teachers.</span></div>
-      <span class="grp">Channels and web</span>
-      <div class="rung" data-cur="social"><label class="tick"><input type="checkbox" id="s-social" data-s="social" aria-label="Social media management"></label><b data-label="social">Social media management</b><span class="d">Our social manager posts three times a month on Instagram and Facebook.</span></div>
-      <div class="rung" data-cur="site"><label class="tick"><input type="checkbox" id="s-site" data-s="site" aria-label="A website in your name"></label><b data-label="site">A website in your name</b><span class="d">Your site, forms, and parent leads move to an account you own.</span></div>
-      <div class="rung" data-cur="search"><label class="tick"><input type="checkbox" id="s-search" data-s="search" aria-label="Local search and reviews"></label><b data-label="search">Local search and reviews</b><span class="d">Your three Google listings share one category and gather more reviews.</span></div>
-    </div>
+<section class="wrap picker" aria-label="Choose a plan">
+  <p class="for">Two plans for your three gardens</p>
+  <h1 class="names" role="tablist" aria-label="Plans">
+    <button class="tab" role="tab" id="tab-films" aria-controls="v-films" aria-selected="true" data-v="films">Your <em>films</em></button>
+    <span class="amp" aria-hidden="true">&amp;</span>
+    <button class="tab" role="tab" id="tab-marketing" aria-controls="v-marketing" aria-selected="false" data-v="marketing">The <em>marketing</em> plan</button>
+  </h1>
+  <p class="hint">Pick a plan to see it. Your films is the one you asked for, and the marketing plan is here so you can add any piece back.</p>
+</section>
 
-    <div class="side">
-      <div class="stage wide" data-stage="launch"><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_02.jpg" alt="The yard at the Northeast garden, with the slide and a wooden work table"></span><div class="txt"><span class="grp">Start here</span><h2>Launch clips from October 18</h2><p>We spent a day at the Northeast garden in October, and that footage is ready to work. The tour confirmation pieces for all three gardens are already cut, and the rest of the day gives us the first nine clips for December, before the first shoot day of the year.</p><ul class="bits"><li><b>Tour confirmation, Northeast</b><span>Cut</span></li><li><b>Tour confirmation, Southeast</b><span>Cut</span></li><li><b>Tour confirmation, Northwest</b><span>Cut</span></li></ul></div></div>
-      <div class="stage wide" data-stage="gardens" hidden><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_10.jpg" alt="A director talking on camera in a classroom"></span><div class="txt"><span class="grp">Films and content</span><h2>Garden films</h2><p>Families pick a garden as much as a school, so each one gets its own short film, with its director on camera and the rooms and yard at their best. A homepage film ties the three together, and a first-tour film shows a new family what their visit looks like. Parents and directors speak for themselves in short testimonials.</p><ul class="bits"><li><b>Northeast, 4114 N Vancouver Ave</b><span>Ms. Brittney</span></li><li><b>Southeast, 8722 SE 17th Ave</b><span>Ms. Raghad</span></li><li><b>Northwest, 800 NW 107th Ave</b><span>Ms. Antonette</span></li></ul></div></div>
-      <div class="stage wide" data-stage="retainer" hidden><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_05.jpg" alt="A classroom with small tables and chairs"></span><div class="txt"><span class="grp">Films and content</span><h2>Year-round content retainer</h2><p>The year holds 36 short vertical clips. Half show how the school works, and the other half are saved for your events, so each open house and celebration gets its own moment. The first half covers a day at each garden, Reggio and Waldorf in practice, the babies room, the garden beds, and ERDC and PFA explained.</p><ul class="bits"><li><b>Two shoot days</b><span>We film all three gardens in winter and summer.</span></li><li><b>Pickups for the big days</b><span>One of us comes out with a camera for open houses and events.</span></li><li><b>A brief for your directors</b><span>Your directors can send in a snow day or a harvest for the feed.</span></li></ul></div></div>
-      <div class="stage wide" data-stage="photos" hidden><span class="v"><img loading="lazy" decoding="async" width="1400" height="788" src="img/wow_08.jpg" alt="Children's art hanging in a classroom window"></span><div class="txt"><span class="grp">Films and content</span><h2>Photo galleries and the parent pack</h2><p>A photographer works both shoot days, so each garden gets a gallery of stills sized for the web and for print. The same pictures fill an eight page parent pack and a one page tour leave-behind for each garden, ready for open houses and tours.</p></div></div>
-      <div class="stage wide" data-stage="hiring" hidden><span class="v"><img loading="lazy" decoding="async" width="1400" height="788" src="img/wow_11.jpg" alt="A classroom with a wooden play tunnel"></span><div class="txt"><span class="grp">Films and content</span><h2>Teacher hiring film</h2><p>Teachers pick a school the way families do, by seeing the rooms and meeting the director. A short film of your gardens and directors, cut for job posts and a careers page, gives each garden more to show a candidate than a listing does. We can film it on the same shoot days.</p></div></div>
-      <div class="stage wide" data-stage="social" hidden><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_07.jpg" alt="A classroom table set with art supplies"></span><div class="txt"><span class="grp">Channels and web</span><h2>Social media management</h2><p>Our social manager posts three times a month on Instagram and Facebook in the school's voice, and answers comments and messages, and lets you know each month what went out and what moved. You approve the calendar once a quarter.</p><ul class="bits"><li><b>@wowandfluttervillespdx</b><span>Instagram and Facebook</span></li></ul></div></div>
-      <div class="stage wide" data-stage="site" hidden><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_04.jpg" alt="Garden beds in the yard at the Northeast garden"></span><div class="txt"><span class="grp">Channels and web</span><h2>A website in your name</h2><p>Today your site, forms, and parent leads run on your current agency's platform, so they change hands when that contract ends. We'd move you to a site on an account you own, with a page for each garden carrying its film, the parent pack and a tour button. Your daughter can build it from our page plan, or we build it.</p><ul class="bits"><li><b>The phone number in the header</b><span>Fixed on the new site</span></li><li><b>A reviews page with real families on it</b><span>Fixed on the new site</span></li><li><b>An open house banner that matches the calendar</b><span>Fixed on the new site</span></li></ul></div></div>
-      <div class="stage wide" data-stage="search" hidden><span class="v"><img loading="lazy" decoding="async" width="1200" height="675" src="img/wow_06.jpg" alt="The nursery, a row of wooden cribs"></span><div class="txt"><span class="grp">Channels and web</span><h2>Local search and reviews</h2><p>Families compare gardens on Google before they book a tour. We give your three listings one category and keep them fresh with photos and posts. A short note after a tour or a moving-up day asks families for a review.</p></div></div>
+<div class="art" aria-hidden="true">
+  <canvas id="yard"></canvas>
+  <div class="stamp"><div class="wrap" id="stamp"></div></div>
+</div>
 
-      <div class="plan" id="plan">
-        <span class="grp">Your plan</span>
-        <h2>Talk it through</h2>
-        <p class="count" data-plan-count></p>
-        <div data-plan-list aria-live="polite"></div>
-        <div class="acts" data-plan-acts></div>
-        <p class="sign">Cody McDonald, Portland Content</p>
-        <p class="alt">cody@portlandcontent.com or (503) 568-1199</p>
+<main>
+  <!-- YOUR FILMS: the video partner plan (default) -->
+  <article class="wrap view" id="v-films" role="tabpanel" aria-labelledby="tab-films">
+    <div class="lede">
+      <h2>Filming for a school that runs its <em>own marketing</em></h2>
+      <div>
+        <p>You're taking the marketing in house, so this plan gives you a videographer and an editor and leaves the posting, the site and the search with you. Two shoot days a year across the three gardens give you the films families expect to find, and a bank of short vertical clips and graded selects you can post yourself whenever the feed needs something. Tick what fits and the total updates as you go.</p>
       </div>
     </div>
-  </div>
 
-  <div class="band paper">
-    <div class="wrap plan-close">
-      <div class="label"><span class="grp">The switch</span><h2>The switch in December</h2></div>
-      <div class="body">
-        <p>In November we plan the pages and cut the first clips from October's footage. In December the new site goes live with your films, the old links point to it, and posting continues on schedule, so families see no gap. January brings the first shoot day of the year.</p>
-        <ol class="timeline">
-          <li><b>November</b><span>Plan and first clips</span></li>
-          <li><b>December</b><span>Site live and posting</span></li>
-          <li><b>January</b><span>Winter shoot</span></li>
-          <li><b>June</b><span>Summer shoot</span></li>
-          <li><b>Fall</b><span>Films live for enrollment</span></li>
+    <section class="sec">
+      <p class="label">Choose the pieces</p>
+      <ul class="pick" id="films-pick">
+        <li><label class="opt" data-k="shoot" data-name="the shoot days and films">
+          <input type="checkbox" id="f-shoot" checked><span class="box"></span>
+          <div class="ct">2 shoot days, 5 films, 4 testimonials</div>
+          <div class="txt"><h3>Shoot days and the garden films<span class="tag">Recommended</span></h3>
+          <p>Two shoot days, one in winter and one in summer, across all three gardens, with a camera assistant and a sound recordist alongside Cody. From those days we cut a film for each garden with its director on camera, a homepage film that ties the three together, a first-tour film for new families, and four parent and director testimonials. Each film comes as a 16:9 master and a vertical recut, with perpetual use on your web and social channels included.</p></div>
+          <div class="price">$12,985</div>
+        </label></li>
+        <li><label class="opt" data-k="clips" data-name="the clips and selects">
+          <input type="checkbox" id="f-clips" checked><span class="box"></span>
+          <div class="ct">18 clips, 3 select reels</div>
+          <div class="txt"><h3>Clips and selects you post yourself<span class="tag">Recommended</span></h3>
+          <p>Eighteen short vertical clips cut from the shoot days and the October footage, captioned and clean, delivered in a batch after each day so you always have something ready to post. Alongside them, a graded reel of the best selects from each garden, trimmed and sorted by room, so you or your daughter can cut your own posts from real footage all year.</p></div>
+          <div class="price">$1,170</div>
+        </label></li>
+        <li><label class="opt" data-k="stills" data-name="the stills">
+          <input type="checkbox" id="f-stills" checked><span class="box"></span>
+          <div class="ct">3 galleries</div>
+          <div class="txt"><h3>Stills from both days<span class="tag">Recommended</span></h3>
+          <p>A photographer works both shoot days, so each garden gets a gallery of twenty or more pictures sized for the web and for print, for your site, your listings and anything you make in house.</p></div>
+          <div class="price">$2,775</div>
+        </label></li>
+        <li><label class="opt" data-k="events" data-name="event pickups">
+          <input type="checkbox" id="f-events"><span class="box"></span>
+          <div class="ct">Half a day, one camera</div>
+          <div class="txt"><h3>Event pickups</h3>
+          <p id="events-copy">One of us comes out with one camera for about half a day at an open house, a moving-up day or a harvest, and cuts the clips that week. Pick three now, or add them one at a time as the year goes.</p>
+          <span class="seg" role="group" aria-label="How many event pickups">
+            <button type="button" id="ev-three" aria-pressed="true">Three across the year<b>$2,160</b></button>
+            <span class="or" aria-hidden="true">or</span>
+            <button type="button" id="ev-one" aria-pressed="false">One<b>$720</b></button>
+          </span></div>
+          <div class="price" id="events-price">$2,160</div>
+        </label></li>
+        <li><label class="opt" data-k="hiring" data-name="the teacher hiring film">
+          <input type="checkbox" id="f-hiring"><span class="box"></span>
+          <div class="ct">60 to 90 sec, from the same shoot days</div>
+          <div class="txt"><h3>Teacher hiring film<span class="tag">Optional</span></h3>
+          <p>Teachers pick a school the way families do, by seeing the rooms and meeting the director. A short film of your gardens and directors, cut for job posts and a careers page, gives a candidate more than a listing does. We film it on the same shoot days, so it only adds the edit.</p></div>
+          <div class="price">$280</div>
+        </label></li>
+      </ul>
+      <div class="total" aria-live="polite">
+        <div><div class="k" id="films-k">Recommended package</div><p class="what" id="films-what">This includes the shoot days and films, the clips and selects, and the stills.</p></div>
+        <div class="sum" id="films-sum">$16,930</div>
+        <p class="notes">Billed as a monthly retainer of about $1,410, or in three installments at signing, before the first shoot day and on delivery of the summer films. Every file comes as a high resolution master and web versions, with perpetual use on your channels. The estimate is numbered 270115-2CR and holds through November 19.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="care">
+        <h3>How the files reach you</h3>
+        <p>Everything lands in a shared Drive folder named by garden and topic. Clips are 9:16 at 1080 by 1920, as MP4s that upload straight to Instagram, Facebook and TikTok, with a captioned and a clean version of each. Films come as 4K masters and 1080p web versions, plus the vertical recut. Stills come as full size JPEGs and web sizes. Nothing is locked to our accounts, and the license covers your own use for as long as you want it.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="care">
+        <h3>Starting with what you already have</h3>
+        <p>The October 18 day at the Northeast garden is yours, and the tour confirmation pieces for all three gardens are already cut. Before the first shoot day we cut the rest of that day into your first clips, so the feed has new footage in December. If the 2025 Cedar Mill footage is yours to use, it folds into the Northwest film too.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="label">The calendar</p>
+      <ol class="line">
+        <li><span class="d">November</span><span class="n">We plan the shot list and cut the first clips from the October footage.</span></li>
+        <li><span class="d">December</span><span class="n">The first batch of clips reaches you, with the Northeast select reel.</span></li>
+        <li class="key"><span class="d">January</span><span class="n">Winter shoot day across the three gardens, placed on your calendar around the enrollment window.</span></li>
+        <li><span class="d">February</span><span class="n">First cuts of the garden films, the testimonials and the winter clips.</span></li>
+        <li class="key"><span class="d">June</span><span class="n">Summer shoot day, with the yards in use.</span></li>
+        <li><span class="d">July</span><span class="n">Finished films, stills and the second batch of clips, in time for fall enrollment.</span></li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <p class="label">Questions that shape the plan</p>
+      <div class="cols">
+        <ol class="items">
+          <li><span class="num">1</span><span>What does your 2027 calendar look like, with open houses, enrollment windows and closures, so the two shoot days land where they count?</span></li>
+          <li><span class="num">2</span><span>Which garden should lead the winter day?</span></li>
+          <li><span class="num">3</span><span>Who will post, you or your daughter, and on which channels, so the clips arrive in the right format?</span></li>
+        </ol>
+        <ol class="items">
+          <li><span class="num">4</span><span>Do your media releases cover use on your website and in paid posts, or only the school's own feed?</span></li>
+          <li><span class="num">5</span><span>Is the 2025 Cedar Mill footage yours to reuse?</span></li>
         </ol>
       </div>
+    </section>
+
+    <section class="sec">
+      <div class="care">
+        <h3>If you're taking the marketing in house</h3>
+        <p>A few things from your current contract that are worth having in hand, with no strings on our side. Ask for the edited videos and the website rights in writing when you give notice, since the contract keeps them with the agency unless they're assigned. Export your parent leads and forms before the notice date, because the site and forms run on the agency's platform. The raw footage from October 18 is yours already. And if your daughter builds the new site, the page plan in the full marketing year is hers to use.</p>
+      </div>
+    </section>
+  </article>
+
+  <!-- THE MARKETING PLAN: the October 22 proposal, kept whole -->
+  <article class="wrap view" id="v-marketing" role="tabpanel" aria-labelledby="tab-marketing" hidden>
+    <div class="lede">
+      <h2>The year we proposed in <em>October</em></h2>
+      <div>
+        <p>This is the Portland Content plan from October 22, kept as it was, so you can see it beside your films and add back any piece that's useful. The three lines were priced as separate estimates, so you and your daughter can sign any combination.</p>
+      </div>
     </div>
-  </div>
-  <div class="plan-dock"><span data-plan-dockn></span><a href="#plan">See your plan</a></div>
+
+    <section class="sec">
+      <p class="label">Choose the lines</p>
+      <ul class="pick" id="mk-pick">
+        <li><label class="opt" data-k="year" data-name="the content year">
+          <input type="checkbox" id="m-year"><span class="box"></span>
+          <div class="ct">2 shoot days, 36 clips, 3 galleries</div>
+          <div class="txt"><h3>The content year</h3>
+          <p>Two shoot days across the three gardens, a film per garden, a homepage film, a first-tour film and four testimonials, 36 vertical clips in quarterly batches with half saved for your events, three photo galleries, the parent pack and tour leave-behind PDFs, platform export sets for each batch, and perpetual use on your channels.</p></div>
+          <div class="price">$20,400</div>
+        </label></li>
+        <li><label class="opt" data-k="social" data-name="social media management">
+          <input type="checkbox" id="m-social"><span class="box"></span>
+          <div class="ct">3 posts a month</div>
+          <div class="txt"><h3>Social media management</h3>
+          <p>Our social manager posts three times a month on Instagram and Facebook in the school's voice, answers comments and messages, and sends you a page each month on what went out and what moved. You approve the calendar once a quarter.</p></div>
+          <div class="price">$6,900<small>$575 a month</small></div>
+        </label></li>
+        <li><label class="opt" data-k="web" data-name="the website and local search">
+          <input type="checkbox" id="m-web"><span class="box"></span>
+          <div class="ct">Site, listings, reviews</div>
+          <div class="txt"><h3>A website in your name and local search</h3>
+          <p>Your site, forms and parent leads move to an account you own, with a page for each garden carrying its film, the parent pack and a tour button. Your three Google listings share one category and gather more reviews. Search is ours either way.</p>
+          <span class="seg" role="group" aria-label="Who builds the site">
+            <button type="button" id="web-we" aria-pressed="true">We build<b>$9,290</b></button>
+            <span class="or" aria-hidden="true">or</span>
+            <button type="button" id="web-her" aria-pressed="false">Your daughter builds<b>$7,220</b></button>
+          </span></div>
+          <div class="price" id="web-price">$9,290</div>
+        </label></li>
+      </ul>
+      <div class="total" aria-live="polite">
+        <div><div class="k" id="mk-k">The full year</div><p class="what" id="mk-what">All three lines together.</p></div>
+        <div class="sum" id="mk-sum">$36,590</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="label">The plan as we sent it</p>
+      <ol class="svcs">
+        <li class="svc"><div><span class="grp">Start here</span><h3>Launch clips from October 18</h3></div>
+          <div><p>We spent a day at the Northeast garden in October, and that footage is ready to work. The tour confirmation pieces for all three gardens are already cut, and the rest of the day gives us the first nine clips for December, before the first shoot day of the year.</p>
+          <ul class="bits"><li><b>Tour confirmation, Northeast</b>, cut</li><li><b>Tour confirmation, Southeast</b>, cut</li><li><b>Tour confirmation, Northwest</b>, cut</li></ul></div></li>
+        <li class="svc"><div><span class="grp">Films and content</span><h3>Garden films</h3></div>
+          <div><p>Families pick a garden as much as a school, so each one gets its own short film, with its director on camera and the rooms and yard at their best. A homepage film ties the three together, and a first-tour film shows a new family what their visit looks like. Parents and directors speak for themselves in short testimonials.</p>
+          <ul class="bits"><li><b>Northeast, 4114 N Vancouver Ave</b>, Ms. Brittney</li><li><b>Southeast, 8722 SE 17th Ave</b>, Ms. Raghad</li><li><b>Northwest, 800 NW 107th Ave</b>, Ms. Antonette</li></ul></div></li>
+        <li class="svc"><div><span class="grp">Films and content</span><h3>Year-round content retainer</h3></div>
+          <div><p>The year holds 36 short vertical clips. Half show how the school works, and the other half are saved for your events, so each open house and celebration gets its own moment. The first half covers a day at each garden, Reggio and Waldorf in practice, the babies room, the garden beds, and ERDC and PFA explained.</p>
+          <ul class="bits"><li><b>Two shoot days</b>, we film all three gardens in winter and summer.</li><li><b>Pickups for the big days</b>, one of us comes out with a camera for open houses and events.</li><li><b>A brief for your directors</b>, your directors can send in a snow day or a harvest for the feed.</li></ul></div></li>
+        <li class="svc"><div><span class="grp">Films and content</span><h3>Photo galleries and the parent pack</h3></div>
+          <div><p>A photographer works both shoot days, so each garden gets a gallery of stills sized for the web and for print. The same pictures fill an eight page parent pack and a one page tour leave-behind for each garden, ready for open houses and tours.</p></div></li>
+        <li class="svc"><div><span class="grp">Films and content</span><h3>Teacher hiring film</h3></div>
+          <div><p>Teachers pick a school the way families do, by seeing the rooms and meeting the director. A short film of your gardens and directors, cut for job posts and a careers page, gives each garden more to show a candidate than a listing does. We can film it on the same shoot days.</p></div></li>
+        <li class="svc"><div><span class="grp">Channels and web</span><h3>Social media management</h3></div>
+          <div><p>Our social manager posts three times a month on Instagram and Facebook in the school's voice, and answers comments and messages, and lets you know each month what went out and what moved. You approve the calendar once a quarter.</p>
+          <ul class="bits"><li><b>@wowandfluttervillespdx</b>, Instagram and Facebook</li></ul></div></li>
+        <li class="svc"><div><span class="grp">Channels and web</span><h3>A website in your name</h3></div>
+          <div><p>Today your site, forms, and parent leads run on your current agency's platform, so they change hands when that contract ends. We'd move you to a site on an account you own, with a page for each garden carrying its film, the parent pack and a tour button. Your daughter can build it from our page plan, or we build it.</p>
+          <ul class="bits"><li><b>The phone number in the header</b>, fixed on the new site</li><li><b>A reviews page with real families on it</b>, fixed on the new site</li><li><b>An open house banner that matches the calendar</b>, fixed on the new site</li></ul></div></li>
+        <li class="svc"><div><span class="grp">Channels and web</span><h3>Local search and reviews</h3></div>
+          <div><p>Families compare gardens on Google before they book a tour. We give your three listings one category and keep them fresh with photos and posts. A short note after a tour or a moving-up day asks families for a review.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <p class="label">The switch in December</p>
+      <ol class="line">
+        <li><span class="d">November</span><span class="t">Plan and first clips</span></li>
+        <li class="key"><span class="d">December</span><span class="t">Site live and posting</span></li>
+        <li><span class="d">January</span><span class="t">Winter shoot</span></li>
+        <li><span class="d">June</span><span class="t">Summer shoot</span></li>
+        <li class="key"><span class="d">Fall</span><span class="t">Films live for enrollment</span></li>
+      </ol>
+      <p class="aside">In November we plan the pages and cut the first clips from October's footage. In December the new site goes live with your films, the old links point to it, and posting continues on schedule, so families see no gap. January brings the first shoot day of the year.</p>
+    </section>
+  </article>
 </main>
-<footer>
+
+<section class="close">
   <div class="wrap">
-    <div class="foot">
-      <div><h4>Portland Content</h4><ul><li>PO Box 14655, Portland, OR 97293</li><li><a href="mailto:hello@portlandcontent.com">hello@portlandcontent.com</a></li><li><a href="tel:+15035681199">(503) 568-1199</a></li></ul></div>
-      <div><h4>Our work</h4><ul><li><a href="work.html#w-content">Content creation</a></li><li><a href="services.html#s-incentive">Incentive travel</a></li><li><a href="work.html#w-social">Social and channels</a></li><li><a href="index.html#studio">Our studio</a></li></ul></div>
-      <div><h4>Services</h4><ul><li><a href="services.html#s-retainer">Content retainers</a></li><li><a href="services.html#s-social">Social management</a></li><li><a href="services.html#s-ads">Paid media</a></li><li><a href="services.html#s-web">Web and brand</a></li><li><a href="services.html#s-listings">Listings and local search</a></li><li><a href="real-estate.html">Real estate agents</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li><a href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a free call</a></li><li><a href="tel:+15035681199">(503) 568-1199</a></li></ul></div>
+    <div>
+      <h2 id="close-h">Easiest way to settle the shoot dates is a quick call</h2>
+      <p id="close-p">Grab a time, or text me. Once you've ticked what fits, I'll send the estimate the same day.</p>
     </div>
-    <div class="foot-small"><span>© 2026 Portland Content Creation. All rights reserved.</span><span>Portland, Oregon</span></div>
+    <div class="contact">
+      <a class="btn" href="https://calendly.com/macfilms/meeting" target="_blank" rel="noopener">Book a time to talk</a>
+      <span class="line2">Cody McDonald, (503) 568-1199</span>
+      <span class="line2">cody@macfilmproductions.com</span>
+    </div>
   </div>
+</section>
+<footer class="wrap foot">
+  <span>Mac Films, LLC, Portland, Oregon</span>
+  <span>macfilmproductions.com</span>
 </footer>
+
 <script>
 (function(){
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
-  if(menuBtn){menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o?'true':'false')});}
-  document.querySelectorAll('.showcase').forEach(function(sc){
-    var items=sc.querySelectorAll('.item'), imgs=sc.querySelectorAll('.frame img'), cap=sc.querySelector('[data-cap]');
-    function pick(i){ items.forEach(function(it,k){it.setAttribute('aria-current',k===i?'true':'false')}); imgs.forEach(function(im,k){im.classList.toggle('on',k===i)}); if(cap) cap.textContent=items[i].querySelector('h3').textContent; }
-    items.forEach(function(it,i){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && sc.dataset.showcase==='1'){ location.href='case.html'; } else pick(i); }); });
-    pick(0);
+  var body=document.body, tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function g(id){ return document.getElementById(id) }
+  var stamps={
+    films:['Mac Films, your video partner','Two shoot days, 2027','Three gardens, Portland'],
+    marketing:['Portland Content, the full year','Proposed October 22, 2026','Content, channels and web']
+  };
+  var close={
+    films:['Easiest way to settle the shoot dates is a quick call','Grab a time, or text me. Once you’ve ticked what fits, I’ll send the estimate the same day.'],
+    marketing:['Easiest way to talk through the full year is a quick call','Grab a time, or text me, and bring your daughter if she’s building the site.']
+  };
+
+  /* the art band: one play garden yard. Winter: low sun, puddles that ripple, rain boots by the playhouse door,
+     a tripod at the edge of the frame. Summer: the same yard with the beds in bloom, a bunting line and butterflies. */
+  var art=(function(){
+    var c=g('yard'), x=c.getContext('2d'), W=0,H=0,dpr=1, view='films', t0=performance.now(), raf=0, s=29;
+    function r(){ s=(s*16807)%2147483647; return (s-1)/2147483646 }
+    var drops=[], i, blooms=[], flies=[];
+    for(i=0;i<70;i++) drops.push({x:r(),y:r(),sp:.6+r()*.8,l:.02+r()*.03});
+    for(i=0;i<120;i++) blooms.push({x:r(),y:r(),c:['#EE1D52','#F2A541','#F6D365','#E879A6','#FFFFFF','#9B6BD3'][i%6],z:.6+r()*.8});
+    for(i=0;i<6;i++) flies.push({x:r(),y:.18+r()*.35,p:r()*6.28,sp:.4+r()*.6,c:['#EE1D52','#F2A541','#69C9D0'][i%3]});
+    function size(){ dpr=Math.min(2,window.devicePixelRatio||1); W=c.clientWidth; H=c.clientHeight; c.width=W*dpr; c.height=H*dpr; x.setTransform(dpr,0,0,dpr,0,0) }
+    function hill(base,amp,freq,ph,col){
+      x.beginPath(); x.moveTo(0,H);
+      for(var X=0;X<=W;X+=6){ var u=X/W; x.lineTo(X,H*(base+Math.sin(u*freq+ph)*amp+Math.sin(u*freq*2.1+ph*1.3)*amp*.3)) }
+      x.lineTo(W,H); x.closePath(); x.fillStyle=col; x.fill();
+    }
+    function tree(tx,base,h,col,leaf){
+      x.strokeStyle=col; x.lineCap='round';
+      function br(x0,y0,a,l,w,d){ var x1=x0+Math.cos(a)*l, y1=y0+Math.sin(a)*l; x.lineWidth=w; x.beginPath(); x.moveTo(x0,y0); x.lineTo(x1,y1); x.stroke();
+        if(d>0){ br(x1,y1,a-.45,l*.72,w*.66,d-1); br(x1,y1,a+.4,l*.7,w*.66,d-1) } else if(leaf){ x.fillStyle=leaf; x.beginPath(); x.arc(x1,y1,l*1.1,0,6.283); x.fill() } }
+      br(tx,base,-Math.PI/2,h*.34,Math.max(3,h*.05),4);
+    }
+    function playhouse(cx,base,w,wall,roof,trim){
+      var h=w*.7, rh=w*.48;
+      x.fillStyle=wall; x.fillRect(cx-w/2,base-h,w,h);
+      x.fillStyle=roof; x.beginPath(); x.moveTo(cx-w*.62,base-h+2); x.lineTo(cx,base-h-rh); x.lineTo(cx+w*.62,base-h+2); x.closePath(); x.fill();
+      x.fillStyle=trim; x.fillRect(cx-w*.36,base-h*.74,w*.22,w*.2);
+      x.beginPath(); x.moveTo(cx+w*.04,base); x.lineTo(cx+w*.04,base-h*.52); x.arc(cx+w*.17,base-h*.52,w*.13,Math.PI,0); x.lineTo(cx+w*.3,base); x.closePath(); x.fill();
+      return {door:cx+w*.17, w:w};
+    }
+    function climber(cx,base,w,col){
+      x.strokeStyle=col; x.lineWidth=Math.max(2,w*.05); x.lineCap='round';
+      x.beginPath(); x.moveTo(cx-w/2,base); x.lineTo(cx,base-w*.9); x.lineTo(cx+w/2,base); x.stroke();
+      for(var k=1;k<5;k++){ var yy=base-w*.9*k/5, dx=w/2*(1-k/5); x.beginPath(); x.moveTo(cx-dx,yy); x.lineTo(cx+dx,yy); x.stroke() }
+    }
+    function boots(bx,base,sz,col){
+      x.fillStyle=col;
+      [0,sz*.9].forEach(function(o){ x.fillRect(bx+o,base-sz*1.3,sz*.6,sz*1.3); x.beginPath(); x.ellipse(bx+o+sz*.45,base-sz*.18,sz*.5,sz*.2,0,0,6.283); x.fill() });
+    }
+    function tripod(tx,base,h){
+      x.strokeStyle='#C9D2DC'; x.lineWidth=2.2; x.lineCap='round';
+      var top=base-h;
+      x.beginPath(); x.moveTo(tx,top); x.lineTo(tx-h*.28,base); x.moveTo(tx,top); x.lineTo(tx+h*.22,base); x.moveTo(tx,top); x.lineTo(tx+h*.03,base+2); x.stroke();
+      x.fillStyle='#C9D2DC'; x.fillRect(tx-h*.2,top-h*.2,h*.36,h*.2);
+      x.beginPath(); x.arc(tx-h*.24,top-h*.1,h*.07,0,6.283); x.fill();
+      x.fillStyle='#F5D33D'; x.beginPath(); x.arc(tx+h*.12,top-h*.15,2.4,0,6.283); x.fill();
+    }
+    function puddle(px,py,pw,t,k){
+      x.fillStyle='rgba(176,196,214,.55)'; x.beginPath(); x.ellipse(px,py,pw,pw*.16,0,0,6.283); x.fill();
+      x.strokeStyle='rgba(238,241,244,.55)'; x.lineWidth=1;
+      for(var j=0;j<2;j++){ var ph=((t*.0005+k*.37+j*.5)%1); x.globalAlpha=1-ph; x.beginPath(); x.ellipse(px+(j?pw*.3:-pw*.25),py,pw*.45*ph,pw*.07*ph,0,0,6.283); x.stroke() }
+      x.globalAlpha=1;
+    }
+    function bunting(x0,y0,x1,y1,t){
+      x.strokeStyle='#8A6447'; x.lineWidth=1.2; x.beginPath();
+      var n=Math.max(8,Math.round((x1-x0)/26)), sag=H*.06;
+      function pt(u){ return [x0+(x1-x0)*u, y0+(y1-y0)*u+Math.sin(u*Math.PI)*sag] }
+      x.moveTo(x0,y0); for(var k=1;k<=24;k++){ var p=pt(k/24); x.lineTo(p[0],p[1]) } x.stroke();
+      var cols=['#EE1D52','#F2A541','#69C9D0','#F6D365','#E879A6'];
+      for(var k=0;k<n;k++){ var u=(k+.5)/n, p=pt(u), sw=Math.sin(t*.002+k)*.12, fw=9, fh=14;
+        x.save(); x.translate(p[0],p[1]); x.rotate(sw); x.fillStyle=cols[k%cols.length];
+        x.beginPath(); x.moveTo(-fw/2,0); x.lineTo(fw/2,0); x.lineTo(0,fh); x.closePath(); x.fill(); x.restore() }
+    }
+    function butterfly(b,t){
+      var X=((b.x+t*.00001*b.sp+Math.sin(t*.0001*b.sp+b.p)*.06)%1.05)*W, Y=(b.y+Math.sin(t*.0009*b.sp+b.p*2)*.05)*H;
+      var f=Math.abs(Math.sin(t*.012*b.sp+b.p)), sz=8;
+      x.save(); x.translate(X,Y); x.fillStyle=b.c;
+      x.save(); x.scale(.25+.75*f,1); x.beginPath(); x.ellipse(-sz*.55,-sz*.2,sz*.6,sz*.45,-.5,0,6.283); x.ellipse(sz*.55,-sz*.2,sz*.6,sz*.45,.5,0,6.283); x.fill();
+      x.beginPath(); x.ellipse(-sz*.4,sz*.35,sz*.38,sz*.3,.4,0,6.283); x.ellipse(sz*.4,sz*.35,sz*.38,sz*.3,-.4,0,6.283); x.fill(); x.restore();
+      x.fillStyle='#1F2B1F'; x.fillRect(-1,-sz*.5,2,sz); x.restore();
+    }
+    function scene(t,summer){
+      var gr=x.createLinearGradient(0,0,0,H);
+      if(summer){ gr.addColorStop(0,'#CFE6EE'); gr.addColorStop(.62,'#F4EBD6'); gr.addColorStop(1,'#F6F1E6') }
+      else { gr.addColorStop(0,'#2A3748'); gr.addColorStop(.55,'#55657A'); gr.addColorStop(.8,'#B79A7E'); gr.addColorStop(1,'#C9A27F') }
+      x.fillStyle=gr; x.fillRect(0,0,W,H);
+      var sx=W*(summer?.84:.7), sy=H*(summer?.2:.6), sr=Math.min(W,H)*(summer?.08:.07);
+      if(!summer){ var gl=x.createRadialGradient(sx,sy,0,sx,sy,sr*5); gl.addColorStop(0,'rgba(255,214,150,.45)'); gl.addColorStop(1,'rgba(255,214,150,0)'); x.fillStyle=gl; x.fillRect(0,0,W,H) }
+      x.fillStyle=summer?'#F7C873':'#FFD9A0'; x.beginPath(); x.arc(sx,sy,sr,0,6.283); x.fill();
+      hill(.6,.04,4,1.1,summer?'#B9D3A3':'#4A5869');
+      var base=H*.78, hw=Math.max(78,Math.min(150,W*.12));
+      tree(W*.12,base+4,H*.62,summer?'#6B4A33':'#3A4555',summer?'rgba(98,150,82,.85)':null);
+      hill(.76,.015,6,2.2,summer?'#9CC487':'#3E4B5B');
+      var ph=playhouse(W*.36,base,hw,summer?'#F2D7C4':'#8695A8',summer?'#EE1D52':'#5C6B80',summer?'#5F7A70':'#FFD9A0');
+      climber(W*.6,base,hw*.8,summer?'#B07A4F':'#6E7C8F');
+      x.fillStyle=summer?'#86B072':'#334050'; x.fillRect(0,base,W,H-base);
+      /* beds */
+      var n=Math.max(3,Math.round(W/240));
+      for(var k=0;k<n;k++){ var bx=(k+.5)*W/n, bw=W/n*.6, by=H*.84;
+        x.fillStyle=summer?'#8A6447':'#2A3542'; x.fillRect(bx-bw/2,by,bw,H*.04);
+        if(summer){ blooms.forEach(function(b){ if(b.x*n>=k&&b.x*n<k+1){ var fx=bx-bw/2+bw*((b.x*n)%1), fy=by-2-b.y*H*.04; x.fillStyle=b.c; x.beginPath(); x.arc(fx,fy,2.2*b.z+1,0,6.283); x.fill() } }) }
+        else { x.strokeStyle='#4E5D50'; x.lineWidth=1.2; for(var j=0;j<6;j++){ var sx2=bx-bw/2+bw*(j+.5)/6; x.beginPath(); x.moveTo(sx2,by); x.lineTo(sx2-2,by-8); x.moveTo(sx2,by); x.lineTo(sx2+3,by-6); x.stroke() } }
+      }
+      if(summer){
+        bunting(W*.15,H*.36,W*.36,base-hw*1.15,t);
+        bunting(W*.36,base-hw*1.15,W*.62,base-hw*.75,t+400);
+        flies.forEach(function(b){ butterfly(b,t) });
+      } else {
+        boots(ph.door+ph.w*.18,base+2,Math.max(6,hw*.075),'#F5D33D');
+        puddle(W*.24,H*.81,W*.05,t,0); puddle(W*.5,H*.815,W*.065,t,1); puddle(W*.76,H*.805,W*.045,t,2);
+        tripod(W*.93,base+6,Math.max(46,H*.26));
+        x.strokeStyle='rgba(220,228,236,.22)'; x.lineWidth=1;
+        drops.forEach(function(d){ var yy=((d.y+t*.0004*d.sp)%1)*H, xx=d.x*W; x.beginPath(); x.moveTo(xx,yy); x.lineTo(xx-2,yy+d.l*H); x.stroke() });
+      }
+    }
+    function frame(now){ scene(now-t0, view==='marketing'); if(!still) raf=requestAnimationFrame(frame) }
+    function set(v){ view=v; cancelAnimationFrame(raf); raf=requestAnimationFrame(frame) }
+    size(); window.addEventListener('resize',function(){ size(); cancelAnimationFrame(raf); raf=requestAnimationFrame(frame) });
+    return {set:set};
+  })();
+
+  /* prices from lead gen (WOW-VIDEO-PARTNER-PAGE.md, Nov 5): the recommended three add up to the calc's $16,930 */
+  function money(n){ return '$'+n.toLocaleString('en-US') }
+  function roll(el,to){
+    var from=+(el.getAttribute('data-n')||to); el.setAttribute('data-n',to);
+    if(still||from===to){ el.textContent=money(to); return }
+    var s0=performance.now();
+    (function step(now){ var k=Math.min(1,(now-s0)/450), e=1-Math.pow(1-k,3); el.textContent=money(Math.round(from+(to-from)*e)); if(k<1) requestAnimationFrame(step) })(s0);
+  }
+  function list(a){ return a.length>2 ? a.slice(0,-1).join(', ')+', and '+a[a.length-1] : a.join(' and ') }
+  function seg(a,b,input,set){
+    function on(which,e){ e.preventDefault(); e.stopPropagation(); input.checked=true; a.setAttribute('aria-pressed',which===a); b.setAttribute('aria-pressed',which===b); set(which===a) }
+    a.addEventListener('click',function(e){ on(a,e) }); b.addEventListener('click',function(e){ on(b,e) });
+  }
+
+  var evThree=true;
+  var fIn={shoot:g('f-shoot'),clips:g('f-clips'),stills:g('f-stills'),events:g('f-events'),hiring:g('f-hiring')};
+  function films(){
+    var p={shoot:12985,clips:1170,stills:2775,events:evThree?2160:720,hiring:280}, on=[], sum=0;
+    Object.keys(fIn).forEach(function(k){ var c=fIn[k].checked, o=fIn[k].closest('.opt'); o.classList.toggle('on',c); if(c){ sum+=p[k]; on.push(o.getAttribute('data-name')) } });
+    g('events-price').textContent=money(p.events);
+    var pkg=fIn.shoot.checked&&fIn.clips.checked&&fIn.stills.checked&&!fIn.events.checked&&!fIn.hiring.checked;
+    g('films-k').textContent = pkg ? 'Recommended package' : (on.length?'Your selection':'Nothing selected yet');
+    g('films-what').textContent = on.length ? 'This includes '+list(on)+'.' : 'Tick a piece above to build the plan.';
+    roll(g('films-sum'),sum);
+  }
+  Object.keys(fIn).forEach(function(k){ fIn[k].addEventListener('change',films) });
+  seg(g('ev-three'),g('ev-one'),fIn.events,function(three){ evThree=three; films() });
+
+  var webWe=true;
+  var mIn={year:g('m-year'),social:g('m-social'),web:g('m-web')};
+  function mk(){
+    var p={year:20400,social:6900,web:webWe?9290:7220}, on=[], sum=0;
+    Object.keys(mIn).forEach(function(k){ var c=mIn[k].checked, o=mIn[k].closest('.opt'); o.classList.toggle('on',c); if(c){ sum+=p[k]; on.push(o.getAttribute('data-name')) } });
+    g('web-price').textContent=money(p.web);
+    if(!on.length || on.length===3){ g('mk-k').textContent='The full year'; g('mk-what').textContent='All three lines together.'; roll(g('mk-sum'),p.year+p.social+p.web) }
+    else { g('mk-k').textContent='Your selection'; g('mk-what').textContent='This includes '+list(on)+'.'; roll(g('mk-sum'),sum) }
+  }
+  Object.keys(mIn).forEach(function(k){ mIn[k].addEventListener('change',mk) });
+  seg(g('web-we'),g('web-her'),mIn.web,function(we){ webWe=we; mk() });
+
+  function show(v, focus){
+    if(v!=='films'&&v!=='marketing') v='films';
+    body.setAttribute('data-view',v);
+    tabs.forEach(function(t){ var on=t.getAttribute('data-v')===v; t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1; if(on&&focus) t.focus() });
+    g('v-films').hidden=(v!=='films'); g('v-marketing').hidden=(v!=='marketing');
+    g('stamp').innerHTML=stamps[v].map(function(s){return '<span>'+s+'</span>'}).join('');
+    g('close-h').textContent=close[v][0]; g('close-p').textContent=close[v][1];
+    try{ history.replaceState(null,'','#'+v) }catch(e){}
+    art.set(v);
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ show(t.getAttribute('data-v')) });
+    t.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ e.preventDefault(); show(tabs[(i+1)%2].getAttribute('data-v'),true) } });
   });
-  var here=location.pathname.split('/').pop()||'index.html';
-  document.querySelectorAll('nav.main a').forEach(function(a){ if(a.getAttribute('href')===here) a.setAttribute('aria-current','page'); });
+  films(); mk();
+  var h=(location.hash||'').replace('#','');
+  show(h==='marketing'?'marketing':'films');
 })();
 </script>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="https://calendly.com/portlandcontent/call"]');if(!a||!window.Calendly||a.closest('.calendly-inline-widget'))return;e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/portlandcontent/call?hide_gdpr_banner=1'});});</script>
-<script src="motion.js" defer></script>
-<script src="plan.js" defer></script>
 </body>
 </html>
