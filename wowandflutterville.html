@@ -225,8 +225,8 @@ a{color:inherit}
           <input type="checkbox" id="f-shoot" checked><span class="box"></span>
           <div class="ct">2 shoot days, 5 films, 4 testimonials</div>
           <div class="txt"><h3>Shoot days and the garden films<span class="tag">Recommended</span></h3>
-          <p>Two shoot days, one in winter and one in summer, across all three gardens, with a camera assistant and a sound recordist alongside Cody. From those days we cut a film for each garden with its director on camera, a homepage film that ties the three together, a first-tour film for new families, and four parent and director testimonials. Each film comes as a 16:9 master and a vertical recut, with perpetual use on your web and social channels included.</p></div>
-          <div class="price">$12,985</div>
+          <p>Two shoot days, one in winter and one in summer, across all three gardens, with a camera assistant alongside Cody. From those days we cut a film for each garden with its director on camera, a homepage film that ties the three together, a first-tour film for new families, and four parent and director testimonials. Each film comes as a 16:9 master and a vertical recut, with perpetual use on your web and social channels included.</p></div>
+          <div class="price">$9,060</div>
         </label></li>
         <li><label class="opt" data-k="clips" data-name="the clips and selects">
           <input type="checkbox" id="f-clips" checked><span class="box"></span>
@@ -264,8 +264,8 @@ a{color:inherit}
       </ul>
       <div class="total" aria-live="polite">
         <div><div class="k" id="films-k">Recommended package</div><p class="what" id="films-what">This includes the shoot days and films, the clips and selects, and the stills.</p></div>
-        <div class="sum" id="films-sum">$16,930</div>
-        <p class="notes">Billed as a monthly retainer of about $1,410, or in three installments at signing, before the first shoot day and on delivery of the summer films. Every file comes as a high resolution master and web versions, with perpetual use on your channels. The estimate is numbered 270115-2CR and holds through November 19.</p>
+        <div class="sum" id="films-sum">$13,005</div>
+        <p class="notes">Billed as a monthly retainer of about $1,085, or in three installments at signing, before the first shoot day and on delivery of the summer films. Every file comes as a high resolution master and web versions, with perpetual use on your channels. The estimate is numbered 270115-2CR and holds through November 19.</p>
       </div>
     </section>
 
@@ -546,7 +546,7 @@ a{color:inherit}
     return {set:set};
   })();
 
-  /* prices from lead gen (WOW-VIDEO-PARTNER-PAGE.md, Nov 5): the recommended three add up to the calc's $16,930 */
+  /* prices from lead gen (WOW-VIDEO-PARTNER-PAGE.md, Nov 5): the recommended three add up to the calc's $13,005 */
   function money(n){ return '$'+n.toLocaleString('en-US') }
   function roll(el,to){
     var from=+(el.getAttribute('data-n')||to); el.setAttribute('data-n',to);
@@ -563,7 +563,7 @@ a{color:inherit}
   var evThree=true;
   var fIn={shoot:g('f-shoot'),clips:g('f-clips'),stills:g('f-stills'),events:g('f-events'),hiring:g('f-hiring')};
   function films(){
-    var p={shoot:12985,clips:1170,stills:2775,events:evThree?2160:720,hiring:280}, on=[], sum=0;
+    var p={shoot:9060,clips:1170,stills:2775,events:evThree?2160:720,hiring:280}, on=[], sum=0;
     Object.keys(fIn).forEach(function(k){ var c=fIn[k].checked, o=fIn[k].closest('.opt'); o.classList.toggle('on',c); if(c){ sum+=p[k]; on.push(o.getAttribute('data-name')) } });
     g('events-price').textContent=money(p.events);
     var pkg=fIn.shoot.checked&&fIn.clips.checked&&fIn.stills.checked&&!fIn.events.checked&&!fIn.hiring.checked;
