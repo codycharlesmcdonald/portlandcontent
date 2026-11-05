@@ -265,14 +265,14 @@ a{color:inherit}
       <div class="total" aria-live="polite">
         <div><div class="k" id="films-k">Recommended package</div><p class="what" id="films-what">This includes the shoot days and films, the clips and selects, and the stills.</p></div>
         <div class="sum" id="films-sum">$13,005</div>
-        <p class="notes">Billed as a monthly retainer of about $1,085, or in three installments at signing, before the first shoot day and on delivery of the summer films. Every file comes as a high resolution master and web versions, with perpetual use on your channels. The estimate is numbered 270115-2CR and holds through November 19.</p>
+        <p class="notes">Billed as a monthly retainer of about <span id="films-mo">$1,085</span>, or in three installments at signing, before the first shoot day and on delivery of the summer films. Every file comes as a high resolution master and web versions, with perpetual use on your channels. The estimate is numbered 270115-2CR and holds through November 19.</p>
       </div>
     </section>
 
     <section class="sec">
       <div class="care">
         <h3>How the files reach you</h3>
-        <p>Everything lands in a shared Drive folder named by garden and topic. Clips are 9:16 at 1080 by 1920, as MP4s that upload straight to Instagram, Facebook and TikTok, with a captioned and a clean version of each. Films come as 4K masters and 1080p web versions, plus the vertical recut. Stills come as full size JPEGs and web sizes. Nothing is locked to our accounts, and the license covers your own use for as long as you want it.</p>
+        <p>Every cut lands in a private Vimeo showcase, one for each garden, where you watch it, leave your notes right on the timeline, and download the finals once they're approved. Clips are 9:16 at 1080 by 1920, as MP4s that upload straight to Instagram, Facebook and TikTok, with a captioned and a clean version of each. Films come as 4K masters and 1080p web versions, plus the vertical recut. Stills come as full size JPEGs and web sizes in a gallery link. Nothing is locked to our accounts, and the license covers your own use for as long as you want it.</p>
       </div>
     </section>
 
@@ -570,6 +570,7 @@ a{color:inherit}
     g('films-k').textContent = pkg ? 'Recommended package' : (on.length?'Your selection':'Nothing selected yet');
     g('films-what').textContent = on.length ? 'This includes '+list(on)+'.' : 'Tick a piece above to build the plan.';
     roll(g('films-sum'),sum);
+    g('films-mo').textContent=money(Math.round(sum/12/5)*5); /* the retainer reads a twelfth of the total, to the nearest $5 (Cody, mockup comment Nov 5) */
   }
   Object.keys(fIn).forEach(function(k){ fIn[k].addEventListener('change',films) });
   seg(g('ev-three'),g('ev-one'),fIn.events,function(three){ evThree=three; films() });
