@@ -11,7 +11,7 @@
 <meta property="og:title" content="Your films and the marketing plan, for Wow &amp; Flutterville Playgardens">
 <meta property="og:description" content="Mac Films plans for Wow &amp; Flutterville Playgardens: two shoot days a year and the films, clips and stills you post yourself, beside the October marketing plan.">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#1E2836">
+<meta name="theme-color" content="#EEF6E6">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:border-box}
@@ -24,17 +24,17 @@ img{max-width:100%}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap">
 <style>
 /* Layout: the heading is the selector (the Vivian Lee format; copy and prices from lead gen, WOW-VIDEO-PARTNER-PAGE.md).
-   Your films is the default and opens on a play garden yard in low winter light: puddles, rain boots by the door, a tripod
-   at the edge of the frame, in slate with the Mac Films yellow. The marketing plan is the October proposal kept whole and
+   Your films is the default and opens on a play garden yard on a spring morning: blue sky, a tree in blossom, tulips in the beds,
+   a tripod at the edge of the frame, in fresh green with a yellow playhouse roof (Cody, Nov 5: optimistic, spring not fall). The marketing plan is the October proposal kept whole and
    opens on the same yard in summer, beds in bloom and a bunting line, in cream with the Portland Content pink.
    Each view commits to one look on purpose. No near-black grounds and no children in the art. */
 :root{
-  --win:#1E2836; --win-2:#263243; --win-ink:#EEF1F4; --win-mute:#A9B4C2; --win-rule:#3A4859; --win-acc:#F5D33D;
+  --win:#EEF6E6; --win-2:#E1EED6; --win-ink:#1E3A2F; --win-mute:#4A6657; --win-rule:#C9DCBC; --win-acc:#25774A;
   --sum:#F6F1E6; --sum-2:#ECE4D3; --sum-ink:#1F2B1F; --sum-mute:#56634F; --sum-rule:#D5CCB7; --sum-acc:#C4164A;
   --display:"DM Serif Display", Georgia, "Times New Roman", serif;
   --body:"Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --bg:var(--win); --bg-2:var(--win-2); --ink:var(--win-ink); --mute:var(--win-mute); --rule:var(--win-rule); --accent:var(--win-acc);
-  color-scheme:dark;
+  color-scheme:light;
 }
 :root:has(body[data-view="marketing"]){
   --bg:var(--sum); --bg-2:var(--sum-2); --ink:var(--sum-ink); --mute:var(--sum-mute); --rule:var(--sum-rule); --accent:var(--sum-acc);
@@ -436,7 +436,7 @@ a{color:inherit}
     marketing:['Easiest way to talk through the full year is a quick call','Grab a time, or text me, and bring your daughter if she’s building the site.']
   };
 
-  /* the art band: one play garden yard. Winter: low sun, puddles that ripple, rain boots by the playhouse door,
+  /* the art band: one play garden yard. Spring: morning sun, a tree in blossom shedding petals, tulips in the beds,
      a tripod at the edge of the frame. Summer: the same yard with the beds in bloom, a bunting line and butterflies. */
   var art=(function(){
     var c=g('yard'), x=c.getContext('2d'), W=0,H=0,dpr=1, view='films', t0=performance.now(), raf=0, s=29;
@@ -470,15 +470,16 @@ a{color:inherit}
       x.beginPath(); x.moveTo(cx-w/2,base); x.lineTo(cx,base-w*.9); x.lineTo(cx+w/2,base); x.stroke();
       for(var k=1;k<5;k++){ var yy=base-w*.9*k/5, dx=w/2*(1-k/5); x.beginPath(); x.moveTo(cx-dx,yy); x.lineTo(cx+dx,yy); x.stroke() }
     }
+    function cloud(cx,cy,w){ x.fillStyle='rgba(255,255,255,.9)'; x.beginPath(); x.ellipse(cx,cy,w,w*.3,0,0,6.283); x.ellipse(cx-w*.45,cy+w*.05,w*.5,w*.22,0,0,6.283); x.ellipse(cx+w*.4,cy-w*.12,w*.5,w*.3,0,0,6.283); x.fill() }
     function boots(bx,base,sz,col){
       x.fillStyle=col;
       [0,sz*.9].forEach(function(o){ x.fillRect(bx+o,base-sz*1.3,sz*.6,sz*1.3); x.beginPath(); x.ellipse(bx+o+sz*.45,base-sz*.18,sz*.5,sz*.2,0,0,6.283); x.fill() });
     }
     function tripod(tx,base,h){
-      x.strokeStyle='#C9D2DC'; x.lineWidth=2.2; x.lineCap='round';
+      x.strokeStyle='#4A6657'; x.lineWidth=2.2; x.lineCap='round';
       var top=base-h;
       x.beginPath(); x.moveTo(tx,top); x.lineTo(tx-h*.28,base); x.moveTo(tx,top); x.lineTo(tx+h*.22,base); x.moveTo(tx,top); x.lineTo(tx+h*.03,base+2); x.stroke();
-      x.fillStyle='#C9D2DC'; x.fillRect(tx-h*.2,top-h*.2,h*.36,h*.2);
+      x.fillStyle='#4A6657'; x.fillRect(tx-h*.2,top-h*.2,h*.36,h*.2);
       x.beginPath(); x.arc(tx-h*.24,top-h*.1,h*.07,0,6.283); x.fill();
       x.fillStyle='#F5D33D'; x.beginPath(); x.arc(tx+h*.12,top-h*.15,2.4,0,6.283); x.fill();
     }
@@ -509,35 +510,34 @@ a{color:inherit}
     function scene(t,summer){
       var gr=x.createLinearGradient(0,0,0,H);
       if(summer){ gr.addColorStop(0,'#CFE6EE'); gr.addColorStop(.62,'#F4EBD6'); gr.addColorStop(1,'#F6F1E6') }
-      else { gr.addColorStop(0,'#2A3748'); gr.addColorStop(.55,'#55657A'); gr.addColorStop(.8,'#B79A7E'); gr.addColorStop(1,'#C9A27F') }
+      else { gr.addColorStop(0,'#A9DCF2'); gr.addColorStop(.6,'#DDF1E6'); gr.addColorStop(1,'#EEF6E6') }
       x.fillStyle=gr; x.fillRect(0,0,W,H);
-      var sx=W*(summer?.84:.7), sy=H*(summer?.2:.6), sr=Math.min(W,H)*(summer?.08:.07);
-      if(!summer){ var gl=x.createRadialGradient(sx,sy,0,sx,sy,sr*5); gl.addColorStop(0,'rgba(255,214,150,.45)'); gl.addColorStop(1,'rgba(255,214,150,0)'); x.fillStyle=gl; x.fillRect(0,0,W,H) }
-      x.fillStyle=summer?'#F7C873':'#FFD9A0'; x.beginPath(); x.arc(sx,sy,sr,0,6.283); x.fill();
-      hill(.6,.04,4,1.1,summer?'#B9D3A3':'#4A5869');
+      var sx=W*(summer?.84:.78), sy=H*(summer?.2:.22), sr=Math.min(W,H)*(summer?.08:.085);
+      if(!summer){ var gl=x.createRadialGradient(sx,sy,0,sx,sy,sr*5); gl.addColorStop(0,'rgba(255,240,170,.6)'); gl.addColorStop(1,'rgba(255,240,170,0)'); x.fillStyle=gl; x.fillRect(0,0,W,H) }
+      x.fillStyle=summer?'#F7C873':'#F9DC5C'; x.beginPath(); x.arc(sx,sy,sr,0,6.283); x.fill();
+      if(!summer){ cloud(W*.2+Math.sin(t*.00008)*W*.01,H*.17,W*.05); cloud(W*.55+Math.sin(t*.00006+2)*W*.012,H*.12,W*.04) }
+      hill(.6,.04,4,1.1,summer?'#B9D3A3':'#BFE09A');
       var base=H*.78, hw=Math.max(78,Math.min(150,W*.12));
-      tree(W*.12,base+4,H*.62,summer?'#6B4A33':'#3A4555',summer?'rgba(98,150,82,.85)':null);
-      hill(.76,.015,6,2.2,summer?'#9CC487':'#3E4B5B');
-      var ph=playhouse(W*.36,base,hw,summer?'#F2D7C4':'#8695A8',summer?'#EE1D52':'#5C6B80',summer?'#5F7A70':'#FFD9A0');
-      climber(W*.6,base,hw*.8,summer?'#B07A4F':'#6E7C8F');
-      x.fillStyle=summer?'#86B072':'#334050'; x.fillRect(0,base,W,H-base);
+      tree(W*.12,base+4,H*.62,summer?'#6B4A33':'#7A5A43',summer?'rgba(98,150,82,.85)':'rgba(248,190,212,.92)');
+      hill(.76,.015,6,2.2,summer?'#9CC487':'#A5D47E');
+      var ph=playhouse(W*.36,base,hw,summer?'#F2D7C4':'#FFF8E4',summer?'#EE1D52':'#F5D33D',summer?'#5F7A70':'#6FB3C9');
+      climber(W*.6,base,hw*.8,summer?'#B07A4F':'#C98B5A');
+      x.fillStyle=summer?'#86B072':'#92C96A'; x.fillRect(0,base,W,H-base);
       /* beds */
       var n=Math.max(3,Math.round(W/240));
       for(var k=0;k<n;k++){ var bx=(k+.5)*W/n, bw=W/n*.6, by=H*.84;
-        x.fillStyle=summer?'#8A6447':'#2A3542'; x.fillRect(bx-bw/2,by,bw,H*.04);
+        x.fillStyle=summer?'#8A6447':'#94704F'; x.fillRect(bx-bw/2,by,bw,H*.04);
         if(summer){ blooms.forEach(function(b){ if(b.x*n>=k&&b.x*n<k+1){ var fx=bx-bw/2+bw*((b.x*n)%1), fy=by-2-b.y*H*.04; x.fillStyle=b.c; x.beginPath(); x.arc(fx,fy,2.2*b.z+1,0,6.283); x.fill() } }) }
-        else { x.strokeStyle='#4E5D50'; x.lineWidth=1.2; for(var j=0;j<6;j++){ var sx2=bx-bw/2+bw*(j+.5)/6; x.beginPath(); x.moveTo(sx2,by); x.lineTo(sx2-2,by-8); x.moveTo(sx2,by); x.lineTo(sx2+3,by-6); x.stroke() } }
+        else { var tc=['#F5D33D','#F58FB0','#FFFFFF','#F2A541']; for(var j=0;j<8;j++){ var sx2=bx-bw/2+bw*(j+.5)/8; x.strokeStyle='#3F8F4E'; x.lineWidth=1.6; x.beginPath(); x.moveTo(sx2,by); x.lineTo(sx2,by-11); x.stroke(); x.fillStyle=tc[(j+k)%4]; x.beginPath(); x.ellipse(sx2,by-13,3,4.2,0,0,6.283); x.fill() } }
       }
       if(summer){
         bunting(W*.15,H*.36,W*.36,base-hw*1.15,t);
         bunting(W*.36,base-hw*1.15,W*.62,base-hw*.75,t+400);
         flies.forEach(function(b){ butterfly(b,t) });
       } else {
-        boots(ph.door+ph.w*.18,base+2,Math.max(6,hw*.075),'#F5D33D');
-        puddle(W*.24,H*.81,W*.05,t,0); puddle(W*.5,H*.815,W*.065,t,1); puddle(W*.76,H*.805,W*.045,t,2);
         tripod(W*.93,base+6,Math.max(46,H*.26));
-        x.strokeStyle='rgba(220,228,236,.22)'; x.lineWidth=1;
-        drops.forEach(function(d){ var yy=((d.y+t*.0004*d.sp)%1)*H, xx=d.x*W; x.beginPath(); x.moveTo(xx,yy); x.lineTo(xx-2,yy+d.l*H); x.stroke() });
+        x.fillStyle='rgba(248,190,212,.85)';
+        drops.slice(0,28).forEach(function(d){ var yy=((d.y+t*.00005*d.sp)%1)*H*.82+H*.08, xx=((d.x*.34+t*.000012*d.sp)%.42)*W; x.beginPath(); x.ellipse(xx,yy,2.6,1.6,d.l*40+t*.001,0,6.283); x.fill() });
       }
     }
     function frame(now){ scene(now-t0, view==='marketing'); if(!still) raf=requestAnimationFrame(frame) }
