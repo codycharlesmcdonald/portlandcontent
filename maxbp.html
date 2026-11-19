@@ -90,18 +90,8 @@ section.band+section.band{border-top:1px solid var(--line)}
 .kit li:last-child{border-bottom:1px solid var(--line)}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-.two .next{margin-top:36px}
-.two.asks>div:first-child{position:sticky;top:24px;align-self:start}
 .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
 .split .frame16{margin-bottom:10px}
-.qs{list-style:none;counter-reset:q}
-.qs li{counter-increment:q;padding:16px 0 16px 40px;border-top:1px solid var(--line);position:relative}
-.qs li:last-child{border-bottom:1px solid var(--line)}
-.qs li::before{content:counter(q);position:absolute;left:0;top:16px;font-family:var(--head);font-weight:900;color:var(--gold)}
-.qs label{display:block}
-.qs textarea{display:block;width:100%;margin-top:10px;min-height:44px;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:3px;color:#fff;font:inherit;line-height:1.45;resize:vertical}
-.qs textarea::placeholder{color:rgba(255,255,255,.5)}
-.qs textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
 .picks{font-size:.95rem;max-width:360px;line-height:1.45}
 .picks a{font-weight:700}
 
@@ -134,7 +124,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   section.band{padding-block:52px}
   .day,.kit,.two,.split,.noticed,.cta .wrap{grid-template-columns:1fr;gap:28px}
   .noticed{gap:0}
-  .frames,.two.asks>div:first-child{position:static}
+  .frames{position:static}
   .hero{min-height:72vh}
   .hero img{object-position:80% 35%}
   .bleed img{aspect-ratio:16/10}
@@ -153,7 +143,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   <img src="img/maxbp-baseball-hero.jpg" alt="A batter in a gray jersey cocks a teal bat against a clear blue sky, shot from low behind the plate">
   <div class="wrap">
     <h1>Got time for a shoot?</h1>
-    <p>We'd like to spend one day with you making a sports film, a few vertical cuts, and a set of stills for MaxBP, free, so you can see what working with us is like.</p>
+    <p>I'd like to spend one day with you making a sports film, a few vertical cuts, and a set of stills for MaxBP, free, so you can see what working with me is like.</p>
   </div>
 </header>
 
@@ -161,21 +151,21 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
 <section class="band">
   <div class="wrap split">
     <div>
-    <p class="lede">Hi MaxBP team! I'm Cody, and I run Mac Films here in Portland. I saw you're hiring a videographer and content creator, and I'd love to learn how you're making video in house right now before anyone signs on for anything.</p>
-    <p>So here's an easy way to get to know each other. Give us a morning in the cage with a couple of machines and an athlete or two, and we'll turn it into finished pieces you can post, run as ads, and put on the site. If it's a fit, great, and if it isn't, you still keep everything we made.</p>
+    <p class="lede">Hi! I'm Cody, and I run Mac Films here in Portland. I saw you're hiring a videographer and content creator, and I'd love to learn how you're making video in house right now and get a feel for the workflow you need from your new team member.</p>
+    <p>Here's an easy way to get some free content and get to know each other. Give me a morning in the cage with a couple of machines and an athlete or two, and I'll turn it into finished pieces you can post, run as ads, and put on the site. If it's a fit, great, and if it isn't, you still keep everything I made.</p>
     </div>
     <div>
       <div class="frame16"><iframe src="https://player.vimeo.com/video/1140589145?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="Mac Films cinematography reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <p class="muted">Our cinematography reel, a minute of recent work shot on the same cameras we'd bring to your cage.</p>
+      <p class="muted">My cinematography reel, a minute of recent work shot on the same cameras I'd bring to your cage.</p>
     </div>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <h2>What we noticed</h2>
+    <h2>Here's what I noticed</h2>
     <ol class="noticed">
-      <li><div><h3>Your Shorts are working</h3><p>You've been posting two or three a week since late October, shot on a phone in the cage, and the challenge ones travel. Hardest Pitch to Hit in Baseball? is past 30,000 views.</p></div></li>
+      <li><div><h3>Your Shorts are working</h3><p>You've been posting two or three a week since late October, shot on a phone in the cage, and the challenge ones travel. Your <a href="https://www.youtube.com/shorts/vXZSb6QIWgw" target="_blank" rel="noopener"><em>Hardest Pitch to Hit in Baseball?</em></a> post is past 30,000 views.</p></div></li>
       <li><div><h3>The site's videos date from 2021</h3><p>The video page on maxbp.com stops in 2021, and the homepage leans on product photos on gray where a hitter at game speed would sell it faster.</p></div></li>
       <li><div><h3>House of Reps raised the bar</h3><p>The October episode with Ryan Harrison is the most produced thing on the channel, and it shows you already care how the brand looks on camera.</p></div></li>
       <li><div><h3>The pickleball machine is quiet</h3><p>MaxPB hasn't had a video of its own in your last fifteen uploads.</p></div></li>
@@ -187,12 +177,12 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   <div class="wrap day" id="day">
     <div>
       <h2>The day</h2>
-      <p class="muted">Tick the pieces that would help you most, and the email button at the bottom brings your picks along.</p>
+      <p class="muted">Tick the pieces that would help you most, and the email button at the bottom sends your picks to me to prep edits.</p>
       <ul class="pieces" id="pieces">
-        <li><label class="piece"><input type="checkbox" checked data-name="A one minute sports film"><span><h3>A one minute sports film</h3><p>We film athletes training at game speed with the machines, widescreen, with slow motion on the ball, the swing, and the contact. It stands on its own as a sports film, and it works on your homepage, at the top of a product page, and in front of coaches.</p></span></label></li>
-        <li><label class="piece"><input type="checkbox" checked data-name="Four vertical cuts"><span><h3>Four vertical cuts</h3><p>We make Shorts, Reels, and TikToks in the formats that already work for you, like Can You Hit This and the POV pitch, and cut them from the cinema footage so they stand out in the feed next to your phone clips.</p></span></label></li>
-        <li><label class="piece"><input type="checkbox" checked data-name="Twenty stills"><span><h3>Twenty stills</h3><p>We photograph athletes and machines in use for product pages, ads, and email, to sit beside the studio shots you have now.</p></span></label></li>
-        <li><label class="piece"><input type="checkbox" data-name="One cut for the pickleball machine"><span><h3>One cut for the pickleball machine</h3><p>If MaxPB can come along, one of the four verticals goes to it. We've filmed a lot of pickleball, and a dink looks great in slow motion.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="A one minute sports film"><span><h3>A one minute sports film</h3><p>I film athletes training at game speed with the machines, widescreen, with slow motion on the ball, the swing, and the contact. It stands on its own as a sports film, and it works on your homepage, at the top of a product page, and in front of coaches.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="Four vertical cuts"><span><h3>Four vertical cuts</h3><p>I make Shorts, Reels, and TikToks in the formats that already work for you, like Can You Hit This and the POV pitch, and cut them from the cinema footage so they stand out in the feed next to your phone clips.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="Twenty stills"><span><h3>Twenty stills</h3><p>I photograph athletes and machines in use for product pages, ads, and email, to sit beside the studio shots you have now.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" data-name="One cut for the pickleball machine"><span><h3>One cut for the pickleball machine</h3><p>If MaxPB can come along, one of the four verticals goes to it. I've filmed a lot of pickleball, and a dink looks great in slow motion.</p></span></label></li>
       </ul>
       <p class="tally" id="tally">3 pieces picked.</p>
     </div>
@@ -211,36 +201,27 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   <div class="wrap kit">
     <img src="img/maxbp-cody-onset.jpg" alt="Cody frames an interview on a cinema camera's monitor">
     <div>
-      <h2>What we'd bring</h2>
+      <h2>What I'd bring</h2>
       <ul>
         <li>A cinema camera shooting 4K, with slow motion up to 120 frames a second on the swing, the ball, and the contact.</li>
         <li>Fast autofocus lenses that keep a hitter sharp at game speed.</li>
         <li>Discreet wireless audio and a multicam setup for interviews, so an athlete or coach can talk through a drill on camera between reps.</li>
         <li>The verticals come from the same footage, framed for 9:16 in the edit.</li>
-        <li>A dedicated stills camera, and lights that travel with us.</li>
+        <li>A dedicated stills camera, and lights that travel with me.</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap two asks">
+  <div class="wrap two">
     <div>
-      <h2>What we'd need from you</h2>
-      <p>The cage or a field for a morning, two or three machines, and an athlete or two who don't mind a lot of reps. We'll plan the day around your schedule and theirs, and we'll show you a first cut to look over before anything is final.</p>
-      <h2 class="next">Who keeps what</h2>
-      <p>Everything we make is yours to post, run as ads, and put on the site, with no fee and no strings. We'd keep the right to show the sports film on our own reel and site, which is the only thing we ask in return.</p>
+      <h2>What I'd need from you</h2>
+      <p>The cage or a field for a morning, two or three machines, and an athlete or two who don't mind a lot of reps. I'll plan the day around your schedule and theirs, and I'll show you a first cut to look over before anything is final.</p>
     </div>
     <div>
-      <h2>A few questions</h2>
-      <p class="muted">Your answers shape the day, and they help us both see whether a longer run together makes sense. Anything you type here goes into the email with your picks.</p>
-    <ol class="qs">
-      <li><label for="q1">What are you making in house right now, and who shoots and edits it?</label><textarea id="q1" data-q="What we make in house now" rows="1" placeholder="Your answer"></textarea></li>
-      <li><label for="q2">Where does video do the most for you today, between the site, ads, Shorts, and the coaches and teams you sell to?</label><textarea id="q2" data-q="Where video does the most for us" rows="1" placeholder="Your answer"></textarea></li>
-      <li><label for="q3">What would you want from an outside partner that's hard to do in house?</label><textarea id="q3" data-q="What we would want from a partner" rows="1" placeholder="Your answer"></textarea></li>
-      <li><label for="q4">Is there a launch or a season push coming that this day could feed?</label><textarea id="q4" data-q="Anything coming up the day could feed" rows="1" placeholder="Your answer"></textarea></li>
-      <li><label for="q5">Are there athletes or coaches you'd want in it?</label><textarea id="q5" data-q="Athletes or coaches we would want in it" rows="1" placeholder="Your answer"></textarea></li>
-    </ol>
+      <h2>Who keeps what</h2>
+      <p>Everything I make is yours to post, run as ads, and put on the site, with no fee and no strings. I'd keep the right to show the sports film on my own reel and site, which is the only thing I ask in return.</p>
     </div>
   </div>
 </section>
@@ -250,7 +231,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   <div class="wrap">
     <div>
       <h2>Let's find a day</h2>
-      <p>Pick a filming day on the calendar below, or send your picks and answers over email and I'll take it from there.</p>
+      <p>Pick a filming day on the calendar below, or send your picks over email and I'll take it from there.</p>
       <p class="sig">Cody McDonald, Mac Films, <a href="tel:+15035681199">(503) 568-1199</a></p>
     </div>
     <div class="btns">
@@ -262,23 +243,20 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   <div class="cal" id="book"><iframe src="https://calendly.com/macfilms/production?embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=1f423c" title="Book a time with Cody" loading="lazy"></iframe></div>
 </section>
 
-<footer class="wrap">The baseball frames on this page come from our cinematography reel. <a href="https://www.macfilmproductions.com">macfilmproductions.com</a></footer>
+<footer class="wrap">The baseball frames on this page come from my cinematography reel. <a href="https://www.macfilmproductions.com">macfilmproductions.com</a></footer>
 
 <script>
 (function(){
   var boxes=[].slice.call(document.querySelectorAll('#pieces input'));
-  var answers=[].slice.call(document.querySelectorAll('.qs textarea'));
   var tally=document.getElementById('tally'), picks=document.getElementById('picks'), mail=document.getElementById('mail');
   function update(){
     var picked=boxes.filter(function(b){return b.checked}).map(function(b){return b.dataset.name});
     tally.textContent=picked.length===1?'1 piece picked.':picked.length+' pieces picked.';
     picks.innerHTML=picked.length?'Your picks: '+picked.join(', ')+'. <a href="#day">Change picks</a>':'No pieces picked yet. <a href="#day">Pick them above</a>';
     var body='Hi Cody,\n\nHere are the pieces that would help us most:\n'+(picked.length?picked.map(function(p){return '- '+p}).join('\n'):'- (none picked yet)');
-    answers.forEach(function(t){ body+='\n\n'+t.dataset.q+':\n'+t.value.trim(); });
     mail.href='mailto:cody@macfilmproductions.com?subject='+encodeURIComponent('MaxBP | A day of filming')+'&body='+encodeURIComponent(body+'\n');
   }
   boxes.forEach(function(b){b.addEventListener('change',update)});
-  answers.forEach(function(t){t.addEventListener('input',update)});
   update();
 })();
 </script>
