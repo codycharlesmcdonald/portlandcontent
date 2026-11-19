@@ -1,0 +1,405 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Open+Sans:wght@400..700&display=swap">
+<style>
+#d{background:var(--k);color:var(--w);--ui:#1B1F26;--ui2:#23282F;--ui3:#2C323B;--ln:#353B45;--tlbg:#121519;--txt:#C9CDD3;--vid:#3E5C8A;--vid2:#2F6F6C;--aud:#2F6B3E;--wave:#7FC58E;--head:#E5483B}
+#d .rv{max-width:1440px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r);font-family:"Open Sans","Segoe UI",system-ui,sans-serif;font-size:12px;color:var(--rt)}
+#d{--rg:#000;--rp:#1B1F26;--rp2:#13161C;--rh:#262B34;--rl:#343A45;--rt:#A8AFBA;--rt2:#E6E9EE;--rd:#6C7480;--acc:#E8613C;--cv:#4D6F9A;--cvh:#3A5878;--ca:#2E6B52;--cah:#245641;--cw:#93DDB0;--ct:#7B5FA0;--cth:#634A85}
+#d .rv-box{background:var(--rg);padding:3px;display:grid;gap:3px;border-radius:6px}
+#d .rv svg.i{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#d .rtop{display:flex;align-items:center;gap:4px;height:34px;padding:0 6px;background:var(--rp);border-radius:4px;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+#d .rtop .tb{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:3px;color:var(--rt);text-decoration:none;flex:none}
+#d .rtop .tb:hover{color:var(--rt2);background:var(--rh)}
+#d .rtop .tb:focus-visible{outline:2px solid var(--y)}
+#d .rtop .tb.go{color:var(--y)}
+#d .rtop .tb.go:hover{color:var(--y)}
+#d .rtop .tb.on{color:var(--rt2);background:var(--rh)}
+#d .rtop .tb.on svg{color:var(--acc)}
+#d .rtop .proj{flex:1;text-align:center;color:var(--rt2);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+#d .rtop .proj span{color:var(--rd);font-weight:400;margin-left:6px}
+#d .rv-main{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr) minmax(0,300px);gap:3px}
+#d .pane{min-width:0;display:flex;flex-direction:column;background:var(--rp);border-radius:4px;overflow:hidden}
+#d .ph-h{display:flex;align-items:center;gap:8px;height:28px;padding:0 10px;border-bottom:1px solid var(--rg);color:var(--rt);white-space:nowrap;overflow:hidden;flex:none}
+#d .ph-h .sp{flex:1}
+#d .ph-h b{font-weight:600;color:var(--rt2)}
+#d .ph-h .dim{color:var(--rd)}
+#d .ph-h .tc{font-variant-numeric:tabular-nums;color:var(--rt2);font-size:13px}
+#d .pool{display:grid;grid-template-columns:1fr 1fr;gap:12px 8px;padding:10px;align-content:start}
+#d .pool button{all:unset;cursor:pointer;display:grid;gap:5px;min-width:0}
+#d .pool .pv{display:block;border-radius:2px;overflow:hidden;outline:2px solid transparent;outline-offset:1px}
+#d .pool img{width:100%;aspect-ratio:16/9;object-fit:cover}
+#d .pool span.n{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--rt);text-align:center}
+#d .pool button.on .pv{outline-color:var(--acc)}
+#d .pool button.on span.n{color:var(--rt2)}
+#d .pool button:focus-visible .pv{outline-color:var(--y)}
+#d .viewer{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+#d .viewer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease;max-width:none}
+#d .jog{position:relative;height:16px;border-bottom:1px solid var(--rg);background:var(--rp2)}
+#d .jog::before{content:"";position:absolute;left:10px;right:10px;top:7px;height:2px;background:var(--rl);border-radius:1px}
+#d .jog i{position:absolute;top:3px;width:2px;height:10px;background:var(--head);margin-left:10px}
+#d .transport{display:flex;justify-content:center;align-items:center;gap:4px;height:36px}
+#d .transport button{all:unset;cursor:pointer;width:30px;height:26px;display:grid;place-items:center;color:var(--rt);border-radius:3px}
+#d .transport button:hover{color:var(--rt2);background:var(--rh)}
+#d .transport button:focus-visible{outline:2px solid var(--y)}
+#d .transport svg{width:14px;height:14px;fill:currentColor}
+#d .itabs{display:flex;gap:2px;padding:6px 8px 0;border-bottom:1px solid var(--rg)}
+#d .itabs span{padding:5px 10px 6px;color:var(--rd);border-radius:3px 3px 0 0}
+#d .itabs span.on{color:var(--rt2);background:var(--rh)}
+#d .isec{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border-bottom:1px solid var(--rp2);color:var(--rt)}
+#d .isec .sp{flex:1}
+#d .isec svg.i{width:10px;height:10px;color:var(--rd)}
+#d .isec.open{color:var(--rt2);background:var(--rh)}
+#d .isec.open svg.i{transform:rotate(90deg)}
+#d .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2px rgba(232,97,60,.22)}
+#d .dot.off{background:#4A515C;box-shadow:none}
+#d .ival{display:flex;gap:6px;margin-left:auto}
+#d .ival em{font-style:normal;font-variant-numeric:tabular-nums;color:var(--rt2);background:var(--rp2);padding:1px 6px;border-radius:2px;min-width:3.4em;text-align:right}
+#d .viewer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+#d .viewer video.on{opacity:1}
+#d .viewer::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 46% at 50% 50%,rgba(0,0,0,.5),rgba(0,0,0,0));pointer-events:none;z-index:1}
+#d .badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:inline-flex;align-items:center;gap:6px;font-family:"Bodoni Moda",Didot,serif;color:#fff;text-align:center;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+#d .badge svg{width:clamp(30px,3.4vw,48px);height:clamp(76px,8.6vw,122px);flex:none;color:#F5D33D;filter:drop-shadow(0 -1px 0 rgba(255,250,220,.55)) drop-shadow(0 1.5px 1px rgba(90,60,0,.65)) drop-shadow(0 4px 12px rgba(0,0,0,.55))}
+#d .badge svg.r{transform:scaleX(-1)}
+#d .badge span{display:grid;justify-items:center;gap:4px;font-size:clamp(.9rem,1.4vw,1.2rem);line-height:1.2;max-width:15em}
+#d .badge small{font-style:italic;font-size:.78em;color:#F5D33D;text-shadow:0 1px 2px rgba(0,0,0,.7),0 0 14px rgba(0,0,0,.5)}
+#d .badge span.bt{display:block;font-style:italic;font-size:clamp(1.05rem,1.9vw,1.75rem);line-height:1.12;color:#fff;text-wrap:balance;text-shadow:0 1px 1px rgba(0,0,0,.6),0 2px 18px rgba(0,0,0,.55)}
+#d .badge span.lgs{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1vw,14px);margin-top:6px;max-width:none}
+#d .badge span.lgs:empty{display:none}
+#d .badge .lgs img{position:static;inset:auto;opacity:1;object-fit:contain;transition:none;height:clamp(calc(var(--h)*.55px),calc(var(--h)*.075vw),calc(var(--h)*1px));width:auto;max-width:none;filter:drop-shadow(0 1px 6px rgba(0,0,0,.5))}
+#d .badge .lgs .amp{font-family:"Bodoni Moda",Didot,serif;font-style:italic;font-size:clamp(1.1rem,1.7vw,1.6rem);line-height:1;color:#F5D33D;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+#d .badge .lgs img.rd{border-radius:50%;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
+#d .meta{margin:4px 0 0;width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 10px;text-align:left;font-family:"Open Sans","Segoe UI",system-ui,sans-serif;font-size:12px}
+#d .meta dt{color:var(--rd)}
+#d .meta dd{margin:0;color:var(--rt2);background:var(--rp2);padding:1px 7px;border-radius:2px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#d .sheet{padding:16px 14px 18px;display:grid;justify-items:center;text-align:center;gap:10px;font-family:"Bodoni Moda",Didot,serif;color:var(--w);border-bottom:1px solid var(--rp2)}
+#d .sheet .laurel{display:inline-flex;align-items:center;gap:4px}
+#d .sheet .laurel svg{width:24px;height:60px;flex:none}
+#d .sheet .laurel svg.r{transform:scaleX(-1)}
+#d .sheet .laurel span{display:grid;gap:2px;font-size:.95rem;line-height:1.2;max-width:11em}
+#d .sheet .laurel small{font-style:italic;color:var(--rt);font-size:.78rem}
+#d .sheet h3{margin:0;font-weight:400;font-style:italic;font-size:1.45rem;line-height:1.12;text-wrap:balance}
+#d .sheet p{margin:0;font-family:"Open Sans","Segoe UI",system-ui,sans-serif;font-size:12.5px;color:var(--rt);line-height:1.55}
+#d .sheet .credit{font-style:italic;color:var(--rt);font-size:.84rem}
+#d .tlp{background:var(--rp);border-radius:4px;overflow:hidden}
+#d .ttool{display:flex;align-items:center;gap:2px;height:32px;padding:0 8px;border-bottom:1px solid var(--rg)}
+#d .ttool span{display:grid;place-items:center;width:28px;height:24px;border-radius:3px;color:var(--rt)}
+#d .ttool span.on{color:var(--acc);background:var(--rh)}
+#d .ttool .sep{width:1px;height:16px;background:var(--rl);margin:0 6px}
+#d .ttool .sp{flex:1;width:auto;background:none}
+#d .zoom{display:flex;align-items:center;gap:8px;color:var(--rd)}
+#d .zoom i{display:block;width:90px;height:3px;border-radius:2px;background:var(--rl);position:relative}
+#d .zoom i::after{content:"";position:absolute;left:38%;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--rt)}
+#d .tl{position:relative;background:var(--rp2);user-select:none;-webkit-user-select:none;touch-action:pan-y;--thw:150px}
+#d .tl-row{display:grid;grid-template-columns:var(--thw) minmax(0,1fr);border-bottom:1px solid var(--rg)}
+#d .th{position:relative;background:var(--rp);border-right:1px solid var(--rg);display:flex;align-items:center;gap:7px;padding:0 8px 0 12px;color:var(--rt);min-width:0;overflow:hidden}
+#d .th::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--chip,transparent)}
+#d .th b{color:var(--rt2);font-weight:600}
+#d .th .nmx{display:grid;line-height:1.25;min-width:0}
+#d .th .nmx small{color:var(--rd);font-size:10.5px}
+#d .th .sp{flex:1}
+#d .th .ics{display:flex;gap:6px;color:var(--rd)}
+#d .th .ics svg.i{width:12px;height:12px}
+#d .th.tc0{font-variant-numeric:tabular-nums;color:var(--rt2);font-size:14px;font-weight:600;padding-left:10px}
+#d .ruler{position:relative;height:26px;background:var(--rp);overflow:hidden}
+#d .ruler i{position:absolute;bottom:0;width:1px;height:4px;background:#4A515C}
+#d .ruler i.m{height:7px;background:#646C78}
+#d .ruler i.M{height:12px;background:#838B97}
+#d .ruler b{position:absolute;top:2px;font-weight:400;font-size:10.5px;color:#8A919C;font-variant-numeric:tabular-nums;transform:translateX(4px);white-space:nowrap}
+#d .lane{position:relative;display:flex;gap:1px;padding:3px 0;min-width:0}
+#d .lane.v{height:66px}
+#d .lane.v2{height:34px}
+#d .lane.a{height:48px}
+#d .clip{all:unset;box-sizing:border-box;position:relative;min-width:0;cursor:pointer;overflow:hidden;border:1px solid rgba(0,0,0,.6);border-radius:3px;display:flex;flex-direction:column}
+#d .clip .nm{flex:none;height:15px;padding:0 6px;font-size:10.5px;line-height:15px;color:#F2F2F4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#d .lane.v .clip{background:var(--cv)}
+#d .lane.v .clip .nm{background:var(--cvh)}
+#d .lane.v .clip .bd{position:relative;flex:1;display:flex;justify-content:space-between}
+#d .lane.v .clip .hd,#d .lane.v .clip .tl2{height:100%;aspect-ratio:16/9;background-size:cover;background-position:center;flex:none;max-width:48%}
+#d .lane.v .clip .tl2{background-size:260%;background-position:78% 40%}
+#d .lane.v .clip.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+#d .lane.v2 .clip{background:var(--ct);justify-content:center}
+#d .lane.v2 .clip .nm{height:auto;line-height:26px;background:none}
+#d .lane.v2 .clip:hover{background:var(--cth)}
+#d .lane.a .clip{background:var(--ca);cursor:default}
+#d .lane.a .clip .nm{background:var(--cah)}
+#d .lane.a svg{flex:1;width:100%;height:auto;min-height:0}
+#d .lane.a path{fill:var(--cw);opacity:.9}
+#d .clip:focus-visible{outline:2px solid var(--y)}
+#d .ph{position:absolute;top:0;bottom:0;width:1px;background:var(--head);pointer-events:none;z-index:4;left:var(--thw)}
+#d .ph::before{content:"";position:absolute;top:0;left:-6px;width:13px;height:14px;background:var(--head);clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%)}
+#d .pages{display:flex;align-items:center;gap:4px;height:46px;padding:0 10px;background:var(--rp);border-radius:4px;overflow-x:auto;scrollbar-width:none}
+#d .pages .sp{flex:1;min-width:8px}
+#d .pages .pg{display:grid;justify-items:center;gap:3px;min-width:64px;color:var(--rd);font-size:10.5px}
+#d .pages .pg svg.i{width:17px;height:17px}
+#d .pages .pg.on{color:var(--rt2)}
+#d .pages .pg.on svg.i{color:var(--acc)}
+#d .pages .psep{flex:none;width:1px;height:26px;background:var(--rl);margin:0 6px}
+#d .pages .side{display:flex;gap:12px;color:var(--rd)}
+@media (max-width:1060px){#d .rv-main{grid-template-columns:minmax(0,1fr) minmax(0,280px)}#d .pane.poolp{grid-column:1/-1;order:3}#d .pool{grid-template-columns:repeat(6,minmax(0,1fr))}#d .rtop .proj{display:none}}
+@media (max-width:760px){#d .rv-main{grid-template-columns:minmax(0,1fr)}#d .pool{grid-template-columns:repeat(3,minmax(0,1fr))}#d .rtop .proj{display:none}#d .tl{--thw:52px}#d .th{padding:0 4px 0 9px}#d .th .nmx small,#d .th .nmx span,#d .th .ics{display:none}#d .th.tc0{font-size:0}#d .lane.v{height:54px}#d .lane.v .clip .tl2{display:none}#d .clip .nm{font-size:9.5px;padding:0 4px}#d .isec.min{display:none}#d .ttool .zoom,#d .ttool .hide3{display:none}#d .ruler b:nth-of-type(even){display:none}#d .pages .pg{min-width:52px}#d .pages .side{display:none}#d .below,#d .end .in{grid-template-columns:1fr}#d .studios a{grid-template-columns:1fr}#d .nav .hide{display:none}}
+.pv{position:relative;width:100%}
+.pv img{display:block}
+.pv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;pointer-events:none}
+.pv.playing video{opacity:1}
+/* home page fit: the desk sits in the Recent work band, aligned to the site's 1180px column */
+#d{--k:#000000;--w:#FFFFFF;--y:#F5D33D;--mute:#B4B8BE;--dim:#82888F;--gut-l:max(16px,env(safe-area-inset-left,0px));--gut-r:max(16px,env(safe-area-inset-right,0px));background:transparent;margin-top:44px;line-height:1.4}
+/* Cody, Nov 19: "I'd love for this video player we worked so hard on to take up more space." The desk runs past the
+   1180px text column and the side panels slim down so the viewer gets the width */
+#d .rv{max-width:1640px}
+#d .meta dd{white-space:normal;line-height:1.35;padding-block:2px}
+@media (min-width:1061px){#d .rv-main{grid-template-columns:minmax(0,190px) minmax(0,1fr) minmax(0,270px)}}
+#d h3{font-family:"Bodoni Moda",Didot,serif}
+@media (max-width:1100px){#d .rtop .hide2{display:none}}
+/* desk looks (Cody, Nov 19: "a different hue of the background and timeline. Maybe black timeline on white background? Can I toggle some layouts in this section?") */
+.looks{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:18px;color:var(--muted)}
+.looks span{margin-right:6px}
+.looks button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;padding:6px 14px;border-radius:999px;cursor:pointer}
+.looks button:hover{color:var(--fg)}
+.looks button[aria-pressed="true"]{background:var(--fg);color:var(--ground)}
+.looks button:focus-visible{outline:2px solid var(--y,#F5D33D);outline-offset:2px}
+/* Cody, Nov 19: "a bit more contrast between the player and the background": the band goes to the black ground so the slate desk panels stand off it */
+#rwBand{background:var(--ground)}
+/* Cody, Nov 19: "touch up the design on the title to mock the [edit suite] colorway and typeface while still being a centered,
+   large title". Open Sans in the desk's slate and panel greys, with the playhead's orange-red as a marker above it */
+#rwBand .rwHead{justify-items:center;text-align:center;gap:14px}
+#rwBand .rwHead h2{font-family:"Open Sans",system-ui,sans-serif;font-weight:600;font-size:clamp(2.4rem,5.2vw,4.4rem);letter-spacing:-.02em;line-height:1.02;color:#1B1F26;position:relative;padding-top:26px}
+#rwBand .rwHead h2::before{content:"";position:absolute;left:50%;top:0;width:14px;height:12px;transform:translateX(-50%);background:#E8613C;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%)}
+#rwBand .rwHead .lede{font-family:"Open Sans",system-ui,sans-serif;font-size:1.05rem;color:#4A515C;margin-inline:auto}
+#rwBand.look-light{background:#FFFFFF;--fg:#000000;--ground:#FFFFFF;--muted:#4A515C;color:#000}
+#rwBand.look-light h2{color:#000}
+#d.look-light .rv-box{background:#AEB4BD;box-shadow:0 18px 50px rgba(20,24,30,.22)}
+#d.look-light{--rg:#C9CDD3;--rp:#FFFFFF;--rp2:#F2F3F5;--rh:#E4E7EB;--rl:#C9CDD3;--rt:#4A515C;--rt2:#000000;--rd:#7A818C}
+#d.look-light .tlp{--rg:#262A31;--rp:#14171C;--rp2:#000000;--rh:#262B34;--rl:#343A45;--rt:#A8AFBA;--rt2:#F2F3F5;--rd:#6C7480}
+#d.look-light .sheet{color:#000}
+#d.look-light .rtop .tb.go,#d.look-light .rtop .tb.go:hover{background:var(--y);color:#000}
+#d.look-light .dot.off{background:#C9CDD3}
+/* Cody, Nov 19: "light works best. Can we demo a few more that are in that direction?" Each look below rides on look-light. */
+#rwBand.look-paper{background:#F4F1EA;--muted:#5A544A}
+#d.look-paper{--rg:#D3CCBE;--rp:#FBF9F5;--rp2:#F2EEE6;--rh:#E9E3D8;--rl:#D3CCBE;--rt:#5A544A;--rd:#8A8376}
+#d.look-paper .rv-box{background:#C4BCAC;box-shadow:0 18px 50px rgba(60,50,30,.18)}
+#d.look-bright .tlp{--rg:#D5D9DE;--rp:#FFFFFF;--rp2:#F3F4F6;--rh:#E4E7EB;--rl:#C9CDD3;--rt:#4A515C;--rt2:#000000;--rd:#7A818C}
+#d.look-gold{--acc:#C99A0E;--head:#E0B416}
+#d.look-gold .dot{box-shadow:0 0 0 2px rgba(201,154,14,.25)}
+#rwBand.look-studio{background:#E3E6EA}
+#d.look-studio .rv-box{background:#B9BFC7}
+#d.look-studio .tlp{--rg:#3A3F47;--rp:#2B2F36;--rp2:#23272D;--rh:#363B43;--rl:#4A505A}
+
+</style>
+<style>
+#rwBand{--ground:#F4F1EA;--fg:#000000;--muted:#5A544A;--max:1180px;padding-block:clamp(64px,9vw,120px);font-family:"Open Sans",system-ui,sans-serif}
+#rwBand .dwrap{max-width:var(--max);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#rwBand .rwHead{display:grid;justify-items:center;text-align:center;gap:14px;min-width:0}
+#rwBand .rwHead h2{margin:0;text-wrap:balance}
+#rwBand .rwHead p{margin:0;max-width:36em}
+.page-section:has(#rwBand) .section-background,.page-section:has(#rwBand){background:#F4F1EA!important}
+.page-section:has(#rwBand) .content-wrapper,.page-section:has(#rwBand) .sqs-block{padding:0!important}
+.page-section:has(#rwBand) .sqs-block-code .sqs-block-content{max-width:none}
+</style>
+  <div class="mfdesk look-light look-paper" id="rwBand">
+    <div class="dwrap">
+      <div class="rwHead"><h2>Recent work</h2><p>A few recent pieces from our studio.</p></div>
+    </div>
+    <div id="show" hidden></div>
+    <div id="d" class="look-light look-paper">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="lf" viewBox="0 0 40 100"><path d="M31 97 C12 82 7 44 24 4" fill="none" stroke="currentColor" stroke-width="1.6"/><g fill="currentColor"><ellipse cx="22.5" cy="90" rx="2.6" ry="6.6" transform="rotate(-34 22.5 90)"/><ellipse cx="30.6" cy="87" rx="2" ry="5" transform="rotate(6 30.6 87)"/><ellipse cx="16.5" cy="79" rx="2.6" ry="6.6" transform="rotate(-22 16.5 79)"/><ellipse cx="24.6" cy="76" rx="2" ry="5" transform="rotate(18 24.6 76)"/><ellipse cx="11.5" cy="67" rx="2.6" ry="6.6" transform="rotate(-12 11.5 67)"/><ellipse cx="19.6" cy="64" rx="2" ry="5" transform="rotate(28 19.6 64)"/><ellipse cx="8.5" cy="55" rx="2.6" ry="6.6" transform="rotate(-2 8.5 55)"/><ellipse cx="16.6" cy="52" rx="2" ry="5" transform="rotate(38 16.6 52)"/><ellipse cx="7.5" cy="43" rx="2.6" ry="6.6" transform="rotate(8 7.5 43)"/><ellipse cx="15.6" cy="40" rx="2" ry="5" transform="rotate(48 15.6 40)"/><ellipse cx="8.5" cy="31" rx="2.6" ry="6.6" transform="rotate(18 8.5 31)"/><ellipse cx="16.6" cy="28" rx="2" ry="5" transform="rotate(58 16.6 28)"/><ellipse cx="11.5" cy="20" rx="2.6" ry="6.6" transform="rotate(28 11.5 20)"/><ellipse cx="19.6" cy="17" rx="2" ry="5" transform="rotate(68 19.6 17)"/><ellipse cx="16.5" cy="10" rx="2.6" ry="6.6" transform="rotate(38 16.5 10)"/><ellipse cx="24.6" cy="7" rx="2" ry="5" transform="rotate(78 24.6 7)"/></g></symbol></svg>
+  <div class="rv"><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="ri-pool" viewBox="0 0 16 16"><rect x="2" y="3" width="5" height="4" rx=".5"/><rect x="9" y="3" width="5" height="4" rx=".5"/><rect x="2" y="9" width="5" height="4" rx=".5"/><rect x="9" y="9" width="5" height="4" rx=".5"/></symbol>
+    <symbol id="ri-fx" viewBox="0 0 16 16"><path d="M8 2l1.6 3.6L13.5 6l-2.9 2.6.8 3.9L8 10.6 4.6 12.5l.8-3.9L2.5 6l3.9-.4z"/></symbol>
+    <symbol id="ri-list" viewBox="0 0 16 16"><path d="M5 4h9M5 8h9M5 12h9M2 4h.5M2 8h.5M2 12h.5"/></symbol>
+    <symbol id="ri-note" viewBox="0 0 16 16"><path d="M6 12V3l8-1.5v9"/><circle cx="4.5" cy="12" r="1.8"/><circle cx="12.5" cy="10.5" r="1.8"/></symbol>
+    <symbol id="ri-mix" viewBox="0 0 16 16"><path d="M4 2v12M8 2v12M12 2v12"/><rect x="2.5" y="8" width="3" height="2"/><rect x="6.5" y="4" width="3" height="2"/><rect x="10.5" y="10" width="3" height="2"/></symbol>
+    <symbol id="ri-meta" viewBox="0 0 16 16"><rect x="2.5" y="2" width="11" height="12" rx="1"/><path d="M5 5.5h6M5 8h6M5 10.5h4"/></symbol>
+    <symbol id="ri-insp" viewBox="0 0 16 16"><path d="M3 4h6M12 4h1M3 8h1M7 8h6M3 12h7M13 12h0"/><circle cx="10.5" cy="4" r="1.5"/><circle cx="5.5" cy="8" r="1.5"/><circle cx="11.5" cy="12" r="1.5"/></symbol>
+    <symbol id="ri-arrow" viewBox="0 0 16 16"><path d="M4 2l8.5 6.5-4 .6 2.3 4.2-1.6.9-2.3-4.3L4 13z"/></symbol>
+    <symbol id="ri-trim" viewBox="0 0 16 16"><path d="M6 2v12M10 2v12M3 5l3 3-3 3M13 5l-3 3 3 3"/></symbol>
+    <symbol id="ri-blade" viewBox="0 0 16 16"><path d="M3 13l7-7 3-3-1 4-7 7zM9 7l2 2"/></symbol>
+    <symbol id="ri-magnet" viewBox="0 0 16 16"><path d="M4 3v5a4 4 0 008 0V3M4 6h2.5M9.5 6H12M6.5 3v5a1.5 1.5 0 003 0V3"/></symbol>
+    <symbol id="ri-link" viewBox="0 0 16 16"><path d="M7 9.5a2.5 2.5 0 003.5 0l2-2a2.5 2.5 0 00-3.5-3.5l-.8.8M9 6.5a2.5 2.5 0 00-3.5 0l-2 2A2.5 2.5 0 007 12l.8-.8"/></symbol>
+    <symbol id="ri-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></symbol>
+    <symbol id="ri-eye" viewBox="0 0 16 16"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></symbol>
+    <symbol id="ri-spk" viewBox="0 0 16 16"><path d="M2.5 6h2.5L9 3v10L5 10H2.5zM11.5 5.5a3.5 3.5 0 010 5"/></symbol>
+    <symbol id="ri-hp" viewBox="0 0 16 16"><path d="M3 11V8a5 5 0 0110 0v3"/><rect x="2.5" y="10" width="2.5" height="4" rx=".8"/><rect x="11" y="10" width="2.5" height="4" rx=".8"/></symbol>
+    <symbol id="ri-chev" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></symbol>
+    <symbol id="ri-media" viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><path d="M5 2h6"/></symbol>
+    <symbol id="ri-cut" viewBox="0 0 16 16"><circle cx="4.5" cy="11.5" r="2"/><circle cx="11.5" cy="11.5" r="2"/><path d="M6 10l6-8M10 10L4 2"/></symbol>
+    <symbol id="ri-edit" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="3" rx=".5"/><rect x="2" y="7.5" width="8" height="2.5" rx=".5"/><rect x="5" y="11.5" width="9" height="2.5" rx=".5"/></symbol>
+    <symbol id="ri-color" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="3.5"/><circle cx="5.5" cy="10" r="3.5"/><circle cx="10.5" cy="10" r="3.5"/></symbol>
+    <symbol id="ri-audio" viewBox="0 0 16 16"><path d="M2 8h1.5M4.5 5v6M7 3v10M9.5 6v4M12 4.5v7M14 8h0"/></symbol>
+    <symbol id="ri-deliver" viewBox="0 0 16 16"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 11.5v2h11v-2"/></symbol>
+    <symbol id="ri-plane" viewBox="0 0 16 16"><path d="M2 9.5l12-5-3.5 9-2.5-3.5zM8 10l-1 3.5"/></symbol>
+    <symbol id="ri-cam" viewBox="0 0 16 16"><path d="M2 5.5h3l1.2-2h3.6l1.2 2h3v7.5H2z"/><circle cx="8" cy="9" r="2.4"/></symbol>
+    <symbol id="ri-spot" viewBox="0 0 16 16"><path d="M5 2.5l6 0-1.5 5h-3zM8 7.5v3M4 14l4-3.5 4 3.5"/></symbol>
+    <symbol id="ri-phone" viewBox="0 0 16 16"><path d="M4 2h2.5l1 3-1.5 1a7 7 0 004 4l1-1.5 3 1V12a2 2 0 01-2 2A10 10 0 012 4a2 2 0 012-2z"/></symbol>
+    <symbol id="ri-home" viewBox="0 0 16 16"><path d="M2.5 7.5L8 3l5.5 4.5V13h-11z"/></symbol>
+    <symbol id="ri-gear" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6L5 5M11 11l1.4 1.4M3.6 12.4L5 11M11 5l1.4-1.4"/></symbol>
+    <symbol id="ri-brief" viewBox="0 0 16 16"><path d="M2.5 3h11v7.5H7l-3 2.5v-2.5H2.5z"/></symbol>
+    <symbol id="ri-script" viewBox="0 0 16 16"><path d="M3.5 2h6l3 3v9h-9zM9.5 2v3h3M5.5 8h5M5.5 10.5h5"/></symbol>
+    <symbol id="ri-board" viewBox="0 0 16 16"><rect x="2" y="3" width="5" height="4" rx=".5"/><rect x="9" y="3" width="5" height="4" rx=".5"/><rect x="2" y="9.5" width="5" height="4" rx=".5"/><rect x="9" y="9.5" width="5" height="4" rx=".5"/></symbol>
+    <symbol id="ri-cast" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 14c.6-2.8 2.6-4.3 5-4.3s4.4 1.5 5 4.3"/></symbol>
+    <symbol id="ri-pin" viewBox="0 0 16 16"><path d="M8 14.5s4.5-4.6 4.5-8a4.5 4.5 0 00-9 0c0 3.4 4.5 8 4.5 8z"/><circle cx="8" cy="6.5" r="1.6"/></symbol>
+  </svg><div class="rv-box">
+    <nav class="rtop" aria-label="Pages">
+      <a class="tb on" href="/work"><svg class="i" aria-hidden="true"><use href="#ri-pool"/></svg><span>Work</span></a><a class="tb" href="/incentive-travel"><svg class="i" aria-hidden="true"><use href="#ri-plane"/></svg><span>Incentive travel</span></a><a class="tb" href="/photography"><svg class="i" aria-hidden="true"><use href="#ri-cam"/></svg><span>Photography</span></a><a class="tb" href="/events"><svg class="i" aria-hidden="true"><use href="#ri-spot"/></svg><span>Events</span></a><a class="tb hide2" href="/management"><svg class="i" aria-hidden="true"><use href="#ri-list"/></svg><span>Management</span></a>
+      <div class="proj">Recent work<span>Mac Films</span></div>
+      <a class="tb" href="/about"><svg class="i" aria-hidden="true"><use href="#ri-meta"/></svg><span>About</span></a><a class="tb hide2" href="tel:+15035681199"><svg class="i" aria-hidden="true"><use href="#ri-phone"/></svg><span>(503) 568-1199</span></a><a class="tb go" href="#contact"><svg class="i" aria-hidden="true"><use href="#ri-insp"/></svg><span>Start a project</span></a>
+    </nav>
+    <div class="rv-main">
+      <div class="pane poolp"><div class="ph-h"><b>Master</b><span class="dim">Recent work</span><span class="sp"></span><svg class="i" aria-hidden="true"><use href="#ri-list"/></svg><svg class="i" aria-hidden="true"><use href="#ri-pool"/></svg></div><div class="pool" id="dPool"></div></div>
+      <div class="pane"><div class="ph-h"><span class="dim">Fit</span><span class="sp"></span><b id="dVName"></b><span class="sp"></span><span class="dim">Portland, <span id="dTz">PST</span></span><span class="tc" id="dTc" aria-label="Current time in Portland">00:00:00:00</span></div>
+        <div class="viewer"><img id="dImg1" alt=""><img id="dImg2" alt="" style="opacity:0"><video id="dVid" muted playsinline preload="none" aria-hidden="true"></video><video id="dVid2" muted playsinline preload="none" aria-hidden="true"></video><div class="laurel badge"><svg aria-hidden="true"><use href="#lf"/></svg><span><small id="dFm"></small><span class="bt" id="dBt"></span><span id="dW"></span><span class="lgs" id="dLg"></span></span><svg class="r" aria-hidden="true"><use href="#lf"/></svg></div></div>
+        <div class="jog"><i id="dJog"></i></div>
+        <div class="transport">
+          <button type="button" id="dPrev" aria-label="Previous film"><svg viewBox="0 0 16 16"><path d="M3 2h2v12H3zM14 2v12L6 8z"/></svg></button>
+          <button type="button" id="dBack" aria-label="Back"><svg viewBox="0 0 16 16"><path d="M14 2v12L6 8zM8 2v12L0 8z"/></svg></button>
+          <button type="button" id="dPlay" aria-label="Pause"><svg viewBox="0 0 16 16" id="dPlayIcon"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></button>
+          <button type="button" id="dFwd" aria-label="Forward"><svg viewBox="0 0 16 16"><path d="M2 2v12l8-6zM8 2v12l8-6z"/></svg></button>
+          <button type="button" id="dNext" aria-label="Next film"><svg viewBox="0 0 16 16"><path d="M11 2h2v12h-2zM2 2v12l8-6z"/></svg></button>
+        </div>
+      </div>
+      <div class="pane"><div class="itabs"><span class="on">Video</span><span>Audio</span><span>Effects</span><span>File</span></div>
+        <div class="isec open"><svg class="i" aria-hidden="true"><use href="#ri-chev"/></svg><span>Overview</span><span class="sp"></span><span class="dot"></span></div>
+        <div class="sheet" aria-live="polite">
+          <h3 id="dT"></h3>
+          <p id="dP"></p>
+          <dl class="meta" id="dMeta"></dl>
+          <span class="credit">A Mac Films production</span>
+        </div>
+        <div class="isec min"><svg class="i" aria-hidden="true"><use href="#ri-chev"/></svg><span>Transform</span><span class="ival"><em>1.000</em><em>0.000</em></span><span class="sp"></span><span class="dot"></span></div>
+        <div class="isec min"><svg class="i" aria-hidden="true"><use href="#ri-chev"/></svg><span>Composite</span><span class="sp"></span><span class="dot"></span></div>
+      </div>
+    </div>
+    <div class="tlp">
+      <div class="ttool"><span class="on" title="Selection"><svg class="i" aria-hidden="true"><use href="#ri-arrow"/></svg></span><span title="Trim"><svg class="i" aria-hidden="true"><use href="#ri-trim"/></svg></span><span title="Blade"><svg class="i" aria-hidden="true"><use href="#ri-blade"/></svg></span><span class="sep"></span><span class="on" title="Snapping"><svg class="i" aria-hidden="true"><use href="#ri-magnet"/></svg></span><span class="hide3" title="Linked selection"><svg class="i" aria-hidden="true"><use href="#ri-link"/></svg></span><span class="sp"></span><div class="zoom"><svg class="i" aria-hidden="true"><use href="#ri-pool"/></svg><i></i></div></div>
+      <div class="tl" id="dTl">
+        <div class="tl-row"><div class="th tc0" id="dTc2">01:00:00:00</div><div class="ruler" id="dRuler"></div></div>
+        <div class="tl-row"><div class="th" style="--chip:var(--ct)"><b>V2</b><span class="nmx"><span>Services</span><small>6 clips</small></span><span class="sp"></span><span class="ics"><svg class="i" aria-hidden="true"><use href="#ri-lock"/></svg><svg class="i" aria-hidden="true"><use href="#ri-eye"/></svg></span></div><div class="lane v2">
+          <a class="clip" href="#d" style="flex:5"><span class="nm">Production, start to finish</span></a>
+          <a class="clip" href="#d" style="flex:4"><span class="nm">Cody as your DP</span></a>
+          <a class="clip" href="#d" style="flex:3"><span class="nm">Photography</span></a>
+          <a class="clip" href="#d" style="flex:3"><span class="nm">Incentive travel</span></a>
+          <a class="clip" href="#d" style="flex:3"><span class="nm">Events</span></a>
+          <a class="clip" href="#d" style="flex:6"><span class="nm">Management, with Portland Content</span></a>
+        </div></div>
+        <div class="tl-row"><div class="th" style="--chip:var(--cv)"><b>V1</b><span class="nmx"><span>Films</span><small id="dV1n"></small></span><span class="sp"></span><span class="ics"><svg class="i" aria-hidden="true"><use href="#ri-lock"/></svg><svg class="i" aria-hidden="true"><use href="#ri-eye"/></svg></span></div><div class="lane v" id="dClips"></div></div>
+        <div class="tl-row"><div class="th" style="--chip:var(--ca)"><b>A1</b><span class="nmx"><span>Dialogue</span><small>2.0</small></span><span class="sp"></span><span class="ics"><svg class="i" aria-hidden="true"><use href="#ri-lock"/></svg><svg class="i" aria-hidden="true"><use href="#ri-spk"/></svg><svg class="i" aria-hidden="true"><use href="#ri-hp"/></svg></span></div><div class="lane a" id="dA1"></div></div>
+        <div class="tl-row"><div class="th" style="--chip:var(--ca)"><b>A2</b><span class="nmx"><span>Music</span><small>2.0</small></span><span class="sp"></span><span class="ics"><svg class="i" aria-hidden="true"><use href="#ri-lock"/></svg><svg class="i" aria-hidden="true"><use href="#ri-spk"/></svg><svg class="i" aria-hidden="true"><use href="#ri-hp"/></svg></span></div><div class="lane a" id="dA2"></div></div>
+        <div class="ph" id="dPh"></div>
+      </div>
+    </div>
+    <div class="pages" aria-hidden="true">
+      <span class="sp"></span>
+      <span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-brief"/></svg>Brief</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-script"/></svg>Script</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-board"/></svg>Storyboard</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-cast"/></svg>Casting</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-pin"/></svg>Locations</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-cam"/></svg>Shoot</span><span class="psep" aria-hidden="true"></span><span class="pg on"><svg class="i" aria-hidden="true"><use href="#ri-edit"/></svg>Edit</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-color"/></svg>Color</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-audio"/></svg>Mix</span><span class="pg"><svg class="i" aria-hidden="true"><use href="#ri-deliver"/></svg>Deliver</span>
+      <span class="sp"></span><span class="side"><svg class="i" aria-hidden="true"><use href="#ri-home"/></svg><svg class="i" aria-hidden="true"><use href="#ri-gear"/></svg></span>
+    </div>
+  </div></div>
+    </div>
+  </div>
+<script>
+(function(){
+  var FILMS=[
+    {t:'How can greener AI lead to a greener planet?',w:'Intel with Vox',fm:'Documentary',c:'Intel with Vox',p:'A full crew documentary piece on a sustainability and AI partnership, shot and delivered on brand and on schedule.',i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/5ffe32cd-4b3c-4e7c-91f7-88a71c3e0d8b/mf-intel-vox-greener-ai.jpg?format=1500w',k:'intel',ro:'Camera and drones for Vox Media',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/intel.png',a:'Intel',h:24},{s:'https://portlandcontent.com/media/mf-desk/logo/voxmedia.png',a:'Vox Media',h:13}],y:'2023',len:'5:40',a:'Whales surfacing in dark green water, seen from above',f:5},
+    {t:'Employee Resource Groups',w:'Keurig Dr Pepper',fm:'Internal resource',c:'Keurig Dr Pepper',p:"An internal piece built on interviews, cut for the company's own channels.",i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/6ea80726-1ef5-4f77-8987-e6256fd0ee7f/mf26-kdp-building.jpg?format=1500w',k:'kdp',ro:'Shot for Content Inc.',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/kdp.png',a:'Keurig Dr Pepper',h:30}],y:'2022',len:'1:53',a:'A woman speaks in a sunlit interview setup',f:4},
+    {t:'Our Sustainable Future',w:'TV episode, Atomo Coffee',fm:'TV episode',c:'Atomo Coffee',p:"An episode of the TV series Our Sustainable Future on Atomo's beanless coffee, hosted by Mario and Courtney Lopez, shot for Food Network.",i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/06dcbd42-f5c8-4d7c-818c-81f605369e0e/mf26-atomo-episode.jpg?format=1500w',k:'atomo',ro:'Shot for WGST Productions',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/atomo.jpg',a:'Atomo Coffee',h:52,r:1},{s:'https://portlandcontent.com/media/mf-desk/logo/foodnetwork.png',a:'Food Network',h:52,r:1}],y:'2022',a:'The Brewing real change title card',f:4},
+    {t:'FoodQuest',w:'TV episode, USA Pears',fm:'TV episode',c:'USA Pears',p:"A kitchen episode of the TV series FoodQuest, hosted by Mario and Courtney Lopez, shot for Food Network.",i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/aaa589e9-db4a-4e64-b63c-ac9be6c0b84a/mf26-usa-pears-episode.jpg?format=1500w',k:'pears',ro:'Shot for WGST Productions',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/usapears.png',a:'USA Pears',h:52,r:1},{s:'https://portlandcontent.com/media/mf-desk/logo/foodnetwork.png',a:'Food Network',h:52,r:1}],y:'2022',a:'Mario and Courtney Lopez at a kitchen island',f:4},
+    {t:'Mission Overview',w:'4D Recovery',fm:'Nonprofit film',c:'4D Recovery',p:'A mission film for 4D Recovery, a recovery community for young people, told in their own words.',i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/85fb8988-2160-4f2c-9461-065728816ed2/mf26-4d-recovery.jpg?format=1500w',k:'recovery',ro:'Shot and edited for LocalEyes',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/4d.png',a:'4D Recovery',h:38}],y:'2022',len:'5:58',a:'A man smiles at the camera in front of a pink wall',f:4},
+    {t:'2025 Cinematography Reel',w:'Mac Films',fm:'Cinematography reel',c:'Mac Films',p:'A year of commercial and documentary work in under a minute.',i:'https://images.squarespace-cdn.com/content/5c81e6b19b7d15787dcaf609/59120020-2077-4950-bdcd-0575a1349e40/mf26-reel-cheers.jpg?format=1500w',k:'reel',lg:[{s:'https://portlandcontent.com/media/mf-desk/logo/macfilms.png',a:'Mac Films',h:46}],ro:'Cinematography',y:'2025',len:'0:53',a:'A woman feeds a beach fire under a grey sky',f:7}
+  ];
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    var tl=document.getElementById('dTl'),lane=document.getElementById('dClips'),ph=document.getElementById('dPh'),ruler=document.getElementById('dRuler'),pool=document.getElementById('dPool');
+    var FPS=24,UNIT=9;/* notional seconds per weight unit, for the readout only */
+    var tot=FILMS.reduce(function(s,f){return s+f.f},0);
+    for(var r=0;r<=96;r++){var ti=document.createElement('i');if(r%16===0)ti.className='M';else if(r%4===0)ti.className='m';ti.style.left=(r/96*100)+'%';ruler.appendChild(ti);
+      if(r%16===0&&r<96){var lb=document.createElement('b');lb.style.left=(r/96*100)+'%';lb.textContent=tc(r/96*tot*UNIT);ruler.appendChild(lb)}}
+    function tc(sec){var h=1,m=Math.floor(sec/60),s=Math.floor(sec%60),f=Math.floor((sec*FPS)%FPS);function z(n){return ('0'+n).slice(-2)}return z(h)+':'+z(m)+':'+z(s)+':'+z(f)}
+    function wave(seed,quiet){var pts=[],n=90,x,y,v=seed;for(var i=0;i<=n;i++){v=(v*9301+49297)%233280;var a=(v/233280);var env=quiet?0.35:0.55+0.45*Math.sin(i/7+seed);y=Math.max(.08,a*env);pts.push([i/n*100,y])}
+      var up=pts.map(function(p){return p[0].toFixed(2)+','+(50-p[1]*46).toFixed(2)}).join(' L');var dn=pts.slice().reverse().map(function(p){return p[0].toFixed(2)+','+(50+p[1]*46).toFixed(2)}).join(' L');
+      return '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M'+up+' L'+dn+' Z"/></svg>'}
+    var clips=[],thumbs=[];
+    FILMS.forEach(function(f,ix){
+      var b=document.createElement('button');b.type='button';b.className='clip';b.style.flex=f.f;b.setAttribute('aria-label','Play '+f.t+', '+f.w);
+      var nm=document.createElement('span');nm.className='nm';nm.textContent=f.t;var bd=document.createElement('span');bd.className='bd';bd.innerHTML='<span class="hd"></span><span class="tl2"></span>';bd.firstChild.style.backgroundImage=bd.lastChild.style.backgroundImage='url('+f.i+')';b.appendChild(nm);b.appendChild(bd);
+      b.addEventListener('click',function(){take();go(ix,0)});lane.appendChild(b);clips.push(b);
+      var a1=document.createElement('span');a1.className='clip';a1.style.flex=f.f;a1.innerHTML='<span class="nm"></span>'+wave(ix*31+7,false);a1.querySelector('.nm').textContent=f.c+' dialogue';document.getElementById('dA1').appendChild(a1);
+      var tb=document.createElement('button');tb.type='button';var pw=document.createElement('span');pw.className='pv';if(f.k)pw.setAttribute('data-pv','https://portlandcontent.com/media/mf-desk/vid/'+f.k+'.mp4');var im=document.createElement('img');im.src=f.i;im.alt='';pw.appendChild(im);var sp=document.createElement('span');sp.className='n';sp.textContent=f.t;tb.appendChild(pw);tb.appendChild(sp);tb.setAttribute('aria-label','Load '+f.t);
+      tb.addEventListener('click',function(){take();go(ix,0)});pool.appendChild(tb);thumbs.push(tb);
+    });
+    document.getElementById('dV1n').textContent=FILMS.length+' clips';var a2=document.createElement('span');a2.className='clip';a2.style.flex=tot;a2.innerHTML='<span class="nm">Reel music, licensed</span>'+wave(3,true);document.getElementById('dA2').appendChild(a2);
+    var cur=-1,front=1,pos=0,playing=!reduce,last=0,running=false,PER=5200;
+    function setImg(ix){var a=document.getElementById(front===1?'dImg1':'dImg2'),b=document.getElementById(front===1?'dImg2':'dImg1');b.src=FILMS[ix].i;b.alt=FILMS[ix].a;b.style.opacity=1;a.style.opacity=0;front=front===1?2:1}
+    /* viewer: two players, the next film loads behind the current one and cuts in once its first frame is ready,
+       each film plays once and holds its last frame, and the playhead dwells for the length of the film's clip */
+    var vids=[document.getElementById('dVid'),document.getElementById('dVid2')],vf=0,vtok=0,durs={},vidOk=!!vids[0]&&!!vids[1]&&!reduce;
+    function vcur(){return vids[vf]}
+    function vplay(){if(!vidOk)return;var v=vcur();if(!v.getAttribute('src')||!v.classList.contains('on'))return;if(playing&&running&&!v.ended){var q=v.play();if(q&&q.catch)q.catch(function(){})}else v.pause()}
+    function vset(ix){if(!vidOk)return;var tok=++vtok,k=FILMS[ix].k;
+      if(!k){vids.forEach(function(v){v.classList.remove('on');v.pause()});return}
+      var back=vids[1-vf];back.pause();back.preload='auto';
+      back.onloadedmetadata=function(){if(isFinite(back.duration))durs[ix]=back.duration*1000};
+      back.onloadeddata=function(){if(tok!==vtok)return;back.currentTime=0;var old=vids[vf];back.classList.add('on');old.classList.remove('on');old.pause();vf=1-vf;vplay()};
+      back.onerror=function(){if(tok!==vtok)return;vids.forEach(function(v){v.classList.remove('on');v.pause()})};
+      back.src='https://portlandcontent.com/media/mf-desk/vid/'+k+'.mp4'}
+    function dwell(ix){return durs[ix]||PER*FILMS[ix].f/4.25}
+    function go(ix,frac){
+      if(ix!==cur){cur=ix;setImg(ix);vset(ix);
+        document.getElementById('dT').textContent=FILMS[ix].t;document.getElementById('dW').textContent=FILMS[ix].c;document.getElementById('dFm').textContent=FILMS[ix].fm;document.getElementById('dBt').textContent=FILMS[ix].t;document.getElementById('dFm').style.display=FILMS[ix].t.toLowerCase().indexOf(FILMS[ix].fm.toLowerCase())>=0?'none':'';var lgEl=document.getElementById('dLg'),LG=FILMS[ix].lg||[];lgEl.textContent='';LG.forEach(function(o,n){if(n){var am=document.createElement('span');am.className='amp';am.textContent='&';am.setAttribute('aria-hidden','true');lgEl.appendChild(am)}var im=new Image();im.src=o.s;im.alt=o.a;im.style.setProperty('--h',o.h);if(o.r)im.className='rd';lgEl.appendChild(im)});document.getElementById('dW').style.display=LG.length?'none':'';
+        document.getElementById('dP').textContent=FILMS[ix].p;var md=document.getElementById('dMeta');md.textContent='';[['Client',FILMS[ix].c],['Deliverables',FILMS[ix].dl],['Length',FILMS[ix].len]].forEach(function(r){if(!r[1])return;var dt=document.createElement('dt');dt.textContent=r[0];var dd=document.createElement('dd');dd.textContent=r[1];md.appendChild(dt);md.appendChild(dd)});document.getElementById('dVName').textContent=FILMS[ix].t;
+        clips.forEach(function(c,i){c.classList.toggle('on',i===ix)});thumbs.forEach(function(c,i){c.classList.toggle('on',i===ix)});}
+      pos=ix+frac;place();
+    }
+    function place(){var c=clips[cur];if(!c)return;var cr=c.getBoundingClientRect(),tr=tl.getBoundingClientRect();var frac=pos-Math.floor(pos);ph.style.left=(cr.left-tr.left+frac*cr.width)+'px';
+      var before=0;for(var i=0;i<cur;i++)before+=FILMS[i].f;var t=tc((before+frac*FILMS[cur].f)*UNIT);document.getElementById('dTc2').textContent=t;document.getElementById('dJog').style.left='calc('+((before+frac*FILMS[cur].f)/tot)+' * (100% - 22px))'}
+    var pdx=null;try{pdx=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'})}catch(e){}
+    var tcEl=document.getElementById('dTc'),tzEl=document.getElementById('dTz'),lastClock='',lastZ=-1,pdz=null;try{pdz=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',timeZoneName:'short'})}catch(e){}
+    function clock(){var n=new Date(),str;if(pdx){var o={};pdx.formatToParts(n).forEach(function(q){o[q.type]=q.value});str=(o.hour==='24'?'00':o.hour)+':'+o.minute+':'+o.second}else{str=n.toTimeString().slice(0,8)}
+      str+=':'+('0'+Math.floor(n.getMilliseconds()*24/1000)).slice(-2);if(pdz&&n.getSeconds()!==lastZ){lastZ=n.getSeconds();try{var z=pdz.formatToParts(n).filter(function(q){return q.type==='timeZoneName'})[0];if(z&&tzEl.textContent!==z.value)tzEl.textContent=z.value}catch(e){}}if(str!==lastClock){tcEl.textContent=str;lastClock=str}}
+    clock();
+    function tick(t){if(!running)return;clock();if(playing&&last){pos+=(t-last)/dwell(Math.min(FILMS.length-1,Math.floor(pos)));if(pos>=FILMS.length)pos=0;var ix=Math.floor(pos);if(ix!==cur)go(ix,pos-ix);else place()}last=t;requestAnimationFrame(tick)}
+    var pb=document.getElementById('dPlay'),pi=document.getElementById('dPlayIcon');
+    function label(){pb.setAttribute('aria-label',playing?'Pause':'Play the reel');pi.innerHTML=playing?'<path d="M3 2h4v12H3zM9 2h4v12H9z"/>':'<path d="M4 2l10 6-10 6z"/>';if(typeof vplay==='function')vplay()}
+    function take(){playing=false;label()}
+    pb.addEventListener('click',function(){playing=!playing;label()});
+    document.getElementById('dNext').addEventListener('click',function(){take();go((cur+1)%FILMS.length,0)});
+    document.getElementById('dPrev').addEventListener('click',function(){take();go((cur+FILMS.length-1)%FILMS.length,0)});
+    document.getElementById('dFwd').addEventListener('click',function(){take();pos=Math.min(FILMS.length-.001,pos+.25);go(Math.floor(pos),pos-Math.floor(pos))});
+    document.getElementById('dBack').addEventListener('click',function(){take();pos=Math.max(0,pos-.25);go(Math.floor(pos),pos-Math.floor(pos))});
+    function scrub(e){var cr=lane.getBoundingClientRect();var x=Math.max(0,Math.min(cr.width-1,e.clientX-cr.left));var acc=0;
+      for(var i=0;i<clips.length;i++){var w=clips[i].getBoundingClientRect().width+1;if(x<acc+w||i===clips.length-1){go(i,Math.min(.999,Math.max(0,(x-acc)/w)));break}acc+=w}}
+    var drag=false;
+    tl.addEventListener('pointerdown',function(e){if(e.target.closest('.lane.v2'))return;drag=true;take();scrub(e)});
+    window.addEventListener('pointermove',function(e){if(drag)scrub(e)});
+    window.addEventListener('pointerup',function(){drag=false});
+    window.addEventListener('resize',place);
+    label();go(0,0);
+    window.__dRun=function(on){if(on&&!running){running=true;last=0;requestAnimationFrame(function(t){place();tick(t)})}else if(!on){running=false}vplay()};
+    window.__dRun(true);
+  })();
+  /* hover previews: a short muted loop plays over the still on hover, and in view on touch screens */
+  (function(){
+    var reduceM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hover=window.matchMedia&&matchMedia('(hover: hover)').matches;
+    function vidFor(el){
+      if(el.tagName==='VIDEO') return el;
+      var v=el.querySelector('video');
+      if(!v){v=document.createElement('video');v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='none';v.setAttribute('aria-hidden','true');el.appendChild(v)}
+      return v;
+    }
+    function start(el,host){
+      if(reduceM||el.dataset.bad) return;
+      var v=vidFor(el);
+      if(!v.src){v.src=el.dataset.pv;v.addEventListener('error',function(){el.dataset.bad='1';host.classList.remove('playing');el.classList.remove('playing')},{once:true})}
+      var p=v.play();if(p&&p.catch)p.catch(function(){});
+      v.addEventListener('playing',function on(){v.removeEventListener('playing',on);if(host.dataset.want==='1'){host.classList.add('playing');el.classList.add('playing')}});
+      host.dataset.want='1';
+      if(!v.paused&&v.readyState>2){host.classList.add('playing');el.classList.add('playing')}
+    }
+    function stop(el,host){host.dataset.want='0';host.classList.remove('playing');el.classList.remove('playing');var v=el.tagName==='VIDEO'?el:el.querySelector('video');if(v){v.pause();try{v.currentTime=0}catch(e){}}}
+    document.querySelectorAll('[data-pv]').forEach(function(el){
+      var host=el.closest('li,article')||el;
+      if(hover){host.addEventListener('mouseenter',function(){start(el,host)});host.addEventListener('mouseleave',function(){stop(el,host)});
+        host.addEventListener('focusin',function(){start(el,host)});host.addEventListener('focusout',function(){stop(el,host)});}
+      else if('IntersectionObserver' in window && el.tagName!=='VIDEO'){
+        new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.6)start(el,host);else stop(el,host)})},{threshold:[0,.6,1]}).observe(el);
+      }
+    });
+  })();
+})();
+</script>
