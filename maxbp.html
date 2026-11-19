@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>A Day with MaxBP</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="A free day of filming for MaxBP from Mac Films: a one minute sports film, four vertical cuts, and twenty stills.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mac Films">
+<meta property="og:title" content="Got time for a shoot?">
+<meta property="og:description" content="A free day of filming for MaxBP from Mac Films: a one minute sports film, four vertical cuts, and twenty stills.">
+<meta property="og:image" content="https://portlandcontent.com/img/maxbp-og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://portlandcontent.com/img/maxbp-og.jpg">
+<meta name="theme-color" content="#1F423C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#1F423C; --deep:#132B27; --type:#FFFFFF; --muted:rgba(255,255,255,.74); --line:rgba(255,255,255,.2);
+  --gold:#F6C344; --on-gold:#1F423C;
+  --head:"Mulish","Figtree",system-ui,sans-serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#1F423C}}
+:root[data-theme="dark"]{--ground:#1F423C}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--type);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(100% - 32px,1040px);margin-inline:auto}
+.narrow{width:min(100% - 32px,720px);margin-inline:auto}
+h1,h2,h3{font-family:var(--head);font-weight:900;line-height:1.08;letter-spacing:-.01em}
+h1{font-size:clamp(2.4rem,6.4vw,4.6rem)}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-bottom:18px}
+h3{font-size:1.2rem;font-weight:800;margin-bottom:6px}
+p+p{margin-top:14px}
+.muted{color:var(--muted)}
+
+/* top line */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;font-weight:600}
+.top .who{font-family:var(--head);font-weight:900;font-size:1.15rem}
+.top .who span{color:var(--gold)}
+.top a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:2px}
+
+/* hero */
+.hero{position:relative;min-height:min(78vh,680px);display:flex;align-items:flex-end;overflow:hidden;background:var(--deep)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 30%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,43,39,0) 30%,rgba(19,43,39,.88) 86%)}
+.hero .wrap{position:relative;z-index:1;padding-block:48px 44px}
+.hero p{max-width:620px;font-size:1.2rem;margin-top:16px;color:rgba(255,255,255,.9)}
+
+section.band{padding-block:56px}
+section.band+section.band{border-top:1px solid var(--line)}
+.lede{font-size:1.25rem;line-height:1.55}
+
+/* what we noticed: numbered list with hairlines */
+.noticed{list-style:none;counter-reset:n;margin-top:8px;display:grid;grid-template-columns:1fr 1fr;column-gap:40px;border-bottom:1px solid var(--line)}
+.noticed li{counter-increment:n;display:grid;grid-template-columns:56px 1fr;gap:4px 18px;padding:22px 0;border-top:1px solid var(--line)}
+.noticed li::before{content:counter(n);font-family:var(--head);font-weight:900;font-size:2rem;line-height:1;color:var(--gold)}
+
+/* the day: editorial two column, frames beside the pieces */
+.day{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.pieces{list-style:none}
+.piece{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:20px 0;border-top:1px solid var(--line);cursor:pointer}
+.piece:last-child{border-bottom:1px solid var(--line)}
+.piece input{appearance:none;width:24px;height:24px;margin-top:3px;border:2px solid var(--gold);border-radius:3px;display:grid;place-items:center;cursor:pointer}
+.piece input:checked{background:var(--gold)}
+.piece input:checked::after{content:"";width:6px;height:12px;border:solid var(--on-gold);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.piece input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.piece p{color:var(--muted)}
+.tally{margin-top:18px;color:var(--muted)}
+.frames{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:sticky;top:24px}
+.frames figure{margin:0}
+.frames img{width:100%;aspect-ratio:9/16;object-fit:cover}
+.frames figcaption{font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* full bleed band */
+.bleed{position:relative;background:var(--deep)}
+.bleed img{width:100%;aspect-ratio:2.39/1;object-fit:cover}
+.bleed p{width:min(100% - 32px,1040px);margin:12px auto 0;font-size:.9rem;color:var(--muted);padding-bottom:14px}
+
+/* kit */
+.kit{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.kit img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.kit ul{list-style:none;margin-top:6px}
+.kit li{padding:12px 0;border-top:1px solid var(--line)}
+.kit li:last-child{border-bottom:1px solid var(--line)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.two .next{margin-top:36px}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.split .frame16{margin-bottom:10px}
+.qs{list-style:none;counter-reset:q}
+.qs li{counter-increment:q;padding:16px 0 16px 40px;border-top:1px solid var(--line);position:relative}
+.qs li:last-child{border-bottom:1px solid var(--line)}
+.qs li::before{content:counter(q);position:absolute;left:0;top:16px;font-family:var(--head);font-weight:900;color:var(--gold)}
+.qs label{display:block}
+.qs textarea{display:block;width:100%;margin-top:10px;min-height:48px;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:3px;color:#fff;font:inherit;line-height:1.45;resize:vertical}
+.qs textarea::placeholder{color:rgba(255,255,255,.5)}
+.qs textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.picks{font-size:.95rem;max-width:360px;line-height:1.45}
+.picks a{font-weight:700}
+
+/* reel and scheduler embeds */
+.frame16{position:relative;width:100%;aspect-ratio:16/9;background:var(--deep);margin-bottom:14px}
+.frame16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.poster{position:absolute;inset:0;display:block}
+.poster img{width:100%;height:100%;object-fit:cover}
+.play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--gold)}
+.play::after{content:"";position:absolute;left:33px;top:26px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent var(--on-gold)}
+.cal{background:#FFFFFF}
+.cal-link{display:block;width:min(100% - 32px,1040px);margin:0 auto;padding:40px 0;color:var(--on-gold);font-weight:600}
+.cal iframe{display:block;width:100%;height:720px;border:0}
+
+/* call to action */
+.cta{background:var(--gold);color:var(--on-gold)}
+.cta .wrap{padding-block:64px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
+.cta p{font-size:1.15rem}
+.btns{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.btn{display:inline-block;font-family:var(--head);font-weight:900;font-size:1.05rem;text-decoration:none;padding:16px 22px;border-radius:3px;min-height:44px}
+.btn.solid{background:var(--on-gold);color:#fff}
+.btn.line{border:2px solid var(--on-gold)}
+.sig{font-weight:600}
+footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
+
+
+@media (max-width:820px){
+  section.band{padding-block:52px}
+  .day,.kit,.two,.split,.noticed,.cta .wrap{grid-template-columns:1fr;gap:28px}
+  .noticed{gap:0}
+  .frames{position:static}
+  .hero{min-height:72vh}
+  .hero img{object-position:80% 35%}
+  .bleed img{aspect-ratio:16/10}
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <span class="who">MaxBP <span>+</span> Mac Films</span>
+  <a href="#talk">Let's talk</a>
+</div>
+
+<header class="hero">
+  <img src="img/maxbp-baseball-hero.jpg" alt="A batter in a gray jersey cocks a teal bat against a clear blue sky, shot from low behind the plate">
+  <div class="wrap">
+    <h1>Got time for a shoot?</h1>
+    <p>We'd like to spend one day with you making a sports film, a few vertical cuts, and a set of stills for MaxBP, free, so you can see what working with us is like.</p>
+  </div>
+</header>
+
+<main>
+<section class="band">
+  <div class="wrap split">
+    <div>
+    <p class="lede">Hi MaxBP team! I'm Cody, and I run Mac Films here in Portland. I saw you're hiring a videographer and content creator, and I'd love to learn how you're making video in house right now before anyone signs on for anything.</p>
+    <p>So here's an easy way to get to know each other. Give us a morning in the cage with a couple of machines and an athlete or two, and we'll turn it into finished pieces you can post, run as ads, and put on the site. If it's a fit, great, and if it isn't, you still keep everything we made.</p>
+    </div>
+    <div>
+      <div class="frame16"><iframe src="https://player.vimeo.com/video/1140589145?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="Mac Films cinematography reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <p class="muted">Our cinematography reel, a minute of recent work shot on the same cameras we'd bring to your cage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What we noticed</h2>
+    <ol class="noticed">
+      <li><div><h3>Your Shorts are working</h3><p>You've been posting two or three a week since late October, shot on a phone in the cage, and the challenge ones travel. Hardest Pitch to Hit in Baseball? is past 30,000 views.</p></div></li>
+      <li><div><h3>The site's videos date from 2021</h3><p>The video page on maxbp.com stops in 2021, and the homepage leans on product photos on gray where a hitter at game speed would sell it faster.</p></div></li>
+      <li><div><h3>House of Reps raised the bar</h3><p>The October episode with Ryan Harrison is the most produced thing on the channel, and it shows you already care how the brand looks on camera.</p></div></li>
+      <li><div><h3>The pickleball machine is quiet</h3><p>MaxPB hasn't had a video of its own in your last fifteen uploads.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap day" id="day">
+    <div>
+      <h2>The day</h2>
+      <p class="muted">Tick the pieces that would help you most, and the email button at the bottom brings your picks along.</p>
+      <ul class="pieces" id="pieces">
+        <li><label class="piece"><input type="checkbox" checked data-name="A one minute sports film"><span><h3>A one minute sports film</h3><p>We film athletes training at game speed with the machines, widescreen, with slow motion on the ball, the swing, and the contact. It stands on its own as a sports film, and it works on your homepage, at the top of a product page, and in front of coaches.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="Four vertical cuts"><span><h3>Four vertical cuts</h3><p>We cut Shorts, Reels, and TikToks in the formats that already work for you, like Can You Hit This and the POV pitch, and cut them from the cinema footage so they stand out in the feed next to your phone clips.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="Twenty stills"><span><h3>Twenty stills</h3><p>We photograph athletes and machines in use for product pages, ads, and email, to sit beside the studio shots you have now.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" data-name="One cut for the pickleball machine"><span><h3>One cut for the pickleball machine</h3><p>If MaxPB can come along, one of the four verticals goes to it. We've filmed a lot of pickleball, and a dink looks great in slow motion.</p></span></label></li>
+      </ul>
+      <p class="tally" id="tally">3 pieces picked.</p>
+    </div>
+    <div class="frames">
+      <figure><img src="img/maxbp-frame-windup.jpg" alt="A batter in navy loads up with a light blue bat, shot from low behind the plate"></figure>
+      <figure><img src="img/maxbp-frame-run.jpg" alt="The batter sprints out of the box toward first base"></figure>
+    </div>
+  </div>
+</section>
+
+<figure class="bleed">
+  <img src="img/maxbp-batter-swing.jpg" style="object-position:50% 40%" alt="A batter in navy follows through as the ball leaves the bat, with tall firs past the outfield">
+</figure>
+
+<section class="band">
+  <div class="wrap kit">
+    <img src="img/maxbp-cody-onset.jpg" alt="Cody frames an interview on a cinema camera's monitor">
+    <div>
+      <h2>What we'd bring</h2>
+      <ul>
+        <li>A cinema camera shooting 4K, with slow motion up to 120 frames a second on the swing, the ball, and the contact.</li>
+        <li>Fast autofocus lenses that keep a hitter sharp at game speed.</li>
+        <li>Discreet wireless audio and a multicam setup for interviews, so an athlete or coach can talk through a drill on camera between reps.</li>
+        <li>The verticals come from the same footage, framed for 9:16 in the edit.</li>
+        <li>A dedicated stills camera, and lights that travel with us.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap two">
+    <div>
+      <h2>What we'd need from you</h2>
+      <p>The cage or a field for a morning, two or three machines, and an athlete or two who don't mind a lot of reps. We'll plan the day around your schedule and theirs, and we'll show you a first cut to look over before anything is final.</p>
+      <h2 class="next">Who keeps what</h2>
+      <p>Everything we make is yours to post, run as ads, and put on the site, with no fee and no strings. We'd keep the right to show the sports film on our own reel and site, which is the only thing we ask in return.</p>
+    </div>
+    <div>
+      <h2>A few questions</h2>
+      <p class="muted">Your answers shape the day, and they help us both see whether a longer run together makes sense. Anything you type here goes into the email with your picks.</p>
+    <ol class="qs">
+      <li><label for="q1">What are you making in house right now, and who shoots and edits it?</label><textarea id="q1" data-q="What we make in house now" rows="2" placeholder="Your answer"></textarea></li>
+      <li><label for="q2">Where does video do the most for you today, between the site, ads, Shorts, and the coaches and teams you sell to?</label><textarea id="q2" data-q="Where video does the most for us" rows="2" placeholder="Your answer"></textarea></li>
+      <li><label for="q3">What would you want from an outside partner that's hard to do in house?</label><textarea id="q3" data-q="What we would want from a partner" rows="2" placeholder="Your answer"></textarea></li>
+      <li><label for="q4">Is there a launch or a season push coming that this day could feed?</label><textarea id="q4" data-q="Anything coming up the day could feed" rows="2" placeholder="Your answer"></textarea></li>
+      <li><label for="q5">Are there athletes or coaches you'd want in it?</label><textarea id="q5" data-q="Athletes or coaches we would want in it" rows="2" placeholder="Your answer"></textarea></li>
+    </ol>
+    </div>
+  </div>
+</section>
+</main>
+
+<section class="cta" id="talk">
+  <div class="wrap">
+    <div>
+      <h2>Let's find a day</h2>
+      <p>Pick a filming day on the calendar below, or send your picks and answers over email and I'll take it from there.</p>
+      <p class="sig">Cody McDonald, Mac Films, <a href="tel:+15035681199">(503) 568-1199</a></p>
+    </div>
+    <div class="btns">
+      <a class="btn solid" href="#book">Pick a filming day</a>
+      <p class="picks" id="picks" aria-live="polite"></p>
+      <a class="btn line" id="mail" href="mailto:cody@macfilmproductions.com">Email my picks</a>
+    </div>
+  </div>
+  <div class="cal" id="book"><iframe src="https://calendly.com/macfilms/production?embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=1f423c" title="Book a time with Cody" loading="lazy"></iframe></div>
+</section>
+
+<footer class="wrap">The baseball frames on this page come from our cinematography reel. <a href="https://www.macfilmproductions.com">macfilmproductions.com</a></footer>
+
+<script>
+(function(){
+  var boxes=[].slice.call(document.querySelectorAll('#pieces input'));
+  var answers=[].slice.call(document.querySelectorAll('.qs textarea'));
+  var tally=document.getElementById('tally'), picks=document.getElementById('picks'), mail=document.getElementById('mail');
+  function update(){
+    var picked=boxes.filter(function(b){return b.checked}).map(function(b){return b.dataset.name});
+    tally.textContent=picked.length===1?'1 piece picked.':picked.length+' pieces picked.';
+    picks.innerHTML=picked.length?'Your picks: '+picked.join(', ')+'. <a href="#day">Change picks</a>':'No pieces picked yet. <a href="#day">Pick them above</a>';
+    var body='Hi Cody,\n\nHere are the pieces that would help us most:\n'+(picked.length?picked.map(function(p){return '- '+p}).join('\n'):'- (none picked yet)');
+    answers.forEach(function(t){ body+='\n\n'+t.dataset.q+':\n'+t.value.trim(); });
+    mail.href='mailto:cody@macfilmproductions.com?subject='+encodeURIComponent('MaxBP | A day of filming')+'&body='+encodeURIComponent(body+'\n');
+  }
+  boxes.forEach(function(b){b.addEventListener('change',update)});
+  answers.forEach(function(t){t.addEventListener('input',update)});
+  update();
+})();
+</script>
+</body>
+</html>
