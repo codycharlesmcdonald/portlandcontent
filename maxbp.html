@@ -91,6 +91,7 @@ section.band+section.band{border-top:1px solid var(--line)}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
 .two .next{margin-top:36px}
+.two.asks>div:first-child{position:sticky;top:24px;align-self:start}
 .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
 .split .frame16{margin-bottom:10px}
 .qs{list-style:none;counter-reset:q}
@@ -98,7 +99,7 @@ section.band+section.band{border-top:1px solid var(--line)}
 .qs li:last-child{border-bottom:1px solid var(--line)}
 .qs li::before{content:counter(q);position:absolute;left:0;top:16px;font-family:var(--head);font-weight:900;color:var(--gold)}
 .qs label{display:block}
-.qs textarea{display:block;width:100%;margin-top:10px;min-height:48px;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:3px;color:#fff;font:inherit;line-height:1.45;resize:vertical}
+.qs textarea{display:block;width:100%;margin-top:10px;min-height:44px;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:3px;color:#fff;font:inherit;line-height:1.45;resize:vertical}
 .qs textarea::placeholder{color:rgba(255,255,255,.5)}
 .qs textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
 .picks{font-size:.95rem;max-width:360px;line-height:1.45}
@@ -111,19 +112,21 @@ section.band+section.band{border-top:1px solid var(--line)}
 .poster img{width:100%;height:100%;object-fit:cover}
 .play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--gold)}
 .play::after{content:"";position:absolute;left:33px;top:26px;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent var(--on-gold)}
-.cal{background:#FFFFFF}
-.cal-link{display:block;width:min(100% - 32px,1040px);margin:0 auto;padding:40px 0;color:var(--on-gold);font-weight:600}
+.cal{width:min(100% - 32px,1040px);margin:0 auto;padding-bottom:64px}
+.cal>*{background:#FFFFFF}
+.cal-link{display:block;padding:40px 28px;color:var(--on-gold);font-weight:600}
 .cal iframe{display:block;width:100%;height:720px;border:0}
 
 /* call to action */
 .cta{background:var(--gold);color:var(--on-gold)}
-.cta .wrap{padding-block:64px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
+.cta .wrap{padding-block:64px 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
 .cta p{font-size:1.15rem}
 .btns{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .btn{display:inline-block;font-family:var(--head);font-weight:900;font-size:1.05rem;text-decoration:none;padding:16px 22px;border-radius:3px;min-height:44px}
 .btn.solid{background:var(--on-gold);color:#fff}
 .btn.line{border:2px solid var(--on-gold)}
 .sig{font-weight:600}
+.sig a{white-space:nowrap}
 footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
 
 
@@ -131,7 +134,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
   section.band{padding-block:52px}
   .day,.kit,.two,.split,.noticed,.cta .wrap{grid-template-columns:1fr;gap:28px}
   .noticed{gap:0}
-  .frames{position:static}
+  .frames,.two.asks>div:first-child{position:static}
   .hero{min-height:72vh}
   .hero img{object-position:80% 35%}
   .bleed img{aspect-ratio:16/10}
@@ -187,7 +190,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
       <p class="muted">Tick the pieces that would help you most, and the email button at the bottom brings your picks along.</p>
       <ul class="pieces" id="pieces">
         <li><label class="piece"><input type="checkbox" checked data-name="A one minute sports film"><span><h3>A one minute sports film</h3><p>We film athletes training at game speed with the machines, widescreen, with slow motion on the ball, the swing, and the contact. It stands on its own as a sports film, and it works on your homepage, at the top of a product page, and in front of coaches.</p></span></label></li>
-        <li><label class="piece"><input type="checkbox" checked data-name="Four vertical cuts"><span><h3>Four vertical cuts</h3><p>We cut Shorts, Reels, and TikToks in the formats that already work for you, like Can You Hit This and the POV pitch, and cut them from the cinema footage so they stand out in the feed next to your phone clips.</p></span></label></li>
+        <li><label class="piece"><input type="checkbox" checked data-name="Four vertical cuts"><span><h3>Four vertical cuts</h3><p>We make Shorts, Reels, and TikToks in the formats that already work for you, like Can You Hit This and the POV pitch, and cut them from the cinema footage so they stand out in the feed next to your phone clips.</p></span></label></li>
         <li><label class="piece"><input type="checkbox" checked data-name="Twenty stills"><span><h3>Twenty stills</h3><p>We photograph athletes and machines in use for product pages, ads, and email, to sit beside the studio shots you have now.</p></span></label></li>
         <li><label class="piece"><input type="checkbox" data-name="One cut for the pickleball machine"><span><h3>One cut for the pickleball machine</h3><p>If MaxPB can come along, one of the four verticals goes to it. We've filmed a lot of pickleball, and a dink looks great in slow motion.</p></span></label></li>
       </ul>
@@ -221,7 +224,7 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
 </section>
 
 <section class="band">
-  <div class="wrap two">
+  <div class="wrap two asks">
     <div>
       <h2>What we'd need from you</h2>
       <p>The cage or a field for a morning, two or three machines, and an athlete or two who don't mind a lot of reps. We'll plan the day around your schedule and theirs, and we'll show you a first cut to look over before anything is final.</p>
@@ -232,11 +235,11 @@ footer{padding-block:28px 96px;color:var(--muted);font-size:.9rem}
       <h2>A few questions</h2>
       <p class="muted">Your answers shape the day, and they help us both see whether a longer run together makes sense. Anything you type here goes into the email with your picks.</p>
     <ol class="qs">
-      <li><label for="q1">What are you making in house right now, and who shoots and edits it?</label><textarea id="q1" data-q="What we make in house now" rows="2" placeholder="Your answer"></textarea></li>
-      <li><label for="q2">Where does video do the most for you today, between the site, ads, Shorts, and the coaches and teams you sell to?</label><textarea id="q2" data-q="Where video does the most for us" rows="2" placeholder="Your answer"></textarea></li>
-      <li><label for="q3">What would you want from an outside partner that's hard to do in house?</label><textarea id="q3" data-q="What we would want from a partner" rows="2" placeholder="Your answer"></textarea></li>
-      <li><label for="q4">Is there a launch or a season push coming that this day could feed?</label><textarea id="q4" data-q="Anything coming up the day could feed" rows="2" placeholder="Your answer"></textarea></li>
-      <li><label for="q5">Are there athletes or coaches you'd want in it?</label><textarea id="q5" data-q="Athletes or coaches we would want in it" rows="2" placeholder="Your answer"></textarea></li>
+      <li><label for="q1">What are you making in house right now, and who shoots and edits it?</label><textarea id="q1" data-q="What we make in house now" rows="1" placeholder="Your answer"></textarea></li>
+      <li><label for="q2">Where does video do the most for you today, between the site, ads, Shorts, and the coaches and teams you sell to?</label><textarea id="q2" data-q="Where video does the most for us" rows="1" placeholder="Your answer"></textarea></li>
+      <li><label for="q3">What would you want from an outside partner that's hard to do in house?</label><textarea id="q3" data-q="What we would want from a partner" rows="1" placeholder="Your answer"></textarea></li>
+      <li><label for="q4">Is there a launch or a season push coming that this day could feed?</label><textarea id="q4" data-q="Anything coming up the day could feed" rows="1" placeholder="Your answer"></textarea></li>
+      <li><label for="q5">Are there athletes or coaches you'd want in it?</label><textarea id="q5" data-q="Athletes or coaches we would want in it" rows="1" placeholder="Your answer"></textarea></li>
     </ol>
     </div>
   </div>
