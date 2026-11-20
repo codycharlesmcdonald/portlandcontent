@@ -26,6 +26,8 @@
 #mvF li.on .m{color:#C9CED6}
 @media (max-width:700px){#mvF .ln{grid-template-columns:minmax(0,1fr)}#mvF .m{text-align:left}#mvF .nm .t{display:block;margin-left:0}}
 @media (prefers-reduced-motion:reduce){#mvF video{display:none}}
+/* Squarespace's site fade (preFade) left the heading and lede at opacity 0 on phones */
+#mvF .preFade,#mvF .preSlide,#mvF .preScale{opacity:1!important;transform:none!important}
 </style>
 <section id="mvF" aria-label="Music videos">
   <div class="bg" id="mvFbg"><img class="media" alt=""><video class="media" muted loop playsinline preload="none" aria-hidden="true"></video></div>
