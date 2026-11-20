@@ -403,7 +403,8 @@
       var host=el.closest('li,article')||el;
       if(hover){host.addEventListener('mouseenter',function(){start(el,host)});host.addEventListener('mouseleave',function(){stop(el,host)});
         host.addEventListener('focusin',function(){start(el,host)});host.addEventListener('focusout',function(){stop(el,host)});}
-      else if('IntersectionObserver' in window && el.tagName!=='VIDEO'){
+      /* Cody, Nov 20: "these are always moving, which is a little busy. I'd rather they just move if we hover over them." No in-view autoplay on the desk's tiles; a tap loads the film in the viewer */
+      else if('IntersectionObserver' in window && el.tagName!=='VIDEO' && !el.closest('#d')){
         new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>.6)start(el,host);else stop(el,host)})},{threshold:[0,.6,1]}).observe(el);
       }
     });
