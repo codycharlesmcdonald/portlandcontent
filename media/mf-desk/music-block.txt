@@ -1,0 +1,60 @@
+<style>
+#mvF{position:relative;isolation:isolate;min-height:100vh;background:#000;color:#FFF;font-family:"Open Sans",system-ui,sans-serif}
+#mvF .w{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#mvF .head{display:grid;gap:10px;padding-block:clamp(40px,6vw,72px) clamp(24px,3vw,36px)}
+#mvF h1{margin:0;color:#FFF;font:600 clamp(1.4rem,2.4vw,1.9rem)/1.15 "Open Sans",system-ui,sans-serif;text-wrap:balance}
+#mvF .lede{margin:0;max-width:40em;color:#9AA3AF;font-size:.98rem;line-height:1.6}
+#mvF img,#mvF video{display:block;max-width:100%}
+#mvF .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#mvF video.media{opacity:0;transition:opacity .5s}
+#mvF video.media.on{opacity:1}
+#mvF .t{font:italic 500 1em/1.1 "Bodoni Moda",Didot,Georgia,serif}
+#mvF .bg{position:sticky;top:0;height:100vh;margin-bottom:-100vh;z-index:-1;overflow:hidden;background:#000}
+#mvF .bg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.5)}
+#mvF .bg.vert .media{object-fit:contain}
+#mvF ol{list-style:none;margin:0;padding:0 0 clamp(64px,10vw,140px)}
+#mvF li{margin:0;padding:0;border-top:1px solid rgba(255,255,255,.14)}
+#mvF li::before{content:none}
+#mvF li:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+#mvF .ln{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:baseline;padding:clamp(14px,2vw,22px) 0;text-decoration:none;color:rgba(255,255,255,.5);transition:color .25s;cursor:pointer}
+#mvF .ln:focus-visible{outline:2px solid #F5D33D;outline-offset:2px}
+#mvF .nm{font-size:clamp(1.5rem,3.6vw,3rem);line-height:1.08}
+#mvF .nm .a{font-weight:600}
+#mvF .nm .t{margin-left:.3em}
+#mvF .m{font-size:.85rem;text-align:right}
+#mvF li.on .ln{color:#FFF}
+#mvF li.on .m{color:#C9CED6}
+@media (max-width:700px){#mvF .ln{grid-template-columns:minmax(0,1fr)}#mvF .m{text-align:left}#mvF .nm .t{display:block;margin-left:0}}
+@media (prefers-reduced-motion:reduce){#mvF video{display:none}}
+</style>
+<section id="mvF" aria-label="Music videos">
+  <div class="bg" id="mvFbg"><img class="media" alt=""><video class="media" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+  <div class="w head"><h1>Music videos</h1><p class="lede">These are the music videos and live sessions I've directed, from a full treatment and storyboard to a rooftop set that runs from sunset into dusk.</p></div>
+  <div class="w"><ol id="mvFl"></ol></div>
+</section>
+<script>
+(function(){
+  var MV=[{"t": "Swan Song", "c": "Les Gold", "fm": "Live session", "y": "2026", "len": "3:41", "k": "mv-swansong", "v": 0, "u": "https://vimeo.com/1219708297", "a": "The Les Gold singer at the mic in a studio room hung with tapestries"}, {"t": "All My Good Friends", "c": "Les Gold", "fm": "Live session", "y": "2026", "len": "3:09", "k": "mv-goodfriends", "v": 0, "u": "https://vimeo.com/1219719070", "a": "The Les Gold singer and keyboardist dancing face to face in the studio"}, {"t": "Speed Traps", "c": "Les Gold", "fm": "Live session", "y": "2026", "len": "2:36", "k": "mv-speedtraps", "v": 0, "u": "https://vimeo.com/1219718852", "a": "The Les Gold drummer mid-hit, sticks flying"}, {"t": "sad but true", "c": "Les Gold", "fm": "Live session", "y": "2025", "len": "3:37", "k": "mv-sadbuttrue", "v": 0, "u": "https://vimeo.com/1241409462", "a": "The Les Gold singer belting into the mic, fist clenched, a bandmate in headphones behind"}, {"t": "FLOWERS ON TUESDAY", "c": "NICOLLL", "fm": "Music video", "y": "2023", "len": "2:58", "k": "mv-flowers", "v": 0, "u": "", "a": "NICOLLL lying in bed among flowers, holding a sunflower"}, {"t": "DECIDE", "c": "NICOLLL", "fm": "Music video", "y": "2023", "len": "3:37", "k": "mv-decide", "v": 0, "u": "https://vimeo.com/1174689675", "a": "NICOLLL singing in a leather jacket in an open field at dusk"}, {"t": "Greytape ft. Zaysims", "c": "Mal London", "fm": "Music video", "y": "2019", "len": "6:02", "k": "mv-greytape", "v": 0, "u": "https://vimeo.com/1197850150", "a": "A rapper looking down into the camera against a white wall"}, {"t": "Rooftop Session", "c": "Bergmonch", "fm": "Live set", "y": "2021", "len": "1:06:08", "k": "mv-rooftop", "v": 0, "u": "https://vimeo.com/1197844231", "a": "Bergmonch at a keyboard on a rooftop at sunset"}],P='https://portlandcontent.com/media/mf-desk/';
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hover=window.matchMedia&&matchMedia('(hover: hover)').matches;
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function play(v,src){if(reduce)return;if(src&&v.getAttribute('src')!==src){v.classList.remove('on');v.src=src}var p=v.play();if(p&&p.catch)p.catch(function(){});if(v.readyState>2)v.classList.add('on');else v.oncanplay=function(){v.classList.add('on')}}
+  function stop(v){v.classList.remove('on');v.pause()}
+  var bg=document.getElementById('mvFbg'),bi=bg.querySelector('img'),bv=bg.querySelector('video'),fl=document.getElementById('mvFl'),fRows=[],fCur=-1;
+  function fSet(i,go){if(i!==fCur){fCur=i;var f=MV[i];bi.src=P+'img/'+f.k+'_still.jpg';bi.alt=f.a;bg.classList.toggle('vert',!!f.v);stop(bv);bv.removeAttribute('src');fRows.forEach(function(r,j){r.classList.toggle('on',j===i)})}if(go)play(bv,P+'vid/'+f.k+'.mp4')}
+  MV.forEach(function(f,i){var li=el('li');var ln=el(f.u?'a':'div','ln');if(f.u){ln.href=f.u;ln.target='_blank';ln.rel='noopener'}else ln.tabIndex=0;
+    var nm=el('span','nm');nm.appendChild(el('span','a',f.c));nm.appendChild(el('span','t',f.t));ln.appendChild(nm);ln.appendChild(el('span','m',f.fm+', '+f.y+(f.len?', '+f.len:'')));
+    ln.addEventListener('mouseenter',function(){fSet(i,true)});ln.addEventListener('focus',function(){fSet(i,true)});
+    if(!hover)ln.addEventListener('click',function(e){if(fCur!==i){e.preventDefault();fSet(i,true)}});
+    li.appendChild(ln);fl.appendChild(li);fRows.push(li)});
+  fl.addEventListener('mouseleave',function(){stop(bv)});
+  fSet(0,false);
+})();
+</script>
+
+<style>
+.page-section:has(#mvF),.page-section:has(#mvF) .section-background{background:#000!important}
+.page-section:has(#mvF){padding:0!important}
+.page-section:has(#mvF) .content-wrapper,.page-section:has(#mvF) .sqs-block{padding:0!important}
+.page-section:has(#mvF) .sqs-block-code .sqs-block-content{max-width:none}
+</style>
