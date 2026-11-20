@@ -245,7 +245,7 @@
     </nav>
     <div class="rv-main">
       <div class="pane poolp"><div class="ph-h"><b>Master</b><span class="dim">Recent work</span><span class="sp"></span><svg class="i" aria-hidden="true"><use href="#ri-list"/></svg><svg class="i" aria-hidden="true"><use href="#ri-pool"/></svg></div><div class="pool" id="dPool"></div></div>
-      <div class="pane"><div class="ph-h"><span class="dim">Fit</span><span class="sp"></span><b id="dVName"></b><span class="sp"></span><span class="dim">Portland, <span id="dTz">PST</span></span><span class="tc" id="dTc" aria-label="Current time in Portland">00:00:00:00</span></div>
+      <div class="pane"><div class="ph-h"><span class="dim">Fit</span><span class="sp"></span><b id="dVName"></b><span class="sp"></span><span class="dim">Portland, OR USA, <span id="dTz">GMT-8</span></span><span class="tc" id="dTc" aria-label="Current time in Portland">00:00:00:00</span></div>
         <div class="viewer"><img id="dImg1" alt=""><img id="dImg2" alt="" style="opacity:0"><video id="dVid" muted playsinline preload="none" aria-hidden="true"></video><video id="dVid2" muted playsinline preload="none" aria-hidden="true"></video><div class="laurel badge"><svg aria-hidden="true"><use href="#lf"/></svg><span><small id="dFm"></small><span class="bt" id="dBt"></span><span id="dW"></span><span class="lgs" id="dLg"></span></span><svg class="r" aria-hidden="true"><use href="#lf"/></svg></div></div>
         <div class="jog"><i id="dJog"></i></div>
         <div class="transport">
@@ -325,7 +325,7 @@
       var nm=document.createElement('span');nm.className='nm';nm.textContent=f.t;var bd=document.createElement('span');bd.className='bd';bd.innerHTML='<span class="hd"></span><span class="tl2"></span>';bd.firstChild.style.backgroundImage=bd.lastChild.style.backgroundImage='url('+f.i+')';b.appendChild(nm);b.appendChild(bd);
       b.addEventListener('click',function(){take();go(ix,0)});lane.appendChild(b);clips.push(b);
       var a1=document.createElement('span');a1.className='clip';a1.style.flex=f.f;a1.innerHTML='<span class="nm"></span>'+wave(ix*31+7,false);a1.querySelector('.nm').textContent=f.c+' dialogue';document.getElementById('dA1').appendChild(a1);
-      var tb=document.createElement('button');tb.type='button';var pw=document.createElement('span');pw.className='pv';if(f.k)pw.setAttribute('data-pv','https://portlandcontent.com/media/mf-desk/vid/'+f.k+'.mp4');var im=document.createElement('img');im.src=f.i;im.alt='';pw.appendChild(im);var sp=document.createElement('span');sp.className='n';sp.textContent=f.t;tb.appendChild(pw);tb.appendChild(sp);tb.setAttribute('aria-label','Load '+f.t);
+      var tb=document.createElement('button');tb.type='button';var pw=document.createElement('span');pw.className='pv';/* Cody, Nov 20, comment cb1196bf: "make these clip previews static". Pool tiles show their stills only */var im=document.createElement('img');im.src=f.i;im.alt='';pw.appendChild(im);var sp=document.createElement('span');sp.className='n';sp.textContent=f.t;tb.appendChild(pw);tb.appendChild(sp);tb.setAttribute('aria-label','Load '+f.t);
       tb.addEventListener('click',function(){take();go(ix,0)});pool.appendChild(tb);thumbs.push(tb);
     });
     document.getElementById('dV1n').textContent=FILMS.length+' clips';var a2=document.createElement('span');a2.className='clip';a2.style.flex=tot;a2.innerHTML='<span class="nm">Reel music, licensed</span>'+wave(3,true);document.getElementById('dA2').appendChild(a2);
@@ -354,7 +354,7 @@
     function place(){var c=clips[cur];if(!c)return;var cr=c.getBoundingClientRect(),tr=tl.getBoundingClientRect();var frac=pos-Math.floor(pos);ph.style.left=(cr.left-tr.left+frac*cr.width)+'px';
       var before=0;for(var i=0;i<cur;i++)before+=FILMS[i].f;var t=tc((before+frac*FILMS[cur].f)*UNIT);document.getElementById('dTc2').textContent=t;document.getElementById('dJog').style.left='calc('+((before+frac*FILMS[cur].f)/tot)+' * (100% - 22px))'}
     var pdx=null;try{pdx=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'})}catch(e){}
-    var tcEl=document.getElementById('dTc'),tzEl=document.getElementById('dTz'),lastClock='',lastZ=-1,pdz=null;try{pdz=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',timeZoneName:'short'})}catch(e){}
+    var tcEl=document.getElementById('dTc'),tzEl=document.getElementById('dTz'),lastClock='',lastZ=-1,pdz=null;try{pdz=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',timeZoneName:'shortOffset'})/* Cody, Nov 20: 'Portland, OR USA GMT+8 (or equivalent)'; Portland is GMT-8, GMT-7 in summer */}catch(e){}
     function clock(){var n=new Date(),str;if(pdx){var o={};pdx.formatToParts(n).forEach(function(q){o[q.type]=q.value});str=(o.hour==='24'?'00':o.hour)+':'+o.minute+':'+o.second}else{str=n.toTimeString().slice(0,8)}
       str+=':'+('0'+Math.floor(n.getMilliseconds()*24/1000)).slice(-2);if(pdz&&n.getSeconds()!==lastZ){lastZ=n.getSeconds();try{var z=pdz.formatToParts(n).filter(function(q){return q.type==='timeZoneName'})[0];if(z&&tzEl.textContent!==z.value)tzEl.textContent=z.value}catch(e){}}if(str!==lastClock){tcEl.textContent=str;lastClock=str}}
     clock();
