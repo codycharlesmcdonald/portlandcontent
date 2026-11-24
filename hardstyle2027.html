@@ -248,16 +248,17 @@ a{color:inherit}
 .cal12 .m{border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:8px 8px 10px; min-height:104px; min-width:0; display:flex; flex-direction:column; gap:4px}
 .cal12 .mn{font-family:var(--display); font-size:17px; line-height:1.1; margin-bottom:2px}
 .cal12 .e, .calkey .e{display:block; font-size:12.5px; line-height:1.25; padding:3px 6px; border-radius:2px; overflow-wrap:anywhere}
+/* Cody, Nov 24: the key says what each colour means. Shoots pink, deliveries gold, posts ink, not in the plan yet dotted. */
 .cal12 .shoot, .calkey .shoot{background:var(--pink); color:#fff}
-/* Cody, Nov 24: colour by kind. Productions pink, deliveries gold, posts ink. */
 .cal12 .batch, .calkey .batch{border:1px solid var(--gold); color:var(--gold)}
-.cal12 .ev, .calkey .ev{border:1px dashed var(--pink); color:var(--ink)}
 .cal12 .batch .bi{display:block}
 .cal12 .batch .bi + .bi{margin-top:2px}
-.cal12 .dots{margin-top:auto; display:flex; gap:4px; padding-top:4px}
-.cal12 .dots i, .calkey .tech i{display:block; width:6px; height:6px; border-radius:50%; background:var(--ink)}
+.cal12 .out, .calkey .out{border:1px dotted var(--mute); color:var(--mute); background:none}
+.cal12 .posts{margin-top:auto; display:flex; flex-direction:column; gap:2px; padding-top:4px}
+.cal12 .p, .calkey .p{display:flex; align-items:baseline; gap:6px; font-size:12.5px; line-height:1.25; color:var(--ink); overflow-wrap:anywhere; min-width:0}
+.cal12 .p i, .calkey .p i{flex:none; width:6px; height:6px; border-radius:50%; background:var(--ink); transform:translateY(-1px)}
+.cal12 .p.out{display:block; padding:2px 6px; border-radius:2px}
 .calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
-.calkey .tech{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mute)}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
 </style>
 </head>
@@ -299,7 +300,7 @@ a{color:inherit}
         <li><span class="n">2</span><h3>Your first class</h3>
           <p>I can make a short course that walks folks through Foundations, six kettlebell basics, and it can sit on your classes page for new sign ups or run behind ad spend.</p></li>
         <li><span class="n">3</span><h3>Coach shorts</h3>
-          <p>Your coach bios have some great stories in them, like Teal finding kettlebells after twelve ankle surgeries. I could turn each one into a short vertical for your feed and create a new team page, so new folks can meet a coach before their first class.</p></li>
+          <p>Your coach bios have some great stories in them, like Teal finding kettlebells after twelve ankle surgeries. I could turn each one into a short vertical for your feed<span id="idea-team"> and create a new team page</span>, so new folks can meet a coach before their first class.</p></li>
         <li><span class="n">4</span><h3>Member stories</h3>
           <p>The member testimonials on your site and YouTube were shot on phones. We could film three members telling their own story with proper sound and light and swap those out. I personally think this is one of the lowest hanging fruit.</p></li>
         <li><span class="n">5</span><h3>Your events</h3>
@@ -312,7 +313,7 @@ a{color:inherit}
     <section class="sec" id="year">
       <p class="label">How the year runs</p>
       <div class="cal12" id="cal12"></div>
-      <p class="calkey" id="calkey"><span class="e shoot">The shoot day</span><span class="e batch">A batch of films</span><span class="e ev" id="key-ev">Your events</span><span class="tech" id="key-tech"><i></i>Technique shorts, one mark each</span></p>
+      <p class="calkey" id="calkey"><span class="e shoot">Shoots</span><span class="e batch">Deliveries</span><span class="p"><i></i>Posts</span><span class="e out">Not in your plan yet</span></p>
       <p class="calnote" id="evnote"></p>
       <p class="calnote">The films from the shoot day come in together, and we'll hop on a call to look back at what worked.</p>
     </section>
@@ -406,6 +407,7 @@ a{color:inherit}
     {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:"We'll cut a new loop for the top of your home page from classes, sessions, and the new space on Division."},
     {id:'first', type:'on', val:true, price:480, name:'First class course', desc:"I'll make a short course that walks folks through Foundations and the six kettlebell basics, and it can sit on your classes page or run behind ad spend."},
     {id:'coach', type:'qty', min:0, max:8, val:8, price:96, one:'short', many:'shorts', name:'Coach shorts', desc:"Each coach gets a short vertical for your feed, built from the story in their bio."},
+    {id:'team', type:'on', val:true, price:190, name:'Team page', desc:"I'll create a new team page, so new folks can meet a coach before their first class."},
     {id:'members', type:'qty', min:0, max:6, val:3, price:240, one:'story', many:'stories', name:'Member stories', desc:"Each member tells their own story with proper sound and light, to replace the phone testimonials on your site."},
     {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:"We can cut short verticals on one lift each, from swings to get ups, to keep some instructional content in your feed."}
   ];
@@ -427,6 +429,7 @@ a{color:inherit}
   function unit(it, m){ return m ? it.price : Math.round(it.price / 0.9); }
   function count(it){
     if (it.type === 'fixed') return 1;
+    if (it.id === 'team' && !BY.coach.val) return 0;
     if (it.type === 'on') return it.val ? (it.perEvent ? BY.events.val : 1) : 0;
     if (it.type === 'seg') return it.val * it.per;
     return it.val;
@@ -452,42 +455,55 @@ a{color:inherit}
     return t;
   }
   // Cody, Nov 24: the year as twelve months that follow the picks. Event months are placeholders.
+  // Shoots, deliveries and posts each have a colour; anything not in the plan yet shows dotted in its month.
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var EVM = {0:[], 1:[5], 2:[3,8], 3:[3,6,9], 4:[2,4,7,9]};
   var WORD = ['', 'one', 'two', 'three', 'four'];
-  // Cody, Nov 24: each batch names what's in it, following the picks. The shoot-day films come in together in March,
-  // each event recap comes a couple of weeks after its event, in that month, and the brand film and ad cuts close the year.
-  function batch(m, ev){
-    var b = [], n;
+  var EVO = [6, 3, 9, 1];               // event months, in the order events are added
+  var XDM = [5, 8];                     // extra shoot days
+  var COACHM = [3, 4, 5, 6, 7, 8, 9, 10];   // one coach short posted a month from April
+  var MEMBM = [4, 7, 10, 5, 8, 11];     // member stories spread through the year
+  function evMonths(){ return EVO.slice(0, BY.events.val); }
+  function plural(n, one, many){ return n + ' ' + (n === 1 ? one : many); }
+  function month(m){
+    var shoots = [], del = [], delOut = [], posts = [], k, n;
+    function sh(label, on){ shoots.push('<span class="e ' + (on ? 'shoot' : 'out') + '">' + label + '</span>'); }
+    function dl(label, on){ (on ? del : delOut).push('<span class="bi">' + label + '</span>'); }
+    function po(label, on){ posts.push(on ? '<span class="p"><i></i>' + label + '</span>' : '<span class="p out">' + label + '</span>'); }
+    if (m === 0) sh('The shoot day', true);
+    if ((k = EVO.indexOf(m)) > -1) sh('Your event', k < BY.events.val);
+    if ((k = XDM.indexOf(m)) > -1) sh('Extra shoot day', k < BY.xday.val);
+    if (m === 10) sh('Brand film half day', BY.brand.val);
     if (m === 2) {
-      if (BY.loop.val) b.push('Homepage loop');
-      if (BY.first.val) b.push('First class course');
-      if ((n = BY.coach.val)) b.push(n + ' coach short' + (n > 1 ? 's' : ''));
-      if ((n = BY.members.val)) b.push(n + ' member stor' + (n > 1 ? 'ies' : 'y'));
-      if (BY.photo.val) b.push('Photos');
+      dl('Homepage loop', BY.loop.val);
+      dl('First class course', BY.first.val);
+      dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0);
+      dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0);
+      if (BY.coach.val) dl('Team page', BY.team.val);
+      dl('Photos', BY.photo.val);
+      dl('4 ad cuts', BY.ads.val);
     }
-    if (m === 11) {
-      if (BY.brand.val) b.push('Brand film');
-      if (BY.ads.val) b.push('4 ad cuts');
-    }
-    return b;
+    if (m === 11) dl('Brand film', BY.brand.val);
+    n = BY.tech.val;
+    po(n ? plural(n, 'technique short', 'technique shorts') : 'Technique shorts', n > 0);
+    if ((k = COACHM.indexOf(m)) > -1) po('Coach short', k < BY.coach.val);
+    if ((k = MEMBM.indexOf(m)) > -1) po('Member story', k < BY.members.val);
+    if ((k = EVO.indexOf(m)) > -1 && k < BY.events.val) po('Event recap', true);
+    var out = shoots.join('');
+    if (del.length) out += '<span class="e batch">' + del.join('') + '</span>';
+    if (delOut.length) out += '<span class="e batch out">' + delOut.join('') + '</span>';
+    return out + '<span class="posts">' + posts.join('') + '</span>';
   }
   function calendar(){
-    var ev = EVM[BY.events.val] || [], tech = BY.tech.val;
     $('cal12').innerHTML = MONTHS.map(function(name, m){
-      var it = [];
-      if (m === 0) it.push('<span class="e shoot">The shoot day</span>');
-      if (ev.indexOf(m) > -1) it.push('<span class="e ev">Your event</span>', '<span class="e batch">Event recap</span>');
-      if (m % 3 === 2) { var b = batch(m, ev); if (b.length) it.push('<span class="e batch">' + b.map(function(x){ return '<span class="bi">' + x + '</span>'; }).join('') + '</span>'); }
-      var dots = tech ? '<span class="dots" title="' + tech + ' technique short' + (tech > 1 ? 's' : '') + '">' + new Array(tech + 1).join('<i></i>') + '</span>' : '';
-      return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + it.join('') + dots + '</div>';
+      return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + month(m) + '</div>';
     }).join('');
-    $('key-ev').hidden = !ev.length; $('key-tech').hidden = !tech;
     var n = BY.events.val;
     $('evnote').hidden = !n;
     $('evnote').textContent = !n ? '' : n === 1
       ? "I'll come back for a half day at the event you pick. We'll pencil in its month for now and move it once you have a date."
       : "I'll come back for a half day at each of the " + WORD[n] + " events you pick. We'll pencil in their months for now and move them once you have dates.";
+    var tp = document.getElementById('idea-team');
+    if (tp) tp.hidden = !(BY.coach.val > 0 && BY.team.val);
   }
 
   function row(it){
@@ -534,6 +550,7 @@ a{color:inherit}
     });
     $('r-shoot').querySelector('.d').firstChild.textContent = shootDesc() + ' ';
     calendar();
+    $('r-team').hidden = !BY.coach.val;
     var rush = $('r-rush').querySelector('.sw');
     rush.disabled = BY.events.val === 0;
 
