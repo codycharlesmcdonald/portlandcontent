@@ -249,12 +249,13 @@ a{color:inherit}
 .cal12 .mn{font-family:var(--display); font-size:17px; line-height:1.1; margin-bottom:2px}
 .cal12 .e, .calkey .e{display:block; font-size:12.5px; line-height:1.25; padding:3px 6px; border-radius:2px; overflow-wrap:anywhere}
 .cal12 .shoot, .calkey .shoot{background:var(--pink); color:#fff}
-.cal12 .batch, .calkey .batch{border:1px solid var(--pink); color:var(--ink)}
-.cal12 .ev, .calkey .ev{border:1px dashed var(--gold); color:var(--gold)}
+/* Cody, Nov 24: colour by kind. Productions pink, deliveries gold, posts ink. */
+.cal12 .batch, .calkey .batch{border:1px solid var(--gold); color:var(--gold)}
+.cal12 .ev, .calkey .ev{border:1px dashed var(--pink); color:var(--ink)}
 .cal12 .batch .bi{display:block}
 .cal12 .batch .bi + .bi{margin-top:2px}
 .cal12 .dots{margin-top:auto; display:flex; gap:4px; padding-top:4px}
-.cal12 .dots i, .calkey .tech i{display:block; width:6px; height:6px; border-radius:50%; background:var(--mute)}
+.cal12 .dots i, .calkey .tech i{display:block; width:6px; height:6px; border-radius:50%; background:var(--ink)}
 .calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
 .calkey .tech{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mute)}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
@@ -400,10 +401,10 @@ a{color:inherit}
   // Prices are the 12-month retainer prices from calc 270114-2CR; month to month is each price / 0.9.
   // share = what each pick adds to the production payment due at signing.
   var BASE = [
-    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:"I'll spend a full day at the gym, with audio set up for the interviews. We'll film the loop, the first-class film, the coach interviews, and the member stories that day."},
+    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:"I'll spend a full day at the gym, with audio set up for the interviews. We'll film the loop, the first class course, the coach interviews, and the member stories that day."},
     {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:"I'll come out for a half day at an event and cut a recap of it for your feed."},
     {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:"We'll cut a new loop for the top of your home page from classes, sessions, and the new space on Division."},
-    {id:'first', type:'on', val:true, price:480, name:'First-class film', desc:"I'll make a short course that walks folks through Foundations and the six kettlebell basics, and it can sit on your classes page or run behind ad spend."},
+    {id:'first', type:'on', val:true, price:480, name:'First class course', desc:"I'll make a short course that walks folks through Foundations and the six kettlebell basics, and it can sit on your classes page or run behind ad spend."},
     {id:'coach', type:'qty', min:0, max:8, val:8, price:96, one:'short', many:'shorts', name:'Coach shorts', desc:"Each coach gets a short vertical for your feed, built from the story in their bio."},
     {id:'members', type:'qty', min:0, max:6, val:3, price:240, one:'story', many:'stories', name:'Member stories', desc:"Each member tells their own story with proper sound and light, to replace the phone testimonials on your site."},
     {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:"We can cut short verticals on one lift each, from swings to get ups, to keep some instructional content in your feed."}
@@ -439,7 +440,7 @@ a{color:inherit}
   function onDay(withMembers){
     var a = [];
     if (BY.loop.val) a.push('the loop');
-    if (BY.first.val) a.push('the first-class film');
+    if (BY.first.val) a.push('the first class course');
     if (BY.coach.val > 0) a.push('the coach interviews');
     if (withMembers && BY.members.val > 0) a.push('the member stories');
     return a;
@@ -455,18 +456,16 @@ a{color:inherit}
   var EVM = {0:[], 1:[5], 2:[3,8], 3:[3,6,9], 4:[2,4,7,9]};
   var WORD = ['', 'one', 'two', 'three', 'four'];
   // Cody, Nov 24: each batch names what's in it, following the picks. The shoot-day films come in together in March,
-  // each event recap comes in the batch after its event (or the same week with that add-on), and the brand film and ad cuts close the year.
+  // each event recap comes a couple of weeks after its event, in that month, and the brand film and ad cuts close the year.
   function batch(m, ev){
     var b = [], n;
     if (m === 2) {
       if (BY.loop.val) b.push('Homepage loop');
-      if (BY.first.val) b.push('First-class film');
+      if (BY.first.val) b.push('First class course');
       if ((n = BY.coach.val)) b.push(n + ' coach short' + (n > 1 ? 's' : ''));
       if ((n = BY.members.val)) b.push(n + ' member stor' + (n > 1 ? 'ies' : 'y'));
       if (BY.photo.val) b.push('Photos');
     }
-    n = BY.rush.val ? 0 : ev.filter(function(e){ return e <= m && e > m - 3; }).length;
-    if (n) b.push(n > 1 ? n + ' event recaps' : 'Event recap');
     if (m === 11) {
       if (BY.brand.val) b.push('Brand film');
       if (BY.ads.val) b.push('4 ad cuts');
@@ -478,7 +477,7 @@ a{color:inherit}
     $('cal12').innerHTML = MONTHS.map(function(name, m){
       var it = [];
       if (m === 0) it.push('<span class="e shoot">The shoot day</span>');
-      if (ev.indexOf(m) > -1) it.push('<span class="e ev">Your event</span>');
+      if (ev.indexOf(m) > -1) it.push('<span class="e ev">Your event</span>', '<span class="e batch">Event recap</span>');
       if (m % 3 === 2) { var b = batch(m, ev); if (b.length) it.push('<span class="e batch">' + b.map(function(x){ return '<span class="bi">' + x + '</span>'; }).join('') + '</span>'); }
       var dots = tech ? '<span class="dots" title="' + tech + ' technique short' + (tech > 1 ? 's' : '') + '">' + new Array(tech + 1).join('<i></i>') + '</span>' : '';
       return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + it.join('') + dots + '</div>';
