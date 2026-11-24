@@ -310,8 +310,7 @@ a{color:inherit}
   // Prices are the 12-month membership prices from calc 270114-2CR; month to month is each price / 0.9.
   // share = what each pick adds to the payment before the January shoot.
   var BASE = [
-    {id:'plan', type:'fixed', price:480, name:'Planning and look-back calls', desc:'We plan the year with you and get on a call each quarter to look back at what worked.'},
-    {id:'shoot', type:'fixed', price:3230, share:1800, name:'January shoot day', desc:'We spend a full day at the gym, with audio for the interviews. The loop, the first-class film, the coach interviews, and the member stories are filmed on it.'},
+    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:'We spend a full day at the gym, with audio for the interviews. The loop, the first-class film, the coach interviews, and the member stories are filmed on it.'},
     {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:'We film a half day at an event and cut a recap from it.'},
     {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:'We cut a short loop of a class in session that loads fast.'},
     {id:'first', type:'on', val:true, price:480, name:'First-class film', desc:'We walk a new member through Foundations and the six kettlebell basics, for the intro 4-pack.'},
@@ -329,6 +328,8 @@ a{color:inherit}
   var ALL = BASE.concat(EXTRA), BY = {};
   ALL.forEach(function(it){ BY[it.id] = it; });
   var member = true;
+  // Cody, Nov 24: planning folded into the shoot day; the signing deposit stays a flat 480 (month to month 480 / 0.9).
+  var SIGN = 480;
 
   function $(id){ return document.getElementById(id); }
   function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
@@ -392,13 +393,13 @@ a{color:inherit}
     $('sum').textContent = money(t);
     $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the membership.' : "You'd save " + money(tx - tm) + ' with the membership.';
     if (member) {
-      var sign = line(BY.plan, true);
+      var sign = SIGN;
       var shoot = ALL.reduce(function(s, it){ return s + (it.share ? count(it) * it.share : 0); }, 0);
       var rest = t - sign - shoot;
       $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
       $('pay').textContent = 'Three payments, with ' + money(sign) + ' at signing, ' + money(shoot) + ' before the January shoot, and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
     } else {
-      var start = line(BY.plan, false), mo = ten((t - start) / 12);
+      var start = Math.round(SIGN / 0.9), mo = ten((t - start) / 12);
       $('mo').textContent = 'About ' + money(mo) + ' a month';
       $('pay').textContent = money(start) + ' to start, then about ' + money(mo) + ' a month. You can stop any month with 30 days’ notice. These prices hold through December 6.';
     }
