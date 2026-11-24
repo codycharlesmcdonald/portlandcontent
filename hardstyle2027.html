@@ -146,14 +146,26 @@ a{color:inherit}
 .send .btn{border:0; cursor:pointer; font-family:var(--body); justify-self:start}
 .sent{margin:0; font-size:15px; color:var(--gold); min-height:1.6em}
 
-/* Cody, Nov 24: the total follows the picks */
-.follow{position:fixed; left:0; right:0; bottom:0; z-index:20; background:var(--bg-2); border-top:1px solid var(--rule); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(110%); transition:transform .25s ease; visibility:hidden}
-.follow.show{transform:none; visibility:visible}
-.follow .wrap{display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 16px; padding-block:12px}
-.follow .k{font-size:14px; color:var(--pink)}
-.follow .fs{font-family:var(--display); font-size:clamp(26px,4vw,34px); line-height:1; font-variant-numeric:lining-nums tabular-nums; margin-left:auto}
-.follow .fm{font-size:14px; color:var(--mute)}
-@media (prefers-reduced-motion:reduce){ .follow{transition:none} }
+/* Cody, Nov 24: the total sits beside the picks and stays in view as they change */
+.bgrid{display:grid; grid-template-columns:minmax(0,1fr); gap:0}
+.picks{min-width:0}
+.fbar{display:none}
+@media (min-width:900px){
+  .bgrid{grid-template-columns:minmax(0,1fr) minmax(280px,340px); gap:0 clamp(40px,5vw,64px); align-items:start}
+  .bgrid .total{position:sticky; top:calc(24px + env(safe-area-inset-top,0px)); grid-template-columns:minmax(0,1fr); gap:0; margin-top:0; padding-block:22px 24px}
+  .bgrid .total > div{display:contents}
+  .bgrid .total .k{order:1} .bgrid .total .sum{order:2} .bgrid .total .mo{order:3} .bgrid .total .what{order:4} .bgrid .total .notes{order:5}
+  .bgrid .total .sum{font-size:clamp(46px,4.6vw,64px); text-align:left; margin-top:14px}
+  .bgrid .total .mo{text-align:left; margin-top:8px}
+  .bgrid .total .what{margin-top:18px; font-size:15px}
+  .bgrid .total .notes{margin-top:12px}
+}
+@media (max-width:899px){
+  .fbar{display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 14px; position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding-block:12px; margin-bottom:14px; border-bottom:1px solid var(--rule); box-shadow:0 0 0 100vmax var(--bg); clip-path:inset(0 -100vmax)}
+  .fbar .k{font-size:14px; color:var(--pink)}
+  .fbar .fs{font-family:var(--display); font-size:clamp(28px,7vw,36px); line-height:1; font-variant-numeric:lining-nums tabular-nums; margin-left:auto}
+  .fbar .fm{flex-basis:100%; text-align:right; font-size:14px; color:var(--mute)}
+}
 
 /* our 2024 films */
 .films{display:grid; grid-template-columns:1.6fr .7fr .9fr; gap:28px; align-items:start}
@@ -251,6 +263,9 @@ a{color:inherit}
 
     <section class="sec" id="build">
       <p class="label">Build your year</p>
+      <div class="bgrid">
+      <div class="picks">
+      <div class="fbar" aria-hidden="true"><span class="k">Your year</span><span class="fs" id="fsum">$10,700</span><span class="fm" id="fmo">About $890 a month</span></div>
       <div class="plan" role="radiogroup" aria-label="Plan">
         <label><input type="radio" name="plan" value="member" checked><span>12-month membership</span></label>
         <label><input type="radio" name="plan" value="monthly"><span>Month to month</span></label>
@@ -261,11 +276,13 @@ a{color:inherit}
       <ul class="pick" id="base"></ul>
       <h3 class="sub">Premium add-ons</h3>
       <ul class="pick" id="extra"></ul>
+      </div>
 
-      <div class="total">
+      <aside class="total" aria-live="polite">
         <div><div class="k">Your year</div><p class="what">Every film comes with full, permanent use on your web and social channels.</p></div>
         <div><div class="sum" id="sum">$10,700</div><span class="mo" id="mo">About $890 a month</span></div>
         <p class="notes" id="pay">Three payments, with $480 at signing, $3,540 before the January shoot, and $6,680 on approval of the films. These prices hold through December 6.</p>
+      </aside>
       </div>
 
       <form class="send" id="send" novalidate>
@@ -318,7 +335,6 @@ a{color:inherit}
   </div>
   <div class="wrap calrow"><div class="cal" id="cal"></div></div>
 </section>
-<div class="follow" id="follow" aria-hidden="true"><div class="wrap"><span class="k">Your year</span><span class="fs" id="fsum">$10,700</span><span class="fm" id="fmo">About $890 a month</span></div></div>
 <footer class="wrap foot">
   <span>Portland Content, a studio for the businesses that keep Portland, Oregon special</span>
   <span>Production by Mac Films</span>
@@ -457,15 +473,6 @@ a{color:inherit}
     });
     return A.length ? [''].concat(['Questions'], A) : [];
   }
-
-  // Cody, Nov 24: the total follows the picks while Build your year is on screen and the full total isn't.
-  (function(){
-    var bar = $('follow'), inBuild = false, sumSeen = false;
-    if (!('IntersectionObserver' in window)) return;
-    function set(){ bar.classList.toggle('show', inBuild && !sumSeen); }
-    new IntersectionObserver(function(es){ inBuild = es[0].isIntersecting; set(); }, {rootMargin:'0px 0px -35% 0px'}).observe($('base'));
-    new IntersectionObserver(function(es){ sumSeen = es[0].isIntersecting; set(); }).observe($('sum'));
-  })();
 
   // Cody, Nov 24: film thumbnails play a muted Vimeo preview (hover, or in view on touch); a click opens Vimeo.
   // Vimeo can't load inside the Claude artifact viewer, so there the still stays.
