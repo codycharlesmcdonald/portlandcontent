@@ -254,7 +254,7 @@ a{color:inherit}
     <section class="sec">
       <p class="label">How the year runs</p>
       <ol class="line">
-        <li class="key"><span class="d">January</span><span class="t">The shoot day</span><span class="x">We spend a full day at the gym on the loop, the first-class film, and the coach interviews.</span></li>
+        <li class="key"><span class="d">January</span><span class="t">The shoot day</span><span class="x" id="jan">We spend a full day at the gym on the loop, the first-class film, and the coach interviews.</span></li>
         <li><span class="d">Through the year</span><span class="t">Your events</span><span class="x">We come back for a half day at three events you pick.</span></li>
         <li class="key"><span class="d">Every quarter</span><span class="t">A batch of films</span><span class="x">The finished films arrive together, and we get on a call to look back at what worked.</span></li>
         <li><span class="d">All year</span><span class="t">Your posting</span><span class="x">You post them on your own schedule.</span></li>
@@ -377,6 +377,27 @@ a{color:inherit}
   function line(it, m){ return count(it) * unit(it, m); }
   function total(m){ return ALL.reduce(function(s, it){ return s + line(it, m); }, 0); }
   function ten(n){ return Math.round(n / 10) * 10; }
+  // Cody, Nov 24: descriptions follow the picks. Only what's still picked is named.
+  function list(a){ return a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1]; }
+  function cap(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+  function onDay(withMembers){
+    var a = [];
+    if (BY.loop.val) a.push('the loop');
+    if (BY.first.val) a.push('the first-class film');
+    if (BY.coach.val > 0) a.push('the coach interviews');
+    if (withMembers && BY.members.val > 0) a.push('the member stories');
+    return a;
+  }
+  function shootDesc(){
+    var a = onDay(true), talk = BY.coach.val > 0 || BY.members.val > 0;
+    var t = 'We spend a full day at the gym' + (talk ? ', with audio for the interviews.' : '.');
+    if (a.length) t += ' ' + cap(list(a)) + (a.length === 1 ? ' is' : ' are') + ' filmed on it.';
+    return t;
+  }
+  function janLine(){
+    var a = onDay(false);
+    return 'We spend a full day at the gym' + (a.length ? ' on ' + list(a) : '') + '.';
+  }
 
   function row(it){
     var li = document.createElement('li'); li.id = 'r-' + it.id;
@@ -420,6 +441,8 @@ a{color:inherit}
         bs[0].disabled = it.val <= it.min; bs[1].disabled = it.val >= it.max;
       }
     });
+    $('r-shoot').querySelector('.d').firstChild.textContent = shootDesc() + ' ';
+    $('jan').textContent = janLine();
     var rush = $('r-rush').querySelector('.sw');
     rush.disabled = BY.events.val === 0;
 
