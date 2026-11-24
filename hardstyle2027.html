@@ -258,9 +258,10 @@ a{color:inherit}
 .cal12 .p, .calkey .p{display:flex; align-items:baseline; gap:6px; font-size:12.5px; line-height:1.25; color:var(--ink); overflow-wrap:anywhere; min-width:0}
 .cal12 .p i, .calkey .p i{flex:none; width:6px; height:6px; border-radius:50%; background:var(--ink); transform:translateY(-1px)}
 .cal12 .p.out{display:block; padding:2px 6px; border-radius:2px}
-.cal12 button.add{font:inherit; font-size:12.5px; line-height:1.25; text-align:left; width:100%; cursor:pointer; padding:4px 6px; overflow-wrap:anywhere}
-.cal12 button.add:hover, .cal12 button.add:focus-visible{border-color:var(--pink); color:var(--ink); outline:none}
-@media (max-width:599px){ .cal12 button.add{padding:6px} }
+:where(.cal12) button.tog{font:inherit; font-size:12.5px; line-height:1.25; text-align:left; width:100%; cursor:pointer; overflow-wrap:anywhere; background:none; border:0; color:inherit; padding:0; margin:0}
+.cal12 button.out{padding:4px 6px}
+.cal12 button.tog:hover, .cal12 button.tog:focus-visible{outline:1px solid var(--pink); outline-offset:1px}
+@media (max-width:599px){ .cal12 button.out{padding:6px} .cal12 .batch button.bi{padding-block:2px} }
 .calkey .hint{font-size:12.5px; color:var(--mute)}
 #caladd:empty{display:none}
 #caladd a{color:var(--ink)}
@@ -330,7 +331,7 @@ a{color:inherit}
     <section class="sec" id="year">
       <p class="label">How the year runs</p>
       <div class="cal12" id="cal12"></div>
-      <p class="calkey" id="calkey"><span class="e shoot">Shoots</span><span class="e batch">Deliveries</span><span class="p"><i></i>Posts</span><span class="e out">Not in your plan yet</span><span class="hint">Tap anything dotted to add it.</span></p>
+      <p class="calkey" id="calkey"><span class="e shoot">Shoots</span><span class="e batch">Deliveries</span><span class="p"><i></i>Posts</span><span class="e out">Not in your plan yet</span><span class="hint">Tap anything to add it or take it out.</span></p>
       <p class="calnote" id="caladd" aria-live="polite"></p>
       <p class="calnote" id="evnote"></p>
       <p class="calnote">The films from the shoot day come in together, and we'll hop on a call to look back at what worked.</p>
@@ -486,47 +487,52 @@ a{color:inherit}
   function plural(n, one, many){ return n + ' ' + (n === 1 ? one : many); }
   function month(m){
     var shoots = [], del = [], delOut = [], posts = [], k, n;
-    function btn(cls, label, add){ return '<button type="button" class="' + cls + ' out add" data-add="' + add + '">' + label + '</button>'; }
-    function sh(label, on, add){ shoots.push(on ? '<span class="e shoot">' + label + '</span>' : btn('e', label, add)); }
-    function dl(label, on, add){ on ? del.push('<span class="bi">' + label + '</span>') : delOut.push(btn('e', label, add)); }
-    function po(label, on, add){ posts.push(on ? '<span class="p"><i></i>' + label + '</span>' : btn('p', label, add)); }
+    // each item carries the pick it sets when tapped: id:value, the value that takes it out when it's in, or adds it when it's dotted
+    function tog(cls, label, set){ return '<button type="button" class="' + cls + ' tog" data-set="' + set + '">' + label + '</button>'; }
+    function sh(label, on, onSet, offSet){ shoots.push(!onSet ? '<span class="e shoot">' + label + '</span>' : tog(on ? 'e shoot' : 'e out', label, on ? onSet : offSet)); }
+    function dl(label, on, onSet, offSet){ on ? del.push(tog('bi', label, onSet)) : delOut.push(tog('e out', label, offSet)); }
+    function po(label, on, onSet, offSet){ posts.push(on ? tog('p', '<i></i>' + label, onSet) : tog('p out', label, offSet)); }
+    function sw(id){ return [id + ':0', id + ':1']; }
     if (m === 0) sh('The shoot day', true);
-    if ((k = EVO.indexOf(m)) > -1) sh('Your event', k < BY.events.val, 'events:' + (k + 1));
-    if ((k = XDM.indexOf(m)) > -1) sh('Extra shoot day', k < BY.xday.val, 'xday:' + (k + 1));
-    if (m === 10) sh('Brand film half day', BY.brand.val, 'brand:1');
+    if ((k = EVO.indexOf(m)) > -1) sh('Your event', k < BY.events.val, 'events:' + k, 'events:' + (k + 1));
+    if ((k = XDM.indexOf(m)) > -1) sh('Extra shoot day', k < BY.xday.val, 'xday:' + k, 'xday:' + (k + 1));
+    if (m === 10) sh('Brand film half day', BY.brand.val, 'brand:0', 'brand:1');
     if (m === 1) {
-      dl('Homepage loop', BY.loop.val, 'loop:1');
-      dl('First class course', BY.first.val, 'first:1');
-      dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0, 'coach:8');
-      dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0, 'members:3');
-      if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val, 'team:1');
-      dl('Web design', BY.site.val, 'site:1');
-      dl('Photos', BY.photo.val, 'photo:1');
-      dl('4 ad cuts', BY.ads.val, 'ads:1');
+      dl('Homepage loop', BY.loop.val, 'loop:0', 'loop:1');
+      dl('First class course', BY.first.val, 'first:0', 'first:1');
+      dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0, 'coach:0', 'coach:8');
+      dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0, 'members:0', 'members:3');
+      if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val, 'team:0', 'team:1');
+      dl('Web design', BY.site.val, 'site:0', 'site:1');
+      dl('Photos', BY.photo.val, 'photo:0', 'photo:1');
+      dl('4 ad cuts', BY.ads.val, 'ads:0', 'ads:1');
     }
-    if (m === 11) dl('Brand film', BY.brand.val, 'brand:1');
+    if (m === 11) dl('Brand film', BY.brand.val, 'brand:0', 'brand:1');
     n = BY.tech.val;
-    po(n ? plural(n, 'technique short', 'technique shorts') : 'Technique shorts', n > 0, 'tech:2');
-    if ((k = COACHM.indexOf(m)) > -1) po('Coach short', k < BY.coach.val, 'coach:' + (k + 1));
-    if ((k = MEMBM.indexOf(m)) > -1) po('Member story', k < BY.members.val, 'members:' + (k + 1));
-    if ((k = EVO.indexOf(m)) > -1 && k < BY.events.val) po('Event recap', true);
+    po(n ? plural(n, 'technique short', 'technique shorts') : 'Technique shorts', n > 0, 'tech:0', 'tech:2');
+    if ((k = COACHM.indexOf(m)) > -1) po('Coach short', k < BY.coach.val, 'coach:' + k, 'coach:' + (k + 1));
+    if ((k = MEMBM.indexOf(m)) > -1) po('Member story', k < BY.members.val, 'members:' + k, 'members:' + (k + 1));
+    if ((k = EVO.indexOf(m)) > -1 && k < BY.events.val) po('Event recap', true, 'events:' + k);
     var out = shoots.join('');
     if (del.length) out += '<span class="e batch">' + del.join('') + '</span>';
     out += delOut.join('');
     return out + '<span class="posts">' + posts.join('') + '</span>';
   }
-  // Cody, Nov 24 (thread 526368fd): tap anything dotted to add it; the picker follows and a line gives the new total.
+  // Cody, Nov 24 (threads 526368fd, 6ed62529): tap anything to add it or take it out; the picker follows and a line gives the new total.
   $('cal12').addEventListener('click', function(e){
-    var b = e.target.closest('[data-add]'); if (!b) return;
-    var a = b.dataset.add.split(':'), it = BY[a[0]], v = Number(a[1]), li = $('r-' + it.id);
-    if (it.type === 'on') { it.val = true; li.querySelector('.sw').checked = true; }
+    var b = e.target.closest('[data-set]'); if (!b) return;
+    var a = b.dataset.set.split(':'), it = BY[a[0]], v = Number(a[1]), li = $('r-' + it.id);
+    var before = count(it);
+    if (it.type === 'on') { it.val = v > 0; li.querySelector('.sw').checked = it.val; }
     else {
-      it.val = Math.max(it.val, v);
+      it.val = it.type === 'seg' ? v : Math.max(it.min, Math.min(it.max, v));
       var r = li.querySelector('input[type=radio][value="' + it.val + '"]'); if (r) r.checked = true;
     }
     render();
-    var what = it.type === 'on' ? it.name : it.type === 'seg' ? it.name + ', ' + it.val + ' a month' : it.name + ', ' + it.val;
-    $('caladd').innerHTML = 'Added ' + what + '. Your year is now ' + money(total(member)) + '. <a href="#build">See your picks</a>';
+    var now = count(it), gone = now === 0;
+    var what = it.type === 'on' || gone ? it.name : it.type === 'seg' ? it.name + ', ' + it.val + ' a month' : it.name + ', ' + it.val;
+    var said = now > before ? 'Added ' + what : gone ? 'Took out ' + what : it.name + ' is now ' + (it.type === 'seg' ? it.val + ' a month' : it.val);
+    $('caladd').innerHTML = said + '. Your year is now ' + money(total(member)) + '. <a href="#build">See your picks</a>';
   });
   function calendar(){
     $('cal12').innerHTML = MONTHS.map(function(name, m){
