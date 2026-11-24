@@ -324,10 +324,10 @@ a{color:inherit}
       <div class="picks">
       <div class="fbar" aria-hidden="true"><span class="k">Your year</span><span class="fs" id="fsum">$10,700</span><span class="fm" id="fmo">About $890 a month</span></div>
       <div class="plan" role="radiogroup" aria-label="Plan">
-        <label><input type="radio" name="plan" value="member" checked><span>12-month membership</span></label>
+        <label><input type="radio" name="plan" value="member" checked><span>12-month retainer</span></label>
         <label><input type="radio" name="plan" value="monthly"><span>Month to month</span></label>
       </div>
-      <p class="save" id="save" aria-live="polite">You save $1,183 with the membership.</p>
+      <p class="save" id="save" aria-live="polite">You save $1,183 with the retainer.</p>
 
       <h3 class="sub">What's in the year</h3>
       <ul class="pick" id="base"></ul>
@@ -338,7 +338,7 @@ a{color:inherit}
       <aside class="total" aria-live="polite">
         <div><div class="k">Your year</div><p class="what">Every film comes with full, permanent use on your web and social channels.</p></div>
         <div><div class="sum" id="sum">$10,700</div><span class="mo" id="mo">About $890 a month</span></div>
-        <p class="notes" id="pay">Three payments, with $480 at signing, $3,540 before the January shoot, and $6,680 on approval of the films. These prices hold through December 6.</p>
+        <p class="notes" id="pay">Two payments, with $4,020 at signing to cover production and $6,680 on approval of the films. These prices hold through December 6.</p>
       </aside>
       </div>
 
@@ -398,8 +398,8 @@ a{color:inherit}
 </footer>
 <script>
 (function(){
-  // Prices are the 12-month membership prices from calc 270114-2CR; month to month is each price / 0.9.
-  // share = what each pick adds to the payment before the January shoot.
+  // Prices are the 12-month retainer prices from calc 270114-2CR; month to month is each price / 0.9.
+  // share = what each pick adds to the production payment due at signing.
   var BASE = [
     {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:'We spend a full day at the gym, with audio for the interviews. The loop, the first-class film, the coach interviews, and the member stories are filmed on it.'},
     {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:'We film a half day at an event and cut a recap from it.'},
@@ -520,13 +520,13 @@ a{color:inherit}
 
     var tm = total(true), tx = total(false), t = member ? tm : tx;
     $('sum').textContent = money(t); $('fsum').textContent = money(t);
-    $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the membership.' : "You'd save " + money(tx - tm) + ' with the membership.';
+    $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the retainer.' : "You'd save " + money(tx - tm) + ' with the retainer.';
     if (member) {
-      var sign = SIGN;
-      var shoot = ALL.reduce(function(s, it){ return s + (it.share ? count(it) * it.share : 0); }, 0);
-      var rest = t - sign - shoot;
+      // Cody, Nov 24: the retainer covers production costs up front, so the planning fee and every shoot share are due at signing.
+      var prod = SIGN + ALL.reduce(function(s, it){ return s + (it.share ? count(it) * it.share : 0); }, 0);
+      var rest = t - prod;
       $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
-      $('pay').textContent = 'Three payments, with ' + money(sign) + ' at signing, ' + money(shoot) + ' before the January shoot, and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
+      $('pay').textContent = 'Two payments, with ' + money(prod) + ' at signing to cover production and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
     } else {
       var start = Math.round(SIGN / 0.9), mo = ten((t - start) / 12);
       $('mo').textContent = 'About ' + money(mo) + ' a month';
@@ -635,7 +635,7 @@ a{color:inherit}
     e.preventDefault();
     var f = e.target, name = f.name.value.trim(), email = f.email.value.trim();
     if (!name || !f.email.checkValidity() || !email) { f.reportValidity(); return; }
-    var body = ['Name: ' + name, 'Email: ' + email, 'Plan: ' + (member ? '12-month membership' : 'Month to month'), '']
+    var body = ['Name: ' + name, 'Email: ' + email, 'Plan: ' + (member ? '12-month retainer' : 'Month to month'), '']
       .concat(picks(), ['', 'Total: ' + $('sum').textContent, $('pay').textContent], answers(f), ['', 'Thanks!']).join('\n');
     location.href = 'mailto:cody@macfilmproductions.com?subject=' + encodeURIComponent('Hardstyle Strength | My 2027 picks') + '&body=' + encodeURIComponent(body);
     $('sent').textContent = "Your email app opened with your picks. Hit send and they'll come straight to Cody.";
