@@ -91,14 +91,56 @@ a{color:inherit}
   .line li::before{top:5px}
 }
 
+/* the picker */
+.plan{display:inline-flex; flex-wrap:wrap; gap:4px; padding:4px; border:1px solid var(--rule); border-radius:999px; margin:0 0 12px}
+.plan label,.seg label{position:relative}
+.plan input,.seg input{position:absolute; inset:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer}
+.plan span{display:block; padding:9px 18px; border-radius:999px; font-size:15px; font-weight:500; color:var(--mute); transition:background .2s, color .2s}
+.plan input:checked + span{background:var(--pink); color:#fff}
+.plan input:focus-visible + span,.seg input:focus-visible + span{outline:2px solid var(--pink); outline-offset:3px}
+.save{margin:0; font-size:15px; color:var(--gold); min-height:1.6em}
+.sub{font-size:15px; font-weight:600; margin:34px 0 0}
+.pick{list-style:none; margin:12px 0 0; padding:0}
+.pick li{display:grid; grid-template-columns:minmax(0,1fr) auto 6.5em; gap:10px 28px; align-items:center; padding-block:18px; border-top:1px solid var(--rule)}
+.pick li:last-child{border-bottom:1px solid var(--rule)}
+.pick .txt{min-width:0}
+.pick h3{font-family:var(--display); font-weight:400; font-size:clamp(20px,2vw,23px); line-height:1.2; margin:0}
+.pick .d{margin:4px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
+.pick .each{color:var(--ink)}
+.pick .amt{text-align:right; font-variant-numeric:tabular-nums}
+.pick li.off .amt{color:var(--mute)}
+.pick .inc{font-size:14px; color:var(--mute)}
+.step{display:inline-flex; align-items:center; gap:6px}
+.step button{width:36px; height:36px; border-radius:50%; border:1px solid var(--rule); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; display:grid; place-items:center; padding:0}
+.step button:hover:not(:disabled){border-color:var(--pink)}
+.step button:disabled{opacity:.3; cursor:default}
+.step output{min-width:2ch; text-align:center; font-variant-numeric:tabular-nums}
+.sw{appearance:none; -webkit-appearance:none; width:46px; height:26px; border-radius:999px; background:rgba(244,242,238,.2); position:relative; cursor:pointer; margin:0; transition:background .2s}
+.sw::after{content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:var(--ink); transition:transform .2s}
+.sw:checked{background:var(--pink)}
+.sw:checked::after{transform:translateX(20px)}
+.sw:disabled{opacity:.3; cursor:default}
+.seg{display:inline-flex; flex-wrap:wrap; gap:4px}
+.seg span{display:block; padding:6px 12px; border-radius:999px; border:1px solid var(--rule); font-size:14px; color:var(--mute)}
+.seg input:checked + span{border-color:var(--pink); color:var(--ink)}
+@media (max-width:620px){ .pick li{grid-template-columns:minmax(0,1fr) auto} .pick .txt{grid-column:1 / -1} }
+@media (max-width:520px){ .plan{display:flex; flex-wrap:nowrap} .plan label{flex:1} .plan span{padding:9px 8px; text-align:center; font-size:14px} }
+
 /* the price */
-.total{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 28px; align-items:end; padding-block:26px 28px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.total{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 28px; align-items:end; padding-block:26px 28px; margin-top:34px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
 .total .k{font-size:14px; color:var(--pink)}
 .total .what{margin:8px 0 0; color:var(--mute); max-width:56ch}
 .total .sum{font-family:var(--display); font-size:clamp(48px,7vw,84px); line-height:.95; font-variant-numeric:lining-nums tabular-nums; text-align:right}
 .total .mo{display:block; font-family:var(--body); font-size:15px; color:var(--mute); margin-top:10px; text-align:right}
 .total .notes{grid-column:1 / -1; margin:6px 0 0; color:var(--mute); font-size:15px; max-width:72ch}
 @media (max-width:620px){ .total{grid-template-columns:minmax(0,1fr)} .total .sum,.total .mo{text-align:left} }
+.send{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; gap:14px; align-items:end; margin-top:28px}
+.send label{display:grid; gap:6px; font-size:14px; color:var(--mute); min-width:0}
+.send input{font:inherit; font-size:16px; color:var(--ink); background:var(--bg-2); border:1px solid var(--rule); border-radius:10px; padding:12px 14px; min-width:0; width:100%}
+.send input:focus{outline:2px solid var(--pink); outline-offset:1px}
+.send .btn{border:0; cursor:pointer; font-family:var(--body)}
+.sent{grid-column:1 / -1; margin:0; font-size:15px; color:var(--gold); min-height:1.6em}
+@media (max-width:720px){ .send{grid-template-columns:minmax(0,1fr)} .send .btn{justify-self:start} }
 
 /* our 2024 films */
 .films{display:grid; grid-template-columns:1.6fr .7fr .9fr; gap:28px; align-items:start}
@@ -186,12 +228,30 @@ a{color:inherit}
     </section>
 
     <section class="sec">
-      <p class="label">The year</p>
-      <div class="total">
-        <div><div class="k">The full year</div><p class="what">This includes the homepage loop, the first-class film, 35 short verticals, and three member stories, with full, permanent use on your web and social channels.</p></div>
-        <div><div class="sum">$10,700</div><span class="mo">About $890 a month</span></div>
-        <p class="notes">Three payments, with $480 at signing, $3,540 before the January shoot, and $6,680 on approval of the films. These prices hold through December 6.</p>
+      <p class="label">Build your year</p>
+      <div class="plan" role="radiogroup" aria-label="Plan">
+        <label><input type="radio" name="plan" value="member" checked><span>12-month membership</span></label>
+        <label><input type="radio" name="plan" value="monthly"><span>Month to month</span></label>
       </div>
+      <p class="save" id="save" aria-live="polite">You save $1,183 with the membership.</p>
+
+      <h3 class="sub">What's in the year</h3>
+      <ul class="pick" id="base"></ul>
+      <h3 class="sub">Premium add-ons</h3>
+      <ul class="pick" id="extra"></ul>
+
+      <div class="total">
+        <div><div class="k">Your year</div><p class="what">Every film comes with full, permanent use on your web and social channels.</p></div>
+        <div><div class="sum" id="sum">$10,700</div><span class="mo" id="mo">About $890 a month</span></div>
+        <p class="notes" id="pay">Three payments, with $480 at signing, $3,540 before the January shoot, and $6,680 on approval of the films. These prices hold through December 6.</p>
+      </div>
+
+      <form class="send" id="send" novalidate>
+        <label>Your name<input type="text" name="name" autocomplete="name" required></label>
+        <label>Your email<input type="email" name="email" autocomplete="email" required></label>
+        <button class="btn" type="submit">Send to Cody</button>
+        <p class="sent" id="sent" aria-live="polite"></p>
+      </form>
     </section>
 
     <section class="sec">
@@ -245,5 +305,140 @@ a{color:inherit}
   <span>Portland Content, Portland, Oregon</span>
   <span>Production by Mac Films</span>
 </footer>
+<script>
+(function(){
+  // Prices are the 12-month membership prices from calc 270114-2CR; month to month is each price / 0.9.
+  // share = what each pick adds to the payment before the January shoot.
+  var BASE = [
+    {id:'plan', type:'fixed', price:480, name:'Planning and look-back calls', desc:'We plan the year with you and get on a call each quarter to look back at what worked.'},
+    {id:'shoot', type:'fixed', price:3230, share:1800, name:'January shoot day', desc:'We spend a full day at the gym, with audio for the interviews. Everything below is filmed on it.'},
+    {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:'We film a half day at an event and cut a recap from it.'},
+    {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:'We cut a short loop of a class in session that loads fast.'},
+    {id:'first', type:'on', val:true, price:480, name:'First-class film', desc:'We walk a new member through Foundations and the six kettlebell basics, for the intro 4-pack.'},
+    {id:'coach', type:'qty', min:0, max:8, val:8, price:96, one:'short', many:'shorts', name:'Coach shorts', desc:'Each coach gets a short vertical built from the story in their bio.'},
+    {id:'members', type:'qty', min:0, max:6, val:3, price:240, one:'story', many:'stories', name:'Member stories', desc:'Each member tells their own story with real sound and light.'},
+    {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:'We cut short verticals on one lift each, from the swing to the get-up.'}
+  ];
+  var EXTRA = [
+    {id:'xday', type:'qty', min:0, max:2, val:0, price:2090, share:1160, one:'day', many:'days', name:'Extra shoot day', desc:'We come back for another full day at the gym, for more footage for the shorts.'},
+    {id:'rush', type:'on', val:false, price:160, perEvent:true, name:'Same-week recaps', desc:'Each event recap arrives within the week of the event.'},
+    {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:'A photographer works alongside us on the shoot day.'},
+    {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:'We add a half day at the gym with audio and cut a two to three minute film.'},
+    {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:'We cut four 15 to 30 second versions for paid ads, and your use widens to advertising.'}
+  ];
+  var ALL = BASE.concat(EXTRA), BY = {};
+  ALL.forEach(function(it){ BY[it.id] = it; });
+  var member = true;
+
+  function $(id){ return document.getElementById(id); }
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function unit(it, m){ return m ? it.price : Math.round(it.price / 0.9); }
+  function count(it){
+    if (it.type === 'fixed') return 1;
+    if (it.type === 'on') return it.val ? (it.perEvent ? BY.events.val : 1) : 0;
+    if (it.type === 'seg') return it.val * it.per;
+    return it.val;
+  }
+  function line(it, m){ return count(it) * unit(it, m); }
+  function total(m){ return ALL.reduce(function(s, it){ return s + line(it, m); }, 0); }
+  function ten(n){ return Math.round(n / 10) * 10; }
+
+  function row(it){
+    var li = document.createElement('li'); li.id = 'r-' + it.id;
+    var ctl = '';
+    if (it.type === 'fixed') ctl = '<span class="inc">Included</span>';
+    if (it.type === 'on') ctl = '<input class="sw" type="checkbox" aria-label="' + it.name + '"' + (it.val ? ' checked' : '') + '>';
+    if (it.type === 'qty') ctl = '<span class="step"><button type="button" data-d="-1" aria-label="Fewer: ' + it.name + '">&minus;</button><output aria-live="polite">' + it.val + '</output><button type="button" data-d="1" aria-label="More: ' + it.name + '">+</button></span>';
+    if (it.type === 'seg') ctl = '<span class="seg" role="radiogroup" aria-label="' + it.name + ' a month">' + it.opts.map(function(o){
+      return '<label><input type="radio" name="seg-' + it.id + '" value="' + o + '"' + (o === it.val ? ' checked' : '') + '><span>' + (o ? o + ' a month' : 'None') + '</span></label>';
+    }).join('') + '</span>';
+    li.innerHTML = '<div class="txt"><h3>' + it.name + '</h3><p class="d">' + it.desc + ' <span class="each"></span></p></div><div class="ctl">' + ctl + '</div><div class="amt"></div>';
+    var sw = li.querySelector('.sw');
+    if (sw) sw.addEventListener('change', function(){ it.val = sw.checked; render(); });
+    li.querySelectorAll('.step button').forEach(function(b){
+      b.addEventListener('click', function(){ it.val = Math.max(it.min, Math.min(it.max, it.val + Number(b.dataset.d))); render(); });
+    });
+    li.querySelectorAll('.seg input').forEach(function(r){
+      r.addEventListener('change', function(){ it.val = Number(r.value); render(); });
+    });
+    return li;
+  }
+
+  function eachText(it){
+    var u = money(unit(it, member));
+    if (it.type === 'qty') return u + ' each.';
+    if (it.type === 'seg') return it.val ? (it.val * it.per) + ' a year at ' + u + ' each.' : u + ' each.';
+    if (it.perEvent) return u + ' per event.';
+    return '';
+  }
+
+  function render(){
+    ALL.forEach(function(it){
+      var li = $('r-' + it.id), n = count(it);
+      li.classList.toggle('off', n === 0);
+      li.querySelector('.each').textContent = eachText(it);
+      li.querySelector('.amt').textContent = n ? money(line(it, member)) : '$0';
+      var out = li.querySelector('output');
+      if (out) {
+        out.textContent = it.val;
+        var bs = li.querySelectorAll('.step button');
+        bs[0].disabled = it.val <= it.min; bs[1].disabled = it.val >= it.max;
+      }
+    });
+    var rush = $('r-rush').querySelector('.sw');
+    rush.disabled = BY.events.val === 0;
+
+    var tm = total(true), tx = total(false), t = member ? tm : tx;
+    $('sum').textContent = money(t);
+    $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the membership.' : "You'd save " + money(tx - tm) + ' with the membership.';
+    if (member) {
+      var sign = line(BY.plan, true);
+      var shoot = ALL.reduce(function(s, it){ return s + (it.share ? count(it) * it.share : 0); }, 0);
+      var rest = t - sign - shoot;
+      $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
+      $('pay').textContent = 'Three payments, with ' + money(sign) + ' at signing, ' + money(shoot) + ' before the January shoot, and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
+    } else {
+      var start = line(BY.plan, false), mo = ten((t - start) / 12);
+      $('mo').textContent = 'About ' + money(mo) + ' a month';
+      $('pay').textContent = money(start) + ' to start, then about ' + money(mo) + ' a month. You can stop any month with 30 days’ notice. These prices hold through December 6.';
+    }
+  }
+
+  function picks(){
+    var L = [];
+    function add(it){
+      var n = count(it); if (!n) return;
+      var label = it.name;
+      if (it.type === 'qty') label += ', ' + n + ' ' + (n === 1 ? it.one : it.many);
+      if (it.type === 'seg') label += ', ' + it.val + ' a month (' + n + ' a year)';
+      if (it.perEvent) label += ', for ' + n + ' ' + (n === 1 ? 'event' : 'events');
+      L.push(label + ': ' + money(line(it, member)));
+    }
+    BASE.forEach(add);
+    var ex = [];
+    EXTRA.forEach(function(it){ if (count(it)) ex.push(it); });
+    if (ex.length) { L.push(''); L.push('Add-ons'); ex.forEach(add); }
+    return L;
+  }
+
+  var base = $('base'), extra = $('extra');
+  BASE.forEach(function(it){ base.appendChild(row(it)); });
+  EXTRA.forEach(function(it){ extra.appendChild(row(it)); });
+  document.querySelectorAll('input[name=plan]').forEach(function(r){
+    r.addEventListener('change', function(){ member = r.value === 'member'; render(); });
+  });
+  render();
+
+  $('send').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = e.target, name = f.name.value.trim(), email = f.email.value.trim();
+    if (!name || !f.email.checkValidity() || !email) { f.reportValidity(); return; }
+    var body = ['Name: ' + name, 'Email: ' + email, 'Plan: ' + (member ? '12-month membership' : 'Month to month'), '']
+      .concat(picks(), ['', 'Total: ' + $('sum').textContent, $('pay').textContent, '', 'Thanks!']).join('\n');
+    location.href = 'mailto:cody@macfilmproductions.com?subject=' + encodeURIComponent('Hardstyle Strength | My 2027 picks') + '&body=' + encodeURIComponent(body);
+    $('sent').textContent = "Your email app opened with your picks. Hit send and they'll come straight to Cody.";
+  });
+})();
+</script>
 </body>
 </html>
