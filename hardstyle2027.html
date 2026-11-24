@@ -243,9 +243,10 @@ a{color:inherit}
 }
 
 /* the year, month by month */
-.cal12{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 18px}
+/* Cody, Nov 24: closed boxes with shared borders, like a calendar */
+.cal12{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule)}
 @media (min-width:600px) and (max-width:899px){ .cal12{grid-template-columns:repeat(4,minmax(0,1fr))} }
-.cal12 .m{border-top:1px solid var(--rule); padding-block:10px 14px; min-height:86px; min-width:0}
+.cal12 .m{border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:10px 12px 14px; min-height:86px; min-width:0}
 .cal12 .mn{display:block; font-family:var(--display); font-size:19px; line-height:1.2; margin-bottom:6px}
 .cal12 .i, .calkey span{display:flex; gap:8px; align-items:baseline; font-size:14px; line-height:1.35; color:var(--mute)}
 .cal12 .i + .i{margin-top:4px}
@@ -256,7 +257,7 @@ a{color:inherit}
 .cal12 .ev, .calkey .ev{color:var(--gold)}
 .cal12 .ev::before, .calkey .ev::before{border:1px dashed var(--gold)}
 .cal12 .tech::before, .calkey .tech::before{width:5px; height:5px; background:var(--mute); margin-inline:2px}
-.calkey{display:flex; flex-wrap:wrap; gap:8px 20px; margin:16px 0 0; padding-top:14px; border-top:1px solid var(--rule)}
+.calkey{display:flex; flex-wrap:wrap; gap:8px 20px; margin:16px 0 0}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
 </style>
 </head>
