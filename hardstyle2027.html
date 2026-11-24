@@ -266,6 +266,15 @@ a{color:inherit}
 #caladd a{color:var(--ink)}
 .calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
+
+/* Cody, Nov 24 (thread b5c9d8fa): the 2024 films as an editorial layout, captions beside the pictures, bottoms lined up */
+.films{grid-template-columns:repeat(2,minmax(0,1fr)); gap:44px 40px; align-items:end}
+.films figure{grid-template-columns:minmax(0,.9fr) minmax(0,1fr); align-items:end; gap:20px}
+.films figure:first-child{grid-column:1 / -1; grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)}
+.films figcaption{padding-bottom:2px}
+@media (max-width:820px){ .films{grid-template-columns:minmax(0,1fr); gap:36px} .films figure:first-child{grid-template-columns:minmax(0,1fr)} .films figure{grid-template-columns:minmax(0,.8fr) minmax(0,1fr)} }
+/* Cody, Nov 24 (thread d409451e): the chips stack so the description has room */
+@media (min-width:621px){ .seg{flex-direction:column; align-items:stretch} .seg span{text-align:center} }
 </style>
 </head>
 <body>
@@ -411,7 +420,7 @@ a{color:inherit}
   // Prices are the 12-month retainer prices from calc 270114-2CR; month to month is each price / 0.9.
   // share = what each pick adds to the production payment due at signing.
   var BASE = [
-    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:"I'll spend a full day at the gym, with audio set up for the interviews. We'll film the loop, the first class course, the coach interviews, and the member stories that day."},
+    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:"I'll spend a full day at the gym with an audio operator for the interviews. We'll film the loop, the first class course, the coach interviews, and the member stories that day."},
     {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:"I'll come out for a half day at an event and cut a recap of it for your feed."},
     {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:"We'll cut a new loop for the top of your home page from classes, sessions, and the new space on Division."},
     {id:'first', type:'on', val:true, price:480, name:'First class course', desc:"I'll make a short course that walks folks through Foundations and the six kettlebell basics, and it can sit on your classes page or run behind ad spend."},
@@ -461,7 +470,7 @@ a{color:inherit}
   }
   function shootDesc(){
     var a = onDay(true), talk = BY.coach.val > 0 || BY.members.val > 0;
-    var t = "I'll spend a full day at the gym" + (talk ? ', with audio set up for the interviews.' : '.');
+    var t = "I'll spend a full day at the gym with an audio operator" + (talk ? ' for the interviews.' : '.');
     if (a.length) t += " We'll film " + list(a) + ' that day.';
     return t;
   }
