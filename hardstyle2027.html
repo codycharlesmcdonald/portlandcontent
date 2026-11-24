@@ -300,7 +300,7 @@ a{color:inherit}
 <main>
   <article class="wrap view">
     <div class="lede">
-      <h2>Keep the gym on your site and feed <em>all year</em></h2>
+      <h2>Now that you&rsquo;re settled into the new gym, <em>let&rsquo;s show it off!</em></h2>
       <div>
         <p>Hi! I put out a few pieces for you in 2024 and after looking at what you've posted since, I put together this plan to add a little polish to your feeds next year.</p>
         <p>Take what you want, and post those on your own schedule. I'll pop in soon to chat, but you can email me at the bottom or schedule some time for a Zoom!</p>
@@ -358,7 +358,7 @@ a{color:inherit}
       <aside class="total" aria-live="polite">
         <div><div class="k">Your year</div><p class="what">Every film comes with full, permanent use on your web and social channels.</p></div>
         <div><div class="sum" id="sum">$10,890</div><span class="mo" id="mo">About $910 a month</span></div>
-        <p class="notes" id="pay">One payment of $10,890 at signing, about $910 a month over the year. These prices hold through December 6.</p>
+        <p class="notes" id="pay">These prices hold through December 6.</p>
       </aside>
       </div>
 
@@ -599,9 +599,9 @@ a{color:inherit}
     $('sum').textContent = money(t); $('fsum').textContent = money(t);
     $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the retainer.' : "You'd save " + money(tx - tm) + ' with the retainer.';
     if (member) {
-      // Cody, Nov 24 (thread 75841533, lead gen spec d3333b9d): the retainer is one payment at signing.
+      // Cody, Nov 24 (threads 75841533, cd899442): the retainer is the total alone; only month to month gets a billing line.
       $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
-      $('pay').textContent = 'One payment of ' + money(t) + ' at signing, about ' + money(ten(t / 12)) + ' a month over the year. These prices hold through December 6.';
+      $('pay').textContent = 'These prices hold through December 6.';
     } else {
       // Month to month is billed by production stage: planning (and half of a redesign) to start, then each shoot and film as it happens.
       var start = Math.round(SIGN / 0.9) + Math.round(line(BY.site, false) / 2), mo = ten((t - start) / 12);
