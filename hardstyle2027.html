@@ -134,13 +134,26 @@ a{color:inherit}
 .total .mo{display:block; font-family:var(--body); font-size:15px; color:var(--mute); margin-top:10px; text-align:right}
 .total .notes{grid-column:1 / -1; margin:6px 0 0; color:var(--mute); font-size:15px; max-width:72ch}
 @media (max-width:620px){ .total{grid-template-columns:minmax(0,1fr)} .total .sum,.total .mo{text-align:left} }
-.send{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; gap:14px; align-items:end; margin-top:28px}
-.send label{display:grid; gap:6px; font-size:14px; color:var(--mute); min-width:0}
-.send input{font:inherit; font-size:16px; color:var(--ink); background:var(--bg-2); border:1px solid var(--rule); border-radius:10px; padding:12px 14px; min-width:0; width:100%}
-.send input:focus{outline:2px solid var(--pink); outline-offset:1px}
-.send .btn{border:0; cursor:pointer; font-family:var(--body)}
-.sent{grid-column:1 / -1; margin:0; font-size:15px; color:var(--gold); min-height:1.6em}
-@media (max-width:720px){ .send{grid-template-columns:minmax(0,1fr)} .send .btn{justify-self:start} }
+/* Cody, Nov 24: the questions take answers, and name and email stack under the total */
+.send{display:grid; grid-template-columns:minmax(0,1fr); gap:18px; max-width:640px; margin-top:34px}
+.send .qhead{font-size:15px; font-weight:600; margin:0}
+.send label{display:grid; gap:8px; font-size:14px; color:var(--mute); min-width:0}
+.send label.q{font-size:16px; color:var(--ink)}
+.send input,.send textarea{font:inherit; font-size:16px; color:var(--ink); background:var(--bg-2); border:1px solid var(--rule); border-radius:10px; padding:12px 14px; min-width:0; width:100%; box-sizing:border-box}
+.send textarea{resize:vertical; min-height:4.2em; line-height:1.5}
+.send input:focus,.send textarea:focus{outline:2px solid var(--pink); outline-offset:1px}
+.send .who{display:grid; gap:18px; margin-top:12px}
+.send .btn{border:0; cursor:pointer; font-family:var(--body); justify-self:start}
+.sent{margin:0; font-size:15px; color:var(--gold); min-height:1.6em}
+
+/* Cody, Nov 24: the total follows the picks */
+.follow{position:fixed; left:0; right:0; bottom:0; z-index:20; background:var(--bg-2); border-top:1px solid var(--rule); padding-bottom:env(safe-area-inset-bottom,0px); transform:translateY(110%); transition:transform .25s ease; visibility:hidden}
+.follow.show{transform:none; visibility:visible}
+.follow .wrap{display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 16px; padding-block:12px}
+.follow .k{font-size:14px; color:var(--pink)}
+.follow .fs{font-family:var(--display); font-size:clamp(26px,4vw,34px); line-height:1; font-variant-numeric:lining-nums tabular-nums; margin-left:auto}
+.follow .fm{font-size:14px; color:var(--mute)}
+@media (prefers-reduced-motion:reduce){ .follow{transition:none} }
 
 /* our 2024 films */
 .films{display:grid; grid-template-columns:1.6fr .7fr .9fr; gap:28px; align-items:start}
@@ -148,6 +161,9 @@ a{color:inherit}
 .films .v{display:block; position:relative; overflow:hidden; background:#000}
 .films .v img{display:block; width:100%; height:auto}
 .films a.v:hover img{opacity:.88}
+/* Cody, Nov 24: the thumbnails play a muted preview; a click still opens Vimeo */
+.films .v iframe{position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none; opacity:0; transition:opacity .4s ease}
+.films .v iframe.on{opacity:1}
 .films h3{font-family:var(--display); font-weight:400; font-size:22px; margin:0}
 .films p{margin:4px 0 0; color:var(--mute); font-size:15px}
 .films .watch{display:inline-block; margin-top:8px; font-size:15px; color:var(--pink); text-decoration:none}
@@ -227,7 +243,7 @@ a{color:inherit}
       </ol>
     </section>
 
-    <section class="sec">
+    <section class="sec" id="build">
       <p class="label">Build your year</p>
       <div class="plan" role="radiogroup" aria-label="Plan">
         <label><input type="radio" name="plan" value="member" checked><span>12-month membership</span></label>
@@ -247,8 +263,15 @@ a{color:inherit}
       </div>
 
       <form class="send" id="send" novalidate>
-        <label>Your name<input type="text" name="name" autocomplete="name" required></label>
-        <label>Your email<input type="email" name="email" autocomplete="email" required></label>
+        <p class="qhead">Questions that shape the plan</p>
+        <label class="q">Does a January shoot day work around your classes?<textarea name="q1" rows="2"></textarea></label>
+        <label class="q">Which events are on your 2027 calendar?<textarea name="q2" rows="2"></textarea></label>
+        <label class="q">Which coaches would like to be on camera?<textarea name="q3" rows="2"></textarea></label>
+        <label class="q">Which members would you ask to tell their story?<textarea name="q4" rows="2"></textarea></label>
+        <div class="who">
+          <label>Your name<input type="text" name="name" autocomplete="name" required></label>
+          <label>Your email<input type="email" name="email" autocomplete="email" required></label>
+        </div>
         <button class="btn" type="submit">Send to Cody</button>
         <p class="sent" id="sent" aria-live="polite"></p>
       </form>
@@ -258,33 +281,20 @@ a{color:inherit}
       <p class="label">What we made together in 2024</p>
       <div class="films">
         <figure>
-          <a class="v" href="https://vimeo.com/1242992409" target="_blank" rel="noopener"><img src="img/hardstyle_banner.jpg" width="1800" height="754" loading="lazy" alt="Kettlebell training in front of the gold wall"></a>
-          <figcaption><h3>Gym banner, April</h3><p>A one minute loop of a class in session, made to sit at the top of the gym's website with no sound.</p><a class="watch" href="https://vimeo.com/1242992409" target="_blank" rel="noopener">Watch the film</a></figcaption>
+          <a class="v" data-embed="https://player.vimeo.com/video/1242992409?h=caa3874784" href="https://vimeo.com/1242992409/caa3874784" target="_blank" rel="noopener"><img src="img/hardstyle_banner.jpg" width="1800" height="754" loading="lazy" alt="Kettlebell training in front of the gold wall"></a>
+          <figcaption><h3>Gym banner, April</h3><p>A one minute loop of a class in session, made to sit at the top of the gym's website with no sound.</p><a class="watch" href="https://vimeo.com/1242992409/caa3874784" target="_blank" rel="noopener">Watch the film</a></figcaption>
         </figure>
         <figure>
-          <a class="v" href="https://vimeo.com/1241410280" target="_blank" rel="noopener"><img src="img/hardstyle_barbell.jpg" width="720" height="1280" loading="lazy" alt="The owner of Hardstyle Strength, seated in the gym"></a>
+          <a class="v" data-embed="https://player.vimeo.com/video/1241410280?h=163c04f561" href="https://vimeo.com/1241410280" target="_blank" rel="noopener"><img src="img/hardstyle_barbell.jpg" width="720" height="1280" loading="lazy" alt="The owner of Hardstyle Strength, seated in the gym"></a>
           <figcaption><h3>Barbell certification, May</h3><p>A vertical film ahead of a StrongFirst barbell certification at the gym, with you on why you built the place.</p><a class="watch" href="https://vimeo.com/1241410280" target="_blank" rel="noopener">Watch the film</a></figcaption>
         </figure>
         <figure>
-          <a class="v" href="https://vimeo.com/1242992368" target="_blank" rel="noopener"><img src="img/hardstyle_overview.jpg" width="720" height="900" loading="lazy" alt="The owner demonstrates a movement under the gym lights"></a>
-          <figcaption><h3>Overview, July</h3><p>A one minute look at the gym and its classes, cut at four by five for the feed.</p><a class="watch" href="https://vimeo.com/1242992368" target="_blank" rel="noopener">Watch the film</a></figcaption>
+          <a class="v" data-embed="https://player.vimeo.com/video/1242992368?h=16c3a92d4e" href="https://vimeo.com/1242992368/16c3a92d4e" target="_blank" rel="noopener"><img src="img/hardstyle_overview.jpg" width="720" height="900" loading="lazy" alt="The owner demonstrates a movement under the gym lights"></a>
+          <figcaption><h3>Overview, July</h3><p>A one minute look at the gym and its classes, cut at four by five for the feed.</p><a class="watch" href="https://vimeo.com/1242992368/16c3a92d4e" target="_blank" rel="noopener">Watch the film</a></figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="sec">
-      <p class="label">Questions that shape the plan</p>
-      <div class="cols">
-        <ol class="items">
-          <li><span class="num">1</span><span>Does a January shoot day work around your classes?</span></li>
-          <li><span class="num">2</span><span>Which events are on your 2027 calendar?</span></li>
-        </ol>
-        <ol class="items">
-          <li><span class="num">3</span><span>Which coaches would like to be on camera?</span></li>
-          <li><span class="num">4</span><span>Which members would you ask to tell their story?</span></li>
-        </ol>
-      </div>
-    </section>
   </article>
 </main>
 
@@ -301,6 +311,7 @@ a{color:inherit}
     </div>
   </div>
 </section>
+<div class="follow" id="follow" aria-hidden="true"><div class="wrap"><span class="k">Your year</span><span class="fs" id="fsum">$10,700</span><span class="fm" id="fmo">About $890 a month</span></div></div>
 <footer class="wrap foot">
   <span>Portland Content, Portland, Oregon</span>
   <span>Production by Mac Films</span>
@@ -390,7 +401,7 @@ a{color:inherit}
     rush.disabled = BY.events.val === 0;
 
     var tm = total(true), tx = total(false), t = member ? tm : tx;
-    $('sum').textContent = money(t);
+    $('sum').textContent = money(t); $('fsum').textContent = money(t);
     $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the membership.' : "You'd save " + money(tx - tm) + ' with the membership.';
     if (member) {
       var sign = SIGN;
@@ -403,6 +414,7 @@ a{color:inherit}
       $('mo').textContent = 'About ' + money(mo) + ' a month';
       $('pay').textContent = money(start) + ' to start, then about ' + money(mo) + ' a month. You can stop any month with 30 days’ notice. These prices hold through December 6.';
     }
+    $('fmo').textContent = $('mo').textContent;
   }
 
   function picks(){
@@ -430,12 +442,70 @@ a{color:inherit}
   });
   render();
 
+  function answers(f){
+    var A = [];
+    f.querySelectorAll('label.q').forEach(function(l){
+      var v = l.querySelector('textarea').value.trim();
+      if (v) A.push('', l.firstChild.textContent.trim(), v);
+    });
+    return A.length ? [''].concat(['Questions'], A) : [];
+  }
+
+  // Cody, Nov 24: the total follows the picks while Build your year is on screen and the full total isn't.
+  (function(){
+    var bar = $('follow'), inBuild = false, sumSeen = false;
+    if (!('IntersectionObserver' in window)) return;
+    function set(){ bar.classList.toggle('show', inBuild && !sumSeen); }
+    new IntersectionObserver(function(es){ inBuild = es[0].isIntersecting; set(); }, {rootMargin:'0px 0px -35% 0px'}).observe($('base'));
+    new IntersectionObserver(function(es){ sumSeen = es[0].isIntersecting; set(); }).observe($('sum'));
+  })();
+
+  // Cody, Nov 24: film thumbnails play a muted Vimeo preview (hover, or in view on touch); a click opens Vimeo.
+  // Vimeo can't load inside the Claude artifact viewer, so there the still stays.
+  (function(){
+    var h = location.hostname;
+    if (!/(^|\.)portlandcontent\.com$|^localhost$|^127\.0\.0\.1$/.test(h)) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var hover = window.matchMedia && matchMedia('(hover: hover)').matches;
+    function start(a){
+      if (a.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.src = a.dataset.embed + '&background=1&muted=1&loop=1';
+      f.allow = 'autoplay; fullscreen; picture-in-picture'; f.tabIndex = -1;
+      f.setAttribute('aria-hidden', 'true'); f.title = '';
+      f.addEventListener('load', function(){
+        try { f.contentWindow.postMessage(JSON.stringify({method:'addEventListener', value:'play'}), '*'); } catch(e){}
+        setTimeout(function(){ f.classList.add('on'); }, 1500);
+      });
+      a.appendChild(f);
+    }
+    function stop(a){ var f = a.querySelector('iframe'); if (f) f.remove(); }
+    window.addEventListener('message', function(e){
+      if (!/player\.vimeo\.com$/.test((e.origin || '').replace(/^https?:\/\//, ''))) return;
+      var d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch(x){ return; }
+      if (!d || d.event !== 'play') return;
+      document.querySelectorAll('.films .v iframe').forEach(function(f){ if (f.contentWindow === e.source) f.classList.add('on'); });
+    });
+    var vs = document.querySelectorAll('.films a.v[data-embed]');
+    if (hover) {
+      vs.forEach(function(a){
+        a.addEventListener('mouseenter', function(){ start(a); });
+        a.addEventListener('mouseleave', function(){ stop(a); });
+      });
+    } else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(en){ if (en.isIntersecting) start(en.target); else stop(en.target); });
+      }, {threshold:.6});
+      vs.forEach(function(a){ io.observe(a); });
+    }
+  })();
+
   $('send').addEventListener('submit', function(e){
     e.preventDefault();
     var f = e.target, name = f.name.value.trim(), email = f.email.value.trim();
     if (!name || !f.email.checkValidity() || !email) { f.reportValidity(); return; }
     var body = ['Name: ' + name, 'Email: ' + email, 'Plan: ' + (member ? '12-month membership' : 'Month to month'), '']
-      .concat(picks(), ['', 'Total: ' + $('sum').textContent, $('pay').textContent, '', 'Thanks!']).join('\n');
+      .concat(picks(), ['', 'Total: ' + $('sum').textContent, $('pay').textContent], answers(f), ['', 'Thanks!']).join('\n');
     location.href = 'mailto:cody@macfilmproductions.com?subject=' + encodeURIComponent('Hardstyle Strength | My 2027 picks') + '&body=' + encodeURIComponent(body);
     $('sent').textContent = "Your email app opened with your picks. Hit send and they'll come straight to Cody.";
   });
