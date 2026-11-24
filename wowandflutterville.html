@@ -80,6 +80,8 @@ a{color:inherit}
 .stamp .wrap{display:flex; justify-content:space-between; align-items:flex-end; gap:6px 28px; flex-wrap:wrap; padding-block:0 14px}
 .stamp span{font-size:14px; color:var(--ink); opacity:.9}
 .art::after{content:""; position:absolute; inset:auto 0 0 0; height:1px; background:var(--rule)}
+/* phone check Nov 23, finding 2: on a phone the wrapped caption sat on the garden beds; under 600px it sits below the drawing */
+@media (max-width:600px){ .art{height:auto} .art canvas{position:relative; inset:auto; height:220px} .art .stamp{position:static} .stamp .wrap{padding-block:12px 14px} }
 
 .view{padding-block:clamp(48px,7vw,84px) 24px; animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
 @keyframes rise{from{opacity:.001; transform:translateY(10px)}to{opacity:1; transform:none}}

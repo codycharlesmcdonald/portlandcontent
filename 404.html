@@ -66,7 +66,7 @@
   document.querySelectorAll('.showcase').forEach(function(sc){
     var items=sc.querySelectorAll('.item'), imgs=sc.querySelectorAll('.frame img'), cap=sc.querySelector('[data-cap]');
     function pick(i){ items.forEach(function(it,k){it.setAttribute('aria-current',k===i?'true':'false')}); imgs.forEach(function(im,k){im.classList.toggle('on',k===i)}); if(cap) cap.textContent=items[i].querySelector('h3').textContent; }
-    items.forEach(function(it,i){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && sc.dataset.showcase==='1'){ location.href='case.html'; } else pick(i); }); });
+    /* phone check Nov 23, finding 1: a tap fires mouseenter and focus before click, so on touch screens the first tap opened the film. Hover and focus pick a row only where there is a mouse; touch gets first tap picks, second tap opens */ var canHover=window.matchMedia&&matchMedia('(hover: hover)').matches; items.forEach(function(it,i){ if(canHover){ it.addEventListener('mouseenter',function(){pick(i)}); it.addEventListener('focus',function(){pick(i)}); } it.addEventListener('click',function(){ if(it.getAttribute('aria-current')==='true' && sc.dataset.showcase==='1'){ location.href='case.html'; } else pick(i); }); });
     pick(0);
   });
   var here=location.pathname.split('/').pop()||'index.html';
