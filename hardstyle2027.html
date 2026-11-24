@@ -307,8 +307,8 @@ a{color:inherit}
           <p>I'd come out for a half day at three of your events, like a strength challenge or a certification, and cut a recap of each one for your feed.</p></li>
         <li><span class="n">6</span><h3>Technique shorts</h3>
           <p>Swings! Get ups! We can cut two short verticals each month and keep some instructional content in your feed.</p></li>
-        <li><span class="n">7</span><h3>A refresh for your site</h3>
-          <p>We could also refresh your site so everything we make next year has a home on it. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
+        <li><span class="n">7</span><h3>Web design</h3>
+          <p>We could also take on web design and refresh your site so everything we make next year has a home on it. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
       </ol>
     </section>
 
@@ -420,7 +420,7 @@ a{color:inherit}
     {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:"I'll add a half day at the gym with audio and cut a longer film about why you built the place, for your site."},
     {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:"I'll cut four short versions for paid ads, and your use of the films opens up to advertising."},
     // lead gen spec 0c3826d6: one-time, all of it at signing; the team page folds into it
-    {id:'site', type:'on', val:false, price:2800, share:2800, name:'Site refresh', desc:"We'll refresh your site so every film from the year has a home on it, from the loop up top to a page for your recaps and technique shorts."}
+    {id:'site', type:'on', val:false, price:2800, share:2800, name:'Web design', desc:"We'll design and build fresh pages on your site so every film from the year has a home on it, from the loop up top to a page for your recaps and technique shorts."}
   ];
   var ALL = BASE.concat(EXTRA), BY = {};
   ALL.forEach(function(it){ BY[it.id] = it; });
@@ -483,7 +483,7 @@ a{color:inherit}
       dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0);
       dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0);
       if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val);
-      dl('Site refresh', BY.site.val);
+      dl('Web design', BY.site.val);
       dl('Photos', BY.photo.val);
       dl('4 ad cuts', BY.ads.val);
     }
