@@ -258,6 +258,12 @@ a{color:inherit}
 .cal12 .p, .calkey .p{display:flex; align-items:baseline; gap:6px; font-size:12.5px; line-height:1.25; color:var(--ink); overflow-wrap:anywhere; min-width:0}
 .cal12 .p i, .calkey .p i{flex:none; width:6px; height:6px; border-radius:50%; background:var(--ink); transform:translateY(-1px)}
 .cal12 .p.out{display:block; padding:2px 6px; border-radius:2px}
+.cal12 button.add{font:inherit; font-size:12.5px; line-height:1.25; text-align:left; width:100%; cursor:pointer; padding:4px 6px; overflow-wrap:anywhere}
+.cal12 button.add:hover, .cal12 button.add:focus-visible{border-color:var(--pink); color:var(--ink); outline:none}
+@media (max-width:599px){ .cal12 button.add{padding:6px} }
+.calkey .hint{font-size:12.5px; color:var(--mute)}
+#caladd:empty{display:none}
+#caladd a{color:var(--ink)}
 .calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
 </style>
@@ -308,14 +314,15 @@ a{color:inherit}
         <li><span class="n">6</span><h3>Technique shorts</h3>
           <p>Swings! Get ups! We can cut two short verticals each month and keep some instructional content in your feed.</p></li>
         <li><span class="n">7</span><h3>Web design</h3>
-          <p>We could also take on web design and refresh your site so everything we make next year has a home on it. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
+          <p>We could also take on web design and redesign your site so everything we make next year has a home on it. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
       </ol>
     </section>
 
     <section class="sec" id="year">
       <p class="label">How the year runs</p>
       <div class="cal12" id="cal12"></div>
-      <p class="calkey" id="calkey"><span class="e shoot">Shoots</span><span class="e batch">Deliveries</span><span class="p"><i></i>Posts</span><span class="e out">Not in your plan yet</span></p>
+      <p class="calkey" id="calkey"><span class="e shoot">Shoots</span><span class="e batch">Deliveries</span><span class="p"><i></i>Posts</span><span class="e out">Not in your plan yet</span><span class="hint">Tap anything dotted to add it.</span></p>
+      <p class="calnote" id="caladd" aria-live="polite"></p>
       <p class="calnote" id="evnote"></p>
       <p class="calnote">The films from the shoot day come in together, and we'll hop on a call to look back at what worked.</p>
     </section>
@@ -390,7 +397,7 @@ a{color:inherit}
     <div class="contact">
       <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a time to talk</a>
       <span class="line2">Cody McDonald, <a href="tel:+15035681199">(503) 568-1199</a></span>
-      <span class="line2"><a href="mailto:hello@portlandcontent.com">hello@portlandcontent.com</a></span>
+      <span class="line2"><a href="mailto:cody@macfilmproductions.com">cody@macfilmproductions.com</a></span>
     </div>
     <div class="cal" id="cal"></div>
   </div>
@@ -419,8 +426,8 @@ a{color:inherit}
     {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:"A photographer comes along on the January shoot day and takes stills for your site and socials."},
     {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:"I'll add a half day at the gym with audio and cut a longer film about why you built the place, for your site."},
     {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:"I'll cut four short versions for paid ads, and your use of the films opens up to advertising."},
-    // lead gen spec 0c3826d6: one-time, all of it at signing; the team page folds into it
-    {id:'site', type:'on', val:false, price:2800, share:2800, name:'Web design', desc:"We'll design and build fresh pages on your site so every film from the year has a home on it, from the loop up top to a page for your recaps and technique shorts."}
+    // lead gen spec a36a591e: a full redesign, one-time, all of it at signing; the team page folds into it
+    {id:'site', type:'on', val:false, price:5600, share:5600, name:'Web design', desc:"We'll redesign your whole site so every film from the year has a home on it, from the loop up top to a page for your recaps and technique shorts."}
   ];
   var ALL = BASE.concat(EXTRA), BY = {};
   ALL.forEach(function(it){ BY[it.id] = it; });
@@ -470,34 +477,48 @@ a{color:inherit}
   function plural(n, one, many){ return n + ' ' + (n === 1 ? one : many); }
   function month(m){
     var shoots = [], del = [], delOut = [], posts = [], k, n;
-    function sh(label, on){ shoots.push('<span class="e ' + (on ? 'shoot' : 'out') + '">' + label + '</span>'); }
-    function dl(label, on){ (on ? del : delOut).push('<span class="bi">' + label + '</span>'); }
-    function po(label, on){ posts.push(on ? '<span class="p"><i></i>' + label + '</span>' : '<span class="p out">' + label + '</span>'); }
+    function btn(cls, label, add){ return '<button type="button" class="' + cls + ' out add" data-add="' + add + '">' + label + '</button>'; }
+    function sh(label, on, add){ shoots.push(on ? '<span class="e shoot">' + label + '</span>' : btn('e', label, add)); }
+    function dl(label, on, add){ on ? del.push('<span class="bi">' + label + '</span>') : delOut.push(btn('e', label, add)); }
+    function po(label, on, add){ posts.push(on ? '<span class="p"><i></i>' + label + '</span>' : btn('p', label, add)); }
     if (m === 0) sh('The shoot day', true);
-    if ((k = EVO.indexOf(m)) > -1) sh('Your event', k < BY.events.val);
-    if ((k = XDM.indexOf(m)) > -1) sh('Extra shoot day', k < BY.xday.val);
-    if (m === 10) sh('Brand film half day', BY.brand.val);
-    if (m === 2) {
-      dl('Homepage loop', BY.loop.val);
-      dl('First class course', BY.first.val);
-      dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0);
-      dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0);
-      if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val);
-      dl('Web design', BY.site.val);
-      dl('Photos', BY.photo.val);
-      dl('4 ad cuts', BY.ads.val);
+    if ((k = EVO.indexOf(m)) > -1) sh('Your event', k < BY.events.val, 'events:' + (k + 1));
+    if ((k = XDM.indexOf(m)) > -1) sh('Extra shoot day', k < BY.xday.val, 'xday:' + (k + 1));
+    if (m === 10) sh('Brand film half day', BY.brand.val, 'brand:1');
+    if (m === 1) {
+      dl('Homepage loop', BY.loop.val, 'loop:1');
+      dl('First class course', BY.first.val, 'first:1');
+      dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0, 'coach:8');
+      dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0, 'members:3');
+      if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val, 'team:1');
+      dl('Web design', BY.site.val, 'site:1');
+      dl('Photos', BY.photo.val, 'photo:1');
+      dl('4 ad cuts', BY.ads.val, 'ads:1');
     }
-    if (m === 11) dl('Brand film', BY.brand.val);
+    if (m === 11) dl('Brand film', BY.brand.val, 'brand:1');
     n = BY.tech.val;
-    po(n ? plural(n, 'technique short', 'technique shorts') : 'Technique shorts', n > 0);
-    if ((k = COACHM.indexOf(m)) > -1) po('Coach short', k < BY.coach.val);
-    if ((k = MEMBM.indexOf(m)) > -1) po('Member story', k < BY.members.val);
+    po(n ? plural(n, 'technique short', 'technique shorts') : 'Technique shorts', n > 0, 'tech:2');
+    if ((k = COACHM.indexOf(m)) > -1) po('Coach short', k < BY.coach.val, 'coach:' + (k + 1));
+    if ((k = MEMBM.indexOf(m)) > -1) po('Member story', k < BY.members.val, 'members:' + (k + 1));
     if ((k = EVO.indexOf(m)) > -1 && k < BY.events.val) po('Event recap', true);
     var out = shoots.join('');
     if (del.length) out += '<span class="e batch">' + del.join('') + '</span>';
-    if (delOut.length) out += '<span class="e batch out">' + delOut.join('') + '</span>';
+    out += delOut.join('');
     return out + '<span class="posts">' + posts.join('') + '</span>';
   }
+  // Cody, Nov 24 (thread 526368fd): tap anything dotted to add it; the picker follows and a line gives the new total.
+  $('cal12').addEventListener('click', function(e){
+    var b = e.target.closest('[data-add]'); if (!b) return;
+    var a = b.dataset.add.split(':'), it = BY[a[0]], v = Number(a[1]), li = $('r-' + it.id);
+    if (it.type === 'on') { it.val = true; li.querySelector('.sw').checked = true; }
+    else {
+      it.val = Math.max(it.val, v);
+      var r = li.querySelector('input[type=radio][value="' + it.val + '"]'); if (r) r.checked = true;
+    }
+    render();
+    var what = it.type === 'on' ? it.name : it.type === 'seg' ? it.name + ', ' + it.val + ' a month' : it.name + ', ' + it.val;
+    $('caladd').innerHTML = 'Added ' + what + '. Your year is now ' + money(total(member)) + '. <a href="#build">See your picks</a>';
+  });
   function calendar(){
     $('cal12').innerHTML = MONTHS.map(function(name, m){
       return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + month(m) + '</div>';
