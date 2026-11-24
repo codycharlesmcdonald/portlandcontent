@@ -431,7 +431,8 @@ a{color:inherit}
     {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:"We can cut short verticals on one lift each, from swings to get ups, to keep some instructional content in your feed."}
   ];
   var EXTRA = [
-    {id:'xday', type:'qty', min:0, max:2, val:0, price:2090, share:1160, one:'day', many:'days', name:'Extra shoot day', desc:"I'll come back for another full day at the gym to get more footage for the shorts."},
+    // Cody, Nov 24 (thread e8efc41e, "2"): extra days carry no license, (1012.50 + 150) = 1,160 each
+    {id:'xday', type:'qty', min:0, max:2, val:0, price:1160, share:1160, one:'day', many:'days', name:'Extra shoot day', desc:"I'll come back for another full day at the gym to get more footage for the shorts."},
     {id:'rush', type:'on', val:false, price:160, perEvent:true, name:'Same-week recaps', desc:"You'll get each event recap the same week as the event."},
     {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:"A photographer comes along on the January shoot day and takes stills for your site and socials."},
     {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:"I'll add a half day at the gym with audio and cut a longer film about why you built the place, for your site."},
