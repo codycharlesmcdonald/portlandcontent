@@ -347,8 +347,8 @@ a{color:inherit}
 
       <aside class="total" aria-live="polite">
         <div><div class="k">Your year</div><p class="what">Every film comes with full, permanent use on your web and social channels.</p></div>
-        <div><div class="sum" id="sum">$10,700</div><span class="mo" id="mo">About $890 a month</span></div>
-        <p class="notes" id="pay">Two payments, with $4,020 at signing to cover production and $6,680 on approval of the films. These prices hold through December 6.</p>
+        <div><div class="sum" id="sum">$10,890</div><span class="mo" id="mo">About $910 a month</span></div>
+        <p class="notes" id="pay">One payment of $10,890 at signing, about $910 a month over the year. These prices hold through December 6.</p>
       </aside>
       </div>
 
@@ -584,15 +584,14 @@ a{color:inherit}
     $('sum').textContent = money(t); $('fsum').textContent = money(t);
     $('save').textContent = member ? 'You save ' + money(tx - tm) + ' with the retainer.' : "You'd save " + money(tx - tm) + ' with the retainer.';
     if (member) {
-      // Cody, Nov 24: the retainer covers production costs up front, so the planning fee and every shoot share are due at signing.
-      var prod = SIGN + ALL.reduce(function(s, it){ return s + (it.share ? count(it) * it.share : 0); }, 0);
-      var rest = t - prod;
+      // Cody, Nov 24 (thread 75841533, lead gen spec d3333b9d): the retainer is one payment at signing.
       $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
-      $('pay').textContent = 'Two payments, with ' + money(prod) + ' at signing to cover production and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
+      $('pay').textContent = 'One payment of ' + money(t) + ' at signing, about ' + money(ten(t / 12)) + ' a month over the year. These prices hold through December 6.';
     } else {
-      var start = Math.round(SIGN / 0.9) + line(BY.site, false), mo = ten((t - start) / 12);
+      // Month to month is billed by production stage: planning (and half of a redesign) to start, then each shoot and film as it happens.
+      var start = Math.round(SIGN / 0.9) + Math.round(line(BY.site, false) / 2), mo = ten((t - start) / 12);
       $('mo').textContent = 'About ' + money(mo) + ' a month';
-      $('pay').textContent = money(start) + ' to start, then about ' + money(mo) + ' a month. You can stop any month with 30 days’ notice. These prices hold through December 6.';
+      $('pay').textContent = 'Billed as we go: ' + money(start) + ' to start, then each shoot and film as it happens. You can stop any month with 30 days’ notice. These prices hold through December 6.';
     }
     $('fmo').textContent = $('mo').textContent;
   }
