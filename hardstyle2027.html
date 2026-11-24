@@ -242,22 +242,19 @@ a{color:inherit}
   .ideas p{grid-column:2}
 }
 
-/* the year, month by month */
-/* Cody, Nov 24: closed boxes with shared borders, like a calendar */
-.cal12{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule)}
-@media (min-width:600px) and (max-width:899px){ .cal12{grid-template-columns:repeat(4,minmax(0,1fr))} }
-.cal12 .m{border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:10px 12px 14px; min-height:86px; min-width:0}
-.cal12 .mn{display:block; font-family:var(--display); font-size:19px; line-height:1.2; margin-bottom:6px}
-.cal12 .i, .calkey span{display:flex; gap:8px; align-items:baseline; font-size:14px; line-height:1.35; color:var(--mute)}
-.cal12 .i + .i{margin-top:4px}
-.cal12 .i::before, .calkey span::before{content:""; flex:none; width:9px; height:9px; border-radius:50%; box-sizing:border-box}
-.cal12 .shoot, .calkey .shoot{color:var(--ink)}
-.cal12 .shoot::before, .calkey .shoot::before{background:var(--pink)}
-.cal12 .batch::before, .calkey .batch::before{border:1px solid var(--pink)}
-.cal12 .ev, .calkey .ev{color:var(--gold)}
-.cal12 .ev::before, .calkey .ev::before{border:1px dashed var(--gold)}
-.cal12 .tech::before, .calkey .tech::before{width:5px; height:5px; background:var(--mute); margin-inline:2px}
-.calkey{display:flex; flex-wrap:wrap; gap:8px 20px; margin:16px 0 0}
+/* the year, month by month (Cody, Nov 24: closer to a calendar; each row is a quarter) */
+.cal12{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule)}
+@media (min-width:600px) and (max-width:899px){ .cal12{grid-template-columns:repeat(6,minmax(0,1fr))} }
+.cal12 .m{border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:8px 8px 10px; min-height:104px; min-width:0; display:flex; flex-direction:column; gap:4px}
+.cal12 .mn{font-family:var(--display); font-size:17px; line-height:1.1; margin-bottom:2px}
+.cal12 .e, .calkey .e{display:block; font-size:12.5px; line-height:1.25; padding:3px 6px; border-radius:2px; overflow-wrap:anywhere}
+.cal12 .shoot, .calkey .shoot{background:var(--pink); color:#fff}
+.cal12 .batch, .calkey .batch{border:1px solid var(--pink); color:var(--ink)}
+.cal12 .ev, .calkey .ev{border:1px dashed var(--gold); color:var(--gold)}
+.cal12 .dots{margin-top:auto; display:flex; gap:4px; padding-top:4px}
+.cal12 .dots i, .calkey .tech i{display:block; width:6px; height:6px; border-radius:50%; background:var(--mute)}
+.calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
+.calkey .tech{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mute)}
 .calnote{margin:12px 0 0; color:var(--mute); font-size:15px; max-width:60ch}
 </style>
 </head>
@@ -312,7 +309,7 @@ a{color:inherit}
     <section class="sec" id="year">
       <p class="label">How the year runs</p>
       <div class="cal12" id="cal12"></div>
-      <p class="calkey" id="calkey"><span class="shoot">The shoot day</span><span class="batch">A batch of films</span><span class="ev" id="key-ev">Your events</span><span class="tech" id="key-tech">Technique shorts</span></p>
+      <p class="calkey" id="calkey"><span class="e shoot">The shoot day</span><span class="e batch">A batch of films</span><span class="e ev" id="key-ev">Your events</span><span class="tech" id="key-tech"><i></i>Technique shorts, one mark each</span></p>
       <p class="calnote" id="evnote"></p>
       <p class="calnote">The finished films arrive together, and we get on a call to look back at what worked. You post them on your own schedule.</p>
     </section>
@@ -459,11 +456,11 @@ a{color:inherit}
     var ev = EVM[BY.events.val] || [], tech = BY.tech.val;
     $('cal12').innerHTML = MONTHS.map(function(name, m){
       var it = [];
-      if (m === 0) it.push('<span class="i shoot">The shoot day</span>');
-      if (ev.indexOf(m) > -1) it.push('<span class="i ev">Your event</span>');
-      if (m % 3 === 2) it.push('<span class="i batch">A batch of films</span>');
-      if (tech) it.push('<span class="i tech">' + tech + ' technique short' + (tech > 1 ? 's' : '') + '</span>');
-      return '<div class="m"><span class="mn">' + name + '</span>' + it.join('') + '</div>';
+      if (m === 0) it.push('<span class="e shoot">The shoot day</span>');
+      if (ev.indexOf(m) > -1) it.push('<span class="e ev">Your event</span>');
+      if (m % 3 === 2) it.push('<span class="e batch">A batch of films</span>');
+      var dots = tech ? '<span class="dots" title="' + tech + ' technique short' + (tech > 1 ? 's' : '') + '">' + new Array(tech + 1).join('<i></i>') + '</span>' : '';
+      return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + it.join('') + dots + '</div>';
     }).join('');
     $('key-ev').hidden = !ev.length; $('key-tech').hidden = !tech;
     var n = BY.events.val;
