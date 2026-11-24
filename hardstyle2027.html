@@ -251,6 +251,8 @@ a{color:inherit}
 .cal12 .shoot, .calkey .shoot{background:var(--pink); color:#fff}
 .cal12 .batch, .calkey .batch{border:1px solid var(--pink); color:var(--ink)}
 .cal12 .ev, .calkey .ev{border:1px dashed var(--gold); color:var(--gold)}
+.cal12 .batch .bi{display:block}
+.cal12 .batch .bi + .bi{margin-top:2px}
 .cal12 .dots{margin-top:auto; display:flex; gap:4px; padding-top:4px}
 .cal12 .dots i, .calkey .tech i{display:block; width:6px; height:6px; border-radius:50%; background:var(--mute)}
 .calkey{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:14px 0 0}
@@ -283,7 +285,7 @@ a{color:inherit}
       <h2>Keep the gym on your site and feed <em>all year</em></h2>
       <div>
         <p>Hi! I put out a few pieces for you in 2024 and after looking at what you've posted since, I put together this plan to add a little polish to your feeds next year.</p>
-        <p>Take whatever's useful from it, even if a full year isn't the right fit for now.</p>
+        <p>Take what you want, and post those on your own schedule.</p>
       </div>
     </div>
 
@@ -296,11 +298,11 @@ a{color:inherit}
         <li><span class="n">2</span><h3>Your first class</h3>
           <p>I can make a short course that walks folks through Foundations, six kettlebell basics, and it can sit on your classes page for new sign ups or run behind ad spend.</p></li>
         <li><span class="n">3</span><h3>Coach shorts</h3>
-          <p>Each of your coaches gets a short vertical built from the story in their bio, like Teal finding kettlebells after twelve ankle surgeries.</p></li>
+          <p>Your coach bios have some great stories in them, like Teal finding kettlebells after twelve ankle surgeries. I could turn each one into a short vertical for your feed, so new folks can meet a coach before their first class.</p></li>
         <li><span class="n">4</span><h3>Member stories</h3>
-          <p>We'd film three members telling their own story with real sound and light, to take the place of the phone testimonials on your site and YouTube.</p></li>
+          <p>The member testimonials on your site and YouTube were shot on phones. We could film three members telling their own story with proper sound and light and swap those out.</p></li>
         <li><span class="n">5</span><h3>Your events</h3>
-          <p>We'd film a half day at three of your events, like a strength challenge or a certification, and cut a recap from each one.</p></li>
+          <p>I'd come out for a half day at three of your events, like a strength challenge or a certification, and cut a recap of each one for your feed.</p></li>
         <li><span class="n">6</span><h3>Technique shorts</h3>
           <p>Swings! Get ups! We can cut two short verticals each month and keep some instructional content in your feed.</p></li>
       </ol>
@@ -311,7 +313,7 @@ a{color:inherit}
       <div class="cal12" id="cal12"></div>
       <p class="calkey" id="calkey"><span class="e shoot">The shoot day</span><span class="e batch">A batch of films</span><span class="e ev" id="key-ev">Your events</span><span class="tech" id="key-tech"><i></i>Technique shorts, one mark each</span></p>
       <p class="calnote" id="evnote"></p>
-      <p class="calnote">The finished films arrive together, and we get on a call to look back at what worked. You post them on your own schedule.</p>
+      <p class="calnote">The films from the shoot day come in together, and we'll hop on a call to look back at what worked.</p>
     </section>
     </div>
 
@@ -328,7 +330,7 @@ a{color:inherit}
 
       <h3 class="sub">What's in the year</h3>
       <ul class="pick" id="base"></ul>
-      <h3 class="sub">Premium add-ons</h3>
+      <h3 class="sub">Add to the year</h3>
       <ul class="pick" id="extra"></ul>
       </div>
 
@@ -378,8 +380,8 @@ a{color:inherit}
 <section class="close" id="talk">
   <div class="wrap">
     <div>
-      <h2>The easiest way to talk through the year is a coffee or a quick call</h2>
-      <p>Grab a time that works for you, or call me directly. The gym's a few minutes from me, so coffee is easy.</p>
+      <h2>Let's grab a coffee and talk through the year</h2>
+      <p>Grab a time below, or give me a call. The gym's only a few minutes from me, so coffee's easy, and it's my treat!</p>
     </div>
     <div class="contact">
       <a class="btn" href="https://calendly.com/portlandcontent/call" target="_blank" rel="noopener">Book a time to talk</a>
@@ -398,20 +400,20 @@ a{color:inherit}
   // Prices are the 12-month retainer prices from calc 270114-2CR; month to month is each price / 0.9.
   // share = what each pick adds to the production payment due at signing.
   var BASE = [
-    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:'We spend a full day at the gym, with audio for the interviews. The loop, the first-class film, the coach interviews, and the member stories are filmed on it.'},
-    {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:'We film a half day at an event and cut a recap from it.'},
-    {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:'We cut a short loop of a class in session that loads fast.'},
-    {id:'first', type:'on', val:true, price:480, name:'First-class film', desc:'We walk a new member through Foundations and the six kettlebell basics, for the intro 4-pack.'},
-    {id:'coach', type:'qty', min:0, max:8, val:8, price:96, one:'short', many:'shorts', name:'Coach shorts', desc:'Each coach gets a short vertical built from the story in their bio.'},
-    {id:'members', type:'qty', min:0, max:6, val:3, price:240, one:'story', many:'stories', name:'Member stories', desc:'Each member tells their own story with real sound and light.'},
-    {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:'We cut short verticals on one lift each, from the swing to the get-up.'}
+    {id:'shoot', type:'fixed', price:3710, share:1800, name:'January shoot day', desc:"I'll spend a full day at the gym, with audio set up for the interviews. We'll film the loop, the first-class film, the coach interviews, and the member stories that day."},
+    {id:'events', type:'qty', min:0, max:4, val:3, price:1190, share:580, one:'event', many:'events', name:'Event coverage', desc:"I'll come out for a half day at an event and cut a recap of it for your feed."},
+    {id:'loop', type:'on', val:true, price:300, name:'Homepage loop', desc:"We'll cut a new loop for the top of your home page from classes, sessions, and the new space on Division."},
+    {id:'first', type:'on', val:true, price:480, name:'First-class film', desc:"I'll make a short course that walks folks through Foundations and the six kettlebell basics, and it can sit on your classes page or run behind ad spend."},
+    {id:'coach', type:'qty', min:0, max:8, val:8, price:96, one:'short', many:'shorts', name:'Coach shorts', desc:"Each coach gets a short vertical for your feed, built from the story in their bio."},
+    {id:'members', type:'qty', min:0, max:6, val:3, price:240, one:'story', many:'stories', name:'Member stories', desc:"Each member tells their own story with proper sound and light, to replace the phone testimonials on your site."},
+    {id:'tech', type:'seg', opts:[0,1,2,4], val:2, per:12, price:48, name:'Technique shorts', desc:"We can cut short verticals on one lift each, from swings to get ups, to keep some instructional content in your feed."}
   ];
   var EXTRA = [
-    {id:'xday', type:'qty', min:0, max:2, val:0, price:2090, share:1160, one:'day', many:'days', name:'Extra shoot day', desc:'We come back for another full day at the gym, for more footage for the shorts.'},
-    {id:'rush', type:'on', val:false, price:160, perEvent:true, name:'Same-week recaps', desc:'Each event recap arrives within the week of the event.'},
-    {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:'A photographer works alongside us on the shoot day.'},
-    {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:'We add a half day at the gym with audio and cut a two to three minute film.'},
-    {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:'We cut four 15 to 30 second versions for paid ads, and your use widens to advertising.'}
+    {id:'xday', type:'qty', min:0, max:2, val:0, price:2090, share:1160, one:'day', many:'days', name:'Extra shoot day', desc:"I'll come back for another full day at the gym to get more footage for the shorts."},
+    {id:'rush', type:'on', val:false, price:160, perEvent:true, name:'Same-week recaps', desc:"You'll get each event recap the same week as the event."},
+    {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:"A photographer comes along on the January shoot day and takes stills for your site and socials."},
+    {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:"I'll add a half day at the gym with audio and cut a longer film about why you built the place, for your site."},
+    {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:"I'll cut four short versions for paid ads, and your use of the films opens up to advertising."}
   ];
   var ALL = BASE.concat(EXTRA), BY = {};
   ALL.forEach(function(it){ BY[it.id] = it; });
@@ -444,28 +446,49 @@ a{color:inherit}
   }
   function shootDesc(){
     var a = onDay(true), talk = BY.coach.val > 0 || BY.members.val > 0;
-    var t = 'We spend a full day at the gym' + (talk ? ', with audio for the interviews.' : '.');
-    if (a.length) t += ' ' + cap(list(a)) + (a.length === 1 ? ' is' : ' are') + ' filmed on it.';
+    var t = "I'll spend a full day at the gym" + (talk ? ', with audio set up for the interviews.' : '.');
+    if (a.length) t += " We'll film " + list(a) + ' that day.';
     return t;
   }
   // Cody, Nov 24: the year as twelve months that follow the picks. Event months are placeholders.
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var EVM = {0:[], 1:[5], 2:[3,8], 3:[3,6,9], 4:[2,4,7,9]};
   var WORD = ['', 'one', 'two', 'three', 'four'];
+  // Cody, Nov 24: each batch names what's in it, following the picks. The shoot-day films come in together in March,
+  // each event recap comes in the batch after its event (or the same week with that add-on), and the brand film and ad cuts close the year.
+  function batch(m, ev){
+    var b = [], n;
+    if (m === 2) {
+      if (BY.loop.val) b.push('Homepage loop');
+      if (BY.first.val) b.push('First-class film');
+      if ((n = BY.coach.val)) b.push(n + ' coach short' + (n > 1 ? 's' : ''));
+      if ((n = BY.members.val)) b.push(n + ' member stor' + (n > 1 ? 'ies' : 'y'));
+      if (BY.photo.val) b.push('Photos');
+    }
+    n = BY.rush.val ? 0 : ev.filter(function(e){ return e <= m && e > m - 3; }).length;
+    if (n) b.push(n > 1 ? n + ' event recaps' : 'Event recap');
+    if (m === 11) {
+      if (BY.brand.val) b.push('Brand film');
+      if (BY.ads.val) b.push('4 ad cuts');
+    }
+    return b;
+  }
   function calendar(){
     var ev = EVM[BY.events.val] || [], tech = BY.tech.val;
     $('cal12').innerHTML = MONTHS.map(function(name, m){
       var it = [];
       if (m === 0) it.push('<span class="e shoot">The shoot day</span>');
       if (ev.indexOf(m) > -1) it.push('<span class="e ev">Your event</span>');
-      if (m % 3 === 2) it.push('<span class="e batch">A batch of films</span>');
+      if (m % 3 === 2) { var b = batch(m, ev); if (b.length) it.push('<span class="e batch">' + b.map(function(x){ return '<span class="bi">' + x + '</span>'; }).join('') + '</span>'); }
       var dots = tech ? '<span class="dots" title="' + tech + ' technique short' + (tech > 1 ? 's' : '') + '">' + new Array(tech + 1).join('<i></i>') + '</span>' : '';
       return '<div class="m"><span class="mn">' + name.slice(0, 3) + '</span>' + it.join('') + dots + '</div>';
     }).join('');
     $('key-ev').hidden = !ev.length; $('key-tech').hidden = !tech;
     var n = BY.events.val;
     $('evnote').hidden = !n;
-    $('evnote').textContent = n ? 'We come back for a half day at ' + WORD[n] + ' event' + (n > 1 ? 's' : '') + ' you pick. Their months hold places until you pick them.' : '';
+    $('evnote').textContent = !n ? '' : n === 1
+      ? "I'll come back for a half day at the event you pick. We'll pencil in its month for now and move it once you have a date."
+      : "I'll come back for a half day at each of the " + WORD[n] + " events you pick. We'll pencil in their months for now and move them once you have dates.";
   }
 
   function row(it){
