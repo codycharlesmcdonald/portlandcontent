@@ -418,7 +418,9 @@ a{color:inherit}
     {id:'rush', type:'on', val:false, price:160, perEvent:true, name:'Same-week recaps', desc:"You'll get each event recap the same week as the event."},
     {id:'photo', type:'on', val:false, price:1350, share:750, name:'Photos on the January day', desc:"A photographer comes along on the January shoot day and takes stills for your site and socials."},
     {id:'brand', type:'on', val:false, price:2770, share:900, name:'A film about the people behind Hardstyle', desc:"I'll add a half day at the gym with audio and cut a longer film about why you built the place, for your site."},
-    {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:"I'll cut four short versions for paid ads, and your use of the films opens up to advertising."}
+    {id:'ads', type:'on', val:false, price:900, name:'Ad cuts', desc:"I'll cut four short versions for paid ads, and your use of the films opens up to advertising."},
+    // lead gen spec 0c3826d6: one-time, all of it at signing; the team page folds into it
+    {id:'site', type:'on', val:false, price:2800, share:2800, name:'Site refresh', desc:"We'll refresh your site so every film from the year has a home on it, from the loop up top to a page for your recaps and technique shorts."}
   ];
   var ALL = BASE.concat(EXTRA), BY = {};
   ALL.forEach(function(it){ BY[it.id] = it; });
@@ -431,7 +433,7 @@ a{color:inherit}
   function unit(it, m){ return m ? it.price : Math.round(it.price / 0.9); }
   function count(it){
     if (it.type === 'fixed') return 1;
-    if (it.id === 'team' && !BY.coach.val) return 0;
+    if (it.id === 'team' && (!BY.coach.val || BY.site.val)) return 0;
     if (it.type === 'on') return it.val ? (it.perEvent ? BY.events.val : 1) : 0;
     if (it.type === 'seg') return it.val * it.per;
     return it.val;
@@ -480,7 +482,8 @@ a{color:inherit}
       dl('First class course', BY.first.val);
       dl(BY.coach.val ? plural(BY.coach.val, 'coach short', 'coach shorts') : 'Coach shorts', BY.coach.val > 0);
       dl(BY.members.val ? plural(BY.members.val, 'member story', 'member stories') : 'Member stories', BY.members.val > 0);
-      if (BY.coach.val) dl('Team page', BY.team.val);
+      if (BY.coach.val && !BY.site.val) dl('Team page', BY.team.val);
+      dl('Site refresh', BY.site.val);
       dl('Photos', BY.photo.val);
       dl('4 ad cuts', BY.ads.val);
     }
@@ -505,7 +508,7 @@ a{color:inherit}
       ? "I'll come back for a half day at the event you pick. We'll pencil in its month for now and move it once you have a date."
       : "I'll come back for a half day at each of the " + WORD[n] + " events you pick. We'll pencil in their months for now and move them once you have dates.";
     var tp = document.getElementById('idea-team');
-    if (tp) tp.hidden = !(BY.coach.val > 0 && BY.team.val);
+    if (tp) tp.hidden = !(BY.coach.val > 0 && (BY.team.val || BY.site.val));
   }
 
   function row(it){
@@ -552,7 +555,7 @@ a{color:inherit}
     });
     $('r-shoot').querySelector('.d').firstChild.textContent = shootDesc() + ' ';
     calendar();
-    $('r-team').hidden = !BY.coach.val;
+    $('r-team').hidden = !BY.coach.val || BY.site.val;
     var rush = $('r-rush').querySelector('.sw');
     rush.disabled = BY.events.val === 0;
 
@@ -566,7 +569,7 @@ a{color:inherit}
       $('mo').textContent = 'About ' + money(ten(t / 12)) + ' a month';
       $('pay').textContent = 'Two payments, with ' + money(prod) + ' at signing to cover production and ' + money(rest) + ' on approval of the films. These prices hold through December 6.';
     } else {
-      var start = Math.round(SIGN / 0.9), mo = ten((t - start) / 12);
+      var start = Math.round(SIGN / 0.9) + line(BY.site, false), mo = ten((t - start) / 12);
       $('mo').textContent = 'About ' + money(mo) + ' a month';
       $('pay').textContent = money(start) + ' to start, then about ' + money(mo) + ' a month. You can stop any month with 30 days’ notice. These prices hold through December 6.';
     }
