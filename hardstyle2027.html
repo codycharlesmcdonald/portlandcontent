@@ -314,7 +314,7 @@ a{color:inherit}
         <li><span class="n">6</span><h3>Technique shorts</h3>
           <p>Swings! Get ups! We can cut two short verticals each month and keep some instructional content in your feed.</p></li>
         <li><span class="n">7</span><h3>Web design</h3>
-          <p>We could also take on web design and redesign your site so everything we make next year has a home on it. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
+          <p>We could take on the content already created and put it into action with a website redesign. The new loop goes up top, and the coach shorts fill the new team page. The first class course sits on your classes page, and member stories take the place of the phone testimonials. Recaps and technique shorts get a page of their own that keeps filling up through the year.</p></li>
       </ol>
     </section>
 
@@ -362,7 +362,7 @@ a{color:inherit}
           <label>Your name<input type="text" name="name" autocomplete="name" required></label>
           <label>Your email<input type="email" name="email" autocomplete="email" required></label>
         </div>
-        <button class="btn" type="submit">Send to Cody</button>
+        <button class="btn" type="submit">Send me your picks</button>
         <p class="sent" id="sent" aria-live="polite"></p>
       </form>
     </section>
@@ -700,7 +700,7 @@ a{color:inherit}
     var body = ['Name: ' + name, 'Email: ' + email, 'Plan: ' + (member ? '12-month retainer' : 'Month to month'), '']
       .concat(picks(), ['', 'Total: ' + $('sum').textContent, $('pay').textContent], answers(f), ['', 'Thanks!']).join('\n');
     location.href = 'mailto:cody@macfilmproductions.com?subject=' + encodeURIComponent('Hardstyle Strength | My 2027 picks') + '&body=' + encodeURIComponent(body);
-    $('sent').textContent = "Your email app opened with your picks. Hit send and they'll come straight to Cody.";
+    $('sent').textContent = "Your email app opened with your picks. Hit send and they'll come straight to me.";
   });
 })();
 </script>
