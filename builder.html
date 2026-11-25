@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Proposal builder</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap">
+<!-- Cody, Nov 25, Lead Gen to-do 10548649218: "A seems great!" A form, a live preview in the pitch page look, and Publish to portlandcontent.com/<client>,
+     unlisted and noindex, from his laptop or phone with no Claude and nothing at the Studio. Proposals draw with proposal.js and proposal.css. -->
+<style>
+:root{--bg:#F6F5F2; --panel:#FFFFFF; --ink:#1B1E24; --mute:#5E636C; --rule:#DEDBD4; --accent:#C8193F; --ok:#1F7A4D; --warn:#A35A00; color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0A0E14; --panel:#121821; --ink:#ECEAE6; --mute:#9EA4AD; --rule:#2A313C; --accent:#F0456C; --ok:#5CC98F; --warn:#F0A64A; color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 "Figtree","Helvetica Neue",Arial,sans-serif}
+[hidden]{display:none!important}
+a{color:var(--accent)}
+.top{display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; padding:14px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px)); border-bottom:1px solid var(--rule); background:var(--panel); position:sticky; top:0; z-index:20}
+.top h1{font-size:18px; font-weight:600; margin:0}
+.top .sp{flex:1}
+.top select{max-width:220px}
+.app{display:grid; grid-template-columns:minmax(360px,460px) minmax(0,1fr); height:calc(100vh - 61px)}
+.form{overflow-y:auto; padding:8px max(16px,env(safe-area-inset-left,0px)) 120px 18px; border-right:1px solid var(--rule)}
+.prev{position:relative; min-width:0; background:var(--rule)}
+.prev iframe{border:0; width:100%; height:100%; display:block; background:#fff}
+.prev .w{position:absolute; top:10px; right:14px; display:flex; gap:6px}
+.tabs{display:none}
+@media (max-width:899px){
+  .app{grid-template-columns:minmax(0,1fr); height:auto}
+  .form{border-right:0; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .top{position:static}
+  .top select{flex:1 1 160px; max-width:none}
+  .prev{height:calc(100vh - 52px); height:calc(100dvh - 52px - env(safe-area-inset-bottom,0px))}
+  body[data-tab="edit"] .prev, body[data-tab="preview"] .form{display:none}
+  .tabs{display:flex; position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--panel); border-top:1px solid var(--rule); padding-bottom:env(safe-area-inset-bottom,0px)}
+  .tabs button{flex:1; padding:14px; border:0; background:none; font:inherit; font-weight:600; color:var(--mute)}
+  .tabs button[aria-pressed="true"]{color:var(--accent)}
+}
+details{border-bottom:1px solid var(--rule); padding:4px 0}
+summary{cursor:pointer; font-weight:600; font-size:16px; padding:12px 0; list-style:none; display:flex; justify-content:space-between; gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; color:var(--mute); font-weight:400}
+details[open] summary::after{content:"−"}
+summary small{font-weight:400; color:var(--mute); margin-left:auto; margin-right:8px}
+.f{display:grid; gap:4px; margin:0 0 12px; min-width:0}
+.f > span{font-size:14px; color:var(--mute)}
+.f em{font-style:normal; color:var(--mute); font-size:13px}
+input[type=text],input[type=url],input[type=number],input[type=password],input[type=email],textarea,select{font:inherit; font-size:16px; color:var(--ink); background:var(--panel); border:1px solid var(--rule); border-radius:6px; padding:9px 11px; width:100%; min-width:0}
+textarea{resize:vertical; min-height:72px}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline-offset:0; border-color:transparent}
+.row{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 10px}
+.row3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 10px}
+.color{display:grid; grid-template-columns:44px minmax(0,1fr); gap:6px; align-items:center}
+.color input[type=color]{width:44px; height:40px; padding:2px; border:1px solid var(--rule); border-radius:6px; background:var(--panel)}
+.btn{font:inherit; font-size:15px; font-weight:600; border:1px solid var(--rule); background:var(--panel); color:var(--ink); border-radius:999px; padding:8px 16px; cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.go{background:var(--accent); border-color:var(--accent); color:#fff}
+.btn.sm{font-size:13px; padding:4px 10px; font-weight:500}
+.btn:disabled{opacity:.45; cursor:default}
+.list{display:grid; gap:10px; margin:0 0 10px}
+.it{border-left:2px solid var(--rule); padding:4px 0 4px 12px}
+.it .bar{display:flex; gap:6px; justify-content:flex-end; margin-bottom:4px}
+.it .bar b{margin-right:auto; font-size:14px; color:var(--mute); font-weight:500}
+.note{font-size:14px; color:var(--mute); margin:0 0 12px}
+.msg{font-size:14px; margin:8px 0 0; min-height:1.4em}
+.msg.ok{color:var(--ok)} .msg.warn{color:var(--warn)} .msg.bad{color:var(--accent)}
+.steps{margin:0 0 12px; padding-left:20px; font-size:14px; color:var(--mute)}
+.steps li{margin-bottom:4px}
+.live{display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:14px}
+.live code{font:inherit; user-select:all}
+</style>
+</head>
+<body data-tab="edit">
+<header class="top">
+  <h1>Proposal builder</h1>
+  <select id="open" aria-label="Open a proposal"></select>
+  <button class="btn sm" type="button" id="new">New</button>
+  <span class="sp"></span>
+  <button class="btn go" type="button" id="pub1">Publish</button>
+</header>
+
+<div class="app">
+  <form class="form" id="form" autocomplete="off" onsubmit="return false">
+
+    <details open><summary>Client</summary>
+      <label class="f"><span>Client name</span><input type="text" data-k="client.name" placeholder="Hardstyle Strength"></label>
+      <label class="f"><span>Web address <em>portlandcontent.com/</em></span><input type="text" id="slug" data-k="slug" placeholder="hardstyle2027" pattern="[a-z0-9-]+"></label>
+      <div class="row">
+        <label class="f"><span>Who it's for</span><input type="text" data-k="client.contact" placeholder="Paris Bakkum"></label>
+        <label class="f"><span>Month</span><input type="text" data-k="client.month" placeholder="November 2026"></label>
+      </div>
+      <label class="f"><span>From</span><select data-k="studio"><option>Portland Content</option><option>Mac Films</option></select></label>
+    </details>
+
+    <details><summary>Brand</summary>
+      <p class="note">The client's hex codes. The page checks them against the banned near-blacks.</p>
+      <div class="row">
+        <label class="f"><span>Background</span><span class="color"><input type="color" data-c="brand.bg"><input type="text" data-k="brand.bg" placeholder="#0B0B0B"></span></label>
+        <label class="f"><span>Text</span><span class="color"><input type="color" data-c="brand.ink"><input type="text" data-k="brand.ink" placeholder="#F4F2EE"></span></label>
+        <label class="f"><span>Accent</span><span class="color"><input type="color" data-c="brand.accent"><input type="text" data-k="brand.accent" placeholder="#EE1D52"></span></label>
+        <label class="f"><span>Second accent</span><span class="color"><input type="color" data-c="brand.accent2"><input type="text" data-k="brand.accent2" placeholder="#D9B45A"></span></label>
+      </div>
+      <p class="msg" id="colorMsg"></p>
+      <label class="f"><span>Type</span><select data-k="brand.fonts"><option value="serif">DM Serif Display and Figtree</option><option value="bodoni">Bodoni Moda and Hanken Grotesk</option><option value="fraunces">Fraunces and Instrument Sans</option></select></label>
+      <label class="f"><span>Logo link <em>optional, a PNG or SVG web address</em></span><input type="url" data-k="brand.logo"></label>
+      <label class="f"><span>Banner photo link <em>optional, a wide still from their films</em></span><input type="url" data-k="brand.image"></label>
+      <label class="f"><span>What the photo shows</span><input type="text" data-k="brand.imageAlt"></label>
+    </details>
+
+    <details><summary>Title and opening</summary>
+      <label class="f"><span>Above the title</span><input type="text" data-k="title.kicker" placeholder="A plan for your 2027"></label>
+      <label class="f"><span>Title <em>*stars* colour a word</em></span><input type="text" data-k="title.name" placeholder="Hardstyle *Strength*"></label>
+      <label class="f"><span>Headline <em>*stars* colour a word</em></span><input type="text" data-k="lede.headline"></label>
+      <label class="f"><span>Opening <em>a blank line starts a new paragraph</em></span><textarea rows="6" data-k="lede.text"></textarea></label>
+    </details>
+
+    <details><summary>Ideas <small id="n-ideas"></small></summary>
+      <label class="f"><span>Heading</span><input type="text" data-k="ideasLabel" placeholder="Ideas for the year"></label>
+      <div class="list" data-list="ideas"></div>
+      <button class="btn sm" type="button" data-add="ideas">Add an idea</button>
+    </details>
+
+    <details><summary>Copy sections <small id="n-sections"></small></summary>
+      <p class="note">Free sections that sit after the ideas. Add or take out as many as you like.</p>
+      <div class="list" data-list="sections"></div>
+      <button class="btn sm" type="button" data-add="sections">Add a section</button>
+    </details>
+
+    <details><summary>Packages <small id="n-packs"></small></summary>
+      <p class="note">Side by side, with their rows lined up. The client picks one and it goes into the total.</p>
+      <label class="f"><span>Heading over them</span><input type="text" data-k="packages.label" placeholder="Pick a collection"></label>
+      <div class="list" data-list="packages.items"></div>
+      <button class="btn sm" type="button" data-add="packages.items">Add a package</button>
+    </details>
+
+    <details><summary>Priced picks <small id="n-picks"></small></summary>
+      <label class="f"><span>Section heading</span><input type="text" data-k="picks.label" placeholder="Build your year"></label>
+      <label class="f"><span>Heading over the add-ons, when there are packages</span><input type="text" data-k="picks.addLabel" placeholder="Add to the year"></label>
+      <div class="list" data-list="picks.items"></div>
+      <button class="btn sm" type="button" data-add="picks.items">Add a pick</button>
+    </details>
+
+    <details><summary>Total and payment</summary>
+      <label class="f"><span>Plan name</span><input type="text" data-k="pay.label" placeholder="12-month retainer"></label>
+      <label class="f"><span>Line under the total <em>{total} and {month} fill in</em></span><textarea rows="2" data-k="pay.note"></textarea></label>
+      <div class="row">
+        <label class="f"><span>Show a monthly average over</span><input type="number" min="0" max="24" data-k="pay.months" placeholder="12"></label>
+        <label class="f"><span>Prices hold through</span><input type="text" data-k="picks.hold" placeholder="December 6"></label>
+      </div>
+      <label class="f"><span><input type="checkbox" data-k="pay.monthly"> Also offer month to month</span></label>
+      <div id="mtm">
+        <div class="row">
+          <label class="f"><span>Its name</span><input type="text" data-k="pay.mLabel" placeholder="Month to month"></label>
+          <label class="f"><span>The retainer saves (%)</span><input type="number" min="0" max="50" data-k="pay.save" placeholder="10"></label>
+        </div>
+        <label class="f"><span>Its line under the total</span><textarea rows="2" data-k="pay.mNote"></textarea></label>
+      </div>
+    </details>
+
+    <details><summary>Calendar <small id="n-cal"></small></summary>
+      <label class="f"><span>Show it as</span><select data-k="calendar.mode"><option value="none">No calendar</option><option value="year">A year, twelve months</option><option value="dates">Dated steps</option></select></label>
+      <label class="f"><span>Heading</span><input type="text" data-k="calendar.label" placeholder="How the year runs"></label>
+      <label class="f"><span>Note under it</span><input type="text" data-k="calendar.note"></label>
+      <div class="list" data-list="calendar.items"></div>
+      <button class="btn sm" type="button" data-add="calendar.items">Add to the calendar</button>
+    </details>
+
+    <details><summary>Films <small id="n-films"></small></summary>
+      <label class="f"><span>Heading</span><input type="text" data-k="filmsLabel" placeholder="Films we made"></label>
+      <p class="note">Paste a Vimeo link. The still comes from Vimeo unless you add one, and the film previews on hover.</p>
+      <div class="list" data-list="films"></div>
+      <button class="btn sm" type="button" data-add="films">Add a film</button>
+    </details>
+
+    <details><summary>Questions <small id="n-qs"></small></summary>
+      <p class="note">Each one gets an answer box in the send form, and the answers come to you with the picks.</p>
+      <div class="list" data-list="questions"></div>
+      <button class="btn sm" type="button" data-add="questions">Add a question</button>
+    </details>
+
+    <details><summary>Delivery and access</summary>
+      <label class="f"><span>The line</span><textarea rows="3" data-k="delivery"></textarea></label>
+      <div class="live"><button class="btn sm" type="button" data-deliv="films">Films only</button><button class="btn sm" type="button" data-deliv="photos">Films and photos</button><button class="btn sm" type="button" data-deliv="">Leave it out</button></div>
+    </details>
+
+    <details><summary>The close</summary>
+      <label class="f"><span>Heading</span><input type="text" data-k="close.heading" placeholder="Let’s grab a coffee and talk through the year"></label>
+      <label class="f"><span>Text</span><textarea rows="2" data-k="close.text"></textarea></label>
+      <label class="f"><span>Calendly link <em>the calendar shows inline</em></span><input type="url" data-k="close.calendly"></label>
+      <div class="row">
+        <label class="f"><span>Phone</span><input type="text" data-k="close.phone"></label>
+        <label class="f"><span>Email</span><input type="email" data-k="close.email"></label>
+      </div>
+      <label class="f"><span>Send button</span><input type="text" data-k="send.button" placeholder="Send me your picks"></label>
+    </details>
+
+    <details id="pubBox"><summary>Publish</summary>
+      <p class="note">Publishing puts the page at portlandcontent.com/<b id="slugShow">…</b>, unlisted and hidden from search. It goes live about a minute later. Publishing again replaces it.</p>
+      <button class="btn go" type="button" id="pub">Publish</button>
+      <p class="msg" id="pubMsg" aria-live="polite"></p>
+      <p class="live" id="liveLink" hidden></p>
+      <hr style="border:0; border-top:1px solid var(--rule); margin:18px 0">
+      <p class="note"><b>Connect this browser once.</b> Publishing needs a GitHub key that stays on this device only. <span id="keyState"></span></p>
+      <ol class="steps">
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> and sign in.</li>
+        <li>Name it "Proposal builder" and set Expiration to 1 year.</li>
+        <li>Under Repository access pick "Only select repositories", then "portlandcontent".</li>
+        <li>Under Permissions, Repository permissions, set Contents to "Read and write".</li>
+        <li>Click Generate token, copy it, and paste it below.</li>
+      </ol>
+      <label class="f"><span>GitHub key</span><input type="password" id="key" autocomplete="off" spellcheck="false"></label>
+      <div class="live"><button class="btn sm" type="button" id="keySave">Save on this device</button><button class="btn sm" type="button" id="keyForget">Forget it</button></div>
+      <p class="msg" id="keyMsg" aria-live="polite"></p>
+    </details>
+
+    <details><summary>Open or copy</summary>
+      <label class="f"><span>Open a published proposal <em>its web address</em></span><input type="text" id="loadSlug" placeholder="hardstyle2027"></label>
+      <button class="btn sm" type="button" id="load">Open it here</button>
+      <button class="btn sm" type="button" id="dup">Start a new one from this</button>
+      <button class="btn sm" type="button" id="del">Delete this draft</button>
+      <p class="msg" id="loadMsg" aria-live="polite"></p>
+    </details>
+  </form>
+
+  <section class="prev" aria-label="Preview">
+    <iframe id="frame" title="Preview"></iframe>
+  </section>
+</div>
+<nav class="tabs" aria-label="View"><button type="button" data-tab="edit" aria-pressed="true">Edit</button><button type="button" data-tab="preview" aria-pressed="false">Preview</button></nav>
+
+<script src="/proposal.js"></script>
+<script>
+(function(){
+  'use strict';
+  var OWNER = 'codycharlesmcdonald', REPO = 'portlandcontent', SITE = 'https://portlandcontent.com/';
+  var KEY = 'pcb-key', DRAFTS = 'pcb-drafts', LAST = 'pcb-last';
+  /* pages that are not builder proposals never get replaced */
+  var RESERVED = ['builder', 'proposal', 'index', 'home', '404', 'about', 'contact', 'work', 'services', 'pricing', 'press', 'team', 'faqs', 'music', 'invest', 'case', 'consultation', 'free-consultation', 'getintouch', 'real-estate', 'social-media', 'vertical', 'vertical-content', 'past-projects', 'sitemap', 'robots'];
+  var DELIV = {
+    films: 'Your films go in a private Vimeo showcase made for you, with downloads on for every one. It stays up with no end date.',
+    photos: 'Your films go in a private Vimeo showcase made for you, with downloads on for every one, and the photos come as one gallery to download. Both stay up with no end date.'
+  };
+  function $(id){ return document.getElementById(id); }
+  function store(k, v){ try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || 'null'); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
+  function uid(){ return 'p' + Math.random().toString(36).slice(2, 8); }
+  function slugify(s){ return String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60); }
+
+  /* a new proposal starts with Cody's own lines (MOCKUP-RULES: his take-what-you-want line once in the lede, the coffee close, the approved delivery line) */
+  function blank(){
+    return {
+      v: 1, slug: '', studio: 'Portland Content',
+      client: { name: '', contact: '', month: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) },
+      brand: { bg: '#0B0B0B', ink: '#F4F2EE', accent: '#EE1D52', accent2: '#D9B45A', fonts: 'serif', logo: '', image: '', imageAlt: '' },
+      title: { kicker: 'A plan for your ' + (new Date().getFullYear() + 1), name: '' },
+      lede: { headline: '', text: 'Hi!\n\nTake what you want, and post those on your own schedule.' },
+      ideasLabel: 'Ideas for the year', ideas: [], sections: [],
+      packages: { label: '', items: [] },
+      picks: { label: 'Build your year', addLabel: 'Add to the year', hold: '', items: [] },
+      pay: { label: '12-month retainer', note: 'These prices hold through {hold}.', months: 12, monthly: false, mLabel: 'Month to month', save: 10, mNote: 'Billed as we go, each shoot and film as it happens. You can stop any month with 30 days’ notice.' },
+      calendar: { mode: 'none', label: '', note: '', items: [] },
+      filmsLabel: 'Films we made', films: [], questions: [],
+      delivery: DELIV.films,
+      close: { heading: 'Let’s grab a coffee and talk through the year', text: '', calendly: 'https://calendly.com/portlandcontent/call', phone: '(503) 568-1199', email: 'cody@macfilmproductions.com' },
+      send: { button: 'Send me your picks' }
+    };
+  }
+
+  /* what the page draws from: the form's fields turned into proposal.js data */
+  function page(d){
+    var o = JSON.parse(JSON.stringify(d));
+    o.client.prepared = d.client.contact || d.client.month ? 'Prepared for ' + [d.client.contact, d.client.month].filter(Boolean).join(', ') : '';
+    o.lede.paras = String(d.lede.text || '').split(/\n\s*\n/).map(function (t) { return t.trim(); }).filter(Boolean);
+    o.studioSite = d.studio === 'Mac Films' ? 'macfilmproductions.com' : 'portlandcontent.com';
+    /* with no hold date, a sentence that names {hold} drops out instead of reading "hold through ." */
+    var note = function (s) { s = String(s || ''); return String(d.picks.hold || '').trim() ? s : s.split(/(?<=[.!?])\s+/).filter(function (x) { return x.indexOf('{hold}') < 0; }).join(' '); };
+    o.picks.plans = [{ label: d.pay.monthly ? d.pay.label : '', factor: 1, note: note(d.pay.note), months: Number(d.pay.months) || 0 }];
+    if (d.pay.monthly) o.picks.plans.push({ label: d.pay.mLabel || 'Month to month', factor: 1 / (1 - Math.min(50, Number(d.pay.save) || 0) / 100), note: note(d.pay.mNote), months: Number(d.pay.months) || 0 });
+    o.questions = (d.questions || []).map(function (q) { return q.text; });
+    /* the package marked recommended starts picked */
+    var named = (d.packages.items || []).filter(function (p) { return p.name; });
+    o.packages.pick = Math.max(0, named.map(function (p) { return !!p.recommended; }).indexOf(true));
+    o.pageTitle = d.client.name || 'Proposal';
+    return o;
+  }
+
+  var data = null, id = null;
+
+  /* list editors: each list names its fields */
+  var LISTS = {
+    ideas: { one: 'Idea', make: function(){ return { title: '', text: '' }; }, f: [['title', 'Title'], ['text', 'What it does for them', 'area']] },
+    sections: { one: 'Section', make: function(){ return { heading: '', text: '' }; }, f: [['heading', 'Heading'], ['text', 'Text, a blank line starts a paragraph', 'area']] },
+    'packages.items': { one: 'Package', make: function(){ return { name: '', price: '', deliverables: '', note: '', recommended: false }; }, f: [['name', 'Name'], ['price', 'Price', 'num'], ['deliverables', 'What it includes, one per line', 'area'], ['note', 'Small print under it'], ['recommended', 'Mark it recommended', 'check']] },
+    'picks.items': { one: 'Pick', make: function(){ return { id: uid(), name: '', desc: '', type: 'on', price: '', val: true, min: 0, max: 4, unit: '' }; }, f: [['name', 'Name'], ['desc', 'What it is', 'area'], ['type', 'How they pick it', 'type'], ['price', 'Price, each', 'num'], ['val', 'Starts on, or how many', 'val'], ['max', 'Most they can pick', 'numq'], ['unit', 'Each one is a', 'textq']] },
+    'calendar.items': { one: 'Calendar item', make: function(){ return { month: 1, when: '', title: '', kind: 'shoot', pick: '', text: '' }; }, f: [['title', 'What happens'], ['kind', 'Kind', 'kind'], ['month', 'Month', 'month'], ['when', 'Date', 'when'], ['text', 'A line under it', 'whenq'], ['pick', 'Shows while this pick is in', 'pick']] },
+    films: { one: 'Film', make: function(){ return { vimeo: '', title: '', text: '', thumb: '' }; }, f: [['vimeo', 'Vimeo link', 'url'], ['title', 'Title'], ['text', 'A line about it'], ['thumb', 'Still link, optional', 'url']] },
+    questions: { one: 'Question', make: function(){ return { text: '' }; }, f: [['text', 'Question']] }
+  };
+  function get(o, path){ return path.split('.').reduce(function (a, k) { return a == null ? a : a[k]; }, o); }
+  function set(o, path, v){ var ks = path.split('.'), last = ks.pop(); var t = ks.reduce(function (a, k) { if (a[k] == null) a[k] = {}; return a[k]; }, o); t[last] = v; }
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  function field(path, i, f, it){
+    var k = f[0], lab = f[1], kind = f[2] || 'text', v = it[k], name = 'data-li="' + path + '" data-i="' + i + '" data-f="' + k + '"';
+    var mode = data.calendar.mode;
+    if (kind === 'area') return '<label class="f"><span>' + lab + '</span><textarea rows="3" ' + name + '>' + esc(v) + '</textarea></label>';
+    if (kind === 'check') return '<label class="f"><span><input type="checkbox" ' + name + (v ? ' checked' : '') + '> ' + lab + '</span></label>';
+    if (kind === 'num') return '<label class="f"><span>' + lab + '</span><input type="number" min="0" step="1" ' + name + ' value="' + esc(v) + '"></label>';
+    if (kind === 'url') return '<label class="f"><span>' + lab + '</span><input type="url" ' + name + ' value="' + esc(v) + '"></label>';
+    if (kind === 'type') return '<label class="f"><span>' + lab + '</span><select ' + name + '>' + [['on', 'On or off'], ['qty', 'A number of them'], ['fixed', 'Always included']].map(function (o) { return '<option value="' + o[0] + '"' + (v === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>';
+    if (kind === 'val') return it.type === 'fixed' ? '' : it.type === 'qty' ? '<label class="f"><span>How many to start</span><input type="number" min="0" ' + name + ' value="' + esc(Number(v) || 0) + '"></label>' : '<label class="f"><span><input type="checkbox" ' + name + (v ? ' checked' : '') + '> Starts on</span></label>';
+    if (kind === 'numq') return it.type === 'qty' ? '<label class="f"><span>' + lab + '</span><input type="number" min="1" ' + name + ' value="' + esc(v) + '"></label>' : '';
+    if (kind === 'textq') return it.type === 'qty' ? '<label class="f"><span>' + lab + ' <em>e.g. day, event, story</em></span><input type="text" ' + name + ' value="' + esc(v) + '"></label>' : '';
+    if (kind === 'kind') return '<label class="f"><span>' + lab + '</span><select ' + name + '>' + [['shoot', 'A shoot'], ['delivery', 'A delivery'], ['post', 'A post']].map(function (o) { return '<option value="' + o[0] + '"' + (v === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>';
+    if (kind === 'month') return mode === 'dates' ? '' : '<label class="f"><span>' + lab + '</span><select ' + name + '>' + MONTHS.map(function (m, j) { return '<option value="' + (j + 1) + '"' + (Number(v) === j + 1 ? ' selected' : '') + '>' + m + '</option>'; }).join('') + '</select></label>';
+    if (kind === 'when') return mode === 'dates' ? '<label class="f"><span>' + lab + ' <em>as it should read, e.g. Fri, Nov 13</em></span><input type="text" ' + name + ' value="' + esc(v) + '"></label>' : '';
+    if (kind === 'whenq') return mode === 'dates' ? '<label class="f"><span>' + lab + '</span><input type="text" ' + name + ' value="' + esc(v) + '"></label>' : '';
+    if (kind === 'pick') {
+      var ps = (data.picks.items || []).filter(function (p) { return p.name && p.type !== 'fixed'; });
+      return '<label class="f"><span>' + lab + '</span><select ' + name + '><option value="">Always</option>' + ps.map(function (p) { return '<option value="' + esc(p.id) + '"' + (v === p.id ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('') + '</select></label>';
+    }
+    return '<label class="f"><span>' + lab + '</span><input type="text" ' + name + ' value="' + esc(v) + '"></label>';
+  }
+  function drawList(path){
+    var box = document.querySelector('[data-list="' + path + '"]'), arr = get(data, path) || [], L = LISTS[path];
+    box.innerHTML = arr.map(function (it, i) {
+      return '<div class="it"><div class="bar"><b>' + L.one + ' ' + (i + 1) + '</b>' +
+        '<button class="btn sm" type="button" data-mv="' + path + '" data-i="' + i + '" data-d="-1"' + (i ? '' : ' disabled') + ' aria-label="Move up">↑</button>' +
+        '<button class="btn sm" type="button" data-mv="' + path + '" data-i="' + i + '" data-d="1"' + (i < arr.length - 1 ? '' : ' disabled') + ' aria-label="Move down">↓</button>' +
+        '<button class="btn sm" type="button" data-rm="' + path + '" data-i="' + i + '">Remove</button></div>' +
+        L.f.map(function (f) { return field(path, i, f, it); }).join('') + '</div>';
+    }).join('');
+    counts();
+  }
+  function counts(){
+    var c = { ideas: 'ideas', sections: 'sections', packs: 'packages.items', picks: 'picks.items', cal: 'calendar.items', films: 'films', qs: 'questions' };
+    Object.keys(c).forEach(function (k) { var n = (get(data, c[k]) || []).length; $('n-' + k).textContent = n ? n : ''; });
+  }
+
+  function fill(){
+    [].forEach.call(document.querySelectorAll('[data-k]'), function (el) {
+      var v = get(data, el.getAttribute('data-k'));
+      if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v;
+    });
+    [].forEach.call(document.querySelectorAll('[data-c]'), function (el) { var v = get(data, el.getAttribute('data-c')); if (/^#[0-9a-f]{6}$/i.test(v || '')) el.value = v; });
+    Object.keys(LISTS).forEach(drawList);
+    $('mtm').hidden = !data.pay.monthly;
+    $('slugShow').textContent = data.slug || '…';
+    colors();
+  }
+
+  function colors(){
+    var b = data.brand, bad = [];
+    ['bg', 'ink', 'accent', 'accent2'].forEach(function (k) {
+      var v = String(b[k] || '').trim();
+      if (!/^#[0-9a-f]{6}$/i.test(v)) bad.push(k === 'bg' ? 'Background' : k === 'ink' ? 'Text' : k === 'accent' ? 'Accent' : 'Second accent');
+      else if (PCProposal.banned.indexOf(v.toLowerCase()) > -1) bad.push(v + ' is a banned near-black');
+    });
+    var m = $('colorMsg');
+    m.className = 'msg' + (bad.length ? ' warn' : '');
+    m.textContent = bad.length ? 'Using the default for: ' + bad.join(', ') + '. Hex codes look like #EE1D52.' : '';
+  }
+
+  /* the preview: the same page Publish puts up, drawn in a frame */
+  var timer = 0, frameY = 0;
+  function preview(){
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      var f = $('frame');
+      try { frameY = f.contentWindow ? f.contentWindow.scrollY : 0; } catch (e) {}
+      var html = PCProposal.shell(page(data)).replace('<head>', '<head><base href="' + location.origin + '/">');
+      f.onload = function () { try { f.contentWindow.scrollTo(0, frameY); } catch (e) {} };
+      f.srcdoc = html;
+    }, 350);
+  }
+  function save(){
+    var all = store(DRAFTS) || {};
+    data.saved = new Date().toISOString();
+    all[id] = data; store(DRAFTS, all); store(LAST, id);
+    menu();
+  }
+  function changed(){ save(); preview(); }
+
+  function menu(){
+    var all = store(DRAFTS) || {}, ids = Object.keys(all).sort(function (a, b) { return String(all[b].saved).localeCompare(String(all[a].saved)); });
+    $('open').innerHTML = ids.map(function (k) { var d = all[k]; return '<option value="' + esc(k) + '"' + (k === id ? ' selected' : '') + '>' + esc(d.client && d.client.name || 'Untitled') + (d.slug ? ' (' + esc(d.slug) + ')' : '') + '</option>'; }).join('');
+  }
+  function open(k, d){
+    id = k; data = d || (store(DRAFTS) || {})[k] || blank();
+    var b = blank();
+    Object.keys(b).forEach(function (x) { if (data[x] == null) data[x] = b[x]; else if (typeof b[x] === 'object' && !Array.isArray(b[x])) Object.keys(b[x]).forEach(function (y) { if (data[x][y] == null) data[x][y] = b[x][y]; }); });
+    fill(); save(); preview();
+    $('liveLink').hidden = true; $('pubMsg').textContent = '';
+  }
+
+  /* typing */
+  var form = $('form');
+  form.addEventListener('input', function (e) {
+    var el = e.target, k = el.getAttribute('data-k');
+    if (k) {
+      var v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? (el.value === '' ? '' : Number(el.value)) : el.value;
+      if (k === 'slug') { v = slugify(v); }
+      set(data, k, v);
+      if (k === 'client.name' && !data.slugTouched) { data.slug = slugify(v); $('slug').value = data.slug; }
+      if (k === 'slug') data.slugTouched = !!v;
+      if (k.indexOf('brand.') === 0) { var c = document.querySelector('[data-c="' + k + '"]'); if (c && /^#[0-9a-f]{6}$/i.test(v)) c.value = v; colors(); }
+      if (k === 'pay.monthly') $('mtm').hidden = !v;
+      if (k === 'calendar.mode') drawList('calendar.items');
+      $('slugShow').textContent = data.slug || '…';
+      return changed();
+    }
+    var c = el.getAttribute('data-c');
+    if (c) { set(data, c, el.value.toUpperCase()); var t = document.querySelector('[data-k="' + c + '"]'); if (t) t.value = el.value.toUpperCase(); colors(); return changed(); }
+    var li = el.getAttribute('data-li');
+    if (li) {
+      var it = get(data, li)[Number(el.getAttribute('data-i'))], f = el.getAttribute('data-f');
+      it[f] = el.type === 'checkbox' ? el.checked : el.type === 'number' ? (el.value === '' ? '' : Number(el.value)) : el.value;
+      if (f === 'type') { it.val = it.type === 'qty' ? 1 : true; drawList(li); }
+      if (li === 'picks.items' && f === 'name') drawList('calendar.items');
+      return changed();
+    }
+  });
+  form.addEventListener('change', function (e) { if (e.target.tagName === 'SELECT' || e.target.type === 'checkbox') form.dispatchEvent(new Event('input')); });
+  form.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var a = b.getAttribute('data-add'), rm = b.getAttribute('data-rm'), mv = b.getAttribute('data-mv'), dv = b.getAttribute('data-deliv');
+    if (a) { get(data, a).push(LISTS[a].make()); drawList(a); changed(); var all = document.querySelectorAll('[data-list="' + a + '"] .it'); var last = all[all.length - 1]; if (last) { var x = last.querySelector('input,textarea'); if (x) x.focus(); } }
+    if (rm) { get(data, rm).splice(Number(b.getAttribute('data-i')), 1); drawList(rm); if (rm === 'picks.items') drawList('calendar.items'); changed(); }
+    if (mv) { var arr = get(data, mv), i = Number(b.getAttribute('data-i')), j = i + Number(b.getAttribute('data-d')); var t = arr[i]; arr[i] = arr[j]; arr[j] = t; drawList(mv); changed(); }
+    if (dv !== null) { data.delivery = dv ? DELIV[dv] : ''; document.querySelector('[data-k="delivery"]').value = data.delivery; changed(); }
+  });
+
+  $('open').addEventListener('change', function () { open(this.value); });
+  $('new').addEventListener('click', function () { open('d' + Date.now()); });
+  $('dup').addEventListener('click', function () { var d = JSON.parse(JSON.stringify(data)); d.slug = ''; d.slugTouched = false; d.client.name = (d.client.name || '') + ' copy'; open('d' + Date.now(), d); $('loadMsg').textContent = 'Copied. Change the client and web address before publishing.'; });
+  $('del').addEventListener('click', function () {
+    if (b4del !== id) { b4del = id; $('loadMsg').className = 'msg warn'; $('loadMsg').textContent = 'Click again to delete this draft from this device. A published page stays up.'; return; }
+    var all = store(DRAFTS) || {}; delete all[id]; store(DRAFTS, all); b4del = null;
+    var left = Object.keys(all); open(left[0] || ('d' + Date.now())); $('loadMsg').className = 'msg'; $('loadMsg').textContent = 'Draft deleted.';
+  });
+  var b4del = null;
+  $('load').addEventListener('click', function () {
+    var s = slugify($('loadSlug').value), m = $('loadMsg'); if (!s) return;
+    m.className = 'msg'; m.textContent = 'Opening…';
+    fetch('/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('not found'); return r.text(); }).then(function (t) {
+      var j = t.match(/<script type="application\/json" id="proposal-data">([\s\S]*?)<\/script>/);
+      if (!j) { m.className = 'msg bad'; m.textContent = 'That page was built by hand, so it can’t open here.'; return; }
+      var d = JSON.parse(j[1]); open(d.builderId || ('d' + Date.now()), d.form || d); m.className = 'msg ok'; m.textContent = 'Opened ' + s + '.';
+    }).catch(function () { m.className = 'msg bad'; m.textContent = 'No page at portlandcontent.com/' + s + '.'; });
+  });
+
+  [].forEach.call(document.querySelectorAll('.tabs button'), function (b) {
+    b.addEventListener('click', function () { document.body.setAttribute('data-tab', b.getAttribute('data-tab')); [].forEach.call(document.querySelectorAll('.tabs button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); if (b.getAttribute('data-tab') === 'preview') { window.scrollTo(0, 0); preview(); } });
+  });
+
+  /* the GitHub key stays in this browser only */
+  function keyState(){ $('keyState').textContent = store(KEY) ? 'This device is connected.' : 'This device isn’t connected yet.'; }
+  $('keySave').addEventListener('click', function () {
+    var k = $('key').value.trim(), m = $('keyMsg'); if (!k) return;
+    m.className = 'msg'; m.textContent = 'Checking the key…';
+    fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, { headers: { Authorization: 'Bearer ' + k, Accept: 'application/vnd.github+json' } }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (x) {
+      if (!x.ok) { m.className = 'msg bad'; m.textContent = 'GitHub didn’t accept that key. Check it was copied whole.'; return; }
+      if (!x.j.permissions || !x.j.permissions.push) { m.className = 'msg bad'; m.textContent = 'The key works but can’t publish. Set Contents to Read and write.'; return; }
+      store(KEY, k); $('key').value = ''; keyState(); m.className = 'msg ok'; m.textContent = 'Connected. You can publish from this device now.';
+    }).catch(function () { m.className = 'msg bad'; m.textContent = 'Couldn’t reach GitHub. Try again in a minute.'; });
+  });
+  $('keyForget').addEventListener('click', function () { store(KEY, null); keyState(); $('keyMsg').className = 'msg'; $('keyMsg').textContent = 'Forgotten on this device.'; });
+
+  /* Publish: one file, <slug>.html, committed to the site's repo; GitHub Pages puts it live */
+  function b64(s){ var b = new TextEncoder().encode(s), out = ''; for (var i = 0; i < b.length; i += 0x8000) out += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(out); }
+  function unb64(s){ var bin = atob(String(s).replace(/\s/g, '')), u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new TextDecoder().decode(u); }
+  /* the page data as published: what the page draws, plus the form so "Open it here" can bring it back */
+  function published(){ var out = page(data); out.form = data; out.builderId = id; out.published = new Date().toISOString(); return out; }
+  window.PCBuilder = { html: function () { return PCProposal.shell(published()); } };
+  var busy = false;
+  function publish(){
+    var m = $('pubMsg'), key = store(KEY), s = data.slug;
+    $('pubBox').open = true; $('pubBox').scrollIntoView({ block: 'start' });
+    if (busy) return;
+    if (!data.client.name) { m.className = 'msg bad'; m.textContent = 'Add the client name first.'; return; }
+    if (!/^[a-z0-9][a-z0-9-]{1,59}$/.test(s || '') || RESERVED.indexOf(s) > -1) { m.className = 'msg bad'; m.textContent = 'Pick another web address. It needs letters, numbers and dashes, and it can’t be one of the site’s own pages.'; return; }
+    if (!key) { m.className = 'msg warn'; m.textContent = 'Connect this device first, below.'; return; }
+    busy = true; m.className = 'msg'; m.textContent = 'Publishing…';
+    var api = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + s + '.html', H = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' };
+    var out = published(), html = PCProposal.shell(out);
+    fetch(api, { headers: H, cache: 'no-store' }).then(function (r) {
+      if (r.status === 404) return null;
+      if (!r.ok) throw new Error('read ' + r.status);
+      return r.json();
+    }).then(function (cur) {
+      if (cur && unb64(cur.content).indexOf('id="proposal-data"') < 0) throw new Error('hand');
+      var body = { message: 'Proposal for ' + data.client.name + ' (' + s + '), from the builder', content: b64(html) };
+      if (cur) body.sha = cur.sha;
+      return fetch(api, { method: 'PUT', headers: H, body: JSON.stringify(body) });
+    }).then(function (r) {
+      if (!r.ok) throw new Error('write ' + r.status);
+      data.lastPublished = out.published; save();
+      m.className = 'msg'; m.textContent = 'Saved. Waiting for it to go live, usually about a minute…';
+      watch(s, out.published, 0);
+    }).catch(function (e) {
+      busy = false; m.className = 'msg bad';
+      m.textContent = e.message === 'hand' ? 'portlandcontent.com/' + s + ' is a page built by hand, so the builder won’t replace it. Pick another web address.' :
+        /401|403/.test(e.message) ? 'GitHub turned the key down. It may have expired. Make a new one below.' : 'Publishing didn’t go through (' + e.message + '). Nothing changed on the site.';
+    });
+  }
+  function watch(s, stamp, n){
+    fetch('/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (t) {
+      if (t.indexOf(stamp) > -1) { busy = false; done(s, 'Live.'); return; }
+      if (n > 40) { busy = false; done(s, 'Published. GitHub is slow to put it up, so check the link in a few minutes.'); return; }
+      setTimeout(function () { watch(s, stamp, n + 1); }, 5000);
+    });
+  }
+  function done(s, msg){
+    var url = SITE + s, m = $('pubMsg'), l = $('liveLink');
+    m.className = 'msg ok'; m.textContent = msg;
+    l.hidden = false; l.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener">' + url.replace('https://', '') + '</a><button class="btn sm" type="button" id="copy">Copy link</button>';
+    $('copy').onclick = function () { navigator.clipboard.writeText(url).then(function () { $('copy').textContent = 'Copied'; }, function () { $('copy').textContent = 'Select the link to copy it'; }); };
+  }
+  $('pub').addEventListener('click', publish);
+  $('pub1').addEventListener('click', publish);
+
+  keyState();
+  var last = store(LAST), all = store(DRAFTS) || {};
+  open(last && all[last] ? last : ('d' + Date.now()));
+})();
+</script>
+</body>
+</html>
