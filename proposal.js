@@ -9,6 +9,7 @@
   var FONTS = {
     serif: { link: 'family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;600', display: '"DM Serif Display", Georgia, "Times New Roman", serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
     bodoni: { link: 'family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600', display: '"Bodoni Moda", Didot, Georgia, serif', body: '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif' },
+    mwf: { link: 'family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600', display: '"Fraunces", Georgia, serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
     fraunces: { link: 'family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Instrument+Sans:wght@400;500;600', display: '"Fraunces", Georgia, serif', body: '"Instrument Sans", "Helvetica Neue", Arial, sans-serif' }
   };
   /* MOCKUP-RULES: these near-blacks never go on a brand page */
@@ -60,7 +61,10 @@
     var qs = list(d.questions).filter(function (q) { return q && String(q).trim(); });
     var name = d.client.name || 'Your proposal';
 
-    var css = ':root{--bg:' + bg + ';--ink:' + ink + ';--accent:' + acc + ';--accent-2:' + acc2 + ';--display:' + f.display + ';--body:' + f.body + '}';
+    /* text on an accent fill: dark on a light accent (Mac Films yellow), white on a dark one */
+    var lum = function (c) { var n = parseInt(c.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) / 255; };
+    var onAcc = lum(acc) > 0.6 ? '#000000' : '#FFFFFF';
+    var css = ':root{--bg:' + bg + ';--ink:' + ink + ';--accent:' + acc + ';--accent-2:' + acc2 + ';--on-accent:' + onAcc + ';--display:' + f.display + ';--body:' + f.body + '}';
     var h = [];
     h.push('<style>' + css + '</style>');
     h.push('<header class="wrap mast"><span>' + (b.logo ? '<img class="logo" src="' + esc(b.logo) + '" alt="' + esc(name) + ' logo">' : '') + '<b>' + esc(d.studio || 'Portland Content') + '</b> for ' + esc(name) + '</span>' + (d.client.prepared ? '<span>' + esc(d.client.prepared) + '</span>' : '') + '</header>');
