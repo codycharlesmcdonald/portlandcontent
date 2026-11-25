@@ -203,12 +203,12 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       <p class="live" id="liveLink" hidden></p>
       <hr style="border:0; border-top:1px solid var(--rule); margin:18px 0">
       <p class="note"><b>Connect this browser once.</b> Publishing needs a GitHub key that stays on this device only. <span id="keyState"></span></p>
+      <!-- GitHub sign-in (OAuth or device flow) needs a server: its login endpoints send no CORS headers, so a static page can't finish it (checked Nov 25).
+           The pre-filled token link sets the name, a year's expiry and Contents read and write; GitHub has no parameter for the repository, so that's the one pick. -->
+      <p><a class="btn sm" href="https://github.com/settings/personal-access-tokens/new?name=Proposal+builder&amp;description=Publishes+proposals+from+portlandcontent.com%2Fbuilder&amp;expires_in=366&amp;contents=write" target="_blank" rel="noopener" style="text-decoration:none">Get a key from GitHub</a></p>
       <ol class="steps">
-        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> and sign in.</li>
-        <li>Name it "Proposal builder" and set Expiration to 1 year.</li>
-        <li>Under Repository access pick "Only select repositories", then "portlandcontent".</li>
-        <li>Under Permissions, Repository permissions, set Contents to "Read and write".</li>
-        <li>Click Generate token, copy it, and paste it below.</li>
+        <li>Under Repository access, pick "Only select repositories", then "portlandcontent".</li>
+        <li>Click Generate token at the bottom, copy it, and paste it below.</li>
       </ol>
       <label class="f"><span>GitHub key</span><input type="password" id="key" autocomplete="off" spellcheck="false"></label>
       <div class="live"><button class="btn sm" type="button" id="keySave">Save on this device</button><button class="btn sm" type="button" id="keyForget">Forget it</button></div>
