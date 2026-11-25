@@ -84,6 +84,21 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
 <div class="app">
   <form class="form" id="form" autocomplete="off" onsubmit="return false">
 
+    <details id="startBox"><summary>Start, open or restore</summary>
+      <p class="note">Start from a template, change the client and colors, and publish. Your current draft stays in the menu at the top.</p>
+      <button class="btn sm" type="button" data-tpl="year">New from the yearly plan template</button>
+      <hr style="border:0; border-top:1px solid var(--rule); margin:16px 0">
+      <label class="f"><span>Open a published proposal</span><select id="pages"><option value="">Loading the list…</option></select></label>
+      <label class="f"><span>Or type its web address</span><input type="text" id="loadSlug" placeholder="hardstyle2027"></label>
+      <button class="btn sm" type="button" id="load">Open it here</button>
+      <p class="msg" id="loadMsg" aria-live="polite"></p>
+      <hr style="border:0; border-top:1px solid var(--rule); margin:16px 0">
+      <p class="note"><b>Past versions of <span id="verSlug">this page</span></b>. Restore puts a version back in the form, and Publish puts it live again.</p>
+      <div class="list" id="versions"></div>
+      <button class="btn sm" type="button" id="verLoad">Show past versions</button>
+      <p class="msg" id="verMsg" aria-live="polite"></p>
+    </details>
+
     <details open><summary>Client</summary>
       <label class="f"><span>Client name</span><input type="text" data-k="client.name" placeholder="Hardstyle Strength"></label>
       <label class="f"><span>Web address <em>portlandcontent.com/</em></span><input type="text" id="slug" data-k="slug" placeholder="hardstyle2027" pattern="[a-z0-9-]+"></label>
@@ -215,12 +230,10 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       <p class="msg" id="keyMsg" aria-live="polite"></p>
     </details>
 
-    <details><summary>Open or copy</summary>
-      <label class="f"><span>Open a published proposal <em>its web address</em></span><input type="text" id="loadSlug" placeholder="hardstyle2027"></label>
-      <button class="btn sm" type="button" id="load">Open it here</button>
+    <details><summary>Copy or delete</summary>
       <button class="btn sm" type="button" id="dup">Start a new one from this</button>
       <button class="btn sm" type="button" id="del">Delete this draft</button>
-      <p class="msg" id="loadMsg" aria-live="polite"></p>
+      <p class="msg" id="delMsg" aria-live="polite"></p>
     </details>
   </form>
 
@@ -348,6 +361,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     Object.keys(LISTS).forEach(drawList);
     $('mtm').hidden = !data.pay.monthly;
     $('slugShow').textContent = data.slug || '…';
+    $('verSlug').textContent = data.slug || 'this page'; $('versions').innerHTML = ''; $('verMsg').textContent = '';
     colors();
   }
 
@@ -405,6 +419,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       set(data, k, v);
       if (k === 'client.name' && !data.slugTouched) { data.slug = slugify(v); $('slug').value = data.slug; }
       if (k === 'slug') data.slugTouched = !!v;
+      if (k === 'slug' || k === 'client.name') $('verSlug').textContent = data.slug || 'this page';
       if (k.indexOf('brand.') === 0) { var c = document.querySelector('[data-c="' + k + '"]'); if (c && /^#[0-9a-f]{6}$/i.test(v)) c.value = v; colors(); }
       if (k === 'pay.monthly') $('mtm').hidden = !v;
       if (k === 'calendar.mode') drawList('calendar.items');
@@ -434,21 +449,98 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
 
   $('open').addEventListener('change', function () { open(this.value); });
   $('new').addEventListener('click', function () { open('d' + Date.now()); });
-  $('dup').addEventListener('click', function () { var d = JSON.parse(JSON.stringify(data)); d.slug = ''; d.slugTouched = false; d.client.name = (d.client.name || '') + ' copy'; open('d' + Date.now(), d); $('loadMsg').textContent = 'Copied. Change the client and web address before publishing.'; });
+  $('dup').addEventListener('click', function () { var d = JSON.parse(JSON.stringify(data)); d.slug = ''; d.slugTouched = false; d.client.name = (d.client.name || '') + ' copy'; open('d' + Date.now(), d); $('delMsg').textContent = 'Copied. Change the client and web address before publishing.'; });
   $('del').addEventListener('click', function () {
-    if (b4del !== id) { b4del = id; $('loadMsg').className = 'msg warn'; $('loadMsg').textContent = 'Click again to delete this draft from this device. A published page stays up.'; return; }
+    if (b4del !== id) { b4del = id; $('delMsg').className = 'msg warn'; $('delMsg').textContent = 'Click again to delete this draft from this device. A published page stays up.'; return; }
     var all = store(DRAFTS) || {}; delete all[id]; store(DRAFTS, all); b4del = null;
-    var left = Object.keys(all); open(left[0] || ('d' + Date.now())); $('loadMsg').className = 'msg'; $('loadMsg').textContent = 'Draft deleted.';
+    var left = Object.keys(all); open(left[0] || ('d' + Date.now())); $('delMsg').className = 'msg'; $('delMsg').textContent = 'Draft deleted.';
   });
   var b4del = null;
-  $('load').addEventListener('click', function () {
-    var s = slugify($('loadSlug').value), m = $('loadMsg'); if (!s) return;
+
+  /* Templates: a whole proposal in the Hardstyle shape, his lines from that page made general. Prices are Hardstyle's own rows, as a starting point. */
+  var TEMPLATES = {
+    year: function () {
+      var d = blank();
+      d.client.name = 'Client name'; d.slugTouched = false; d.slug = 'client-name';
+      d.title.name = 'Client *name*';
+      d.lede.headline = 'Now that you’re settled in, *let’s show it off!*';
+      d.lede.text = 'Hi! After looking at what you’ve posted lately, I put together this plan to add a little polish to your feeds next year.\n\nTake what you want, and post those on your own schedule. I’ll pop in soon to chat, but you can email me at the bottom or schedule some time for a Zoom!';
+      d.ideas = [
+        { title: 'A new homepage loop', text: 'The video at the top of your home page could use a refresh. We could cut something new that loops content from your space and the people in it.' },
+        { title: 'Team shorts', text: 'Your team bios have some great stories in them. I could turn each one into a short vertical for your feed, so new folks can meet your people before they walk in.' },
+        { title: 'Your events', text: 'I’d come out for a half day at a few of your events and cut a recap of each one for your feed.' }
+      ];
+      d.packages = { label: 'Pick a plan', items: [
+        { name: 'The essentials', price: 4778, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts', note: '', recommended: false },
+        { name: 'The full year', price: 9068, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts\nThree event recaps\nThree customer stories', note: '', recommended: true }
+      ] };
+      d.picks = { label: 'Build your year', addLabel: 'Add to the year', hold: '', items: [
+        { id: 'xday', name: 'Extra shoot day', desc: 'I’ll come back for another full day to get more footage for the shorts.', type: 'qty', price: 1160, val: 0, min: 0, max: 2, unit: 'day' },
+        { id: 'photo', name: 'Photos on the shoot day', desc: 'A photographer comes along on the shoot day and takes stills for your site and socials.', type: 'on', price: 1350, val: false },
+        { id: 'ads', name: 'Ad cuts', desc: 'I’ll cut four short versions for paid ads, and your use of the films opens up to advertising.', type: 'on', price: 900, val: false }
+      ] };
+      d.pay.monthly = true;
+      d.calendar = { mode: 'year', label: 'How the year runs', note: 'Event months are placeholders until we know your dates.', items: [
+        { month: 1, title: 'Shoot day', kind: 'shoot', pick: '', text: '' },
+        { month: 2, title: 'Homepage loop and team shorts', kind: 'delivery', pick: '', text: '' },
+        { month: 4, title: 'Event', kind: 'shoot', pick: '', text: '' },
+        { month: 7, title: 'Event', kind: 'shoot', pick: '', text: '' },
+        { month: 10, title: 'Event', kind: 'shoot', pick: '', text: '' },
+        { month: 6, title: 'Extra shoot day', kind: 'shoot', pick: 'xday', text: '' }
+      ] };
+      d.questions = [{ text: 'Which events are coming up this year?' }, { text: 'Who on your team should we talk to first?' }];
+      d.close.text = 'Grab a time below, or give me a call. Coffee’s my treat!';
+      return d;
+    }
+  };
+  document.querySelector('[data-tpl]').addEventListener('click', function () { open('d' + Date.now(), TEMPLATES[this.getAttribute('data-tpl')]()); $('loadMsg').className = 'msg ok'; $('loadMsg').textContent = 'Filled from the template. Change the client, colors and prices, then publish.'; });
+
+  /* Published proposals: the builder keeps proposals.json in the site's repo, one line per page it published */
+  var RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/';
+  function pagesList(){
+    fetch(RAW + 'main/proposals.json?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (list) {
+      list = (list || []).slice().sort(function (a, b) { return String(b.published).localeCompare(String(a.published)); });
+      $('pages').innerHTML = '<option value="">' + (list.length ? 'Pick one' : 'None yet. Published pages show here.') + '</option>' + list.map(function (p) { return '<option value="' + esc(p.slug) + '">' + esc(p.client || p.slug) + ' (' + esc(p.slug) + ')</option>'; }).join('');
+    });
+  }
+  function fromHtml(t){ var j = t.match(/<script type="application\/json" id="proposal-data">([\s\S]*?)<\/script>/); if (!j) return null; var d = JSON.parse(j[1]); return d.form ? d : null; }
+  function openSlug(s){
+    var m = $('loadMsg'); if (!s) return;
     m.className = 'msg'; m.textContent = 'Opening…';
-    fetch('/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('not found'); return r.text(); }).then(function (t) {
-      var j = t.match(/<script type="application\/json" id="proposal-data">([\s\S]*?)<\/script>/);
-      if (!j) { m.className = 'msg bad'; m.textContent = 'That page was built by hand, so it can’t open here.'; return; }
-      var d = JSON.parse(j[1]); open(d.builderId || ('d' + Date.now()), d.form || d); m.className = 'msg ok'; m.textContent = 'Opened ' + s + '.';
+    fetch(RAW + 'main/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('none'); return r.text(); }).then(function (t) {
+      var d = fromHtml(t);
+      if (!d) { m.className = 'msg bad'; m.textContent = 'That page was built by hand, so it can’t open here.'; return; }
+      open(d.builderId || ('d' + Date.now()), d.form); m.className = 'msg ok'; m.textContent = 'Opened ' + s + '. Changes go live when you publish.';
     }).catch(function () { m.className = 'msg bad'; m.textContent = 'No page at portlandcontent.com/' + s + '.'; });
+  }
+  $('pages').addEventListener('change', function () { openSlug(this.value); });
+  $('load').addEventListener('click', function () { openSlug(slugify($('loadSlug').value)); });
+
+  /* Past versions: every publish is a commit, so a page's history is its list of commits */
+  function versions(){
+    var s = data.slug, m = $('verMsg'), box = $('versions'), key = store(KEY);
+    if (!s) { m.className = 'msg'; m.textContent = 'Give the page a web address first.'; return; }
+    m.className = 'msg'; m.textContent = 'Looking…'; box.innerHTML = '';
+    fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/commits?per_page=30&path=' + encodeURIComponent(s + '.html'), { headers: key ? { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' } : { Accept: 'application/vnd.github+json' }, cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (cs) {
+      if (!cs.length) { m.textContent = 'Nothing published at ' + s + ' yet.'; return; }
+      m.textContent = '';
+      box.innerHTML = cs.map(function (c, i) {
+        var when = new Date(c.commit.committer.date).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+        return '<div class="it"><div class="bar"><b>' + esc(when) + (i ? '' : ', live now') + '</b><button class="btn sm" type="button" data-ver="' + esc(c.sha) + '" data-when="' + esc(when) + '">Restore</button></div><span class="note">' + esc(c.commit.message.split('\n')[0]) + '</span></div>';
+      }).join('');
+    }).catch(function (e) { m.className = 'msg bad'; m.textContent = 'Couldn’t read the history from GitHub' + (String(e.message) === '403' ? ' just now. Try again in a few minutes, or connect this device below.' : '.'); });
+  }
+  $('verLoad').addEventListener('click', versions);
+  $('versions').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ver]'); if (!b) return;
+    var m = $('verMsg'); m.className = 'msg'; m.textContent = 'Restoring…';
+    fetch(RAW + b.getAttribute('data-ver') + '/' + data.slug + '.html').then(function (r) { if (!r.ok) throw new Error(); return r.text(); }).then(function (t) {
+      var d = fromHtml(t);
+      if (!d) { m.className = 'msg bad'; m.textContent = 'That version was built by hand, so it can’t open here.'; return; }
+      var keep = $('versions').innerHTML;
+      open(id, d.form); $('versions').innerHTML = keep;
+      m.className = 'msg ok'; m.textContent = 'The version from ' + b.getAttribute('data-when') + ' is in the form. Publish to put it live again.';
+    }).catch(function () { m.className = 'msg bad'; m.textContent = 'Couldn’t load that version.'; });
   });
 
   [].forEach.call(document.querySelectorAll('.tabs button'), function (b) {
@@ -474,6 +566,18 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   /* the page data as published: what the page draws, plus the form so "Open it here" can bring it back */
   function published(){ var out = page(data); out.form = data; out.builderId = id; out.published = new Date().toISOString(); return out; }
   window.PCBuilder = { html: function () { return PCProposal.shell(published()); } };
+  /* proposals.json lists what the builder published, for the Open picker; a failed update leaves the page live and is fixed by the next publish */
+  function index(s, H){
+    var api = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/proposals.json';
+    fetch(api, { headers: H, cache: 'no-store' }).then(function (r) { return r.status === 404 ? null : r.ok ? r.json() : Promise.reject(); }).then(function (cur) {
+      var list = cur ? JSON.parse(unb64(cur.content)) : [];
+      list = list.filter(function (p) { return p.slug !== s; });
+      list.push({ slug: s, client: data.client.name, published: data.lastPublished });
+      var body = { message: 'Proposal list: ' + s, content: b64(JSON.stringify(list, null, 1) + '\n') };
+      if (cur) body.sha = cur.sha;
+      return fetch(api, { method: 'PUT', headers: H, body: JSON.stringify(body) });
+    }).then(function () { pagesList(); }, function () {});
+  }
   var busy = false;
   function publish(){
     var m = $('pubMsg'), key = store(KEY), s = data.slug;
@@ -499,6 +603,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       data.lastPublished = out.published; save();
       m.className = 'msg'; m.textContent = 'Saved. Waiting for it to go live, usually about a minute…';
       watch(s, out.published, 0);
+      index(s, H);
     }).catch(function (e) {
       busy = false; m.className = 'msg bad';
       m.textContent = e.message === 'hand' ? 'portlandcontent.com/' + s + ' is a page built by hand, so the builder won’t replace it. Pick another web address.' :
@@ -521,7 +626,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   $('pub').addEventListener('click', publish);
   $('pub1').addEventListener('click', publish);
 
-  keyState();
+  keyState(); pagesList();
   var last = store(LAST), all = store(DRAFTS) || {};
   open(last && all[last] ? last : ('d' + Date.now()));
 })();
