@@ -222,7 +222,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       <p class="note"><b>Connect this browser once.</b> Publishing needs a GitHub key that stays on this device only. <span id="keyState"></span></p>
       <!-- GitHub sign-in (OAuth or device flow) needs a server: its login endpoints send no CORS headers, so a static page can't finish it (checked Nov 25).
            The pre-filled token link sets the name, a year's expiry and Contents read and write; GitHub has no parameter for the repository, so that's the one pick. -->
-      <p><a class="btn sm" href="https://github.com/settings/personal-access-tokens/new?name=Proposal+builder&amp;description=Publishes+proposals+from+portlandcontent.com%2Fbuilder&amp;expires_in=366&amp;contents=write" target="_blank" rel="noopener" style="text-decoration:none">Get a key from GitHub</a></p>
+      <p><a class="btn sm" id="keyLink" href="https://github.com/settings/personal-access-tokens/new?name=Proposal+builder&amp;description=Publishes+proposals+from+portlandcontent.com%2Fbuilder&amp;expires_in=365&amp;contents=write" target="_blank" rel="noopener" style="text-decoration:none">Get a key from GitHub</a></p>
       <ol class="steps">
         <li>Under Repository access, pick "Only select repositories", then "portlandcontent".</li>
         <li>Click Generate token at the bottom, copy it, and paste it below.</li>
@@ -668,6 +668,11 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       if (!x.j.permissions || !x.j.permissions.push) { m.className = 'msg bad'; m.textContent = 'The key works but can’t publish. Set Contents to Read and write.'; return; }
       store(KEY, k); $('key').value = ''; keyState(); m.className = 'msg ok'; m.textContent = 'Connected. You can publish from this device now.';
     }).catch(function () { m.className = 'msg bad'; m.textContent = 'Couldn’t reach GitHub. Try again in a minute.'; });
+  });
+  /* GitHub refuses a key name that's already taken (Cody, Nov 25, comment 10548797840), so each link names its key by device and date; 366 days fell back to 30, so 365 */
+  $('keyLink').addEventListener('click', function () {
+    var dev = /iPhone|Android|Mobile/i.test(navigator.userAgent) ? 'phone' : 'laptop', when = new Date().toISOString().slice(0, 16).replace('T', ' ');
+    this.href = 'https://github.com/settings/personal-access-tokens/new?name=' + encodeURIComponent('Proposal builder ' + dev + ' ' + when) + '&description=' + encodeURIComponent('Publishes proposals from portlandcontent.com/builder') + '&expires_in=365&contents=write';
   });
   $('keyForget').addEventListener('click', function () { store(KEY, null); keyState(); $('keyMsg').className = 'msg'; $('keyMsg').textContent = 'Forgotten on this device.'; });
 
