@@ -86,8 +86,8 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
 
     <details id="startBox"><summary>Start, open or restore</summary>
       <p class="note">Start from a template, change the client and colors, and publish. Your current draft stays in the menu at the top.</p>
-      <button class="btn sm" type="button" data-tpl="year">New from the yearly plan template</button>
-      <button class="btn sm" type="button" data-tpl="wedding">New from the couple guide template</button>
+      <button class="btn sm" type="button" data-tpl="year">New from the Client Company sample</button>
+      <button class="btn sm" type="button" data-tpl="wedding">New from the Client &amp; Partner wedding sample</button>
       <hr style="border:0; border-top:1px solid var(--rule); margin:16px 0">
       <label class="f"><span>Open a published proposal</span><select id="pages"><option value="">Loading the list…</option></select></label>
       <label class="f"><span>Or type its web address</span><input type="text" id="loadSlug" placeholder="hardstyle2027"></label>
@@ -475,72 +475,112 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   });
   var b4del = null;
 
-  /* Templates: a whole proposal in the Hardstyle shape, his lines from that page made general. Prices are Hardstyle's own rows, as a starting point. */
+  /* Templates (Cody, comment 10548766117: "I actually want to see the template filled out with all available fields"): two full sample proposals,
+     every field used. Placeholder text in his voice; the wedding prices and lines come from the couple guide, the agency rows from Hardstyle's own prices. */
+  function svgLogo(t){ return 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64"><text x="0" y="44" font-family="Georgia, serif" font-size="34" fill="#FFFFFF">' + t + '</text></svg>'); }
   var TEMPLATES = {
     year: function () {
       var d = blank();
-      d.client.name = 'Client name'; d.slugTouched = false; d.slug = 'client-name';
-      d.title.name = 'Client *name*';
-      d.lede.headline = 'Now that you’re settled in, *let’s show it off!*';
-      d.lede.text = 'Hi! After looking at what you’ve posted lately, I put together this plan to add a little polish to your feeds next year.\n\nTake what you want, and post those on your own schedule. I’ll pop in soon to chat, but you can email me at the bottom or schedule some time for a Zoom!';
+      d.slug = 'sample-client-company'; d.slugTouched = true; d.studio = 'Portland Content';
+      d.client = { name: 'Client Company', contact: 'Jordan Client', month: 'November 2026' };
+      d.brand = { bg: '#0F2A2E', ink: '#F4F1EA', accent: '#E8743B', accent2: '#9BC4B5', fonts: 'serif', logo: svgLogo('Client Co.'), image: 'img/lw_facade.jpg', imageAlt: 'The front of the building at dusk' };
+      d.title = { kicker: 'A plan for your 2027', name: 'Client *Company*' };
+      d.lede = { headline: 'Now that the new shop is open, *let’s show it off!*', text: 'Hi! I’ve been watching what you’ve posted since the move, and I put together this plan to add a little polish to your feeds next year.\n\nTake what you want, and post those on your own schedule. I’ll pop in soon to chat, but you can email me at the bottom or schedule some time for a Zoom!' };
+      d.ideasLabel = 'Ideas for the year';
       d.ideas = [
-        { title: 'A new homepage loop', text: 'The video at the top of your home page could use a refresh. We could cut something new that loops content from your space and the people in it.' },
-        { title: 'Team shorts', text: 'Your team bios have some great stories in them. I could turn each one into a short vertical for your feed, so new folks can meet your people before they walk in.' },
-        { title: 'Your events', text: 'I’d come out for a half day at a few of your events and cut a recap of each one for your feed.' }
+        { title: 'A new homepage loop', text: 'The video at the top of your home page is from the old space. We could cut something new that loops your counter, your team and the new room.' },
+        { title: 'Team shorts', text: 'Your team page has some great stories on it. I could turn each one into a short vertical for your feed, so new folks can meet your people before they walk in.' },
+        { title: 'Your events', text: 'I’d come out for a half day at three of your events and cut a recap of each one for your feed.' },
+        { title: 'Customer stories', text: 'Your reviews are already doing the talking. A few customers telling their own story, with proper sound and light, would replace the phone clips on your site.' }
+      ];
+      d.sections = [
+        { heading: 'How a year with us runs', text: 'We start with one planning call, then I film everything for the first half of the year in one January day, so your feed has something new every week without us in your way.\n\nEvents get their own half days, and every film comes to you for notes before it posts.' },
+        { heading: 'Who you’ll work with', text: 'You’ll have me on every shoot, with an audio operator for interviews and a photographer when you add one. The same editor cuts your whole year, so it all feels like one voice.' }
       ];
       d.packages = { label: 'Pick a plan', items: [
-        { name: 'The essentials', price: 4778, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts', note: '', recommended: false },
-        { name: 'The full year', price: 9068, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts\nThree event recaps\nThree customer stories', note: '', recommended: true }
+        { name: 'The essentials', price: 4778, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts', note: 'A good start if you post on your own.', recommended: false },
+        { name: 'The full year', price: 9068, deliverables: 'A full shoot day with audio\nA new homepage loop\nEight team shorts\nThree event recaps\nThree customer stories', note: 'What most folks pick.', recommended: true },
+        { name: 'The full year and a film', price: 11838, deliverables: 'Everything in the full year\nA half day with audio about the people behind the shop\nA longer film for your about page', note: 'For a big year.', recommended: false }
       ] };
-      d.picks = { label: 'Build your year', addLabel: 'Add to the year', hold: '', items: [
-        { id: 'xday', name: 'Extra shoot day', desc: 'I’ll come back for another full day to get more footage for the shorts.', type: 'qty', price: 1160, val: 0, min: 0, max: 2, unit: 'day' },
-        { id: 'photo', name: 'Photos on the shoot day', desc: 'A photographer comes along on the shoot day and takes stills for your site and socials.', type: 'on', price: 1350, val: false },
+      d.picks = { label: 'Build your year', addLabel: 'Add to the year', hold: 'December 6', items: [
+        { id: 'plan', name: 'Planning and look-back calls', desc: 'A planning call to start the year and a look-back at the end, folded into the plan.', type: 'fixed', price: 0 },
+        { id: 'xday', name: 'Extra shoot day', desc: 'I’ll come back for another full day to get more footage for the shorts.', type: 'qty', price: 1160, val: 1, min: 0, max: 2, unit: 'day' },
+        { id: 'photo', name: 'Photos on the shoot day', desc: 'A photographer comes along on the January day and takes stills for your site and socials.', type: 'on', price: 1350, val: true },
+        { id: 'rush', name: 'Same-week recaps', desc: 'You’ll get each event recap the same week as the event.', type: 'on', price: 160, val: false },
         { id: 'ads', name: 'Ad cuts', desc: 'I’ll cut four short versions for paid ads, and your use of the films opens up to advertising.', type: 'on', price: 900, val: false }
       ] };
-      d.pay.monthly = true;
+      d.pay = { label: '12-month retainer', note: 'These prices hold through {hold}.', months: 12, monthly: true, mLabel: 'Month to month', save: 10, mNote: 'Billed as we go, planning to start, then each shoot and film as it happens. You can stop any month with 30 days’ notice.' };
       d.calendar = { mode: 'year', label: 'How the year runs', note: 'Event months are placeholders until we know your dates.', items: [
         { month: 1, title: 'Shoot day', kind: 'shoot', pick: '', text: '' },
-        { month: 2, title: 'Homepage loop and team shorts', kind: 'delivery', pick: '', text: '' },
-        { month: 4, title: 'Event', kind: 'shoot', pick: '', text: '' },
-        { month: 7, title: 'Event', kind: 'shoot', pick: '', text: '' },
-        { month: 10, title: 'Event', kind: 'shoot', pick: '', text: '' },
-        { month: 6, title: 'Extra shoot day', kind: 'shoot', pick: 'xday', text: '' }
+        { month: 2, title: 'Homepage loop', kind: 'delivery', pick: '', text: '' },
+        { month: 2, title: 'Team shorts', kind: 'post', pick: '', text: '' },
+        { month: 4, title: 'Spring event', kind: 'shoot', pick: '', text: '' },
+        { month: 6, title: 'Extra shoot day', kind: 'shoot', pick: 'xday', text: '' },
+        { month: 7, title: 'Summer event', kind: 'shoot', pick: '', text: '' },
+        { month: 8, title: 'Customer stories', kind: 'delivery', pick: '', text: '' },
+        { month: 10, title: 'Fall event', kind: 'shoot', pick: '', text: '' },
+        { month: 12, title: 'Look-back call', kind: 'post', pick: '', text: '' }
       ] };
-      d.questions = [{ text: 'Which events are coming up this year?' }, { text: 'Who on your team should we talk to first?' }];
-      d.close.text = 'Grab a time below, or give me a call. Coffee’s my treat!';
+      d.filmsLabel = 'Films we made';
+      d.films = [
+        { vimeo: 'https://vimeo.com/1242992409/caa3874784', title: 'Gym banner', text: 'A one minute loop of a class in session, made to sit at the top of a website with no sound.', thumb: 'img/hardstyle_banner.jpg' },
+        { vimeo: 'https://vimeo.com/1241410280', title: 'Barbell certification', text: 'A vertical film ahead of a certification weekend, with the owner on why they built the place.', thumb: 'img/hardstyle_barbell.jpg' }
+      ];
+      d.questions = [{ text: 'Which events are coming up this year?' }, { text: 'Who on your team should we talk to first?' }, { text: 'Where do you post most, and how often?' }];
+      d.delivery = DELIV.photos;
+      d.close = { heading: 'Let’s grab a coffee and talk through the year', text: 'Grab a time below, or give me a call. Coffee’s my treat!', calendly: 'https://calendly.com/portlandcontent/call', phone: '(503) 568-1199', email: 'cody@macfilmproductions.com' };
+      d.send = { button: 'Send me your picks' };
       return d;
     },
-    /* the couple guide (Claudia & Eddy format, docs/mockups/couple-guide.template.html): his words and the site's prices, with [brackets] to fill */
+    /* the couple guide (Claudia & Eddy format, docs/mockups/couple-guide.template.html): his words and the site's prices */
     wedding: function () {
       var d = blank();
-      d.studio = 'Mac Wedding Films'; applyBrandTo(d, 'Mac Wedding Films');
-      d.client = { name: '[Name] & [Name]', contact: '', month: '' }; d.slug = 'name-and-name'; d.slugTouched = false;
-      d.title = { kicker: '[Weekday], [Month Day, Year], at [Venue]', name: '[Name] & *[Name]*' };
-      d.lede = { headline: 'Hi, guys!', text: '[One real line from their inquiry, like "Congrats on your courthouse wedding this summer."]\n\nI threw this page together so you have everything in one place while we find some time to meet up. There are a couple of films to watch, a little about me and how we work, what it all costs, and the questions couples ask me most. There’s no pressure here at all, and if anything’s missing, would love to get it for you!' };
-      d.ideasLabel = ''; d.ideas = [];
+      d.slug = 'sample-client-and-partner'; d.slugTouched = true; d.studio = 'Mac Wedding Films';
+      d.client = { name: 'Client & Partner', contact: 'Client and Partner', month: 'November 2026' };
+      d.brand = { bg: '#F3F3F3', ink: '#06203F', accent: '#A55E46', accent2: '#F0D1B5', fonts: 'mwf', logo: svgLogo('C &amp; P').replace(/base64,.*/, function () { return 'base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 160 64"><text x="0" y="44" font-family="Georgia, serif" font-style="italic" font-size="34" fill="#06203F">C &amp; P</text></svg>'); }), image: 'img/sample-wedding.jpg', imageAlt: 'A couple at golden hour, filmed anamorphic' };
+      d.title = { kicker: 'Saturday, August 14, 2027, at the Venue', name: 'Client & *Partner*' };
+      d.lede = { headline: 'Hi, guys!', text: 'Congrats on the engagement, and on landing a summer Saturday at the Venue!\n\nI threw this page together so you have everything in one place while we find some time to meet up. There are a couple of films to watch, a little about me and how we work, what it all costs, and the questions couples ask me most. There’s no pressure here at all, and if anything’s missing, would love to get it for you!' };
+      d.ideasLabel = 'Questions couples ask';
+      d.ideas = [
+        { title: 'What’s the difference between the Highlight and the Feature?', text: 'The Wedding Highlight runs five to eight minutes and covers the whole day, cut down to the parts you’ll want to watch again and again. The Full Length Feature Documentary starts months before the wedding and runs forty-five minutes or more.' },
+        { title: 'When will we get our film?', text: 'Wedding Highlight couples get the finished film four months after the wedding. Feature Documentary couples get a 60 to 120 second trailer about eight weeks after the wedding and the finished documentary at eight months.' },
+        { title: 'How do we book you?', text: 'Check that your date is open, pick a collection and any companion films, and we’ll follow up with a straightforward contract. If you’d rather talk first, grab a time below.' },
+        { title: 'Can we get the raw footage?', text: 'Yes, as an add-on. You get the actual camera files, still unprocessed in the log and anamorphic formats we shoot in, on a hard drive we include.' }
+      ];
       d.sections = [
         { heading: 'Hi, I’m Cody', text: 'The first and most important thing I want to convey is that our films are genuine and personal. You won’t find two films alike, because it’s essential to me and everyone here that your wedding film holds meaning for you forever.\n\nAlmost 400 weddings filmed (!!!)' },
-        { heading: 'How we film your day', text: 'I love to film in what we call a documentary style. We’re with you and your people all day and focus a lot on the unscheduled and unscripted stuff.\n\nNo hourly limits. We’re there for the whole thing! Why would we want to miss cool stuff over a couple hours?\n\nIf it’s safe and legal at [the venue], we’ll put the drone up, and the aerials are included. Again, why not!?' }
+        { heading: 'How we film your day', text: 'I love to film in what we call a documentary style. We’re with you and your people all day and focus a lot on the unscheduled and unscripted stuff.\n\nNo hourly limits. We’re there for the whole thing! Why would we want to miss cool stuff over a couple hours?\n\nIf it’s safe and legal at the Venue, we’ll put the drone up, and the aerials are included. Again, why not!?' }
       ];
       d.packages = { label: 'Your film', items: [
         { name: 'Wedding Highlight', price: 4850, deliverables: 'Five to eight minutes\nThe wedding day, with no hourly limits\nDelivered four months after the wedding', note: 'From', recommended: true },
         { name: 'Full Length Feature Doc', price: 12500, deliverables: 'Forty-five minutes or more\nThe season before your wedding, then the day itself\nA trailer eight weeks after the wedding', note: 'From', recommended: false }
       ] };
-      d.picks = { label: 'Put your weekend together', addLabel: 'Companion films', hold: '', items: [
+      d.picks = { label: 'Put your weekend together', addLabel: 'Companion films', hold: 'December 31', items: [
         { id: 'second', name: 'A second shooter', desc: 'No extra cost.', type: 'fixed', price: 0 },
         { id: 'drone', name: 'Drone coverage', desc: 'Wherever it’s safe and legal to fly.', type: 'fixed', price: 0 },
-        { id: 'extra', name: 'An extra day of coverage', desc: '[The welcome party on Friday] at [place].', type: 'qty', price: 1250, val: 0, min: 0, max: 2, unit: 'day' },
-        { id: 'ceremony', name: 'Ceremony film', desc: 'Your whole ceremony, multicam, with professional audio.', type: 'on', price: 400, val: false },
-        { id: 'toasts', name: 'Toasts film', desc: 'Every toast in full, multicam, with professional audio.', type: 'on', price: 400, val: false },
+        { id: 'extra', name: 'An extra day of coverage', desc: 'The welcome party on Friday, at the Venue’s garden.', type: 'qty', price: 1250, val: 1, min: 0, max: 2, unit: 'day' },
+        { id: 'ceremony', name: 'Ceremony film', desc: 'Your whole ceremony, multicam, with professional audio.', type: 'on', price: 400, val: true },
+        { id: 'toasts', name: 'Toasts film', desc: 'Every toast in full, multicam, with professional audio.', type: 'on', price: 400, val: true },
         { id: 'trailer', name: 'Trailer', desc: 'A vertical sneak peek cut for social, delivered four weeks after the wedding.', type: 'on', price: 1000, val: false },
         { id: 'std', name: 'Save the date', desc: 'A sixty second engagement film for your announcement and your wedding website.', type: 'on', price: 1000, val: false },
         { id: 'raw', name: 'The raw footage', desc: 'The actual camera files from your day, log encoded and anamorphic, on a hard drive we include.', type: 'on', price: 1580, val: false }
       ] };
-      d.pay = { label: '', note: 'Prices marked from are where each one starts, and we’ll firm them up together on our call.', months: 0, monthly: false, mLabel: '', save: 0, mNote: '' };
+      d.pay = { label: 'Your collection', note: 'Prices marked from are where each one starts, and we’ll firm them up together on our call.', months: 0, monthly: false, mLabel: '', save: 0, mNote: '' };
+      d.calendar = { mode: 'dates', label: 'Your wedding, start to finish', note: 'Dates after the wedding count from August 14.', items: [
+        { when: 'Sat, Feb 6', title: 'Save the date shoot', kind: 'shoot', pick: 'std', text: 'An evening somewhere that means something to you two.' },
+        { when: 'Fri, Aug 13', title: 'Welcome party', kind: 'shoot', pick: 'extra', text: 'The Venue’s garden, from arrivals to the last toast.' },
+        { when: 'Sat, Aug 14', title: 'The wedding', kind: 'shoot', pick: '', text: 'Getting ready through the send-off, with no hourly limits.' },
+        { when: 'Sat, Sep 11', title: 'Trailer', kind: 'delivery', pick: 'trailer', text: 'Your vertical sneak peek, four weeks after.' },
+        { when: 'Tue, Dec 14', title: 'Your Wedding Highlight', kind: 'delivery', pick: '', text: 'Four months after, with your ceremony and toasts films.' }
+      ] };
       d.filmsLabel = 'Two weddings to watch';
-      d.films = [{ vimeo: '', title: '[Couple] at [Venue]', text: '[The same venue if we have one. Say why it’s here in one plain paragraph.]', thumb: '' }, { vimeo: '', title: '[Couple] at [Venue]', text: '[A couple whose story is like theirs. Say why it’s here in one plain paragraph.]', thumb: '' }];
-      d.questions = [];
-      d.close = { heading: 'I’d love to talk!', text: '', calendly: 'https://calendly.com/macweddingfilms/intro', phone: '(503) 568-1199', email: 'cody@macweddingfilms.com' };
+      d.films = [
+        { vimeo: 'https://vimeo.com/1237758412', title: 'Jeremy & Nga', text: 'Their complete event collection, so you can see every film a weekend can hold.', thumb: 'img/sample-wedding.jpg' },
+        { vimeo: 'https://vimeo.com/1205609802', title: 'Oak & Hood', text: 'A look around a venue we love, the kind of place that films beautifully.', thumb: '' }
+      ];
+      d.questions = [{ text: 'Where are you getting ready?' }, { text: 'Who’s your planner and photographer?' }, { text: 'Is there a moment you most want on film?' }];
+      d.delivery = 'Your films go in a private Vimeo showcase made for you, with downloads on for every one. It stays up with no end date.';
+      d.close = { heading: 'I’d love to talk!', text: 'We meet with every couple before signing to make sure we’re the right fit for your day. Pick any time that works for you two.', calendly: 'https://calendly.com/macweddingfilms/intro', phone: '(503) 568-1199', email: 'cody@macweddingfilms.com' };
       d.send = { button: 'Send Cody these picks' };
       return d;
     }
@@ -681,8 +721,12 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   $('pub1').addEventListener('click', publish);
 
   keyState(); pagesList();
+  var q = new URLSearchParams(location.search), qt = q.get('template'), qo = q.get('open');
   var last = store(LAST), all = store(DRAFTS) || {};
   open(last && all[last] ? last : ('d' + Date.now()));
+  /* links from Basecamp: ?template=year or wedding starts a sample, ?open=<page> loads a published one */
+  if (qt && TEMPLATES[qt]) { open('d' + Date.now(), TEMPLATES[qt]()); $('startBox').open = true; $('loadMsg').className = 'msg ok'; $('loadMsg').textContent = 'Filled from the sample. Every field has something in it.'; }
+  else if (qo) { $('startBox').open = true; openSlug(slugify(qo)); }
 })();
 </script>
 </body>
