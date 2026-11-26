@@ -10,9 +10,25 @@
     serif: { link: 'family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;600', display: '"DM Serif Display", Georgia, "Times New Roman", serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
     bodoni: { link: 'family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600', display: '"Bodoni Moda", Didot, Georgia, serif', body: '"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif' },
     mwf: { link: 'family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Figtree:wght@400;500;600', display: '"Fraunces", Georgia, serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
+    mulish: { link: 'family=Mulish:ital,wght@0,400..800;1,400..700&family=Figtree:wght@400;500;600', display: '"Mulish", "Helvetica Neue", Arial, sans-serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
+    baskerville: { link: 'family=Baskervville:ital@0;1&family=Nunito+Sans:wght@400;600', display: '"Baskervville", Baskerville, Georgia, serif', body: '"Nunito Sans", "Helvetica Neue", Arial, sans-serif' },
+    figtree: { link: 'family=Figtree:ital,wght@0,400..700;1,400..600', display: '"Figtree", "Helvetica Neue", Arial, sans-serif', body: '"Figtree", "Helvetica Neue", Arial, sans-serif' },
     fraunces: { link: 'family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Instrument+Sans:wght@400;500;600', display: '"Fraunces", Georgia, serif', body: '"Instrument Sans", "Helvetica Neue", Arial, sans-serif' }
   };
   /* MOCKUP-RULES: these near-blacks never go on a brand page */
+  /* Named designs (Cody, comment 10548797840: "name the different designs that we make ourselves and incorporate them back into the builder as a design choice selector").
+     Each is a layer in proposal.css (.pcp.d-<id>) over the same fields. colors are the page it came from, offered in the builder, never forced. */
+  var DESIGNS = {
+    hardstyle: { name: 'Hardstyle', line: 'A bold dark pitch for a business we know, with the ideas beside the year and the total beside the picks.', from: 'hardstyle2027', fonts: 'serif', colors: { bg: '#0B0B0B', ink: '#F4F2EE', accent: '#EE1D52', accent2: '#D9B45A' } },
+    vivianlee: { name: 'Vivian Lee', line: 'A quiet, elegant proposal for a nonprofit or an event, centered, with fine rules and lots of air.', from: 'vivianleefoundation', fonts: 'bodoni', colors: { bg: '#EEF0EA', ink: '#232823', accent: '#4C6A53', accent2: '#E9CB93' } },
+    maxbp: { name: 'MaxBP', line: 'A day-in-the-life pitch for a product or a founder, big sans type on a deep color.', from: 'maxbp', fonts: 'mulish', colors: { bg: '#1F423C', ink: '#FFFFFF', accent: '#F6C344', accent2: '#132B27' } },
+    embrace: { name: 'Embrace', line: 'A warm editorial plan for a studio or shop with a story to tell, set like a magazine.', from: 'peekabooboudoir', fonts: 'baskerville', colors: { bg: '#FFFFFF', ink: '#14212A', accent: '#9D5A31', accent2: '#F0C29E' } },
+    roku: { name: 'Roku', line: 'One ad or spot pitched like a film, with the title over the still.', from: 'wenatcheeroku', fonts: 'bodoni', colors: { bg: '#0F1115', ink: '#F1EDE6', accent: '#F0B35A', accent2: '#6C8CFF' } },
+    plan: { name: 'Plan page', line: 'A content plan for a client we already film for, as numbered steps in one plain column (Real Estate Rob, LucidWild, Wow and Flutterville).', from: 'realestaterobpdx', fonts: 'serif', colors: { bg: '#0B0B0B', ink: '#F4F2EE', accent: '#EE1D52', accent2: '#B4B0A8' } },
+    editorial: { name: 'Editorial scroll', line: 'Rob plan direction A: one long read with the picks inline and a slim total bar that follows you.', from: 'rob-plan-directions', fonts: 'serif', colors: null },
+    couple: { name: 'Couple guide', line: 'The Claudia & Eddy guide: a helpful page for a couple, more answers than pitch, light and soft.', from: 'claudia-and-eddy', fonts: 'mwf', colors: { bg: '#F3F3F3', ink: '#06203F', accent: '#A55E46', accent2: '#F0D1B5' } },
+    estimate: { name: 'Production estimate', line: 'The In Good Hands estimate: a Mac Films production laid out as a clear, priced plan in black and yellow.', from: 'igh-estimate', fonts: 'serif', colors: { bg: '#000000', ink: '#FFFFFF', accent: '#F5D33D', accent2: '#82888F' } }
+  };
   var BANNED = ['#100f0e', '#0e0d0b', '#16140f', '#15140f', '#16120a'];
 
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -152,7 +168,7 @@
     h.push('<footer class="wrap foot"><span>' + esc(d.studio || 'Portland Content') + ', Portland, Oregon</span><span>' + esc(d.studioSite || 'portlandcontent.com') + '</span></footer>');
 
     el.innerHTML = h.join('');
-    el.classList.add('pcp');
+    el.classList.add('pcp'); [].slice.call(el.classList).forEach(function (c) { if (/^d-/.test(c)) el.classList.remove(c); }); el.classList.add('d-' + (DESIGNS[d.design] ? d.design : 'hardstyle'));
     wire(el, d, items, BY, plans, calItems, cal, qs, mail, S, packs);
   }
 
@@ -315,7 +331,7 @@
       '<script type="application/json" id="proposal-data">\n' + json + '\n</script>\n<script src="' + base + 'proposal.js"></script>\n</body>\n</html>\n';
   }
 
-  root.PCProposal = { render: render, shell: shell, vimeo: vimeo, fonts: FONTS, banned: BANNED };
+  root.PCProposal = { render: render, shell: shell, vimeo: vimeo, fonts: FONTS, banned: BANNED, designs: DESIGNS };
 
   /* a published page draws itself */
   if (typeof document !== 'undefined') {

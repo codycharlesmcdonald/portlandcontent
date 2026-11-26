@@ -232,3 +232,86 @@ img{max-width:100%}
 .pcp .prose p{margin:0 0 14px; font-size:clamp(17px,1.6vw,19px)}
 .pcp .prose p + p{color:var(--mute)}
 .pcp .mast .logo{height:28px; width:auto; vertical-align:middle; margin-right:10px}
+
+/* ---------- Named designs: one layer each over the same fields (Cody, comment 10548797840). Hardstyle is the base above. ---------- */
+
+/* Vivian Lee: centered, fine rules, lots of air */
+.pcp.d-vivianlee .mast{justify-content:center; text-align:center}
+.pcp.d-vivianlee .title{text-align:center}
+.pcp.d-vivianlee .title h1{font-size:clamp(42px,7.4vw,96px); letter-spacing:0}
+.pcp.d-vivianlee .art .still{aspect-ratio:16/7}
+.pcp.d-vivianlee .jump .wrap{justify-content:center}
+.pcp.d-vivianlee .lede{grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center; max-width:760px; margin-inline:auto}
+.pcp.d-vivianlee .lede p{margin-inline:auto}
+.pcp.d-vivianlee .label{justify-content:center; font-family:var(--display); font-style:italic; font-weight:400; font-size:22px}
+.pcp.d-vivianlee .label::before{content:""; flex:1; height:1px; background:var(--rule)}
+.pcp.d-vivianlee .ideas .n{font-style:normal}
+.pcp.d-vivianlee .close{text-align:center}
+
+/* MaxBP: big heavy sans on a deep color */
+.pcp.d-maxbp .title h1{font-weight:800; letter-spacing:-.035em; line-height:.92}
+.pcp.d-maxbp .title h1 em{font-style:normal}
+.pcp.d-maxbp .title .for{font-family:var(--body); font-style:normal; font-weight:600; color:var(--accent)}
+.pcp.d-maxbp .lede h2, .pcp.d-maxbp .close h2{font-weight:800; letter-spacing:-.02em}
+.pcp.d-maxbp .lede h2 em, .pcp.d-maxbp .close h2 em{font-style:normal}
+.pcp.d-maxbp .ideas .n{font-style:normal; font-weight:800}
+.pcp.d-maxbp .total .sum, .pcp.d-maxbp .fbar .fs{font-weight:800; letter-spacing:-.02em}
+.pcp.d-maxbp .art .still{aspect-ratio:16/8}
+.pcp.d-maxbp .label{font-size:18px; font-weight:700}
+
+/* Embrace: warm editorial, set like a magazine */
+.pcp.d-embrace .wrap{max-width:1040px}
+.pcp.d-embrace .title h1{font-size:clamp(44px,7.6vw,100px); letter-spacing:0}
+.pcp.d-embrace .lede h2{font-style:italic}
+.pcp.d-embrace .lede h2 em{font-style:normal}
+.pcp.d-embrace .label{font-family:var(--display); font-weight:400; font-style:italic; font-size:24px}
+.pcp.d-embrace .prose p, .pcp.d-embrace .lede p{font-size:clamp(17px,1.5vw,19px); line-height:1.7}
+.pcp.d-embrace .art .still{aspect-ratio:3/1}
+.pcp.d-embrace .ideas h3{font-style:italic}
+
+/* Roku: the title over the still, like a film poster */
+.pcp.d-roku .title{position:relative; z-index:2; padding-block:clamp(56px,9vw,110px) 0}
+.pcp.d-roku .title h1{font-size:clamp(48px,10vw,132px); text-shadow:0 2px 24px color-mix(in srgb, var(--bg) 70%, transparent)}
+.pcp.d-roku .art{margin-top:calc(-1 * clamp(70px,10vw,130px))}
+.pcp.d-roku .art .still{aspect-ratio:21/9}
+.pcp.d-roku .art .still::after{content:""; position:absolute; inset:0; background:linear-gradient(to bottom, var(--bg) 0%, transparent 38%, transparent 70%, var(--bg) 100%)}
+@media (max-width:620px){ .pcp.d-roku .art .still{aspect-ratio:4/3} }
+
+/* Plan page: the content plan look, a glow up top and numbered steps on hairlines */
+.pcp.d-plan .title{background:radial-gradient(70% 90% at 90% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%)}
+.pcp.d-plan .title h1{font-size:clamp(40px,6vw,72px); max-width:16ch}
+.pcp.d-plan .title h1 em{font-style:italic}
+.pcp.d-plan .ideas li{border-top:1px solid var(--rule); padding-top:16px}
+.pcp.d-plan .ideas .n{font-style:normal; font-family:var(--body); font-weight:600; font-size:20px}
+
+/* Editorial scroll: one long column, picks inline, the slim total bar follows at every width */
+.pcp.d-editorial .view{max-width:820px}
+.pcp.d-editorial .lede{grid-template-columns:minmax(0,1fr)}
+.pcp.d-editorial .duo{display:block !important}
+.pcp.d-editorial .duo #year{position:static}
+.pcp.d-editorial .bgrid{grid-template-columns:minmax(0,1fr) !important}
+.pcp.d-editorial .bgrid .total{position:static !important}
+.pcp.d-editorial .fbar{display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 14px; position:sticky; top:calc(53px + env(safe-area-inset-top,0px)); z-index:5; background:var(--bg); padding-block:12px; margin-bottom:14px; border-bottom:1px solid var(--rule)}
+.pcp.d-editorial .fbar .k{font-size:14px; color:var(--accent)}
+.pcp.d-editorial .fbar .fs{font-family:var(--display); font-size:clamp(28px,4vw,36px); line-height:1; font-variant-numeric:lining-nums tabular-nums; margin-left:auto}
+.pcp.d-editorial .fbar .fm{flex-basis:100%; text-align:right; font-size:14px; color:var(--mute)}
+.pcp.d-editorial .fbar .fm:empty{display:none}
+
+/* Couple guide: light and soft, a helpful page more than a pitch */
+.pcp.d-couple .title{text-align:center}
+.pcp.d-couple .title h1{font-weight:300; letter-spacing:0}
+.pcp.d-couple .title h1 em{font-weight:300}
+.pcp.d-couple .mast{justify-content:center; text-align:center}
+.pcp.d-couple .jump .wrap{justify-content:center}
+.pcp.d-couple .lede h2{font-weight:300}
+.pcp.d-couple .ideas .n{font-style:normal; font-weight:300}
+.pcp.d-couple .label{font-family:var(--display); font-weight:400; font-size:22px}
+.pcp.d-couple .close{background:color-mix(in srgb, var(--accent-2) 45%, var(--bg))}
+
+/* Production estimate: Mac Films, a clear priced plan, the accent as a band */
+.pcp.d-estimate .title h1{font-size:clamp(40px,6.4vw,84px)}
+.pcp.d-estimate .title .for{font-family:var(--body); font-style:normal; font-weight:600; color:var(--accent)}
+.pcp.d-estimate .label{font-weight:700}
+.pcp.d-estimate .label::after{height:2px; background:var(--accent)}
+.pcp.d-estimate .ideas .n{font-family:var(--body); font-style:normal; font-weight:700; font-size:20px}
+.pcp.d-estimate .total .sum{color:var(--accent)}

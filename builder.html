@@ -109,6 +109,9 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       </div>
       <label class="f"><span>Brand <em>sets the look, the sign-off and the site it goes on</em></span><select data-k="studio"><option>Portland Content</option><option>Mac Films</option><option>Mac Wedding Films</option></select></label>
       <p class="note" id="brandNote"></p>
+      <label class="f"><span>Design <em>the look of the page, from the ones we've made</em></span><select data-k="design" id="design"></select></label>
+      <p class="note" id="designNote"></p>
+      <button class="btn sm" type="button" id="designColors">Use this design's colors</button>
     </details>
 
     <details><summary>Brand</summary>
@@ -280,6 +283,13 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     data.close.calendly = b.calendly; data.close.email = b.email;
   }
   function $(id){ return document.getElementById(id); }
+  /* Design picker: the named designs live in proposal.js (PCProposal.designs) so a published page and the builder agree */
+  var DES = PCProposal.designs;
+  function designNote(){
+    var x = DES[data.design] || DES.hardstyle;
+    $('designNote').textContent = x.line;
+    $('designColors').hidden = !x.colors;
+  }
   function store(k, v){ try { if (v === undefined) return JSON.parse(localStorage.getItem(k) || 'null'); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
   function uid(){ return 'p' + Math.random().toString(36).slice(2, 8); }
   function slugify(s){ return String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60); }
@@ -287,7 +297,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   /* a new proposal starts with Cody's own lines (MOCKUP-RULES: his take-what-you-want line once in the lede, the coffee close, the approved delivery line) */
   function blank(){
     return {
-      v: 1, slug: '', studio: 'Portland Content',
+      v: 1, slug: '', studio: 'Portland Content', design: 'hardstyle',
       client: { name: '', contact: '', month: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) },
       brand: { bg: '#0B0B0B', ink: '#F4F2EE', accent: '#EE1D52', accent2: '#D9B45A', fonts: 'serif', logo: '', image: '', imageAlt: '' },
       title: { kicker: 'A plan for your ' + (new Date().getFullYear() + 1), name: '' },
@@ -393,7 +403,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     $('mtm').hidden = !data.pay.monthly;
     $('slugShow').textContent = data.slug || '…';
     $('verSlug').textContent = data.slug || 'this page'; $('versions').innerHTML = ''; $('verMsg').textContent = '';
-    colors(); brandNote();
+    colors(); brandNote(); designNote();
   }
 
   function colors(){
@@ -454,6 +464,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       if (k.indexOf('brand.') === 0) { var c = document.querySelector('[data-c="' + k + '"]'); if (c && /^#[0-9a-f]{6}$/i.test(v)) c.value = v; colors(); }
       if (k === 'pay.monthly') $('mtm').hidden = !v;
       if (k === 'studio') { applyBrand(v); fill(); }
+      if (k === 'design') { var dz = DES[v]; if (dz) { data.brand.fonts = dz.fonts; fill(); } }
       if (k === 'calendar.mode') drawList('calendar.items');
       $('slugShow').textContent = data.slug || '…';
       return changed();
@@ -491,11 +502,11 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
 
   /* Templates (Cody, comment 10548766117: "I actually want to see the template filled out with all available fields"): two full sample proposals,
      every field used. Placeholder text in his voice; the wedding prices and lines come from the couple guide, the agency rows from Hardstyle's own prices. */
-  function svgLogo(t){ return 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64"><text x="0" y="44" font-family="Georgia, serif" font-size="34" fill="#FFFFFF">' + t + '</text></svg>'); }
+  function svgLogo(t){ return 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64"><text x="0" y="44" font-family="Georgia, serif" font-size="34" fill="#8A8A8A">' + t + '</text></svg>'); }
   var TEMPLATES = {
     year: function () {
       var d = blank();
-      d.slug = 'sample-client-company'; d.slugTouched = true; d.studio = 'Portland Content';
+      d.slug = 'sample-client-company'; d.slugTouched = true; d.studio = 'Portland Content'; d.design = 'hardstyle';
       d.client = { name: 'Client Company', contact: 'Jordan Client', month: 'November 2026' };
       d.brand = { bg: '#0F2A2E', ink: '#F4F1EA', accent: '#E8743B', accent2: '#9BC4B5', fonts: 'serif', logo: svgLogo('Client Co.'), image: 'img/lw_facade.jpg', imageAlt: 'The front of the building at dusk' };
       d.title = { kicker: 'A plan for your 2027', name: 'Client *Company*' };
@@ -549,7 +560,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     /* the couple guide (Claudia & Eddy format, docs/mockups/couple-guide.template.html): his words and the site's prices */
     wedding: function () {
       var d = blank();
-      d.slug = 'sample-client-and-partner'; d.slugTouched = true; d.studio = 'Mac Wedding Films';
+      d.slug = 'sample-client-and-partner'; d.slugTouched = true; d.studio = 'Mac Wedding Films'; d.design = 'couple';
       d.client = { name: 'Client & Partner', contact: 'Client and Partner', month: 'November 2026' };
       d.brand = { bg: '#F3F3F3', ink: '#06203F', accent: '#A55E46', accent2: '#F0D1B5', fonts: 'mwf', logo: svgLogo('C &amp; P').replace(/base64,.*/, function () { return 'base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 160 64"><text x="0" y="44" font-family="Georgia, serif" font-style="italic" font-size="34" fill="#06203F">C &amp; P</text></svg>'); }), image: 'img/sample-wedding.jpg', imageAlt: 'Lace on the ceremony chairs in a glass garden room' };
       d.title = { kicker: 'Saturday, August 14, 2027, at the Venue', name: 'Client & *Partner*' };
@@ -670,6 +681,8 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     }).catch(function () { m.className = 'msg bad'; m.textContent = 'Couldn’t reach GitHub. Try again in a minute.'; });
   });
   /* GitHub refuses a key name that's already taken (Cody, Nov 25, comment 10548797840), so each link names its key by device and date; 366 days fell back to 30, so 365 */
+  $('design').innerHTML = Object.keys(DES).map(function (k) { return '<option value="' + k + '">' + esc(DES[k].name) + '</option>'; }).join('');
+  $('designColors').addEventListener('click', function () { var x = DES[data.design]; if (!x || !x.colors) return; Object.keys(x.colors).forEach(function (k) { data.brand[k] = x.colors[k]; }); fill(); changed(); });
   $('keyLink').addEventListener('click', function () {
     var dev = /iPhone|Android|Mobile/i.test(navigator.userAgent) ? 'phone' : 'laptop', when = new Date().toISOString().slice(0, 16).replace('T', ' ');
     this.href = 'https://github.com/settings/personal-access-tokens/new?name=' + encodeURIComponent('Proposal builder ' + dev + ' ' + when) + '&description=' + encodeURIComponent('Publishes proposals from portlandcontent.com/builder') + '&expires_in=365&contents=write';
