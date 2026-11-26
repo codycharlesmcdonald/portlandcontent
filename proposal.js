@@ -300,6 +300,8 @@
     var d = defaults(JSON.parse(JSON.stringify(data)));
     var f = FONTS[d.brand.fonts] || FONTS.serif, name = d.client.name || 'Proposal';
     var title = d.pageTitle || name, desc = d.description || ('A plan for ' + name + ' from ' + (d.studio || 'Portland Content') + '.');
+    /* brand sites (proposals.macfilmproductions.com and the wedding one) load the one copy of these from portlandcontent.com */
+    var base = /^https:\/\/[a-z0-9.-]+\/$/.test(d.assetBase || '') ? d.assetBase : '/';
     var json = JSON.stringify(data, null, 1).replace(/</g, '\\u003c');
     var img = d.brand.image && /^https?:/.test(d.brand.image) ? d.brand.image : (d.brand.image ? 'https://portlandcontent.com/' + d.brand.image.replace(/^\//, '') : '');
     return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' +
@@ -308,9 +310,9 @@
       (img ? '<meta property="og:image" content="' + esc(img) + '">\n<meta name="twitter:card" content="summary_large_image">\n' : '') +
       '<meta name="theme-color" content="' + esc(hex(d.brand.bg, '#0B0B0B')) + '">\n<meta name="generator" content="Portland Content proposal builder">\n' +
       '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
-      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?' + f.link + '&display=swap">\n<link rel="stylesheet" href="/proposal.css">\n</head>\n<body>\n' +
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?' + f.link + '&display=swap">\n<link rel="stylesheet" href="' + base + 'proposal.css">\n</head>\n<body>\n' +
       '<div id="proposal"><noscript><p style="padding:24px">This proposal needs JavaScript. Write to cody@macfilmproductions.com and I’ll send it another way.</p></noscript></div>\n' +
-      '<script type="application/json" id="proposal-data">\n' + json + '\n</script>\n<script src="/proposal.js"></script>\n</body>\n</html>\n';
+      '<script type="application/json" id="proposal-data">\n' + json + '\n</script>\n<script src="' + base + 'proposal.js"></script>\n</body>\n</html>\n';
   }
 
   root.PCProposal = { render: render, shell: shell, vimeo: vimeo, fonts: FONTS, banned: BANNED };

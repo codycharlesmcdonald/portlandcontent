@@ -265,8 +265,15 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     'Mac Wedding Films': { site: 'macweddingfilms.com', brand: { bg: '#F3F3F3', ink: '#06203F', accent: '#A55E46', accent2: '#F0D1B5', fonts: 'mwf' }, calendly: 'https://calendly.com/macweddingfilms/intro', email: 'cody@macweddingfilms.com', voice: 'The couple proposal, in the Claudia & Eddy guide voice. "Hi, guys!", a helpful guide more than a sell, almost 400 weddings filmed.' }
   };
   /* where each brand publishes; Mac Films and Mac Wedding Films wait on their own repos and subdomains */
-  var TARGETS = { 'Portland Content': { repo: 'portlandcontent', site: 'https://portlandcontent.com/' } };
-  function brandNote(){ var b = BRANDS[data.studio] || BRANDS['Portland Content']; $('siteShow').textContent = (TARGETS[data.studio] ? b.site : 'proposals.' + b.site) + '/'; $('brandNote').textContent = b.voice + (TARGETS[data.studio] ? '' : ' Publishing to ' + b.site + ' is being set up, so for now you can draft and preview it here.'); }
+  /* where each brand publishes: one repo each, since GitHub Pages gives a repo one domain. ready: the brand's DNS record is in and the page links work. */
+  var TARGETS = {
+    'Portland Content': { repo: 'portlandcontent', site: 'https://portlandcontent.com/', ready: true },
+    'Mac Films': { repo: 'proposals-macfilms', site: 'https://proposals.macfilmproductions.com/', ready: false },
+    'Mac Wedding Films': { repo: 'proposals-macweddingfilms', site: 'https://proposals.macweddingfilms.com/', ready: false }
+  };
+  function T(name){ return TARGETS[name || data.studio] || TARGETS['Portland Content']; }
+  var STEP = 'https://app.basecamp.com/5989098/buckets/44772505/todos/10548696362';
+  function brandNote(){ var b = BRANDS[data.studio] || BRANDS['Portland Content']; $('siteShow').textContent = T().site.replace('https://', ''); $('brandNote').textContent = b.voice + (T().ready ? '' : ' Its pages publish now, and their links work once the DNS step on Opens is done.'); }
   function applyBrand(name){
     var b = BRANDS[name]; if (!b) return;
     Object.keys(b.brand).forEach(function (k) { data.brand[k] = b.brand[k]; });
@@ -312,6 +319,13 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     var named = (d.packages.items || []).filter(function (p) { return p.name; });
     o.packages.pick = Math.max(0, named.map(function (p) { return !!p.recommended; }).indexOf(true));
     o.pageTitle = d.client.name || 'Proposal';
+    /* on a brand repo, the renderer and any image path from portlandcontent.com load from there */
+    if (T(d.studio).repo !== 'portlandcontent') {
+      var abs = function (u) { return u && !/^(https?:|data:)/.test(u) ? 'https://portlandcontent.com/' + String(u).replace(/^\//, '') : u; };
+      o.assetBase = 'https://portlandcontent.com/';
+      o.brand.image = abs(o.brand.image); o.brand.logo = abs(o.brand.logo);
+      (o.films || []).forEach(function (f) { f.thumb = abs(f.thumb); });
+    }
     return o;
   }
 
@@ -589,24 +603,28 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   [].forEach.call(document.querySelectorAll('[data-tpl]'), function (tb) { tb.addEventListener('click', function () { open('d' + Date.now(), TEMPLATES[this.getAttribute('data-tpl')]()); $('loadMsg').className = 'msg ok'; $('loadMsg').textContent = 'Filled from the template. Change the client, colors and prices, then publish.'; }); });
 
   /* Published proposals: the builder keeps proposals.json in the site's repo, one line per page it published */
-  var RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/';
+  function RAW(repo){ return 'https://raw.githubusercontent.com/' + OWNER + '/' + repo + '/'; }
   function pagesList(){
-    fetch(RAW + 'main/proposals.json?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }).then(function (list) {
-      list = (list || []).slice().sort(function (a, b) { return String(b.published).localeCompare(String(a.published)); });
-      $('pages').innerHTML = '<option value="">' + (list.length ? 'Pick one' : 'None yet. Published pages show here.') + '</option>' + list.map(function (p) { return '<option value="' + esc(p.slug) + '">' + esc(p.client || p.slug) + ' (' + esc(p.slug) + ')</option>'; }).join('');
+    var names = Object.keys(TARGETS);
+    Promise.all(names.map(function (n) {
+      return fetch(RAW(TARGETS[n].repo) + 'main/proposals.json?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+        .then(function (l) { return (l || []).map(function (p) { p.brand = n; return p; }); });
+    })).then(function (ls) {
+      var list = [].concat.apply([], ls).sort(function (a, b) { return String(b.published).localeCompare(String(a.published)); });
+      $('pages').innerHTML = '<option value="">' + (list.length ? 'Pick one' : 'None yet. Published pages show here.') + '</option>' + list.map(function (p) { return '<option value="' + esc(p.brand + '|' + p.slug) + '">' + esc(p.client || p.slug) + ' (' + esc(p.brand) + ')</option>'; }).join('');
     });
   }
   function fromHtml(t){ var j = t.match(/<script type="application\/json" id="proposal-data">([\s\S]*?)<\/script>/); if (!j) return null; var d = JSON.parse(j[1]); return d.form ? d : null; }
-  function openSlug(s){
-    var m = $('loadMsg'); if (!s) return;
+  function openSlug(s, brand){
+    var m = $('loadMsg'); if (!s) return; var t = T(brand);
     m.className = 'msg'; m.textContent = 'Opening…';
-    fetch(RAW + 'main/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('none'); return r.text(); }).then(function (t) {
+    fetch(RAW(t.repo) + 'main/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('none'); return r.text(); }).then(function (t) {
       var d = fromHtml(t);
       if (!d) { m.className = 'msg bad'; m.textContent = 'That page was built by hand, so it can’t open here.'; return; }
       open(d.builderId || ('d' + Date.now()), d.form); m.className = 'msg ok'; m.textContent = 'Opened ' + s + '. Changes go live when you publish.';
-    }).catch(function () { m.className = 'msg bad'; m.textContent = 'No page at portlandcontent.com/' + s + '.'; });
+    }).catch(function () { m.className = 'msg bad'; m.textContent = 'No page at ' + t.site.replace('https://', '') + s + '.'; });
   }
-  $('pages').addEventListener('change', function () { openSlug(this.value); });
+  $('pages').addEventListener('change', function () { var v = this.value.split('|'); openSlug(v[1], v[0]); });
   $('load').addEventListener('click', function () { openSlug(slugify($('loadSlug').value)); });
 
   /* Past versions: every publish is a commit, so a page's history is its list of commits */
@@ -614,7 +632,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     var s = data.slug, m = $('verMsg'), box = $('versions'), key = store(KEY);
     if (!s) { m.className = 'msg'; m.textContent = 'Give the page a web address first.'; return; }
     m.className = 'msg'; m.textContent = 'Looking…'; box.innerHTML = '';
-    fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/commits?per_page=30&path=' + encodeURIComponent(s + '.html'), { headers: key ? { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' } : { Accept: 'application/vnd.github+json' }, cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (cs) {
+    fetch('https://api.github.com/repos/' + OWNER + '/' + T().repo + '/commits?per_page=30&path=' + encodeURIComponent(s + '.html'), { headers: key ? { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' } : { Accept: 'application/vnd.github+json' }, cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (cs) {
       if (!cs.length) { m.textContent = 'Nothing published at ' + s + ' yet.'; return; }
       m.textContent = '';
       box.innerHTML = cs.map(function (c, i) {
@@ -627,7 +645,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   $('versions').addEventListener('click', function (e) {
     var b = e.target.closest('[data-ver]'); if (!b) return;
     var m = $('verMsg'); m.className = 'msg'; m.textContent = 'Restoring…';
-    fetch(RAW + b.getAttribute('data-ver') + '/' + data.slug + '.html').then(function (r) { if (!r.ok) throw new Error(); return r.text(); }).then(function (t) {
+    fetch(RAW(T().repo) + b.getAttribute('data-ver') + '/' + data.slug + '.html').then(function (r) { if (!r.ok) throw new Error(); return r.text(); }).then(function (t) {
       var d = fromHtml(t);
       if (!d) { m.className = 'msg bad'; m.textContent = 'That version was built by hand, so it can’t open here.'; return; }
       var keep = $('versions').innerHTML;
@@ -660,8 +678,8 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
   function published(){ var out = page(data); out.form = data; out.builderId = id; out.published = new Date().toISOString(); return out; }
   window.PCBuilder = { html: function () { return PCProposal.shell(published()); } };
   /* proposals.json lists what the builder published, for the Open picker; a failed update leaves the page live and is fixed by the next publish */
-  function index(s, H){
-    var api = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/proposals.json';
+  function index(s, H, t){
+    var api = 'https://api.github.com/repos/' + OWNER + '/' + t.repo + '/contents/proposals.json';
     fetch(api, { headers: H, cache: 'no-store' }).then(function (r) { return r.status === 404 ? null : r.ok ? r.json() : Promise.reject(); }).then(function (cur) {
       var list = cur ? JSON.parse(unb64(cur.content)) : [];
       list = list.filter(function (p) { return p.slug !== s; });
@@ -678,12 +696,18 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
     if (busy) return;
     if (!data.client.name) { m.className = 'msg bad'; m.textContent = 'Add the client name first.'; return; }
     if (!/^[a-z0-9][a-z0-9-]{1,59}$/.test(s || '') || RESERVED.indexOf(s) > -1) { m.className = 'msg bad'; m.textContent = 'Pick another web address. It needs letters, numbers and dashes, and it can’t be one of the site’s own pages.'; return; }
-    if (!TARGETS[data.studio]) { m.className = 'msg warn'; m.textContent = 'Publishing to ' + BRANDS[data.studio].site + ' is being set up. You can draft and preview it here for now.'; return; }
     if (!key) { m.className = 'msg warn'; m.textContent = 'Connect this device first, below.'; return; }
     busy = true; m.className = 'msg'; m.textContent = 'Publishing…';
-    var api = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + s + '.html', H = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' };
+    var t = T(), repoApi = 'https://api.github.com/repos/' + OWNER + '/' + t.repo, api = repoApi + '/contents/' + s + '.html', H = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github+json' };
     var out = published(), html = PCProposal.shell(out);
-    fetch(api, { headers: H, cache: 'no-store' }).then(function (r) {
+    /* the one key covers every brand's repo; one that can't reach this brand's repo yet gets a plain line, not a failed publish */
+    fetch(repoApi, { headers: H, cache: 'no-store' }).then(function (r) {
+      if (r.status === 401) throw new Error('401');
+      return r.ok ? r.json() : null;
+    }).then(function (repo) {
+      if (!repo || !repo.permissions || !repo.permissions.push) throw new Error('access');
+      return fetch(api, { headers: H, cache: 'no-store' });
+    }).then(function (r) {
       if (r.status === 404) return null;
       if (!r.ok) throw new Error('read ' + r.status);
       return r.json();
@@ -696,23 +720,25 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline
       if (!r.ok) throw new Error('write ' + r.status);
       data.lastPublished = out.published; save();
       m.className = 'msg'; m.textContent = 'Saved. Waiting for it to go live, usually about a minute…';
-      watch(s, out.published, 0);
-      index(s, H);
+      watch(s, out.published, 0, t);
+      index(s, H, t);
     }).catch(function (e) {
       busy = false; m.className = 'msg bad';
-      m.textContent = e.message === 'hand' ? 'portlandcontent.com/' + s + ' is a page built by hand, so the builder won’t replace it. Pick another web address.' :
+      if (e.message === 'access') { m.className = 'msg warn'; m.innerHTML = 'Your key can’t reach ' + esc(t.repo) + ' yet. Add it to the key’s Repository access, <a href="' + STEP + '" target="_blank" rel="noopener">the step on Opens</a>, then publish again.'; return; }
+      m.textContent = e.message === 'hand' ? t.site.replace('https://', '') + s + ' is a page built by hand, so the builder won’t replace it. Pick another web address.' :
         /401|403/.test(e.message) ? 'GitHub turned the key down. It may have expired. Make a new one below.' : 'Publishing didn’t go through (' + e.message + '). Nothing changed on the site.';
     });
   }
-  function watch(s, stamp, n){
-    fetch('/' + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (t) {
-      if (t.indexOf(stamp) > -1) { busy = false; done(s, 'Live.'); return; }
-      if (n > 40) { busy = false; done(s, 'Published. GitHub is slow to put it up, so check the link in a few minutes.'); return; }
-      setTimeout(function () { watch(s, stamp, n + 1); }, 5000);
+  function watch(s, stamp, n, t){
+    if (!t.ready) { busy = false; done(s, 'Published. The link works once the DNS step on Opens is done.', t); return; }
+    fetch(t.site + s + '.html?x=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (x) {
+      if (x.indexOf(stamp) > -1) { busy = false; done(s, 'Live.', t); return; }
+      if (n > 40) { busy = false; done(s, 'Published. GitHub is slow to put it up, so check the link in a few minutes.', t); return; }
+      setTimeout(function () { watch(s, stamp, n + 1, t); }, 5000);
     });
   }
-  function done(s, msg){
-    var url = SITE + s, m = $('pubMsg'), l = $('liveLink');
+  function done(s, msg, t){
+    var url = t.site + s, m = $('pubMsg'), l = $('liveLink');
     m.className = 'msg ok'; m.textContent = msg;
     l.hidden = false; l.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener">' + url.replace('https://', '') + '</a><button class="btn sm" type="button" id="copy">Copy link</button>';
     $('copy').onclick = function () { navigator.clipboard.writeText(url).then(function () { $('copy').textContent = 'Copied'; }, function () { $('copy').textContent = 'Select the link to copy it'; }); };
