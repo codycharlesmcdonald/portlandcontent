@@ -385,14 +385,14 @@
   "items": [
    {
     "name": "Boudoir Bible, re-edited",
-    "price": 1020,
+    "price": 920,
     "deliverables": "All 17 lessons recut from your footage\nColor, cleaned-up sound, licensed music and captions\nThe new title look, with your finished images full frame\nA 60 to 90 second trailer and three vertical promos\nReady for Podia by December 22",
     "note": "Nothing to film.",
     "recommended": false
    },
    {
     "name": "The re-edit and a studio film",
-    "price": 2735,
+    "price": 2675,
     "deliverables": "Everything in the re-edit\nA two to three minute film about Peekaboo for your site and social, with a vertical version\nFilmed in your studio on one day in December",
     "note": "The overview film you liked, on its own day.",
     "recommended": true
@@ -504,14 +504,14 @@ hint.addEventListener('click',function(e){ var b=e.target.closest('[data-go]'); 
 show(location.hash==='#scope'?'scope':'pitch', false, true);
 
 /* tab 2: the itemized scope engine from the retired page, repriced to the Plan A re-scope (lead gen, Nov 26: 2 h re-edit prep with a shoot or 9 h without) and Cody's 10 hour re-edit (comments 10550918336, 10550928445: post columns quartered) */
-var R={deck:465, preHr:28.75, scout:201.25, day:1162.5, edit:36, color:33, audio:33, motion:18, music:42, rev:30, deliv:18, lens:1414, mile:0.735, miPerDate:12, lic:0.8};
+var R={deck:465, preHr:28.75, scout:201.25, day:1162.5, edit:36, color:33, audio:33, motion:18, music:42, musicA:24, rev:30, deliv:18, lens:1414, mile:0.735, miPerDate:12, lic:0.8};
 var B={
   core:    {share:1.75, alone:1.5, script:2.5, plan:1.0, edit:28, color:4, audio:4, motion:8, music:3, deliv:1.5, lens:true,  dates:['d15','d16']},
   light:   {share:0.10, alone:0.5, script:0.5, plan:0.0, edit:6,  color:1, audio:1, motion:2, music:1, deliv:0.5, lens:true,  dates:['d15']},
   overview:{share:0.15, alone:0.5, script:0.5, plan:0.0, edit:5,  color:1, audio:1, motion:1, music:1, deliv:0.5, lens:false, dates:['d16']},
   promos:  {share:0,    alone:0,   script:0,   plan:0,   edit:7,  color:1, audio:1, motion:2, music:2, deliv:0.5, lens:false, dates:[]}
 };
-var A={relessons:{edit:4, color:0.75, audio:1.5, motion:2.75, music:2, deliv:1}, repromos:{edit:6, color:0.25, audio:0.25, motion:0.5, music:2, deliv:0}};
+var A={relessons:{edit:4, color:0.75, audio:0.75, motion:2.5, music:2, deliv:1}, repromos:{edit:6, color:0.25, audio:0.25, motion:0.5, music:2, deliv:0}};
 var SHOOT=['core','light','overview'];
 var PRESET={A:['relessons','promos'], B:['core','light','overview','promos','deck'], AB:['relessons','core','light','overview','promos','deck']};
 var TITLES={A:'Boudoir Bible, re-edited', B:'Boudoir Bible, reproduced', AB:'Boudoir Bible, re-edited and reproduced'};
@@ -537,8 +537,9 @@ function price(sel){
   var h={edit:0,color:0,audio:0,motion:0,music:0,deliv:0}, k;
   shoot.forEach(function(p){ for(k in h) h[k]+=B[p][k]; });
   if(promosSrc==='B') for(k in h) h[k]+=B.promos[k];
-  if(aMode) for(k in h) h[k]+=A.relessons[k];
-  if(promosSrc==='A') for(k in h) h[k]+=A.repromos[k];
+  /* the re-edit pieces license music at 20 an hour plus 20% (Cody's Plan A calc, comment 10550932436), so their music hours count at musicA */
+  if(aMode) for(k in h) h[k]+= k==='music' ? A.relessons[k]*R.musicA/R.music : A.relessons[k];
+  if(promosSrc==='A') for(k in h) h[k]+= k==='music' ? A.repromos[k]*R.musicA/R.music : A.repromos[k];
   var any=false, lines=0; for(k in h){ if(h[k]) any=true; lines+=h[k]*R[k]; }
   if(any) lines+=2*R.rev;
   var post=any ? ceilTo(lines+lic,10) : 0;
