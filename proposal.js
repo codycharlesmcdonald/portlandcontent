@@ -66,8 +66,9 @@
     var items = list(d.picks.items).filter(function (it) { return it && it.name; });
     items.forEach(function (it, i) { it.id = it.id || 'p' + i; if (it.type === 'qty') { it.min = Number(it.min) || 0; it.max = Math.max(it.min, Number(it.max) || 10); it.val = Math.min(it.max, Math.max(it.min, Number(it.val) || 0)); it.def = it.val || 1; } else if (it.type === 'on') { it.def = 1; } });
     var BY = {}; items.forEach(function (it) { BY[it.id] = it; });
-    var plans = list(d.picks.plans).filter(function (p) { return p && p.label; });
-    if (!plans.length) plans = [{ label: '', factor: 1, note: '' }];
+    var allPlans = list(d.picks.plans).filter(Boolean), plans = allPlans.filter(function (p) { return p.label; });
+    /* one plan with no label is the plain price: keep its note (the hold date and license line), drop only the plan switch */
+    if (!plans.length) plans = [{ label: '', factor: 1, note: (allPlans[0] && allPlans[0].note) || '', months: (allPlans[0] && allPlans[0].months) || 0 }];
     var pk = d.packages || {}, packs = list(pk.items).filter(function (x) { return x && x.name; });
     var S = { plan: 0, pack: packs.length ? Math.min(Math.max(0, Number(pk.pick) || 0), packs.length - 1) : -1 };
     var sections = list(d.sections).filter(function (x) { return x && (x.heading || x.text); });
